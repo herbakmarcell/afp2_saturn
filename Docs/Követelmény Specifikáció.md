@@ -17,6 +17,16 @@ Minden Kézi, semmi Fake.
 
 ## 3. Vágyálomrendszer
 
+A Kézifék E. Inc sajátkészítésű asztali alkalmazása azért készül, hogy leváltsa a Neptun régi elvault rendszerét. Cégünk szeretné, ha egy könnyen kezelhető, gyors,
+reszponzív, dizájn szempontjából a szemnek kedvező külsővel rendelkező alkalmazást készítenénk a felhasználónak, amely felgyorsítaná és megkönnyítené a hallgatók
+és az oktatók munkáját. Az elavult régi webes dizájnt szeretnénk lecserélni egy új, modern, optimalizált rendszerre a Microsoft .NET keretrendszer
+igénybevételével. Mivel a kompatibilitás miatt ezzel problémába ütköznénk, az egyéb operációs rendszerek és más digitális eszközökön, legyen az mobiltelefon,
+tablet stb. ezért egyelőre csak számítógépes felületre készül. A későbbiekben szeretnénk egy webes felületet is létrehozni az alkalmazásnak, hogy minden platformon
+elérhető legyen. Amellett, hogy az eddig megtalálható funkciókat a Neptunban rendszerében újra dolgozzuk, további opciókat szeretnénk hozzáadni, mellyel
+hasznosabbá válna, és olyan információk is elérhetőek lennének, amelyek az eredetiből hiányoznak, ezzel is jobbá téve a felhasználói élményt. Továbbá a régi
+dizájnt eldobni, és új, modern, minimalisztikus stílusra váltani, ezzel is azt sugallva, hogy a rendszerünk naprakész. Bízunk abban, hogy képesek leszünk egy
+olyan rendszert megalkotni, amelyet a felhasználók szívesen használnak.
+
 ## 4. Jelenlegi üzleti folyamatok modellje
 
 ## 5. Igényelt üzleti folyamatok modellje
