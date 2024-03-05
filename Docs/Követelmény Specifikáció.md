@@ -19,6 +19,12 @@ Minden Kézi, semmi Fake.
 
 ## 4. Jelenlegi üzleti folyamatok modellje
 
+Manapság több digitális felület létezik, amelyek a tanulmányok és információk tárolását végzi az oktatással kapcsolatban. Cégünk olyan
+alkalmazást készít, amely képes versenyt tartani a többi rendszerrel. A felhasználónak szüksége van egy saját fiókra, ennek birtokában
+amint eleget tett a bejelentkezési feltételeknek már hozzá is láthat teendőinek elvégzéséhez. Továbbá, a felhasználó megtekintheti
+személyes adatait, azokat szükség esetén kiegészítheti. Több, a tanulmányaihoz szükséges funkció elérhető, ezek például: tanulmányok,
+tárgyak, pénzügyek, ügyintézés és alkalmazásunk rendelkezik egy postaládával, amely a bejövő üzeneteket tárolja.
+
 ## 5. Igényelt üzleti folyamatok modellje
 
 ## 6. Követelménylista
