@@ -94,3 +94,12 @@ Az alkalmazás tartalmazza a következőket:
 
 
 ## 7. Fogalomtár
+
+-   **Applikáció:** Alkalmazás.
+-   **App:** Alkalmazás.
+-   **Fake:** Hamis, nem eredeti.
+-   **Dizájn:** Egy ipari termék külsejének a tervezete.
+-   **Intuitív:** Élményszerű felismerésen alapuló, egyértelmű.
+-   **Platform:** Felület. 
+-   **Reszponzív:** Kedvezően reagáló.
+-   **Flat:** Két dimenzió hatású felület.
