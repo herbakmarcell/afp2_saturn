@@ -53,20 +53,23 @@ Egy olyan alkalmazás létrehozása, amely alkalmas arra, hogy a hallgatók és 
 Amellett, hogy a funkciók a manapság elfogadott starndard sebességgel működjenek, a felület dizájnja legyen minimalista, flat, intuitív.
 A felhasználó bejelentkezés után, a jogkörének megfelelő felületfelépítést kapja, az alkamazás el tudja különíteni az oktatót és hallgatót.
 A hallgató felhasználó tudjon tárgyat felvenni, illetve leadni, vizsgára tudjon jelentkezni, órarendje a felvett tárgyaknak megfelelően
-jelenjen meg. Az oktató felhasználó tudjon vizsgát kiírni, lássa az oktatott óráit, illetve a hallgatókkal egyetemben tudjon személyes
-ügyet intézni az alkalmazásban. Egy menüpontban legyen elérhető egy alapvető használati útmutató, amely segíti a kezdő felhasználók 
-eligazodását, és élményüket pozitív irányba fokozza.
+jelenjen meg, valamint az érdemjegyeit meg tudja tekinteni a felvett tárgyakból a tanulmányi féléve végén. Az oktató felhasználó tudjon 
+vizsgát kiírni, lássa az oktatott óráit, arra érdemjegyet adni a hallgatóknak, illetve a hallgatókkal egyetemben tudjon személyes ügyet 
+intézni az alkalmazásban. Egy menüpontban legyen elérhető egy alapvető használati útmutató, amely segíti a kezdő felhasználók eligazodását, 
+és élményüket pozitív irányba fokozza.
 
 
 A Saturn felépítése hasonló lesz, a már ismert Neptun-hoz felületéhez és működéséhez.
 Az alkalmazás tartalmazza a következőket:
 
--   Bejelentkezés
+-   Felhasználó kezelés
 -   Személyes adatok megtekintése
+-   Tanulmányi teljesítmény
 -   Tárgyfelvétel
 -   Tárgy kiírás
 -   Vizsgajelentkezés
 -   Vizsga kiírás
+-   Érdemjegy beírás
 -   Órarend
 -   Ügyintézés
 -   Használati útmutató
