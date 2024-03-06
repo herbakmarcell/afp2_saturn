@@ -51,8 +51,21 @@ ami negatívan befolyásolja a felhasználói elégedettséget és hatékonyság
 
 ## 6. Követelménylista
 
-| Id | Modul | Név | Leírás |
+| ID | Modul | Név | Kifejtés |
 | :---: | --- | --- | --- |
-| K1 | ... | ... | ... |
+| K1  | Felhasználókezelés | Bejelentkezés  | Felhasználó bejelentkeztetése. |
+| K2  | Felhasználókezelés | Profilkezelés  | Személyes adatok megtekintése és módosítása |
+| K3  | Tanulmányok | Tanulmányi teljesítmény  | A hallgató felhasználó féléveinek és felvett tárgyainak érdemjegyeit tartalmazza |
+| K4  | Tanulmányok | Tárgyfelvétel | A hallgató felhasználó fel tud venni tantárgyat a félévére. |
+| K5  | Tanulmányok | Tárgy kiírás | Az oktató felhasználó ki tud írni általa oktatott tárgyra kurzust. |
+| K6  | Tanulmányok | Érdemjegybeírás | Az oktató felhasználó jegyet tud beírni az által oktatott tárgyakból. |
+| K7  | Tanulmányok | Órarend | A felhasználó meg tudja tekinteni az óráit. |
+| K8  | Vizsgák | Vizsgajelentkezés | A hallgató felhasználó vizsgára tud jelentkezni a felvett tárgyból. |
+| K9  | Vizsgák | Vizsga kiírás | Az oktató felhasználó vizsgát tud kiírni az általa oktatott vizsgatárgyakból. |
+| K11  | Ügyintézés | Dokumentumok | Egyetemi dokumentumok letöltése. |
+| K12  | Ügyintézés | Kérvények | Kitölthető kérvények feltöltése. |
+| K13  | Használati útmutató | GYIK | Gyakran ismételt kérdések az alkalmazással kapcsolatban. |
+| K14  | Használati útmutató | Részletes leírás | Részletes leírás az alkalmazással kapcsolatban. |
+
 
 ## 7. Fogalomtár
