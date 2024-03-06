@@ -15,6 +15,17 @@ Minden Kézi, semmi Fake.
 
 ## 2. A jelenlegi helyzet leírása
 
+Magyarországon csupán egyetlen olyan rendszer létezik, amely az egyetemi tanulmányokkal, információkkal foglalkozik, kezeli azt, ez a Neptun rendszere.
+Sajnálatos módon ez a régi típusú Neptun weboldal rendszer számos problémával küzd, amelyek hátráltatják az egyetemi hallgatók és oktatók hatékony munkáját.
+Elavult felülete és felhasználói élménye nem megfelelő, nehezen kezelhető és kevésbé intuitív, ami gyakran vezet félreértésekhez és frusztrációhoz. Emellett
+gyakran tapasztalhatóak hibák és leállások a rendszer működésében, ami zavarokat okoz az adminisztrációs teendőkben. A régi típusú Neptun weboldal dizájnja elavult
+és nem követi a mai felhasználói elvárásokat és trendeket. Az elavult grafikai elemek, a zsúfolt elrendezés és a nehezen átlátható struktúra miatt a felhasználók
+gyakran nehezen találják meg az számukra fontos információkat és funkciókat. A túlzottan bonyolult navigáció és az összekeveredett menük tovább súlyosbítják a
+helyzetet, ami a felhasználói élmény rovására megy. Összességében, az elavult Neptun weboldal rendszer komoly problémákat okoz a felhasználóknak, beleértve az
+elavult dizájnt, a nehézkes felhasználói élményt és a korlátozott funkcionalitást. Emellett a rendszer nem megfelelően működik kisebb képernyőméretek és mobil
+eszközök esetén, ami tovább súlyosbítja a helyzetet, ezért sürgősen szükség van egy modern és felhasználóbarát rendszer bevezetésére az oktatási folyamat
+hatékonyabb támogatása érdekében.
+
 ## 3. Vágyálomrendszer
 
 ## 4. Jelenlegi üzleti folyamatok modellje
