@@ -40,6 +40,13 @@ olyan rendszert megalkotni, amelyet a felhasználók szívesen használnak.
 
 ## 4. Jelenlegi üzleti folyamatok modellje
 
+Jelenleg a felhasználók webes felületen tudnak bejelentkezni, és van egy mobilalkalmazás is rendelkezésre, de használhatósága korlátozott.
+A rendszer lassú működése miatt a felhasználói élmény alacsony, és gyakran problémát okoz a felhasználók számára. A menükben való navigálás
+hosszadalmas és kényelmetlen, mert nem logikus a felépítés, és nehéz megtalálni a keresett funkciókat. Emellett gyakran előfordulnak hibák
+és összeomlások, amelyek tovább rontják a felhasználói élményt. Az alkalmazás postaládája bár tárolja a bejövő üzeneteket, azonban hiányzik
+a hatékony kommunikáció lehetősége a felhasználók között. Összességében a jelenlegi rendszer nem elég rugalmas és felhasználóbarát,
+ami negatívan befolyásolja a felhasználói elégedettséget és hatékonyságot.
+
 ## 5. Igényelt üzleti folyamatok modellje
 
 ## 6. Követelménylista
