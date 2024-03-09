@@ -4,29 +4,68 @@
 ## 2. Projektterv
 
 ### 2.1 Projektszerepkörök, felelőségek:
-   * Scrum masters:
-   * Product owner: 
-   * Üzleti szereplő:
+  * Scrum master:
+	 -   Györkis Tamás 	
+  * Product owner:
+	-   Györkis Tamás 
+  * Üzleti szereplő:
+	  -   Megrendelő:
+		  -  Birinyi Gergő
      
 ### 2.2 Projektmunkások és felelőségek:
    * Frontend:
+     - Pántya Barnabás
+     - Fodor Győző Benedek
+     - Herbák Marcell
    * Backend:
+     - Herbák Marcell
+     - Détári Levente
+     - Pántya Barnabás
    * Tesztelés:
+     - Détári Levente
+     - Fodor Győző Benedek
+     - Herbák Marcell
+     - Pántya Barnabás
      
 ### 2.3 Ütemterv:
 
-|Funkció                  | Feladat                                | Prioritás | Becslés (nap) | Aktuális becslés (nap) | Eltelt idő (nap) | Becsült idő (nap) |
-|-------------------------|----------------------------------------|-----------|---------------|------------------------|------------------|---------------------|
-|Követelmény specifikáció |Megírás                                 |         1 |             1 |                      1 |                1 |                   1 |             
-|Funkcionális specifikáció|Megírás                                 |         1 |             1 |                      1 |                1 |                   1 |
-|Rendszerterv             |Megírás                                 |         1 |             1 |                      1 |                1 |                   1 |
-|Program                  |Képernyőtervek elkészítése              |         2 |             1 |                      1 |                1 |                   1 |
-|Program                  |Prototípus elkészítése                  |         3 |             8 |                      8 |                8 |                   8 |
-|Program                  |Alapfunkciók elkészítése                |         3 |             8 |                      8 |                8 |                   8 |
-|Program                  |Tesztelés                               |         4 |             2 |                      2 |                2 |                   2 |
+|Funkció                  | Feladat                             | Prioritás | Becslés (nap) | Aktuális becslés (nap) | Eltelt idő (nap) | Határidő (nap)      |
+|-------------------------|-------------------------------------|-----------|---------------|------------------------|------------------|---------------------|
+|Követelmény specifikáció |Megírás                              |         1 |             1 |                      1 |                1 |                   1 |             
+|Funkcionális specifikáció|Megírás                              |         1 |             1 |                      1 |                1 |                   1 |
+|Rendszerterv             |Megírás                              |         1 |             1 |                      1 |                2 |                   2 |
+|Front End                |Vizuális tervek elkészítése          |         1 |             1 |                      1 |                1 |                   1 |
+|Front End                |Felület prototípus elkészítése       |         2 |             2 |                      2 |                0 |                   2 |
+|Front End                |Felület prototípus bővítése          |         3 |             4 |                      3 |                0 |                   4 |
+|Back End                 |Alapfunkciók elkészítése             |         3 |             5 |                      3 |                0 |                   5 |
+|Front- és Back End       |Összekötött prototípus elkészítése   |         3 |             4 |                      5 |                0 |                   4 |
+|Front- és Back End       |Alpha tesztelés                      |         4 |             1 |                      1 |                0 |                   1 |
+|Front End                |Felület prototípus bővítése          |         5 |             4 |                      4 |                0 |                   3 |
+|Back End                 |Komplex funkciók elkészítése         |         5 |             5 |                      5 |                0 |                   5 |
+|Front- és Back End       |Összekötött prototípus bővítése      |         5 |             4 |                      4 |                0 |                   4 |
+|Front- és Back End       |Béta tesztelés                       |         6 |             1 |                      1 |                0 |                   1 |
+|Front End                |Felület prototípus befejezése        |         7 |             3 |                      3 |                0 |                   3 |
+|Back End                 |Komplex funkciók elkészítése         |         7 |             5 |                      5 |                0 |                   5 |
+|Front- és Back End       |Végleges prototípus elkészítése      |         7 |             5 |                      5 |                0 |                   5 |
+|Front- és Back End       |Végleges tesztelés                   |         8 |             2 |                      2 |                0 |                   2 |
 
 ### 2.4 Mérföldkövek:
-   * Prototípus átadása
+   
+   *   03.06. Követelmény specifikáció elkészítése
+   *   03.09. Funkcionális specifikáció elkészítése
+   *   03.10. Rendszerterv elkészítése
+   *   03.13. Dokumentációk prezentálása
+   *   03.27. Kezelőfelület implementálása
+   *   04.03. II. Sprint prototípus prezentálása
+   *   04.10. Alapvető funkciók implementálása
+   *   04.16. Alpha tesztelések
+   *   04.17. III. Sprint prototípus prezentálása
+   *   04.24. Komplex funkciók implementálása
+   *   04.30. Béta tesztelések
+   *   05.01. IV. Sprint prototípus prezentálása
+   *   05.15. Kényelmi funkciók implementálása
+   *   05.20. Végleges tesztelések
+   *   05.22. V. Sprint végső prototípus bemutatása
 
 ## 3. Üzleti folyamatok modellje
 
