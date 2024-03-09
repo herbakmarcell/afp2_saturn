@@ -4,14 +4,28 @@
 ## 2. Projektterv
 
 ### 2.1 Projektszerepkörök, felelőségek:
-   * Scrum masters:
-   * Product owner: 
-   * Üzleti szereplő:
+  * Scrum master:
+	 -   Györkis Tamás 	
+  * Product owner:
+	-   Györkis Tamás 
+  * Üzleti szereplő:
+	  -   Megrendelő:
+		  -  Birinyi Gergő
      
 ### 2.2 Projektmunkások és felelőségek:
    * Frontend:
+     - Pántya Barnabás
+     - Fodor Győző Benedek
+     - Herbák Marcell
    * Backend:
+     - Herbák Marcell
+     - Détári Levente
+     - Pántya Barnabás
    * Tesztelés:
+     - Détári Levente
+     - Fodor Győző Benedek
+     - Herbák Marcell
+     - Pántya Barnabás
      
 ### 2.3 Ütemterv:
 
