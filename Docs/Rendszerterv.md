@@ -144,6 +144,12 @@ Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó 
 
 ## 10. Implementációs terv
 
+A projektet két részre oszlik: a frontendre és a backendre. A frontend WinForms segítségével készül, míg a backend ASP.NET keretrendszerben.
+A program kódjában használt nyelv elsősorban a magyar.
+A szerver és az adatbázist összekötő csomag  felelős az adatbázis kezeléséért.
+Mind a frontend, mind a backend fejlesztéséhez szükség van a Visual Studio környezet telepítésére és konfigurálására a szükséges eszközökkel és kiegészítőkkel
+együtt.
+
 ## 11. Tesztterv
 
 A tesztelések célja a rendszer és komponensei funkcionalitásának teljes vizsgálata,
