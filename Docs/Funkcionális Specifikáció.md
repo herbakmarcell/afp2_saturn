@@ -29,6 +29,27 @@ A jelenlegi felhasználói felület webes felületen keresztül történő bejel
 
 ## 9. Forgatókönyvek
 
+Minden felhasználónak elsősorban a főoldal jelenik meg:
+
+ * A belépés gombra kattintva, a belépés menübe kerül a felhasználó ahol az adatait megadva beléphet amennyiben van már regisztrált profilja.
+ * A regisztráció gombra kattintva, a regiszrációs menübe kerül a felhasználó ahol az adatait megadva új profilt hozhat létre.
+
+Belépés után visszakerül a felhasználó a főoldalra ahol:
+
+ * Választhat a menüpontok közül
+
+Egy menüpontra kattintva az adott oldalra érkezik a felhasználó:
+
+ * Vizsgát írhat ki vagy vehet fel.
+ * Tárgyat írhat ki vagy vehet fel, adhat le.
+ * Megtekintheti az órarendjét, érdemjegyeit, kurzusait
+
+Ügyeket intézhet:
+
+ * Írhat üzenetet oktatójának vagy hallgatójának.
+ * Letölthet egyetemi dokumentumokat.
+ * Kitöltheti a kiküldött egyetemi kérvényeket.
+
 ## 10. Funkció - követelmény megfeleltetése
 
 | Id | Követelmény | Funkció |
