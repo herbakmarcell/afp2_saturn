@@ -66,6 +66,14 @@ Az alkalmazás a következőket fogja tartalmazza:
 
 ## 7. Megfeleltetés, hogyan fedik le a használati eseteket a követelményeket
 
+| ID | Megfeleltetés | Referencia |
+| --- | --- | --- |
+| C1 | Felhasználó kezelés | [K1, K2] és kijelentkezés |
+| C2 | Tanulmányok | [K3, K4, K5, K6, K7], Megtekinthetők a félévi teljesítmények, tárgyakat lehet kiírni és felvenni, érdemjegyeket adni és órarendet tervezni. |
+| C3 | Vizsgák | [K8, K9], Vizsgákat lehet kiírni és azokra jelentkezni. |
+| C4 | Ügyintézés | [K10, K11], Az egyetem dokumentumait le lehet tölteni, a kérvényeket ki lehet tölteni. |
+| C5 | Használati útmutató | [K12, K13], Megtekinthetők az alkalmazás leírása és a hozzá fűzűdő gyakori kérdések. |
+
 ## 8. Képernyőtervek
 
 ![képnév](gitlink ahol a kép van)
