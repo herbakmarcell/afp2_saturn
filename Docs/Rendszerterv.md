@@ -1,6 +1,14 @@
 # Rendszerterv
 ## 1. A rendszer célja
 
+Alkalmazásunk célja egy modern, digitális egyetemi index létrehozása, amely átfogó megoldást kínál az egyetemi adatok nyilvántartására és kezelésére.
+A fő cél az, hogy az alkalmazás lehetővé tegye a hallgatók és az oktatók számára, hogy egyszerűen és hatékonyan nyomon követhessék az oktatási folyamatban és az
+egyetemi életben történő eseményeket és tevékenységeket. Alkalmazásunk lehetőséget biztosít a hallgatóknak az adataik, érdemjegyeik, óráik, előadásaik,
+vizsgáik és tanulmányi előrehaladásuk pontos rögzítésére és nyomon követésére. Emellett kényelmi funkciókkal gazdagítja az egyetemi adminisztrációt,
+lehetőséget adva például az egyszerűbb dokumentumkezelésre, ütemtervek kezelésére. Mindezek mellett könnyen kezelhető és átlátható mind az oktatók, mind
+a hallgatók számára, így elősegítve az oktatási folyamat hatékonyságát és az információ áramlását az egyetemi közösségben. A felhasználóbarát
+felület és a könnyen kezelhetőség biztosítása kulcsfontosságú, hogy mindenki számára hozzáférhető legyen és hatékonyan tudja használni az alkalmazást. 
+
 ## 2. Projektterv
 
 ### 2.1 Projektszerepkörök, felelőségek:
