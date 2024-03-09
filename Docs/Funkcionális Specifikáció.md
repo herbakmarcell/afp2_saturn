@@ -13,6 +13,29 @@ A jelenlegi felhasználói felület webes felületen keresztül történő bejel
 
 ## 4. Igényelt üzleti folyamatok modellje
 
+Elkészíteni egy olyan alkalmazást, amelynek funkciói lehetővé teszik az egyetemi polgároknak hogy mindennapi feladataikat elvégezzék egy összefogó felületen.
+A dizájn könnyen átlátható és kezelhető, flat, és mindenek előtt megfelelően, a napjainkban átlagos sebességgel működnek a funkciói.
+A felület a bejelentkezés során meg tudja különböztetni a jogköröket, így az oktatók és hallgatók kezelőfelülete és funkcióit elválasztva kezeli.
+Az elvárások a hallgatói oldalról, a kényelmes tárgy felvétel és leadás, vizsgajelentkezés, a felvett tárgyak, órarendbe szervezve megjelenítve, illetve a felvett tárgyakra kapott érdemjegyeket is meg tudja tekinteni.
+Az oktatói jogkörrel rendelkező felhasználó képes vizsgákat kiírni, megtekinthesse az általa tartott vagy felügyelt kurzusokat és a rájuk adott értékeléseket.
+Valamint személyes ügyek esetén tudjon kapcsolatot teremteni mindkét fél a másikkal. Az alapvető használati útmutató a kezdő felhasználóknak könnyen elérhető legyen, egy menüpontban ezzel segítve az eligazodást.
+
+A Saturn felépítése, a már ismert Neptun-hoz hasonló lesz a felületben és működésben.
+Az alkalmazás a következőket fogja tartalmazza:
+
+-   Felhasználó kezelés
+-   Személyes adatok megtekintése
+-   Tanulmányi teljesítmény
+-   Tárgyfelvétel
+-   Tárgy kiírás
+-   Vizsgajelentkezés
+-   Vizsga kiírás
+-   Érdemjegy beírás
+-   Órarend
+-   Ügyintézés
+-   Használati útmutató
+
+
 ## 5. Követelménylista
 
 | Id | Modul | Név | Leírás |
