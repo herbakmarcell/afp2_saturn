@@ -77,17 +77,32 @@
 
 ### Funkcionális követelmények
 
-| ID | Megnevezés | Leírás |
-| --- | --- | --- |
-| K1 | ... | ... |
-
+| ID | Megnevezés               | Leírás                                                                                                                                                     |
+|----|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| K1 | Bejelentkezési ablak     | A felhasználónak egyes funkciók elérése előtt azonosítania kell magát, mielőtt elérhetné azokat.                                                           |
+| K2 | Kijelentkezés gomb       | Biztonsági okokból ezzel jelentkezhet ki a fiókjából a felhasználó.                                                                                        |
+| K3 | Tanulmányok fül          | A felhasználó itt kiválaszthatja, hogy a tanulmányi átlagát, felvett vagy tanított tárgyait vagy órarendjét szeretné látni, jogkörnek megfelelően.         |
+| K4 | Tanulmányi infó          | Itt a felhasználó részletesebb leírást kaphat a tanulmányáról.                                                                                             |
+| K5 | Tárgyak                  | Itt a felhasználó részletesebb leírást kaphat a felvett tárgyairól.                                                                                        |
+| K6 | Órarend                  | Itt a felhasználó részletesebb leírást kaphat az órarendjéről.                                                                                             |
+| K7 | Vizsgák fül              | A felhasználó itt kiválaszthatja, hogy a vizsgafelvételt, vizsgát kiíratni szeretne, esetleg a vizsgáit megnézni jogkörnek megfelelően.                    |
+| K8 | Vizsgajelentkezés        | Itt tud a felhasználó vizsgára jelentkezni.                                                                                                                |
+| K9 | Vizsgakiírás             | Itt tud a felhasználó vizsgát kiírni az általa oktatott tárgyból, ha rendelkezik megfelelő jogkörrel.                                                      |
+| K10 | Vizsgák                  | Itt a felhasználó részletesebb leírást kaphat a vizsgáiról, azokról akár lejelentkezni.                                                                    |
+| K11| Ügyintézés fül           | A felhasználó itt letöltheti a dokumentumait, illetve kérvényeket adhat be.                                                                                |
+ 
 ### Nemfunkcionális követelmények
 
-| ID | Megnevezés | Leírás |
-| --- | --- | --- |
-| K4 | ... | ... |
+| ID  | Megnevezés                             | Leírás                                                                                                                                                       |
+|-----|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| K12 | Használati útmutató                    | A GYIK gyakori kérdésekre válaszol a Saturn-al kapcsolatban, a használati útmutató pedig segíti a kezdő felhasználót a felület és funkciók elsajátításában.  |
+| K13 | Átlátható, könnyen kezelhető felület   | A felületek könnyen használhatóak, átláthatóak legyenek, fülekre osztva a funkciókat, intuitívak, illetve ne legyenek zsúfoltak.                             |
+| K14 | Modern dizájn                          | A program megjelenése feleljen meg a napjainkban használt "flat" dizájnnak.                                                                                  |
+
 
 ### Támogatott eszközök
+
+ * Bármely Windows 10 vagy Windows 11-el rendelkező eszköz, amely rendelkezik aktív internethozzáféréssel. Például otthoni számítógép, laptop, tablet.
 
 ## 5. Funkcionális terv
 
