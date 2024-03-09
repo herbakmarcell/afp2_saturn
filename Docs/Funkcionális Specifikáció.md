@@ -56,6 +56,14 @@ Az alkalmazás a következőket fogja tartalmazza:
 
 ## 6. Használati esetek
 
+### Oktató
+
+ + Egy bővebb de másabb kezelőfelülete van mint a hallgatónak. Tárgyakat tud kiírni és azokra kurzusokat emghírdetni. Értékelni tudja a hallgatók teljesítményét, érdemjegyeket adni nekik a kurzosokra és vizsgákra.
+
+### Hallgató
+
+ + Egy szűkebb hatáskörrel rendelkező felhasználó, de a hallhatónak is vannak egyedi funkciói, mint például a tárgy- és vizsgafelvétel. Meg tudja tekinteni a kapott érdemjegyeket és féléves adatait.
+
 ## 7. Megfeleltetés, hogyan fedik le a használati eseteket a követelményeket
 
 ## 8. Képernyőtervek
