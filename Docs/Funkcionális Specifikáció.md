@@ -115,3 +115,11 @@ Egy menüpontra kattintva az adott oldalra érkezik a felhasználó:
 | I8 | K10 | FK11 |
 
 ## 11 Fogalomszótár
+
+-   **Applikáció:** Alkalmazás.
+-   **App:** Alkalmazás.
+-   **Dizájn:** Egy ipari termék külsejének a tervezete.
+-   **Intuitív:** Élményszerű felismerésen alapuló, egyértelmű.
+-   **Platform:** Felület. 
+-   **Reszponzív:** Kedvezően reagáló.
+-   **Flat:** Két dimenzió hatású felület.
