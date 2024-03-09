@@ -36,3 +36,11 @@ A jelenlegi felhasználói felület webes felületen keresztül történő bejel
 | K4 | ... | ... |
 
 ## 11 Fogalomszótár
+
+-   **Applikáció:** Alkalmazás.
+-   **App:** Alkalmazás.
+-   **Dizájn:** Egy ipari termék külsejének a tervezete.
+-   **Intuitív:** Élményszerű felismerésen alapuló, egyértelmű.
+-   **Platform:** Felület. 
+-   **Reszponzív:** Kedvezően reagáló.
+-   **Flat:** Két dimenzió hatású felület.
