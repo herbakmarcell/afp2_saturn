@@ -15,9 +15,21 @@ A jelenlegi felhasználói felület webes felületen keresztül történő bejel
 
 ## 5. Követelménylista
 
-| Id | Modul | Név | Leírás |
+| ID | Modul | Név | Kifejtés |
 | :---: | --- | --- | --- |
-| K1 | ...| ... | ... |
+| K1  | Felhasználókezelés | Bejelentkezés  | Felhasználó bejelentkeztetése. |
+| K2  | Felhasználókezelés | Profilkezelés  | Személyes adatok megtekintése és módosítása |
+| K3  | Tanulmányok | Tanulmányi teljesítmény  | Tartalmazza a hallgató álltal felvett kurzusok és félévekre kapott érdemjegyeket. |
+| K4  | Tanulmányok | Tárgyfelvétel | A hallgató felhasználó félévente tárgyakat tud felvenni. |
+| K5  | Tanulmányok | Tárgy kiírás | Az oktató felhasználó kurzust tud kiírni az általa oktatott tárgyakból. |
+| K6  | Tanulmányok | Érdemjegybeírás | Az oktató felhasználó jegyet tud beírni az által oktatott tárgyakból. |
+| K7  | Tanulmányok | Órarend | A felhasználó meg tudja tekinteni az óráit. |
+| K8  | Vizsgák | Vizsgajelentkezés | A hallgató a már felvett tárgyakból kiírt vizsgákra tud jelentkezni. |
+| K9  | Vizsgák | Vizsga kiírás | Az oktató a saját kurzusaiból vizsgaalkalmakat tud kiírni a rendszerbe. |
+| K10  | Ügyintézés | Dokumentumok | Egyetemi dokumentumok letöltése. |
+| K11  | Ügyintézés | Kérvények | Kitölthető kérvények feltöltése. |
+| K12  | Használati útmutató | GYIK | Gyakran ismételt kérdések. |
+| K13  | Használati útmutató | Részletes leírás | Az alkalmazás részletes leírása. |
 
 ## 6. Használati esetek
 
