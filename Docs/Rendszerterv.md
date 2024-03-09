@@ -58,14 +58,17 @@
 
 ## 6. Fizikai környezet
 
-### Vásárolt softwarekomponensek és külső rendszerek
-
+### Vásárolt szoftverkomponensek, valamint esetleges külső rendszerek
+Nincsenek vásárolt szoftverkomponensek.
 ### Hardver topológia
-
+Olyan számítógép alkalmas, amely Windows 10 vagy 11 operációs rendszerrel rendelkezik.
 ### Fizikai alrendszerek
-
+Kliens gépek: A követelményeknek megfelelő, Windows 10 vagy 11 operációs rendszerrel rendelkező PC-k.
+Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó szolgáltatáshoz szükséges összetevők itt találhatóak. A kliens gép ezzel kommunikál.
 ### Fejlesztő eszközök
-
+ - Visual Studio 2022
+ - Visual Studio Code
+ - XAMPP (MySQL)
 
 ## 8. Architekturális terv
 
