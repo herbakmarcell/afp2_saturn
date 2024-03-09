@@ -105,6 +105,13 @@ Egy menüpontra kattintva az adott oldalra érkezik a felhasználó:
 
 | Id | Követelmény | Funkció |
 | :---: | --- | --- |
-| K4 | ... | ... |
+| I1 | K1 | FK1 |
+| I2 | K1 | FK2 |
+| I3 | K3 | FK3 |
+| I4 | K4 | FK4 |
+| I5 | K7 | FK6 |
+| I6 | K8 | FK8 |
+| I7 | K9 | FK9 |
+| I8 | K10 | FK11 |
 
 ## 11 Fogalomszótár
