@@ -48,17 +48,17 @@
 | K6 | Órarend                  | Itt a felhasználó részletesebb leírást kaphat az órarendjéről.                                                                                             |
 | K7 | Vizsgák fül              | A felhasználó itt kiválaszthatja, hogy a vizsgafelvételt, vizsgát kiíratni szeretne, esetleg a vizsgáit megnézni jogkörnek megfelelően.                    |
 | K8 | Vizsgajelentkezés        | Itt tud a felhasználó vizsgára jelentkezni.                                                                                                                |
-| K8 | Vizsgakiírás             | Itt tud a felhasználó vizsgát kiírni az általa oktatott tárgyból, ha rendelkezik megfelelő jogkörrel.                                                      |
-| K9 | Vizsgák                  | Itt a felhasználó részletesebb leírást kaphat a vizsgáiról, azokról akár lejelentkezni.                                                                    |
-| K10| Ügyintézés fül           | A felhasználó itt letöltheti a dokumentumait, illetve kérvényeket adhat be.                                                                                |
+| K9 | Vizsgakiírás             | Itt tud a felhasználó vizsgát kiírni az általa oktatott tárgyból, ha rendelkezik megfelelő jogkörrel.                                                      |
+| K10 | Vizsgák                  | Itt a felhasználó részletesebb leírást kaphat a vizsgáiról, azokról akár lejelentkezni.                                                                    |
+| K11| Ügyintézés fül           | A felhasználó itt letöltheti a dokumentumait, illetve kérvényeket adhat be.                                                                                |
  
 ### Nemfunkcionális követelmények
 
 | ID  | Megnevezés                             | Leírás                                                                                                                                                       |
 |-----|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| K11 | Használati útmutató                    | A GYIK gyakori kérdésekre válaszol a Saturn-al kapcsolatban, a használati útmutató pedig segíti a kezdő felhasználót a felület és funkciók elsajátításában.  |
-| K12 | Átlátható, könnyen kezelhető felület   | A felületek könnyen használhatóak, átláthatóak legyenek, fülekre osztva a funkciókat, intuitívak, illetve ne legyenek zsúfoltak.                             |
-| K13 | Modern dizájn                          | A program megjelenése feleljen meg a napjainkban használt "flat" dizájnnak.                                                                                  |
+| K12 | Használati útmutató                    | A GYIK gyakori kérdésekre válaszol a Saturn-al kapcsolatban, a használati útmutató pedig segíti a kezdő felhasználót a felület és funkciók elsajátításában.  |
+| K13 | Átlátható, könnyen kezelhető felület   | A felületek könnyen használhatóak, átláthatóak legyenek, fülekre osztva a funkciókat, intuitívak, illetve ne legyenek zsúfoltak.                             |
+| K14 | Modern dizájn                          | A program megjelenése feleljen meg a napjainkban használt "flat" dizájnnak.                                                                                  |
 
 
 ### Támogatott eszközök
