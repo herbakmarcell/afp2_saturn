@@ -40,7 +40,22 @@
 |Program                  |Tesztelés                               |         4 |             2 |                      2 |                2 |                   2 |
 
 ### 2.4 Mérföldkövek:
-   * Prototípus átadása
+   
+   *   03.06. Követelmény specifikáció elkészítése
+   *   03.09. Funkcionális specifikáció elkészítése
+   *   03.10. Rendszerterv elkészítése
+   *   03.13. Dokumentációk prezentálása
+   *   03.27. Kezelőfelület implementálása
+   *   04.03. II. Sprint prototípus prezentálása
+   *   04.10. Alapvető funkciók implementálása
+   *   04.16. Alpha tesztelések
+   *   04.17. III. Sprint prototípus prezentálása
+   *   04.24. Komplex funkciók implementálása
+   *   04.30. Béta tesztelések
+   *   05.01. IV. Sprint prototípus prezentálása
+   *   05.15. Kényelmi funkciók implementálása
+   *   05.20. Végleges tesztelések
+   *   05.22. V. Sprint végső prototípus bemutatása
 
 ## 3. Üzleti folyamatok modellje
 
