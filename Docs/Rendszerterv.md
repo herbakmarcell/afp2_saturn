@@ -155,6 +155,8 @@ Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó 
 
 ## 9. Adatbázis terv
 
+![saturnconnections](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/9351580d-b70f-4315-a4b6-a3698f20b07d)
+
 ## 10. Implementációs terv
 
 A projektet két részre oszlik: a frontendre és a backendre. A frontend WinForms segítségével készül, míg a backend ASP.NET keretrendszerben.
