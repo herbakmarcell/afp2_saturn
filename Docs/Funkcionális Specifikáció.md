@@ -77,6 +77,8 @@ Az alkalmazás a következőket fogja tartalmazza:
 ## 8. Képernyőtervek
 
 ![képnév](gitlink ahol a kép van)
+### Felső Menüsoros Felület - Adatlap (Pántya Barnabás)
+![saturnadatlap](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/04a227af-6f93-4a18-9d52-63f78f58e921)
 
 ## 9. Forgatókönyvek
 
