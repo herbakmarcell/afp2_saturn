@@ -77,6 +77,9 @@ Az alkalmazás a következőket fogja tartalmazza:
 ## 8. Képernyőtervek
 ### Felső Menüsoros Felület - Órarend (Herbák Marcell)
 ![saturn_felso_soros_orarend](https://github.com/herbakmarcell/afp2_saturn/assets/128597041/780b711d-1340-4556-90fc-116f5cfdeb9e)
+### Alkalmazás indítása - Logo (Pántya Barnabás)
+![saturnstartupscreen](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/9ad471fe-662f-4cc0-b231-ad2257ef6542)
+
 
 ## 9. Forgatókönyvek
 
