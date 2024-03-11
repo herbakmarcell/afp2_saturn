@@ -115,8 +115,21 @@ felület és a könnyen kezelhetőség biztosítása kulcsfontosságú, hogy min
 ## 5. Funkcionális terv
 
 ### 5.1 Rendszerszereplők
+ - Hallgató
+   - Kurzusokra jelentkezhet, vizsgákat vehet föl és le, megnézheti az órarendjét
+ - Oktató
+   - Kurzusokat és vizsgákat írhat ki, értkelheti a hallgatók féléves és vizsgateljesítményét
 
 ### 5.2 Menühierarchiák
+- Profilom
+- Vizsgák
+- Kurzusok
+- Tanulmányok
+- Értékelések
+- Belépés
+- Kijelentkezés
+- Tárgyfelvétel
+- Órarend
 
 ## 6. Fizikai környezet
 
