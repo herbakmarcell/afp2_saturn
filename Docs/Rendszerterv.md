@@ -149,9 +149,15 @@ Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó 
 
 ### Webszerver
 
+- Apache webszerver.
+
 ### Adatbázis rendszer
 
+- MySQL alapú adatbázis rendszer.
+
 ### A program elérése, kezelése
+
+- Szükséges WinForm, ASP.NET és XAMPP, ami az installáció esetén egy szervergép.
 
 ## 9. Adatbázis terv
 
