@@ -78,10 +78,10 @@ felület és a könnyen kezelhetőség biztosítása kulcsfontosságú, hogy min
 ## 3. Üzleti folyamatok modellje
 
 ### 3.1 Üzleti szereplők
-Az alkalmazás regisztráció után válik használhatóvá, viszont kizárólag magyar felsőoktatásban résztvevő (mint hallgatói mint tanári felhasználók) személyek tudnak az alkalmazásra regiszrálni, és azt a regisztráció után használatba venni. A felhasználók által elért funkciók eltérnek a tanulmányi rendszerben betöltött szerepüktől függően.
+Az oldal regisztráció után válik használhatóvá, viszont kizárólag magyar felsőoktatásban résztvevő (mint hallgatói mint tanári felhasználók) személyek tudnak az oldalra regiszrálni, és azt a regisztráció után használatba venni. A felhasználók által elért funkciók eltérnek a tanulmányi rendszerben betöltött szerepüktől függően.
 
 ### 3.2 Üzleti folyamatok
-A program indulását követően a felhasználónak be kell jelentkeznie a funkciók eléréséhez. A felhasználók által elért funkciók eltérnek a tanulmányi rendszerben betöltött szerepüktől függően.
+Az oldal indulását követően a felhasználónak be kell jelentkeznie a funkciók eléréséhez. A felhasználók által elért funkciók eltérnek a tanulmányi rendszerben betöltött szerepüktől függően.
 
 ## 4. Követelmények
 
