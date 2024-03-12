@@ -176,11 +176,23 @@ ellenőrzése a rendszer által megvalósított üzleti szolgáltatások verifik
 A teszteléseket a fejlesztői csapat minden tagja elvégzi.
 Egy teszt eredményeit a tagok dokumentálják külön fájlokba.
 
+A tesztelés során a szoftver megfelelő működését vizsgáljuk. Amennyiben az elvártnak megfelelő eredményt kapunk, a teszt eset sikeresnek tekinthető, ellenkező esetben a hibát rögzítjük a teszt jegyzőkönyvben. Ezt követően a megtalált hibákat javítjuk a szoftverben, és újbóli tesztelésnek vetjük alá a rendszert.
+
 ### Tesztesetek
 
  | Teszteset | Elvárt eredmény | 
  |-----------|-----------------| 
- | ... | ... |
+ | Regisztráció | A felhasználó az adatok megadásával sikeresen regisztrálni tud |
+ | Bejelentkezés |  A felhasználó az adatok megadásával sikeresen be tud jelentkezni |
+ | Kijelentkezés | A felhasználó fiókja lekapcsolódik az alkalmazásról, adatait nem lehet elérni |
+ | Tanulmányok fül elérése | A felhasználó előtt megjelenik a tanulmányi információ, a tárgyak és az órarend fül |
+ | tanulmányi információ megtekintése | A felhasználó részletesebb leírást kap a tanulmányáról. |
+ | Tárgyak megtekintése | A felhasználó által felvett tárgyak adatai részletesen megjelennek. |
+ | órarend megtekintése | A felhasználó órarendje megjelenik részletes informáciükkal. |
+ | Vizsgák megtekintése | A felhasználó ki tudja választani, hogy a vizsgafelvételt, vizsgát kiíratni szeretne, esetleg a vizsgáit megnézni jogkörnek megfelelően. |
+ | vizsgajelentkezés elvégzése | A felhasználó jelentkezni tud a vizsgára. |
+ | vizsgakiírás elvégzése | A felhasználó sikeresen ki tud írni egy új vizsgát az általa oktatott tárgyból, ha rendelkezik a megfelelő jogkörrel. |
+ | ügyintézés megtekintése | A felhasználó le tudja tölteni a dokumentumait, be tud adni sikeresen kérvényeket. |
 
 ### A tesztelési jegyzőkönyv kitöltésére egy sablon:
 
