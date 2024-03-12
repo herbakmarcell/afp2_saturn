@@ -82,6 +82,19 @@ Az oldal regisztráció után válik használhatóvá, viszont kizárólag magya
 
 ### 3.2 Üzleti folyamatok
 Az oldal indulását követően a felhasználónak be kell jelentkeznie a funkciók eléréséhez. A felhasználók által elért funkciók eltérnek a tanulmányi rendszerben betöltött szerepüktől függően.
+- __Általános folyamatok:__
+     - Regisztrálni az oldalra a megfelelő adatok magadásával.
+     - Bejelentkezni az oldalra a regisztráció során megadott megfelelő adatokkal.
+     - Bejelentkezés után kijelentkezni az oldalról.
+     - A felhasználó adatainak megtekintése.
+     - A bejelentkezéskor használandó jelszó megváltoztatása.
+- __Tanulói folyamatok:__
+	- Órarend megtekintése
+	- Tárgyak felvétele, tárgyak részleteinek megtekintése.
+	- vizsgák megtekintése, felvétele, részletek megtekintése.
+	- Ügyek intézése, kérvények beadása, dokumentumok megtekintése és letöltése.
+- __Tanári folyamatok:__
+	- vizsgaidőpontok kiírása, szerkesztése.
 
 ## 4. Követelmények
 
