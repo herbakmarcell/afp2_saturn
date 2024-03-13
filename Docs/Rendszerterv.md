@@ -241,7 +241,7 @@ például. Teszt #01 | Regisztráció | A felhasználó az adatok megadásával 
 ## 13. Karbantartási terv
 
 Fontos ellenőrizni:
-...
+*	Az oldal megfelelően kezeli a kritikus információkat, azok nem elérhetők a megfelelő jogkör és felhasználói adatok nélkül. Ilyenek például a bejelentkezési adatok, és a felhasználók személyes adatai adatai.
 
 Figyelembe kell venni a felhasználó által jött visszajelzést is a programmal kapcsolatban.
 Ha hibát talált, mielőbb orvosolni kell, lehet az:
