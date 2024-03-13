@@ -75,8 +75,18 @@ Az alkalmazás a következőket fogja tartalmazza:
 | C5 | Használati útmutató | [K12, K13], Megtekinthetők az alkalmazás leírása és a hozzá fűzűdő gyakori kérdések. |
 
 ## 8. Képernyőtervek
-
-![képnév](gitlink ahol a kép van)
+### Felső Menüsoros Felület - Órarend (Herbák Marcell)
+![saturn_felso_soros_orarend](https://github.com/herbakmarcell/afp2_saturn/assets/128597041/780b711d-1340-4556-90fc-116f5cfdeb9e)
+### Alkalmazás indítása - Logo (Pántya Barnabás)
+![saturnstartupscreen](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/9ad471fe-662f-4cc0-b231-ad2257ef6542)
+### Felső Menüsoros Felület - Adatlap (Pántya Barnabás)
+![saturnadatlap](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/04a227af-6f93-4a18-9d52-63f78f58e921)
+### Felső Menüsoros Felület - Vizsga kiírás (Fodor Győző Benedek)
+![vizsgakiiras](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/a3e29c98-aa27-48ce-b3d1-4c6466e69d1b)
+### Felső Menüsoros Felület - Kurzus kiírás (Fodor Győző Benedek)
+![kurzuskiiras](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/8f9db6e1-1ac9-40a0-b11a-4dba6e9d3417)
+### Bejelentkezési felület - Bejelentkezési felület (Détári Levente)
+![Bejelentkezes](https://github.com/herbakmarcell/afp2_saturn/blob/28-funkcionlis-specifikci---8-kpernytervek/Imgs/bejelentkezes_terv.png))
 
 ## 9. Forgatókönyvek
 
