@@ -155,8 +155,7 @@ Szerver (Host) gép: Az adatbázis rendszer és a háttérfolyamatokat ellátó 
 
 ## 9. Adatbázis terv
 
-![saturnconnections](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/eeca7076-3393-4931-83b6-3b73d042044f)
-
+![Imgs/saturnconnections.PNG](https://github.com/herbakmarcell/afp2_saturn/blob/39-rendszerterv---9-adatbzis-terv/Imgs/saturnconnections.PNG)
 
 ## 10. Implementációs terv
 
