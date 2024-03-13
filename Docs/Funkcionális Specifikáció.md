@@ -81,6 +81,10 @@ Az alkalmazás a következőket fogja tartalmazza:
 ![saturnstartupscreen](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/9ad471fe-662f-4cc0-b231-ad2257ef6542)
 ### Felső Menüsoros Felület - Adatlap (Pántya Barnabás)
 ![saturnadatlap](https://github.com/herbakmarcell/afp2_saturn/assets/135157255/04a227af-6f93-4a18-9d52-63f78f58e921)
+### Felső Menüsoros Felület - Vizsga kiírás (Fodor Győző Benedek)
+![vizsgakiiras](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/a3e29c98-aa27-48ce-b3d1-4c6466e69d1b)
+### Felső Menüsoros Felület - Kurzus kiírás (Fodor Győző Benedek)
+![kurzuskiiras](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/8f9db6e1-1ac9-40a0-b11a-4dba6e9d3417)
 
 ## 9. Forgatókönyvek
 
