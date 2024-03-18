@@ -14,6 +14,7 @@ namespace ASP_Core
 
             // Add services to the container.
             CreateDatabase();
+            AddRole();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -53,6 +54,29 @@ namespace ASP_Core
                     Console.WriteLine("[SaturnDB] Adatbázis már létezik, csatlakozás megkezdése...");
                 }
 
+                User user = new User();
+                user.SaturnCode = "QAGSVA";
+                user.Password = "SapkásKacsa18";
+                user.LastName = "Marcell";
+                user.FirstName = "Herbák";
+                user.Email = "herbakmarcell@gmail.com";
+                user.PhoneNumber = "+36701234567";
+
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
+
+        private static void AddRole()
+        {
+            using (var context = new UserContext())
+            {
+                User user = context.Users.First();
+                Role role = new Role();
+                role.Name = "Oktató";
+
+                user.Roles = new List<Role>();
+                user.Roles.Add(role);
                 context.SaveChanges();
             }
         }
