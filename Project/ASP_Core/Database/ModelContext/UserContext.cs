@@ -22,13 +22,13 @@ namespace ASP_Core.Database.ModelContext
             {
                 entity.HasKey(e => e.SaturnCode);
                 entity.Property(e => e.Password).IsRequired();
-                entity.HasMany(e => e.AccessLevel).WithOne(r => r.OneUser);
+                entity.HasMany(e => e.Roles).WithOne(r => r.User);
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.RoleName).IsRequired();
+                entity.Property(e => e.Name).IsRequired();
                 
             });
         }
