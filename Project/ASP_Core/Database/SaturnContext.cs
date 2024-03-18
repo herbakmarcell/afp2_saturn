@@ -3,9 +3,9 @@ using MySql.EntityFrameworkCore.Extensions;
 using ASP_Core.Database.Models;
 
 
-namespace ASP_Core.Database.ModelContext
+namespace ASP_Core.Database
 {
-    public class UserContext : DbContext
+    public class SaturnContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -18,7 +18,7 @@ namespace ASP_Core.Database.ModelContext
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User> (entity =>
+            modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.SaturnCode);
                 entity.Property(e => e.Password).IsRequired();
@@ -29,7 +29,7 @@ namespace ASP_Core.Database.ModelContext
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired();
-                
+
             });
         }
 
