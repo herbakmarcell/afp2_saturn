@@ -1,5 +1,5 @@
 
-using ASP_Core.Database.ModelContext;
+using ASP_Core.Database;
 using System.Security.Policy;
 using ASP_Core.Database.Models;
 using System.Diagnostics.Eventing.Reader;
@@ -43,7 +43,7 @@ namespace ASP_Core
         }
         private static void CreateDatabase()
         {
-            using (var context = new UserContext())
+            using (var context = new SaturnContext())
             {
                 if (context.Database.EnsureCreated())
                 {
@@ -69,7 +69,7 @@ namespace ASP_Core
 
         private static void AddRole()
         {
-            using (var context = new UserContext())
+            using (var context = new SaturnContext())
             {
                 User user = context.Users.First();
                 Role role = new Role();
