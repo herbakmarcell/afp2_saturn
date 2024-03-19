@@ -86,7 +86,8 @@ Az alkalmazás a következőket fogja tartalmazza:
 ### Felső Menüsoros Felület - Kurzus kiírás (Fodor Győző Benedek)
 ![kurzuskiiras](https://github.com/herbakmarcell/afp2_saturn/assets/117568964/8f9db6e1-1ac9-40a0-b11a-4dba6e9d3417)
 ### Bejelentkezési felület - Bejelentkezési felület (Détári Levente)
-![Bejelentkezes](https://github.com/herbakmarcell/afp2_saturn/blob/28-funkcionlis-specifikci---8-kpernytervek/Imgs/bejelentkezes_terv.png))
+![bejelentkezes_terv](https://github.com/herbakmarcell/afp2_saturn/assets/128597041/bf8b3af2-5e4a-45ea-8cb9-a308a10215b9)
+
 
 ## 9. Forgatókönyvek
 
