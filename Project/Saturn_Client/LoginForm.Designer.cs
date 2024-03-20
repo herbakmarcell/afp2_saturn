@@ -31,13 +31,15 @@
             components = new System.ComponentModel.Container();
             usernameField = new TextBox();
             passwordField = new TextBox();
-            usernameLabel = new Label();
-            passwordLabel = new Label();
             loginButton = new Button();
             logoBox = new PictureBox();
             exitButton = new Button();
             toolTip1 = new ToolTip(components);
+            userPic = new PictureBox();
+            passPic = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)logoBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)userPic).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)passPic).BeginInit();
             SuspendLayout();
             // 
             // usernameField
@@ -53,24 +55,6 @@
             passwordField.Name = "passwordField";
             passwordField.Size = new Size(339, 27);
             passwordField.TabIndex = 1;
-            // 
-            // usernameLabel
-            // 
-            usernameLabel.AutoSize = true;
-            usernameLabel.Location = new Point(116, 150);
-            usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(109, 20);
-            usernameLabel.TabIndex = 2;
-            usernameLabel.Text = "Felhasználónév";
-            // 
-            // passwordLabel
-            // 
-            passwordLabel.AutoSize = true;
-            passwordLabel.Location = new Point(146, 199);
-            passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(48, 20);
-            passwordLabel.TabIndex = 3;
-            passwordLabel.Text = "Jelszó";
             // 
             // loginButton
             // 
@@ -100,21 +84,39 @@
             exitButton.UseVisualStyleBackColor = true;
             exitButton.Click += exitButton_Click;
             // 
+            // userPic
+            // 
+            userPic.Location = new Point(195, 147);
+            userPic.Name = "userPic";
+            userPic.Size = new Size(30, 30);
+            userPic.TabIndex = 7;
+            userPic.TabStop = false;
+            // 
+            // passPic
+            // 
+            passPic.Location = new Point(195, 196);
+            passPic.Name = "passPic";
+            passPic.Size = new Size(30, 30);
+            passPic.TabIndex = 8;
+            passPic.TabStop = false;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(749, 366);
+            Controls.Add(passPic);
+            Controls.Add(userPic);
             Controls.Add(exitButton);
             Controls.Add(logoBox);
             Controls.Add(loginButton);
-            Controls.Add(passwordLabel);
-            Controls.Add(usernameLabel);
             Controls.Add(passwordField);
             Controls.Add(usernameField);
             Name = "LoginForm";
             Text = "Saturn";
             ((System.ComponentModel.ISupportInitialize)logoBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)userPic).EndInit();
+            ((System.ComponentModel.ISupportInitialize)passPic).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,11 +125,11 @@
 
         private TextBox usernameField;
         private TextBox passwordField;
-        private Label usernameLabel;
-        private Label passwordLabel;
         private Button loginButton;
         private PictureBox logoBox;
         private Button exitButton;
         private ToolTip toolTip1;
+        private PictureBox userPic;
+        private PictureBox passPic;
     }
 }

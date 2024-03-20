@@ -29,6 +29,8 @@ namespace Saturn_Client
         {
             logoBox.Image = Properties.Resources.saturnbeta;
             exitButton.Image = Properties.Resources.exiticon;
+            userPic.Image= Properties.Resources.user;
+            passPic.Image= Properties.Resources.padlock;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
