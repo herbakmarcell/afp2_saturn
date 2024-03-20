@@ -2,7 +2,10 @@
 {
     public class Semester
     {
-        public DateOnly Year { get; set; }
+        public int Id { get; set; }
+        public string Year { get; set; } 
         public bool EvenSemester { get; set; }
+
+        public List<Course> SemesterCourses { get; set; }
     }
 }

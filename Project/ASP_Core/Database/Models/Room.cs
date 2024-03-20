@@ -5,5 +5,7 @@
         public string Code { get; set; }
         public int MaxSize { get; set; }
 
+        public List<ClassModel> Classes { get; set; }
+
     }
 }
