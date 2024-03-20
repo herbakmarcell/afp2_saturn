@@ -114,6 +114,9 @@
             Controls.Add(usernameField);
             Name = "LoginForm";
             Text = "Saturn";
+            MouseDown += LoginForm_MouseDown;
+            MouseMove += LoginForm_MouseMove;
+            MouseUp += LoginForm_MouseUp;
             ((System.ComponentModel.ISupportInitialize)logoBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)userPic).EndInit();
             ((System.ComponentModel.ISupportInitialize)passPic).EndInit();
