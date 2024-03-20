@@ -8,11 +8,26 @@ namespace Saturn_Client
         public LoginForm()
         {
             InitializeComponent();
-            logoBox.Image = Properties.Resources.saturnbeta;
+            InitFormStyle();
+            ButtonStyle();
+            ImageStyle();
+        }
+
+        private void InitFormStyle()
+        {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void ButtonStyle()
+        {
             exitButton.FlatAppearance.BorderSize = 0;
+        }
+
+        private void ImageStyle()
+        {
+            logoBox.Image = Properties.Resources.saturnbeta;
             exitButton.Image = Properties.Resources.exit;
         }
     }
