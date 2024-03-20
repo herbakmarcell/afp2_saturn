@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C7
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\cross.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\cross.png
 		..\..\..\..\Asztali gép\exit.png = ..\..\..\..\Asztali gép\exit.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnbeta.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnbeta.png
 	EndProjectSection
 EndProject

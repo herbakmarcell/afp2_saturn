@@ -28,7 +28,7 @@ namespace Saturn_Client
         private void ImageStyle()
         {
             logoBox.Image = Properties.Resources.saturnbeta;
-            exitButton.Image = Properties.Resources.exit;
+            exitButton.Image = Properties.Resources.exiticon;
         }
 
         private void exitButton_Click(object sender, EventArgs e)

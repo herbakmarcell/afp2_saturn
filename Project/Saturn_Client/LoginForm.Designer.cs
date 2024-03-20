@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             usernameField = new TextBox();
             passwordField = new TextBox();
             usernameLabel = new Label();
@@ -35,6 +36,7 @@
             loginButton = new Button();
             logoBox = new PictureBox();
             exitButton = new Button();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)logoBox).BeginInit();
             SuspendLayout();
             // 
@@ -94,6 +96,7 @@
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
             exitButton.TabIndex = 6;
+            toolTip1.SetToolTip(exitButton, "Kilépés");
             exitButton.UseVisualStyleBackColor = true;
             exitButton.Click += exitButton_Click;
             // 
@@ -125,5 +128,6 @@
         private Button loginButton;
         private PictureBox logoBox;
         private Button exitButton;
+        private ToolTip toolTip1;
     }
 }

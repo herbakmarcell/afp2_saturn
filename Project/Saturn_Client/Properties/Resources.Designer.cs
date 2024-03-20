@@ -83,6 +83,16 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap exiticon {
+            get {
+                object obj = ResourceManager.GetObject("exiticon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap saturnbeta {
             get {
                 object obj = ResourceManager.GetObject("saturnbeta", resourceCulture);
