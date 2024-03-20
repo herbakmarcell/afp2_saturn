@@ -95,6 +95,7 @@
             exitButton.Size = new Size(30, 30);
             exitButton.TabIndex = 6;
             exitButton.UseVisualStyleBackColor = true;
+            exitButton.Click += exitButton_Click;
             // 
             // LoginForm
             // 

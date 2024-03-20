@@ -4,7 +4,7 @@ namespace Saturn_Client
 {
     public partial class LoginForm : Form
     {
-        
+
         public LoginForm()
         {
             InitializeComponent();
@@ -29,6 +29,11 @@ namespace Saturn_Client
         {
             logoBox.Image = Properties.Resources.saturnbeta;
             exitButton.Image = Properties.Resources.exit;
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
