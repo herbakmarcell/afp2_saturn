@@ -10,6 +10,11 @@ namespace ASP_Core.Database
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<ClassModel> Classes { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Semester> Semesters { get; set; }       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -68,6 +73,7 @@ namespace ASP_Core.Database
             modelBuilder.Entity<Semester>(entity => 
             {
                 entity.HasKey(e => e.Id);
+                entity.Property(e => e.Year).IsRequired();
                 entity.HasMany(e => e.SemesterCourses).WithOne(c => c.CurrentSemester);
             });
         }
@@ -76,6 +82,8 @@ namespace ASP_Core.Database
             modelBuilder.Entity<Subject>(entity =>
             {
                 entity.HasKey(e => e.Code);
+                entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.Credit).IsRequired();
                 entity.HasMany(e => e.Courses).WithOne(c => c.Subject);
             });
         }
@@ -84,6 +92,10 @@ namespace ASP_Core.Database
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.SaturnCode);
+                entity.Property(e => e.Password).IsRequired();
+                entity.Property(e => e.LastName).IsRequired();
+                entity.Property(e => e.FirstName).IsRequired();
+                entity.Property(e => e.Email).IsRequired();
                 entity.HasMany(e => e.Roles).WithOne(r => r.User);
                 entity.HasMany(e => e.Courses).WithMany(c => c.Students);
             });
