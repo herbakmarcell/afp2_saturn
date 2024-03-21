@@ -93,19 +93,19 @@
             // 
             userPic.BackColor = Color.Transparent;
             userPic.Image = Properties.Resources.user;
-            userPic.Location = new Point(195, 147);
+            userPic.Location = new Point(195, 150);
             userPic.Name = "userPic";
-            userPic.Size = new Size(30, 30);
+            userPic.Size = new Size(27, 27);
             userPic.TabIndex = 7;
             userPic.TabStop = false;
             // 
             // passPic
             // 
             passPic.BackColor = Color.Transparent;
-            passPic.Image = Properties.Resources.padlock;
-            passPic.Location = new Point(195, 196);
+            passPic.Image = Properties.Resources.passkey;
+            passPic.Location = new Point(195, 199);
             passPic.Name = "passPic";
-            passPic.Size = new Size(30, 30);
+            passPic.Size = new Size(27, 27);
             passPic.TabIndex = 8;
             passPic.TabStop = false;
             // 
