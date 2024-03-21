@@ -10,5 +10,6 @@
         public string PhoneNumber { get; set; }
 
         public List<Role> Roles { get; set; }
+        public List<Course> Courses { get; set; }
     }
 }

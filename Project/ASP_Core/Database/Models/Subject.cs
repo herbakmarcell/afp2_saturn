@@ -6,8 +6,10 @@
         public string Name { get; set; }
         public int Credit { get; set; }
 
-        public List<Course> Courses { get; set; }
 
+
+
+        public List<Course> Courses { get; set; }
 
         public List<Course> GetCoursesInSemester(int id)
         {

@@ -43,6 +43,7 @@ namespace ASP_Core.Database
                 entity.HasKey(e => e.Code);
                 entity.HasMany(e => e.Classes).WithOne(c => c.Course);
                 entity.HasOne(e => e.CurrentSemester).WithMany(s => s.SemesterCourses);
+                entity.HasMany(e => e.Students).WithMany(u => u.Courses);
             });
         }
         private void RoleTableBuilder(ModelBuilder modelBuilder)
@@ -84,6 +85,7 @@ namespace ASP_Core.Database
             {
                 entity.HasKey(e => e.SaturnCode);
                 entity.HasMany(e => e.Roles).WithOne(r => r.User);
+                entity.HasMany(e => e.Courses).WithMany(c => c.Students);
             });
         }
     }
