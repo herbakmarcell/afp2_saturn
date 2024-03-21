@@ -20,7 +20,6 @@ namespace Saturn_Client
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
-
         }
 
         private void ButtonStyle()
@@ -30,10 +29,7 @@ namespace Saturn_Client
 
         private void ImageStyle()
         {
-            logoBox.Image = Properties.Resources.saturnbeta;
-            exitButton.Image = Properties.Resources.exiticon;
-            userPic.Image = Properties.Resources.user;
-            passPic.Image = Properties.Resources.padlock;
+            this.BackgroundImage = Properties.Resources.space;
         }
 
         private void exitButton_Click(object sender, EventArgs e)

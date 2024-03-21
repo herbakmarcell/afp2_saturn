@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             usernameField = new TextBox();
             passwordField = new TextBox();
             loginButton = new Button();
@@ -67,6 +68,8 @@
             // 
             // logoBox
             // 
+            logoBox.BackColor = Color.Transparent;
+            logoBox.Image = Properties.Resources.saturnbeta;
             logoBox.Location = new Point(324, 12);
             logoBox.Name = "logoBox";
             logoBox.Size = new Size(177, 120);
@@ -75,17 +78,21 @@
             // 
             // exitButton
             // 
+            exitButton.BackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
+            exitButton.Image = Properties.Resources.exiticon;
             exitButton.Location = new Point(699, 12);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
             exitButton.TabIndex = 6;
             toolTip1.SetToolTip(exitButton, "Kilépés");
-            exitButton.UseVisualStyleBackColor = true;
+            exitButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
             // 
             // userPic
             // 
+            userPic.BackColor = Color.Transparent;
+            userPic.Image = Properties.Resources.user;
             userPic.Location = new Point(195, 147);
             userPic.Name = "userPic";
             userPic.Size = new Size(30, 30);
@@ -94,6 +101,8 @@
             // 
             // passPic
             // 
+            passPic.BackColor = Color.Transparent;
+            passPic.Image = Properties.Resources.padlock;
             passPic.Location = new Point(195, 196);
             passPic.Name = "passPic";
             passPic.Size = new Size(30, 30);
@@ -112,6 +121,7 @@
             Controls.Add(loginButton);
             Controls.Add(passwordField);
             Controls.Add(usernameField);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoginForm";
             Text = "Saturn";
             MouseDown += LoginForm_MouseDown;
