@@ -59,11 +59,14 @@
             // 
             // loginButton
             // 
+            loginButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            loginButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            loginButton.FlatStyle = FlatStyle.Flat;
+            loginButton.Image = Properties.Resources.loginButtonpic;
             loginButton.Location = new Point(337, 251);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(124, 45);
+            loginButton.Size = new Size(120, 35);
             loginButton.TabIndex = 4;
-            loginButton.Text = "Bejelentkezés";
             loginButton.UseVisualStyleBackColor = true;
             // 
             // logoBox
@@ -79,6 +82,8 @@
             // exitButton
             // 
             exitButton.BackColor = Color.Transparent;
+            exitButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
             exitButton.Location = new Point(699, 12);
