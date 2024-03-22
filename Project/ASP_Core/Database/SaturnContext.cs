@@ -2,6 +2,11 @@
 using MySql.EntityFrameworkCore.Extensions;
 using ASP_Core.Database.Models;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Resources;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
 
 
 namespace ASP_Core.Database
@@ -18,8 +23,12 @@ namespace ASP_Core.Database
         public DbSet<Semester> Semesters { get; set; }       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySQL("server=localhost;database=SaturnDB;user=root;password=");
+        { 
+            var connectionString = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build()
+                .GetSection("ConnectionString")["SaturnDB"];
+            optionsBuilder.UseMySQL(connectionString);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
