@@ -58,5 +58,12 @@ namespace Saturn_Client
         {
             mouseDown = false;
         }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainForm mainForm = new MainForm();
+            mainForm.Show();
+        }
     }
 }

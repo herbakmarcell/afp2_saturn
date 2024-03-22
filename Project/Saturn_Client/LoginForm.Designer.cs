@@ -68,6 +68,7 @@
             loginButton.Size = new Size(120, 35);
             loginButton.TabIndex = 4;
             loginButton.UseVisualStyleBackColor = true;
+            loginButton.Click += loginButton_Click;
             // 
             // logoBox
             // 

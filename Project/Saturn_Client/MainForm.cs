@@ -12,9 +12,32 @@ namespace Saturn_Client
 {
     public partial class MainForm : Form
     {
+        private Form activeForm;
+
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+                activeForm = childForm;
+            }
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            this.userDataPanel.Controls.Add(childForm);
+            this.userDataPanel.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+        private void userDataButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new UserDataForm(), sender);
         }
     }
 }
