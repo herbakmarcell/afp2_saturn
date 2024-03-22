@@ -55,11 +55,11 @@ namespace ASP_Core
                 }
 
                 User user = new User();
-                user.SaturnCode = "QAGSVA";
-                user.Password = "SapkásKacsa18";
-                user.LastName = "Marcell";
-                user.FirstName = "Herbák";
-                user.Email = "herbakmarcell@gmail.com";
+                user.SaturnCode = "SATURN";
+                user.Password = "JELSZOJELSZO";
+                user.LastName = "VEZETEKNEV";
+                user.FirstName = "KERESZTNEV";
+                user.Email = "example@example.com";
                 user.PhoneNumber = "+36701234567";
 
                 context.Users.Add(user);
