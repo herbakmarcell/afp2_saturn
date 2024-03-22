@@ -28,12 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             userDataButton = new Button();
             studiesButton = new Button();
             subjectsButton = new Button();
             examsButton = new Button();
             financesButton = new Button();
             userDataPanel = new Panel();
+            exitButton = new Button();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // userDataButton
@@ -89,19 +93,38 @@
             userDataPanel.Size = new Size(1044, 438);
             userDataPanel.TabIndex = 5;
             // 
+            // exitButton
+            // 
+            exitButton.BackColor = Color.Transparent;
+            exitButton.BackgroundImageLayout = ImageLayout.None;
+            exitButton.FlatAppearance.BorderSize = 0;
+            exitButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            exitButton.FlatStyle = FlatStyle.Flat;
+            exitButton.Image = Properties.Resources.exiticon;
+            exitButton.Location = new Point(1220, 12);
+            exitButton.Name = "exitButton";
+            exitButton.Size = new Size(30, 30);
+            exitButton.TabIndex = 7;
+            toolTip1.SetToolTip(exitButton, "Kilépés");
+            exitButton.UseVisualStyleBackColor = false;
+            exitButton.MouseClick += exitButton_MouseClick;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1262, 673);
+            Controls.Add(exitButton);
             Controls.Add(userDataPanel);
             Controls.Add(financesButton);
             Controls.Add(examsButton);
             Controls.Add(subjectsButton);
             Controls.Add(studiesButton);
             Controls.Add(userDataButton);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "Form1";
+            Text = "MainForm";
             FormClosing += MainForm_FormClosing;
             ResumeLayout(false);
         }
@@ -114,5 +137,7 @@
         private Button examsButton;
         private Button financesButton;
         private Panel userDataPanel;
+        private Button exitButton;
+        private ToolTip toolTip1;
     }
 }

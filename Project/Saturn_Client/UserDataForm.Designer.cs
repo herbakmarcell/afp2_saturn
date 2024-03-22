@@ -69,7 +69,7 @@
             Controls.Add(familyNameLabel);
             Controls.Add(saturnCodeLabel);
             Name = "UserDataForm";
-            Text = "Form1";
+            Text = "UserData";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

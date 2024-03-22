@@ -19,6 +19,14 @@ namespace Saturn_Client
         {
             InitializeComponent();
             this.loginForm = loginForm;
+            InitFormStyle();
+        }
+
+        private void InitFormStyle()
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void OpenChildForm(Form childForm, object btnSender)
@@ -45,6 +53,11 @@ namespace Saturn_Client
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             loginForm.Close();
+        }
+
+        private void exitButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
         }
     }
 }
