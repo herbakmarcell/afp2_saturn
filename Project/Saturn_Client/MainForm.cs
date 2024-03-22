@@ -13,10 +13,12 @@ namespace Saturn_Client
     public partial class MainForm : Form
     {
         private Form activeForm;
+        private Form loginForm;
 
-        public MainForm()
+        public MainForm(LoginForm loginForm)
         {
             InitializeComponent();
+            this.loginForm = loginForm;
         }
 
         private void OpenChildForm(Form childForm, object btnSender)
@@ -38,6 +40,11 @@ namespace Saturn_Client
         private void userDataButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new UserDataForm(), sender);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            loginForm.Close();
         }
     }
 }

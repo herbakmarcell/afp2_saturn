@@ -102,6 +102,7 @@
             Controls.Add(userDataButton);
             Name = "MainForm";
             Text = "Form1";
+            FormClosing += MainForm_FormClosing;
             ResumeLayout(false);
         }
 

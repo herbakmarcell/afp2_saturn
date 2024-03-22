@@ -62,7 +62,7 @@ namespace Saturn_Client
         private void loginButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MainForm mainForm = new MainForm();
+            MainForm mainForm = new MainForm(this);
             mainForm.Show();
         }
     }
