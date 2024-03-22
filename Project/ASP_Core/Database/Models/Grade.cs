@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public User User { get; set; }
         public Course Course { get; set; }
+        public Exam Exam { get; set; }
 
     }
 }

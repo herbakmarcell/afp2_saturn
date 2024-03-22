@@ -14,5 +14,6 @@
         public List<User> Students { get; set; }
         public List<Grade> Grades { get; set; }
         public Semester CurrentSemester { get; set; }
+        public List<Exam> Exams { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace ASP_Core.Database
         public DbSet<Role> Roles { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Exam> Exams { get; set; }
         public DbSet<ClassModel> Classes { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Semester> Semesters { get; set; }       
@@ -26,6 +27,8 @@ namespace ASP_Core.Database
 
             ClassTableBuilder(modelBuilder);
             CourseTableBuilder(modelBuilder);
+            ExamTableBuilder(modelBuilder);
+            GradeTableBuilder(modelBuilder);
             RoleTableBuilder(modelBuilder);
             RoomTableBuilder(modelBuilder);
             SemesterTableBuilder(modelBuilder);
@@ -53,6 +56,28 @@ namespace ASP_Core.Database
                 entity.Property(e => e.Credit).IsRequired();
             });
         }
+        private void ExamTableBuilder(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Exam>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasMany(e => e.Grades).WithOne(g => g.Exam);
+                entity.HasMany(e => e.Students).WithMany(u => u.Exams);
+                entity.HasOne(e => e.Course).WithMany(c => c.Exams);
+                entity.HasOne(e => e.Semester).WithMany(s => s.SemesterExams);
+            });
+        }
+        private void GradeTableBuilder(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Grade>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.HasOne(e => e.User).WithMany(g => g.Grades);
+                entity.HasOne(e => e.Course).WithMany(c => c.Grades);
+                entity.HasOne(e => e.Exam).WithMany(e => e.Grades);
+
+            });
+        }
         private void RoleTableBuilder(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Role>(entity =>
@@ -77,6 +102,7 @@ namespace ASP_Core.Database
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Year).IsRequired();
                 entity.HasMany(e => e.SemesterCourses).WithOne(c => c.CurrentSemester);
+                entity.HasMany(e => e.SemesterExams).WithOne(c => c.Semester);
             });
         }
         private void SubjectTableBuilder(ModelBuilder modelBuilder)
@@ -100,6 +126,8 @@ namespace ASP_Core.Database
                 entity.HasMany(e => e.Roles).WithOne(r => r.User);
                 entity.HasMany(e => e.Courses).WithMany(c => c.Students);
                 entity.HasMany(e => e.Grades).WithOne(g => g.User);
+                entity.HasMany(e => e.Exams).WithMany(e => e.Students);
+                //entity.HasMany(e => e.Exams).WithOne(e => e.Prof);
             });
         }
     }

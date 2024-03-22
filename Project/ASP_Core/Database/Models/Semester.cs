@@ -7,5 +7,6 @@
         public bool EvenSemester { get; set; }
 
         public List<Course> SemesterCourses { get; set; }
+        public List<Exam> SemesterExams { get; set; }
     }
 }
