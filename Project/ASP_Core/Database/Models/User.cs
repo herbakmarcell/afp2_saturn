@@ -11,5 +11,6 @@
 
         public List<Role> Roles { get; set; }
         public List<Course> Courses { get; set; }
+        public List<Grade> Grades { get; set; }
     }
 }
