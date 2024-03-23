@@ -126,6 +126,9 @@
             Name = "MainForm";
             Text = "MainForm";
             FormClosing += MainForm_FormClosing;
+            MouseDown += MainForm_MouseDown;
+            MouseMove += MainForm_MouseMove;
+            MouseUp += MainForm_MouseUp;
             ResumeLayout(false);
         }
 
