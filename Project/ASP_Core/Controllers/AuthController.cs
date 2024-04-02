@@ -12,7 +12,7 @@ namespace ASP_Core.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly SaturnContext saturnContext;
+        private SaturnContext saturnContext = new SaturnContext();
 
         public AuthController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -24,7 +24,7 @@ namespace ASP_Core.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            if ()
+            if (saturnContext.UserExists(loginModel.SaturnCode))
             {
 
             }
