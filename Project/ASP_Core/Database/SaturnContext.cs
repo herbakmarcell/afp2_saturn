@@ -139,5 +139,17 @@ namespace ASP_Core.Database
                 //entity.HasMany(e => e.Exams).WithOne(e => e.Prof);
             });
         }
+
+        public bool UserExists(string saturnCode)
+        {
+            foreach (var user in Users)
+            {
+                if (user.SaturnCode == saturnCode)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
