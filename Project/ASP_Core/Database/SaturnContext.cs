@@ -13,6 +13,14 @@ namespace ASP_Core.Database
 {
     public class SaturnContext : DbContext
     {
+        public SaturnContext()
+        {
+            if (!this.Database.EnsureCreated())
+            {
+                Seed();
+            }
+            
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Subject> Subjects { get; set; }
@@ -140,16 +148,20 @@ namespace ASP_Core.Database
             });
         }
 
-        public bool UserExists(string saturnCode)
+        public bool UserExistsWithPassword(string saturnCode, string password)
         {
             foreach (var user in Users)
             {
-                if (user.SaturnCode == saturnCode)
+                if (user.SaturnCode == saturnCode && user.Password == password)
                 {
                     return true;
                 }
             }
             return false;
+        }
+        public void Seed()
+        {
+
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using ASP_Core.Database;
+using ASP_Core.Models;
 using ASP_Core.Models.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,27 +9,29 @@ namespace ASP_Core.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private SaturnContext saturnContext = new SaturnContext();
+        //private readonly UserManager<IdentityUser> userManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
+        private readonly SaturnContext saturnContext;
 
-        public AuthController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AuthController(SaturnContext saturnContext)
         {
-            this.userManager = userManager;
-            this.roleManager = roleManager;
+            //this.userManager = userManager;
+            //this.roleManager = roleManager;
+            this.saturnContext = saturnContext;
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        [AllowAnonymous]
+        public async Task<Response> Login([FromBody] LoginModel loginModel)
         {
-            if (saturnContext.UserExists(loginModel.SaturnCode))
+            if (saturnContext.UserExistsWithPassword(loginModel.SaturnCode, loginModel.Password))
             {
-
+                return new Response() { Code = 0 , Message = "Sikeres bejelentkezés!"};
             }
+            return new Response() { Code = -1, Message = "Hibás felhasználónév vagy jelszó!" };
         }
     }
 }

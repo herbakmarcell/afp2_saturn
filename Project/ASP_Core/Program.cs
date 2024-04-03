@@ -13,9 +13,15 @@ namespace ASP_Core
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            CreateDatabase();
-            AddRole();
+            //CreateDatabase();
+            //AddRole();
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<SaturnContext>();
+
+            builder.Services.AddAuthentication()
+                .AddJwtBearer()
+                .AddJwtBearer("LocalAuthIssuer"); ;
+            builder.Services.AddAuthorization();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -32,11 +38,13 @@ namespace ASP_Core
 
             app.UseHttpsRedirection();
 
+            app.UseCors();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
             app.MapControllers();
-
+            //app.MapGet("/auth");
             app.Run();
 
             
@@ -53,7 +61,7 @@ namespace ASP_Core
                 {
                     Console.WriteLine("[SaturnDB] Adatbázis már létezik, csatlakozás megkezdése...");
                 }
-
+                /*
                 User user = new User();
                 user.SaturnCode = "SATURN";
                 user.Password = "JELSZOJELSZO";
@@ -62,7 +70,7 @@ namespace ASP_Core
                 user.Email = "example@example.com";
                 user.PhoneNumber = "+36701234567";
 
-                context.Users.Add(user);
+                context.Users.Add(user);*/
                 context.SaveChanges();
             }
         }
