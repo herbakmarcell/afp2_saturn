@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace Saturn_Client
 {
@@ -23,7 +24,6 @@ namespace Saturn_Client
             this.loginForm = loginForm;
             InitFormStyle();
         }
-
         private void InitFormStyle()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

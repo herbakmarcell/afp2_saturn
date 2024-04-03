@@ -42,49 +42,94 @@
             // 
             // userDataButton
             // 
+            userDataButton.BackColor = Color.Transparent;
+            userDataButton.BackgroundImage = Properties.Resources.buttonBack;
+            userDataButton.FlatAppearance.BorderSize = 0;
+            userDataButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            userDataButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            userDataButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            userDataButton.FlatStyle = FlatStyle.Flat;
+            userDataButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            userDataButton.ForeColor = SystemColors.ActiveCaptionText;
             userDataButton.Location = new Point(75, 36);
             userDataButton.Name = "userDataButton";
             userDataButton.Size = new Size(152, 56);
             userDataButton.TabIndex = 0;
             userDataButton.Text = "Saját adatok";
-            userDataButton.UseVisualStyleBackColor = true;
+            userDataButton.UseVisualStyleBackColor = false;
             userDataButton.Click += userDataButton_Click;
             // 
             // studiesButton
             // 
+            studiesButton.BackColor = Color.Transparent;
+            studiesButton.BackgroundImage = Properties.Resources.buttonBack;
+            studiesButton.FlatAppearance.BorderSize = 0;
+            studiesButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            studiesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            studiesButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            studiesButton.FlatStyle = FlatStyle.Flat;
+            studiesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            studiesButton.ForeColor = SystemColors.ActiveCaptionText;
             studiesButton.Location = new Point(289, 36);
             studiesButton.Name = "studiesButton";
             studiesButton.Size = new Size(152, 56);
             studiesButton.TabIndex = 1;
             studiesButton.Text = "Tanulmányok";
-            studiesButton.UseVisualStyleBackColor = true;
+            studiesButton.UseVisualStyleBackColor = false;
             // 
             // subjectsButton
             // 
+            subjectsButton.BackColor = Color.Transparent;
+            subjectsButton.BackgroundImage = Properties.Resources.buttonBack;
+            subjectsButton.FlatAppearance.BorderSize = 0;
+            subjectsButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            subjectsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            subjectsButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            subjectsButton.FlatStyle = FlatStyle.Flat;
+            subjectsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
             subjectsButton.Location = new Point(511, 36);
             subjectsButton.Name = "subjectsButton";
             subjectsButton.Size = new Size(152, 56);
             subjectsButton.TabIndex = 2;
             subjectsButton.Text = "Tárgyak";
-            subjectsButton.UseVisualStyleBackColor = true;
+            subjectsButton.UseVisualStyleBackColor = false;
             // 
             // examsButton
             // 
+            examsButton.BackColor = Color.Transparent;
+            examsButton.BackgroundImage = Properties.Resources.buttonBack;
+            examsButton.FlatAppearance.BorderSize = 0;
+            examsButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            examsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            examsButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            examsButton.FlatStyle = FlatStyle.Flat;
+            examsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            examsButton.ForeColor = SystemColors.ActiveCaptionText;
             examsButton.Location = new Point(740, 36);
             examsButton.Name = "examsButton";
             examsButton.Size = new Size(152, 56);
             examsButton.TabIndex = 3;
             examsButton.Text = "Vizsgázás";
-            examsButton.UseVisualStyleBackColor = true;
+            examsButton.UseVisualStyleBackColor = false;
             // 
             // financesButton
             // 
+            financesButton.BackColor = Color.Transparent;
+            financesButton.BackgroundImage = Properties.Resources.buttonBack;
+            financesButton.FlatAppearance.BorderSize = 0;
+            financesButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            financesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            financesButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            financesButton.FlatStyle = FlatStyle.Flat;
+            financesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            financesButton.ForeColor = SystemColors.ActiveCaptionText;
             financesButton.Location = new Point(967, 36);
             financesButton.Name = "financesButton";
             financesButton.Size = new Size(152, 56);
             financesButton.TabIndex = 4;
             financesButton.Text = "Pénzügyek";
-            financesButton.UseVisualStyleBackColor = true;
+            financesButton.UseVisualStyleBackColor = false;
             // 
             // userDataPanel
             // 
@@ -114,6 +159,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.mainBack;
             ClientSize = new Size(1262, 673);
             Controls.Add(exitButton);
             Controls.Add(userDataPanel);
