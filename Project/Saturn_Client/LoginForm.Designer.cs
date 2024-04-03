@@ -46,18 +46,18 @@
             // 
             // usernameField
             // 
-            usernameField.Location = new Point(202, 112);
+            usernameField.Location = new Point(231, 150);
             usernameField.Margin = new Padding(3, 2, 3, 2);
             usernameField.Name = "usernameField";
-            usernameField.Size = new Size(297, 23);
+            usernameField.Size = new Size(339, 27);
             usernameField.TabIndex = 0;
             // 
             // passwordField
             // 
-            passwordField.Location = new Point(202, 149);
+            passwordField.Location = new Point(231, 199);
             passwordField.Margin = new Padding(3, 2, 3, 2);
             passwordField.Name = "passwordField";
-            passwordField.Size = new Size(297, 23);
+            passwordField.Size = new Size(339, 27);
             passwordField.TabIndex = 1;
             // 
             // loginButton
@@ -66,10 +66,10 @@
             loginButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             loginButton.FlatStyle = FlatStyle.Flat;
             loginButton.Image = Properties.Resources.loginButtonpic;
-            loginButton.Location = new Point(295, 188);
+            loginButton.Location = new Point(337, 251);
             loginButton.Margin = new Padding(3, 2, 3, 2);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(105, 26);
+            loginButton.Size = new Size(120, 35);
             loginButton.TabIndex = 4;
             loginButton.UseVisualStyleBackColor = true;
             loginButton.Click += loginButton_Click;
@@ -78,10 +78,10 @@
             // 
             logoBox.BackColor = Color.Transparent;
             logoBox.Image = Properties.Resources.saturnbeta;
-            logoBox.Location = new Point(284, 9);
+            logoBox.Location = new Point(324, 12);
             logoBox.Margin = new Padding(3, 2, 3, 2);
             logoBox.Name = "logoBox";
-            logoBox.Size = new Size(155, 90);
+            logoBox.Size = new Size(177, 120);
             logoBox.TabIndex = 5;
             logoBox.TabStop = false;
             // 
@@ -92,10 +92,10 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(612, 9);
+            exitButton.Location = new Point(699, 12);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(26, 22);
+            exitButton.Size = new Size(30, 30);
             exitButton.TabIndex = 6;
             toolTip1.SetToolTip(exitButton, "Kilépés");
             exitButton.UseVisualStyleBackColor = false;
@@ -105,7 +105,7 @@
             // 
             userPic.BackColor = Color.Transparent;
             userPic.Image = Properties.Resources.user;
-            userPic.Location = new Point(171, 112);
+            userPic.Location = new Point(195, 150);
             userPic.Margin = new Padding(3, 2, 3, 2);
             userPic.Name = "userPic";
             userPic.Size = new Size(24, 20);
@@ -116,10 +116,10 @@
             // 
             passPic.BackColor = Color.Transparent;
             passPic.Image = Properties.Resources.passkey;
-            passPic.Location = new Point(171, 149);
+            passPic.Location = new Point(195, 199);
             passPic.Margin = new Padding(3, 2, 3, 2);
             passPic.Name = "passPic";
-            passPic.Size = new Size(24, 20);
+            passPic.Size = new Size(27, 27);
             passPic.TabIndex = 8;
             passPic.TabStop = false;
             // 
@@ -137,7 +137,7 @@
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(655, 274);
             Controls.Add(regformButton);

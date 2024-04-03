@@ -90,11 +90,16 @@
             // exitButton
             // 
             exitButton.BackColor = Color.Transparent;
-            exitButton.BackgroundImage = Properties.Resources.exiticon;
-            exitButton.Location = new Point(306, 12);
+            exitButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            exitButton.FlatStyle = FlatStyle.Flat;
+            exitButton.Image = Properties.Resources.exiticon;
+            exitButton.Location = new Point(699, 12);
+            exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(26, 22);
+            exitButton.Size = new Size(30, 30);
             exitButton.TabIndex = 6;
+            toolTip1.SetToolTip(exitButton, "Kilépés");
             exitButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
             // 
