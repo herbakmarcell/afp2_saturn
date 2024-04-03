@@ -98,8 +98,7 @@
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
-            exitButton.TabIndex = 6;
-            toolTip1.SetToolTip(exitButton, "Kilépés");
+            exitButton.TabIndex = 6;            
             exitButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
             // 
