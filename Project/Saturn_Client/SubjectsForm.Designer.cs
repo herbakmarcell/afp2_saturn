@@ -120,11 +120,11 @@
             label9.TabIndex = 8;
             label9.Text = "Felvett";
             // 
-            // SubjectForm
+            // SubjectsForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(843, 451);
+            ClientSize = new Size(1026, 391);
             Controls.Add(label9);
             Controls.Add(label8);
             Controls.Add(label7);
@@ -134,7 +134,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "SubjectForm";
+            Name = "SubjectsForm";
             Text = "SubjectForm";
             ResumeLayout(false);
             PerformLayout();
