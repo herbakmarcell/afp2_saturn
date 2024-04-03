@@ -46,18 +46,18 @@
             // 
             // usernameField
             // 
-            usernameField.Location = new Point(231, 150);
+            usernameField.Location = new Point(153, 133);
             usernameField.Margin = new Padding(3, 2, 3, 2);
             usernameField.Name = "usernameField";
-            usernameField.Size = new Size(339, 27);
+            usernameField.Size = new Size(297, 23);
             usernameField.TabIndex = 0;
             // 
             // passwordField
             // 
-            passwordField.Location = new Point(231, 199);
+            passwordField.Location = new Point(153, 170);
             passwordField.Margin = new Padding(3, 2, 3, 2);
             passwordField.Name = "passwordField";
-            passwordField.Size = new Size(339, 27);
+            passwordField.Size = new Size(297, 23);
             passwordField.TabIndex = 1;
             // 
             // loginButton
@@ -66,10 +66,10 @@
             loginButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             loginButton.FlatStyle = FlatStyle.Flat;
             loginButton.Image = Properties.Resources.loginButtonpic;
-            loginButton.Location = new Point(337, 251);
+            loginButton.Location = new Point(237, 202);
             loginButton.Margin = new Padding(3, 2, 3, 2);
             loginButton.Name = "loginButton";
-            loginButton.Size = new Size(120, 35);
+            loginButton.Size = new Size(105, 26);
             loginButton.TabIndex = 4;
             loginButton.UseVisualStyleBackColor = true;
             loginButton.Click += loginButton_Click;
@@ -78,10 +78,10 @@
             // 
             logoBox.BackColor = Color.Transparent;
             logoBox.Image = Properties.Resources.saturnbeta;
-            logoBox.Location = new Point(324, 12);
+            logoBox.Location = new Point(211, 9);
             logoBox.Margin = new Padding(3, 2, 3, 2);
             logoBox.Name = "logoBox";
-            logoBox.Size = new Size(177, 120);
+            logoBox.Size = new Size(161, 120);
             logoBox.TabIndex = 5;
             logoBox.TabStop = false;
             // 
@@ -92,7 +92,7 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(699, 12);
+            exitButton.Location = new Point(552, 9);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
@@ -105,10 +105,10 @@
             // 
             userPic.BackColor = Color.Transparent;
             userPic.Image = Properties.Resources.user;
-            userPic.Location = new Point(195, 150);
+            userPic.Location = new Point(122, 133);
             userPic.Margin = new Padding(3, 2, 3, 2);
             userPic.Name = "userPic";
-            userPic.Size = new Size(24, 20);
+            userPic.Size = new Size(27, 27);
             userPic.TabIndex = 7;
             userPic.TabStop = false;
             // 
@@ -116,7 +116,7 @@
             // 
             passPic.BackColor = Color.Transparent;
             passPic.Image = Properties.Resources.passkey;
-            passPic.Location = new Point(195, 199);
+            passPic.Location = new Point(122, 170);
             passPic.Margin = new Padding(3, 2, 3, 2);
             passPic.Name = "passPic";
             passPic.Size = new Size(27, 27);
@@ -127,9 +127,10 @@
             // 
             regformButton.BackColor = Color.Transparent;
             regformButton.ForeColor = SystemColors.ControlLightLight;
-            regformButton.Location = new Point(560, 239);
+            regformButton.Location = new Point(490, 203);
+            regformButton.Margin = new Padding(3, 2, 3, 2);
             regformButton.Name = "regformButton";
-            regformButton.Size = new Size(78, 23);
+            regformButton.Size = new Size(88, 25);
             regformButton.TabIndex = 9;
             regformButton.Text = "Regisztráció";
             regformButton.UseVisualStyleBackColor = false;
@@ -137,9 +138,9 @@
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(655, 274);
+            ClientSize = new Size(588, 241);
             Controls.Add(regformButton);
             Controls.Add(passPic);
             Controls.Add(userPic);
