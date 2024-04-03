@@ -35,9 +35,10 @@
             subjectsButton = new Button();
             examsButton = new Button();
             financesButton = new Button();
-            userDataPanel = new Panel();
+            visibleDataPanel = new Panel();
             exitButton = new Button();
             toolTip1 = new ToolTip(components);
+            inboxButton = new Button();
             SuspendLayout();
             // 
             // userDataButton
@@ -70,12 +71,13 @@
             studiesButton.FlatStyle = FlatStyle.Flat;
             studiesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
             studiesButton.ForeColor = SystemColors.ActiveCaptionText;
-            studiesButton.Location = new Point(289, 36);
+            studiesButton.Location = new Point(251, 36);
             studiesButton.Name = "studiesButton";
             studiesButton.Size = new Size(152, 56);
             studiesButton.TabIndex = 1;
             studiesButton.Text = "Tanulmányok";
             studiesButton.UseVisualStyleBackColor = false;
+            studiesButton.Click += studiesButton_Click;
             // 
             // subjectsButton
             // 
@@ -88,12 +90,13 @@
             subjectsButton.FlatStyle = FlatStyle.Flat;
             subjectsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
             subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
-            subjectsButton.Location = new Point(511, 36);
+            subjectsButton.Location = new Point(423, 36);
             subjectsButton.Name = "subjectsButton";
             subjectsButton.Size = new Size(152, 56);
             subjectsButton.TabIndex = 2;
             subjectsButton.Text = "Tárgyak";
             subjectsButton.UseVisualStyleBackColor = false;
+            subjectsButton.Click += subjectsButton_Click;
             // 
             // examsButton
             // 
@@ -106,12 +109,13 @@
             examsButton.FlatStyle = FlatStyle.Flat;
             examsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
             examsButton.ForeColor = SystemColors.ActiveCaptionText;
-            examsButton.Location = new Point(740, 36);
+            examsButton.Location = new Point(604, 36);
             examsButton.Name = "examsButton";
             examsButton.Size = new Size(152, 56);
             examsButton.TabIndex = 3;
             examsButton.Text = "Vizsgázás";
             examsButton.UseVisualStyleBackColor = false;
+            examsButton.Click += examsButton_Click;
             // 
             // financesButton
             // 
@@ -124,19 +128,21 @@
             financesButton.FlatStyle = FlatStyle.Flat;
             financesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
             financesButton.ForeColor = SystemColors.ActiveCaptionText;
-            financesButton.Location = new Point(967, 36);
+            financesButton.Location = new Point(779, 36);
             financesButton.Name = "financesButton";
             financesButton.Size = new Size(152, 56);
             financesButton.TabIndex = 4;
             financesButton.Text = "Pénzügyek";
             financesButton.UseVisualStyleBackColor = false;
+            financesButton.Click += financesButton_Click;
             // 
-            // userDataPanel
+            // visibleDataPanel
             // 
-            userDataPanel.Location = new Point(75, 108);
-            userDataPanel.Name = "userDataPanel";
-            userDataPanel.Size = new Size(1044, 438);
-            userDataPanel.TabIndex = 5;
+            visibleDataPanel.Location = new Point(75, 108);
+            visibleDataPanel.Name = "visibleDataPanel";
+            visibleDataPanel.Size = new Size(1044, 438);
+            visibleDataPanel.TabIndex = 5;
+            visibleDataPanel.Visible = false;
             // 
             // exitButton
             // 
@@ -155,14 +161,34 @@
             exitButton.UseVisualStyleBackColor = false;
             exitButton.MouseClick += exitButton_MouseClick;
             // 
+            // inboxButton
+            // 
+            inboxButton.BackColor = Color.Transparent;
+            inboxButton.BackgroundImage = Properties.Resources.buttonBack;
+            inboxButton.FlatAppearance.BorderSize = 0;
+            inboxButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            inboxButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            inboxButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            inboxButton.FlatStyle = FlatStyle.Flat;
+            inboxButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            inboxButton.ForeColor = SystemColors.ActiveCaptionText;
+            inboxButton.Location = new Point(962, 36);
+            inboxButton.Name = "inboxButton";
+            inboxButton.Size = new Size(152, 56);
+            inboxButton.TabIndex = 8;
+            inboxButton.Text = "Postaláda";
+            inboxButton.UseVisualStyleBackColor = false;
+            inboxButton.Click += inboxButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.mainBack;
             ClientSize = new Size(1262, 673);
+            Controls.Add(inboxButton);
             Controls.Add(exitButton);
-            Controls.Add(userDataPanel);
+            Controls.Add(visibleDataPanel);
             Controls.Add(financesButton);
             Controls.Add(examsButton);
             Controls.Add(subjectsButton);
@@ -185,8 +211,9 @@
         private Button subjectsButton;
         private Button examsButton;
         private Button financesButton;
-        private Panel userDataPanel;
+        private Panel visibleDataPanel;
         private Button exitButton;
         private ToolTip toolTip1;
+        private Button inboxButton;
     }
 }

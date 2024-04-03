@@ -41,15 +41,17 @@ namespace Saturn_Client
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
-            this.userDataPanel.Controls.Add(childForm);
-            this.userDataPanel.Tag = childForm;
+            this.visibleDataPanel.Controls.Add(childForm);
+            this.visibleDataPanel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
 
+
         private void userDataButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new UserDataForm(), sender);
+            visibleDataPanel.Visible = true;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -83,6 +85,36 @@ namespace Saturn_Client
         {
             mouseDown = false;
 
+        }
+
+        private void inboxButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new InboxForm(), sender);
+            visibleDataPanel.Visible = true;
+        }
+
+        private void studiesButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new StudiesForm(), sender);
+            visibleDataPanel.Visible = true;
+        }
+
+        private void subjectsButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new SubjectsForm(), sender);
+            visibleDataPanel.Visible = true;
+        }
+
+        private void examsButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ExamsForm(), sender);
+            visibleDataPanel.Visible = true;
+        }
+
+        private void financesButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new FinancesForm(), sender);
+            visibleDataPanel.Visible = true;
         }
     }
 }
