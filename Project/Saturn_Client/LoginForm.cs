@@ -65,5 +65,11 @@ namespace Saturn_Client
             MainForm mainForm = new MainForm(this);
             mainForm.Show();
         }
+
+        private void regformButton_Click(object sender, EventArgs e)
+        {
+            RegFrom regFrom = new RegFrom();
+            regFrom.Show();
+        }
     }
 }
