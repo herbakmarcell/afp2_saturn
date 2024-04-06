@@ -3,6 +3,8 @@ using ASP_Core.Database;
 using System.Security.Policy;
 using ASP_Core.Database.Models;
 using System.Diagnostics.Eventing.Reader;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ASP_Core
 {
@@ -20,7 +22,8 @@ namespace ASP_Core
 
             builder.Services.AddAuthentication()
                 .AddJwtBearer()
-                .AddJwtBearer("LocalAuthIssuer"); ;
+                .AddJwtBearer("LocalAuthIssuer");
+                
             builder.Services.AddAuthorization();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

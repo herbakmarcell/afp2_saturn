@@ -7,7 +7,10 @@ using System.Configuration;
 using System.Resources;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol.Plugins;
+using BCrypt;
+    
 
 namespace ASP_Core.Database
 {
@@ -148,17 +151,21 @@ namespace ASP_Core.Database
             });
         }
 
-        public bool UserExistsWithPassword(string saturnCode, string password)
+        public User? LoginCheck(string saturnCode, string password)
         {
-            foreach (var user in Users)
-            {
-                if (user.SaturnCode == saturnCode && user.Password == password)
-                {
-                    return true;
-                }
-            }
-            return false;
+            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode && u.Password == password);
+
+            if (user == null)
+                return null;
+
+            //bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+            //if (!verfified)
+            //    return null;
+
+            return user;
         }
+
         public void Seed()
         {
 
