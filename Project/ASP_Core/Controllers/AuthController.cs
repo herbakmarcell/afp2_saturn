@@ -20,14 +20,10 @@ namespace ASP_Core.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        //private readonly UserManager<IdentityUser> userManager;
-        //private readonly RoleManager<IdentityRole> roleManager;
         private readonly SaturnContext saturnContext;
 
         public AuthController(SaturnContext saturnContext)
         {
-            //this.userManager = userManager;
-            //this.roleManager = roleManager;
             this.saturnContext = saturnContext;
         }
 
@@ -40,7 +36,7 @@ namespace ASP_Core.Controllers
 
             if (user == null)
             {
-                return BadRequest(new Response<string>("Unauthorization"));
+                return BadRequest(new Response<string>("Unauthorized"));
             }
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaturnSuperSecretKey666XDWEARETHECHAMPIONSMYFRIEND"));
@@ -69,7 +65,7 @@ namespace ASP_Core.Controllers
                 };
 
             if (userResponse == null)
-                return BadRequest(new Response<string>("Unauthorization"));
+                return BadRequest(new Response<string>("Unauthorized"));
 
             return new OkObjectResult(new Response<LoginResponse>(userResponse));
         }
