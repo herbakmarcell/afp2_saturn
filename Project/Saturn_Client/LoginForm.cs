@@ -1,4 +1,9 @@
 using System.Drawing.Drawing2D;
+using System.Net;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using RestSharp;
+
 
 namespace Saturn_Client
 {
@@ -6,6 +11,8 @@ namespace Saturn_Client
     {
         private bool mouseDown;
         private Point lastLocation;
+        private RestClient client;
+
 
         public LoginForm()
         {
@@ -13,6 +20,8 @@ namespace Saturn_Client
             InitFormStyle();
             ButtonStyle();
             ImageStyle();
+            client = new RestClient("https://localhost:7204/api/Auth");
+
         }
 
         private void InitFormStyle()
@@ -59,11 +68,47 @@ namespace Saturn_Client
             mouseDown = false;
         }
 
+        private async void LoginAsync()
+        {
+            string username = usernameField.Text;
+            string password = passwordField.Text;
+
+            var request = new RestRequest("/login", Method.Post);
+
+            request.AddBody(new { 
+                saturnCode
+                =
+                username,
+                password //szürke
+                =
+                password });
+
+            try
+            {
+                var response = await client.ExecuteAsync(request);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    this.Hide();
+                    MainForm mainForm = new MainForm(this);
+                    mainForm.Show();
+                }
+                else
+                {
+                    var responseContent = response.Content;
+                    Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
+                    MessageBox.Show("Baj " + temp.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nagy big problem: " + ex.Message);
+            }
+        }
+
         private void loginButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            MainForm mainForm = new MainForm(this);
-            mainForm.Show();
+            LoginAsync();
         }
 
         private void regformButton_Click(object sender, EventArgs e)

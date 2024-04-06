@@ -56,25 +56,25 @@ namespace ASP_Core
         {
             using (var context = new SaturnContext())
             {
-                if (context.Database.EnsureCreated())
-                {
-                    Console.WriteLine("[SaturnDB] Adatbázis létrehozása folyamatban...");
-                }
-                else
-                {
-                    Console.WriteLine("[SaturnDB] Adatbázis már létezik, csatlakozás megkezdése...");
-                }
-                /*
-                User user = new User();
-                user.SaturnCode = "SATURN";
-                user.Password = "JELSZOJELSZO";
-                user.LastName = "VEZETEKNEV";
-                user.FirstName = "KERESZTNEV";
-                user.Email = "example@example.com";
-                user.PhoneNumber = "+36701234567";
+                //if (context.Database.EnsureCreated())
+                //{
+                //    Console.WriteLine("[SaturnDB] Adatbázis létrehozása folyamatban...");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("[SaturnDB] Adatbázis már létezik, csatlakozás megkezdése...");
+                //}
 
-                context.Users.Add(user);*/
-                context.SaveChanges();
+                //User user = new User();
+                //user.SaturnCode = "SATURN";
+                //user.Password = " ";
+                //user.LastName = "VEZETEKNEV";
+                //user.FirstName = "KERESZTNEV";
+                //user.Email = "example@example.com";
+                //user.PhoneNumber = "+36701234567";
+
+                //context.Users.Add(user);
+                //context.SaveChanges();
             }
         }
 
