@@ -70,18 +70,15 @@ namespace Saturn_Client
 
         private async void LoginAsync()
         {
-            string username = usernameField.Text;
-            string password = passwordField.Text;
+            string loginSaturnCode = usernameField.Text;
+            string loginPassword = passwordField.Text;
 
             var request = new RestRequest("/login", Method.Post);
 
             request.AddBody(new { 
-                saturnCode
-                =
-                username,
-                password //szürke
-                =
-                password });
+                saturnCode = loginSaturnCode,
+                password = loginPassword 
+            });
 
             try
             {
@@ -93,16 +90,20 @@ namespace Saturn_Client
                     MainForm mainForm = new MainForm(this);
                     mainForm.Show();
                 }
-                else
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var responseContent = response.Content;
                     Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
-                    MessageBox.Show("Baj " + temp.message);
+                    MessageBox.Show("Hibás felhasználónév vagy jelszó! \nHibaüzenet: " + temp.message);
+                }
+                else
+                {
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Nagy big problem: " + ex.Message);
+                MessageBox.Show("Váratlan hiba! \nBõvebben: " + ex.Message);
             }
         }
 
