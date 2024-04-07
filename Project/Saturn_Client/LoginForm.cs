@@ -20,6 +20,7 @@ namespace Saturn_Client
             InitFormStyle();
             ButtonStyle();
             ImageStyle();
+            passwordField.PasswordChar = '*';
             client = new RestClient("https://localhost:7204/api/Auth");
 
         }
@@ -77,7 +78,7 @@ namespace Saturn_Client
 
             request.AddBody(new { 
                 saturnCode = loginSaturnCode,
-                password = loginPassword 
+                password = loginPassword
             });
 
             try
