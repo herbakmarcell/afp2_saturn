@@ -37,9 +37,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Comic Sans MS", 7.8F);
+            label1.ForeColor = Color.Maroon;
             label1.Location = new Point(83, 49);
             label1.Name = "label1";
-            label1.Size = new Size(136, 20);
+            label1.Size = new Size(127, 18);
             label1.TabIndex = 1;
             label1.Text = "Jogviszony kezdete";
             // 
@@ -47,9 +49,11 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Comic Sans MS", 7.8F);
+            label2.ForeColor = Color.Maroon;
             label2.Location = new Point(83, 113);
             label2.Name = "label2";
-            label2.Size = new Size(115, 20);
+            label2.Size = new Size(103, 18);
             label2.TabIndex = 2;
             label2.Text = "Felvétel dátuma";
             // 
@@ -57,9 +61,11 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Comic Sans MS", 7.8F);
+            label3.ForeColor = Color.Maroon;
             label3.Location = new Point(83, 176);
             label3.Name = "label3";
-            label3.Size = new Size(96, 20);
+            label3.Size = new Size(93, 18);
             label3.TabIndex = 3;
             label3.Text = "Státusz: Aktív";
             // 

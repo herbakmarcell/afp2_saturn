@@ -37,9 +37,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Comic Sans MS", 9F);
+            label1.ForeColor = Color.Maroon;
             label1.Location = new Point(59, 22);
             label1.Name = "label1";
-            label1.Size = new Size(48, 20);
+            label1.Size = new Size(47, 20);
             label1.TabIndex = 0;
             label1.Text = "Küldő";
             // 
@@ -47,9 +49,11 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Comic Sans MS", 9F);
+            label2.ForeColor = Color.Maroon;
             label2.Location = new Point(236, 22);
             label2.Name = "label2";
-            label2.Size = new Size(44, 20);
+            label2.Size = new Size(50, 20);
             label2.TabIndex = 1;
             label2.Text = "Tárgy";
             // 
@@ -57,9 +61,11 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Comic Sans MS", 9F);
+            label3.ForeColor = Color.Maroon;
             label3.Location = new Point(637, 22);
             label3.Name = "label3";
-            label3.Size = new Size(127, 20);
+            label3.Size = new Size(135, 20);
             label3.TabIndex = 2;
             label3.Text = "Érkezés időpontja";
             // 
