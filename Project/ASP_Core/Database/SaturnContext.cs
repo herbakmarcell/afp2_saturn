@@ -153,7 +153,7 @@ namespace ASP_Core.Database
 
         public User? LoginCheck(string saturnCode, string password)
         {
-            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode && u.Password == password);
+            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
 
             if (user == null)
                 return null;
