@@ -36,6 +36,7 @@
             // saturnCodeLabel
             // 
             saturnCodeLabel.AutoSize = true;
+            saturnCodeLabel.BackColor = Color.WhiteSmoke;
             saturnCodeLabel.Location = new Point(50, 26);
             saturnCodeLabel.Name = "saturnCodeLabel";
             saturnCodeLabel.Size = new Size(83, 20);
@@ -66,7 +67,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBack;
-            ClientSize = new Size(1043, 429);
+            ClientSize = new Size(1043, 453);
             Controls.Add(givenNameLabel);
             Controls.Add(familyNameLabel);
             Controls.Add(saturnCodeLabel);
