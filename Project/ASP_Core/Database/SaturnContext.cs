@@ -158,10 +158,10 @@ namespace ASP_Core.Database
             if (user == null)
                 return null;
 
-            //bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
 
-            //if (!verfified)
-            //    return null;
+            if (!verfified)
+                return null;
 
             return user;
         }
