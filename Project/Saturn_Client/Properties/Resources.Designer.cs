@@ -63,6 +63,26 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap buttonBack {
+            get {
+                object obj = ResourceManager.GetObject("buttonBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dataBack {
+            get {
+                object obj = ResourceManager.GetObject("dataBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap exiticon {
             get {
                 object obj = ResourceManager.GetObject("exiticon", resourceCulture);
@@ -76,6 +96,16 @@ namespace Saturn_Client.Properties {
         internal static System.Drawing.Bitmap loginButtonpic {
             get {
                 object obj = ResourceManager.GetObject("loginButtonpic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mainBack {
+            get {
+                object obj = ResourceManager.GetObject("mainBack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

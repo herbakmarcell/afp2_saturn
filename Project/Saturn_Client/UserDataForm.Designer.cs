@@ -36,27 +36,36 @@
             // saturnCodeLabel
             // 
             saturnCodeLabel.AutoSize = true;
+            saturnCodeLabel.BackColor = Color.Transparent;
+            saturnCodeLabel.Font = new Font("Comic Sans MS", 9F);
+            saturnCodeLabel.ForeColor = Color.Maroon;
             saturnCodeLabel.Location = new Point(50, 26);
             saturnCodeLabel.Name = "saturnCodeLabel";
-            saturnCodeLabel.Size = new Size(83, 20);
+            saturnCodeLabel.Size = new Size(91, 20);
             saturnCodeLabel.TabIndex = 0;
             saturnCodeLabel.Text = "Saturn kód:";
             // 
             // familyNameLabel
             // 
             familyNameLabel.AutoSize = true;
+            familyNameLabel.BackColor = Color.Transparent;
+            familyNameLabel.Font = new Font("Comic Sans MS", 9F);
+            familyNameLabel.ForeColor = Color.Maroon;
             familyNameLabel.Location = new Point(50, 79);
             familyNameLabel.Name = "familyNameLabel";
-            familyNameLabel.Size = new Size(86, 20);
+            familyNameLabel.Size = new Size(94, 20);
             familyNameLabel.TabIndex = 1;
             familyNameLabel.Text = "Vezetéknév:";
             // 
             // givenNameLabel
             // 
             givenNameLabel.AutoSize = true;
+            givenNameLabel.BackColor = Color.Transparent;
+            givenNameLabel.Font = new Font("Comic Sans MS", 9F);
+            givenNameLabel.ForeColor = Color.Maroon;
             givenNameLabel.Location = new Point(50, 128);
             givenNameLabel.Name = "givenNameLabel";
-            givenNameLabel.Size = new Size(59, 20);
+            givenNameLabel.Size = new Size(62, 20);
             givenNameLabel.TabIndex = 2;
             givenNameLabel.Text = "Utónév:";
             // 
@@ -64,7 +73,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.White;
+            BackgroundImage = Properties.Resources.dataBack;
+            ClientSize = new Size(1043, 453);
             Controls.Add(givenNameLabel);
             Controls.Add(familyNameLabel);
             Controls.Add(saturnCodeLabel);
