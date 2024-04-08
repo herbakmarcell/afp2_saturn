@@ -36,7 +36,7 @@
             // saturnCodeLabel
             // 
             saturnCodeLabel.AutoSize = true;
-            saturnCodeLabel.BackColor = Color.WhiteSmoke;
+            saturnCodeLabel.BackColor = Color.Transparent;
             saturnCodeLabel.Location = new Point(50, 26);
             saturnCodeLabel.Name = "saturnCodeLabel";
             saturnCodeLabel.Size = new Size(83, 20);
@@ -46,6 +46,7 @@
             // familyNameLabel
             // 
             familyNameLabel.AutoSize = true;
+            familyNameLabel.BackColor = Color.Transparent;
             familyNameLabel.Location = new Point(50, 79);
             familyNameLabel.Name = "familyNameLabel";
             familyNameLabel.Size = new Size(86, 20);
@@ -55,6 +56,7 @@
             // givenNameLabel
             // 
             givenNameLabel.AutoSize = true;
+            givenNameLabel.BackColor = Color.Transparent;
             givenNameLabel.Location = new Point(50, 128);
             givenNameLabel.Name = "givenNameLabel";
             givenNameLabel.Size = new Size(59, 20);
