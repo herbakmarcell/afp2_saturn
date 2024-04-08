@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using NuGet.Protocol.Plugins;
 using BCrypt;
+using System.Text.RegularExpressions;
     
 
 namespace ASP_Core.Database
@@ -169,6 +170,13 @@ namespace ASP_Core.Database
         public void Seed()
         {
 
+        }
+        public async Task<User> Register(User user)
+        {
+            Users.AddAsync(user);
+            SaveChangesAsync();
+
+            return user;
         }
     }
 }

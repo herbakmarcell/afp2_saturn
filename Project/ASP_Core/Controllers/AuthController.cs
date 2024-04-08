@@ -6,10 +6,13 @@ using ASP_Core.Models.Responses;
 using Elfie.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using NuGet.Protocol.Plugins;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -68,6 +71,51 @@ namespace ASP_Core.Controllers
                 return BadRequest(new Response<string>("Unauthorized"));
 
             return new OkObjectResult(new Response<LoginResponse>(userResponse));
+        }
+
+        [HttpPost]
+        [Route("register")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Response<User>>> Register([FromBody] RegisterModel registerModel)
+        {
+            User userExists;
+            string generatedSaturnCode = "";
+            do
+            {
+                
+
+                Random rd = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+                for (int i = 0; i < 6; i++)
+                {
+                    generatedSaturnCode+= chars[rd.Next(chars.Length)];
+                }
+
+                userExists = saturnContext.Users.FirstOrDefault(u =>  u.SaturnCode == generatedSaturnCode);
+            } while (userExists !=null);
+
+
+            User user = new User();
+            user.SaturnCode = generatedSaturnCode;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password);
+            user.LastName = registerModel.LastName;
+            user.FirstName = registerModel.FirstName;
+            user.Email = registerModel.Email;
+            user.PhoneNumber =registerModel.PhoneNumber;
+            Role role = new Role();
+            role.Name = "Hallgató";
+            user.Roles = new List<Role>();
+            user.Roles.Add(role);
+
+            
+
+            var newUser = await saturnContext.Register(user);
+
+            if (newUser == null)
+                return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
+
+            return new OkObjectResult(new Response<User>(newUser));
         }
     }
 }
