@@ -7,12 +7,23 @@ using System.Configuration;
 using System.Resources;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol.Plugins;
+using BCrypt;
+    
 
 namespace ASP_Core.Database
 {
     public class SaturnContext : DbContext
     {
+        public SaturnContext()
+        {
+            if (!this.Database.EnsureCreated())
+            {
+                Seed();
+            }
+            
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Subject> Subjects { get; set; }
@@ -138,6 +149,26 @@ namespace ASP_Core.Database
                 entity.HasMany(e => e.Exams).WithMany(e => e.Students);
                 //entity.HasMany(e => e.Exams).WithOne(e => e.Prof);
             });
+        }
+
+        public User? LoginCheck(string saturnCode, string password)
+        {
+            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode && u.Password == password);
+
+            if (user == null)
+                return null;
+
+            //bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+            //if (!verfified)
+            //    return null;
+
+            return user;
+        }
+
+        public void Seed()
+        {
+
         }
     }
 }
