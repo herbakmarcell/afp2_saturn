@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C732-562D-4D66-9692-F264E0A3AE57}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg

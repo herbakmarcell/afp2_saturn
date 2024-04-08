@@ -64,7 +64,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1026, 391);
+            BackColor = Color.White;
+            BackgroundImage = Properties.Resources.dataBack;
+            ClientSize = new Size(1043, 429);
             Controls.Add(givenNameLabel);
             Controls.Add(familyNameLabel);
             Controls.Add(saturnCodeLabel);
