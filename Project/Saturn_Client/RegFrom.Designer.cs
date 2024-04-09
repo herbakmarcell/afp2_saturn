@@ -201,9 +201,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(58, 233);
             label7.Name = "label7";
-            label7.Size = new Size(45, 15);
+            label7.Size = new Size(72, 15);
             label7.TabIndex = 16;
-            label7.Text = "Utónév";
+            label7.Text = "Telefonszám";
             // 
             // label8
             // 
