@@ -15,6 +15,7 @@ namespace ASP_Core
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            //CreateDB();
             //CreateTemplateUser();
             builder.Services.AddControllers();
             builder.Services.AddDbContext<SaturnContext>();
@@ -50,6 +51,14 @@ namespace ASP_Core
             app.Run();
 
             
+        }
+
+        private static void CreateDB()
+        {
+            using (var context = new SaturnContext())
+            {
+                context.Database.EnsureCreated();
+            }
         }
         //private static void CreateTemplateUser()
         //{
