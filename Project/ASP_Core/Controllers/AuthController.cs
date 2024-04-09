@@ -75,7 +75,6 @@ namespace ASP_Core.Controllers
 
         [HttpPost]
         [Route("register")]
-        [Microsoft.AspNetCore.Mvc.HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult<Response<string>>> Register([FromBody] RegisterModel registerModel)
         {
@@ -116,7 +115,7 @@ namespace ASP_Core.Controllers
             if (newUser == null)
                 return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
 
-            return new OkObjectResult(new Response<string>("Sikeres regisztráció! Most már bejelentkezhet!"));
+            return new OkObjectResult(new Response<string>($"Sikeres regisztráció! Most már bejelentkezhet!\nAz ön Saturn kódja:\n{generatedSaturnCode}"));
         }
     }
 }
