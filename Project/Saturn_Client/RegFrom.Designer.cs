@@ -30,13 +30,16 @@
         {
             regButton = new Button();
             label1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            FirstName_tbox = new TextBox();
+            LastName_tbox = new TextBox();
             label3 = new Label();
             exitButton = new Button();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             label2 = new Label();
+            Email_tbox = new TextBox();
+            PhoneNumber_tbox = new TextBox();
+            Password_tbox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -44,7 +47,7 @@
             // regButton
             // 
             regButton.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            regButton.Location = new Point(101, 207);
+            regButton.Location = new Point(101, 275);
             regButton.Name = "regButton";
             regButton.Size = new Size(170, 42);
             regButton.TabIndex = 0;
@@ -61,19 +64,21 @@
             label1.Size = new Size(0, 32);
             label1.TabIndex = 1;
             // 
-            // textBox1
+            // FirstName_tbox
             // 
-            textBox1.Location = new Point(69, 118);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(267, 23);
-            textBox1.TabIndex = 3;
+            FirstName_tbox.Location = new Point(69, 118);
+            FirstName_tbox.Name = "FirstName_tbox";
+            FirstName_tbox.Size = new Size(267, 23);
+            FirstName_tbox.TabIndex = 3;
+            FirstName_tbox.TextChanged += FirstName_tbox_TextChanged;
             // 
-            // textBox2
+            // LastName_tbox
             // 
-            textBox2.Location = new Point(69, 164);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(267, 23);
-            textBox2.TabIndex = 4;
+            LastName_tbox.Location = new Point(69, 147);
+            LastName_tbox.Name = "LastName_tbox";
+            LastName_tbox.Size = new Size(267, 23);
+            LastName_tbox.TabIndex = 4;
+            LastName_tbox.TextChanged += LastName_tbox_TextChanged;
             // 
             // label3
             // 
@@ -94,11 +99,11 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(699, 12);
+            exitButton.Location = new Point(306, 12);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
-            exitButton.TabIndex = 6;            
+            exitButton.TabIndex = 6;
             exitButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
             // 
@@ -116,7 +121,7 @@
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.BackgroundImage = Properties.Resources.passkey;
-            pictureBox2.Location = new Point(22, 158);
+            pictureBox2.Location = new Point(22, 201);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(27, 27);
             pictureBox2.TabIndex = 8;
@@ -134,18 +139,46 @@
             label2.TabIndex = 9;
             label2.Text = "Admin Felület";
             // 
+            // Email_tbox
+            // 
+            Email_tbox.Location = new Point(69, 176);
+            Email_tbox.Name = "Email_tbox";
+            Email_tbox.Size = new Size(267, 23);
+            Email_tbox.TabIndex = 10;
+            Email_tbox.TextChanged += Email_tbox_TextChanged;
+            // 
+            // PhoneNumber_tbox
+            // 
+            PhoneNumber_tbox.Location = new Point(71, 205);
+            PhoneNumber_tbox.Name = "PhoneNumber_tbox";
+            PhoneNumber_tbox.Size = new Size(267, 23);
+            PhoneNumber_tbox.TabIndex = 11;
+            PhoneNumber_tbox.TextChanged += PhoneNumber_tbox_TextChanged;
+            // 
+            // Password_tbox
+            // 
+            Password_tbox.Location = new Point(71, 234);
+            Password_tbox.Name = "Password_tbox";
+            Password_tbox.PasswordChar = '*';
+            Password_tbox.Size = new Size(267, 23);
+            Password_tbox.TabIndex = 12;
+            Password_tbox.TextChanged += Password_tbox_TextChanged;
+            // 
             // RegFrom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(354, 261);
+            ClientSize = new Size(350, 325);
+            Controls.Add(Password_tbox);
+            Controls.Add(PhoneNumber_tbox);
+            Controls.Add(Email_tbox);
             Controls.Add(label2);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(exitButton);
             Controls.Add(label3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(LastName_tbox);
+            Controls.Add(FirstName_tbox);
             Controls.Add(label1);
             Controls.Add(regButton);
             Name = "RegFrom";
@@ -163,12 +196,15 @@
 
         private Button regButton;
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox FirstName_tbox;
+        private TextBox LastName_tbox;
         private Label label3;
         private Button exitButton;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private Label label2;
+        private TextBox Email_tbox;
+        private TextBox PhoneNumber_tbox;
+        private TextBox Password_tbox;
     }
 }
