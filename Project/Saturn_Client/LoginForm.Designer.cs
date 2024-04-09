@@ -126,7 +126,7 @@
             // regformButton
             // 
             regformButton.BackColor = Color.Transparent;
-            regformButton.ForeColor = SystemColors.ControlLightLight;
+            regformButton.ForeColor = SystemColors.ControlText;
             regformButton.Location = new Point(490, 203);
             regformButton.Margin = new Padding(3, 2, 3, 2);
             regformButton.Name = "regformButton";

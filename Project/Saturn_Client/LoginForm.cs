@@ -111,12 +111,14 @@ namespace Saturn_Client
         private void loginButton_Click(object sender, EventArgs e)
         {
             LoginAsync();
+            
         }
 
         private void regformButton_Click(object sender, EventArgs e)
         {
             RegFrom regFrom = new RegFrom();
             regFrom.Show();
+            regformButton.Enabled = false;
         }
     }
 }

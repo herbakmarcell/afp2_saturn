@@ -42,7 +42,7 @@ namespace Saturn_Client
         private void regButton_Click(object sender, EventArgs e)
         {
             RegAsync();
-
+            
 
         }
 
@@ -94,7 +94,9 @@ namespace Saturn_Client
                 LoginForm lf = new LoginForm();
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    MessageBox.Show("Sikeres regisztráció :D");
+                    var responseContent = response.Content;
+                    Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
+                    MessageBox.Show(temp.message);
                     this.Hide();
                     lf.Show();
                     await Console.Out.WriteLineAsync("siker fazis");
