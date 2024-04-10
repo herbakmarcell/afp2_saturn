@@ -45,6 +45,7 @@
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
+            HelpButton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -91,7 +92,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
             label3.ForeColor = SystemColors.ControlText;
-            label3.Location = new Point(12, 39);
+            label3.Location = new Point(58, 39);
             label3.Name = "label3";
             label3.Size = new Size(259, 29);
             label3.TabIndex = 5;
@@ -138,7 +139,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Comic Sans MS", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
             label2.ForeColor = SystemColors.ControlText;
-            label2.Location = new Point(12, 9);
+            label2.Location = new Point(58, 8);
             label2.Name = "label2";
             label2.Size = new Size(149, 29);
             label2.TabIndex = 9;
@@ -214,11 +215,24 @@
             label8.TabIndex = 17;
             label8.Text = "Jelszó";
             // 
+            // HelpButton
+            // 
+            HelpButton.BackColor = Color.Transparent;
+            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.Location = new Point(22, 8);
+            HelpButton.Name = "HelpButton";
+            HelpButton.Size = new Size(27, 27);
+            HelpButton.TabIndex = 18;
+            HelpButton.Text = "?";
+            HelpButton.UseVisualStyleBackColor = false;
+            HelpButton.Click += HelpButton_Click;
+            // 
             // RegFrom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(363, 390);
+            Controls.Add(HelpButton);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -266,5 +280,6 @@
         private Label label6;
         private Label label7;
         private Label label8;
+        private Button HelpButton;
     }
 }

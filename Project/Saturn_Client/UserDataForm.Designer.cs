@@ -31,6 +31,7 @@
             saturnCodeLabel = new Label();
             familyNameLabel = new Label();
             givenNameLabel = new Label();
+            HelpButton = new Button();
             SuspendLayout();
             // 
             // saturnCodeLabel
@@ -39,9 +40,9 @@
             saturnCodeLabel.BackColor = Color.Transparent;
             saturnCodeLabel.Font = new Font("Comic Sans MS", 9F);
             saturnCodeLabel.ForeColor = Color.Maroon;
-            saturnCodeLabel.Location = new Point(50, 26);
+            saturnCodeLabel.Location = new Point(44, 20);
             saturnCodeLabel.Name = "saturnCodeLabel";
-            saturnCodeLabel.Size = new Size(91, 20);
+            saturnCodeLabel.Size = new Size(72, 17);
             saturnCodeLabel.TabIndex = 0;
             saturnCodeLabel.Text = "Saturn kód:";
             // 
@@ -51,9 +52,9 @@
             familyNameLabel.BackColor = Color.Transparent;
             familyNameLabel.Font = new Font("Comic Sans MS", 9F);
             familyNameLabel.ForeColor = Color.Maroon;
-            familyNameLabel.Location = new Point(50, 79);
+            familyNameLabel.Location = new Point(44, 59);
             familyNameLabel.Name = "familyNameLabel";
-            familyNameLabel.Size = new Size(94, 20);
+            familyNameLabel.Size = new Size(74, 17);
             familyNameLabel.TabIndex = 1;
             familyNameLabel.Text = "Vezetéknév:";
             // 
@@ -63,22 +64,36 @@
             givenNameLabel.BackColor = Color.Transparent;
             givenNameLabel.Font = new Font("Comic Sans MS", 9F);
             givenNameLabel.ForeColor = Color.Maroon;
-            givenNameLabel.Location = new Point(50, 128);
+            givenNameLabel.Location = new Point(44, 96);
             givenNameLabel.Name = "givenNameLabel";
-            givenNameLabel.Size = new Size(62, 20);
+            givenNameLabel.Size = new Size(51, 17);
             givenNameLabel.TabIndex = 2;
             givenNameLabel.Text = "Utónév:";
             // 
+            // HelpButton
+            // 
+            HelpButton.BackColor = Color.Transparent;
+            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.Location = new Point(874, 10);
+            HelpButton.Name = "HelpButton";
+            HelpButton.Size = new Size(27, 27);
+            HelpButton.TabIndex = 12;
+            HelpButton.Text = "?";
+            HelpButton.UseVisualStyleBackColor = false;
+            HelpButton.Click += HelpButton_Click;
+            // 
             // UserDataForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBack;
-            ClientSize = new Size(1043, 453);
+            ClientSize = new Size(913, 340);
+            Controls.Add(HelpButton);
             Controls.Add(givenNameLabel);
             Controls.Add(familyNameLabel);
             Controls.Add(saturnCodeLabel);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "UserDataForm";
             Text = "UserData";
             Load += Form1_Load;
@@ -91,5 +106,6 @@
         private Label saturnCodeLabel;
         private Label familyNameLabel;
         private Label givenNameLabel;
+        private Button HelpButton;
     }
 }

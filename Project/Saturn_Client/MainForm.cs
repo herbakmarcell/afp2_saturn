@@ -118,5 +118,10 @@ namespace Saturn_Client
             OpenChildForm(new FinancesForm(), sender);
             visibleDataPanel.Visible = true;
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("A fõoldalon menüpontok között tudsz navigálni. Lásd: Saját, Tanulmányok, Tárgyak, Vizsgázás, Pénzügyek, Postaláda");
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace Saturn_Client
         {
             InitializeComponent();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Az Üzenetek oldalon, láthatod a beérkezett és elküldött üzeneteidet. Küldhetsz üzenetet másoknak és kezelheted a már meglévőket.");
+        }
     }
 }

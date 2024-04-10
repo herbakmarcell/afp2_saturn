@@ -19,5 +19,10 @@ namespace Saturn_Client
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Itt megtekintheted a felhasználói fiókod adatait. A SaturnKódodat és a nevedet.");
+        }
     }
 }

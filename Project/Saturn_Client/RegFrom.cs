@@ -24,7 +24,7 @@ namespace Saturn_Client
         {
             InitializeComponent();
             InitFormStyle();
-            
+
             client = new RestClient("https://localhost:7204/api/Auth");
         }
         private void InitFormStyle()
@@ -37,12 +37,13 @@ namespace Saturn_Client
         private void exitButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
         private void regButton_Click(object sender, EventArgs e)
         {
             RegAsync();
-            
+
 
         }
 
@@ -85,7 +86,7 @@ namespace Saturn_Client
                 Email = email,
                 Password = password,
                 PhoneNumber = phonenumber
-            }); 
+            });
 
             try
             {
@@ -150,6 +151,11 @@ namespace Saturn_Client
         private void Password_tbox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Adminként, az adatok megadásával, új felhasználót regisztrálhatsz a rendszerbe. Aminek a SaturnKódját rögtön a regisztráció után meg is kapsz.");
         }
     }
 }

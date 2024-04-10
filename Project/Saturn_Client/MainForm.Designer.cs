@@ -39,6 +39,7 @@
             exitButton = new Button();
             toolTip1 = new ToolTip(components);
             inboxButton = new Button();
+            HelpButton = new Button();
             SuspendLayout();
             // 
             // userDataButton
@@ -50,11 +51,12 @@
             userDataButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             userDataButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             userDataButton.FlatStyle = FlatStyle.Flat;
-            userDataButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            userDataButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             userDataButton.ForeColor = SystemColors.ActiveCaptionText;
-            userDataButton.Location = new Point(75, 36);
+            userDataButton.Location = new Point(66, 27);
+            userDataButton.Margin = new Padding(3, 2, 3, 2);
             userDataButton.Name = "userDataButton";
-            userDataButton.Size = new Size(152, 56);
+            userDataButton.Size = new Size(133, 42);
             userDataButton.TabIndex = 0;
             userDataButton.Text = "Saját adatok";
             userDataButton.UseVisualStyleBackColor = false;
@@ -69,11 +71,12 @@
             studiesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             studiesButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             studiesButton.FlatStyle = FlatStyle.Flat;
-            studiesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            studiesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             studiesButton.ForeColor = SystemColors.ActiveCaptionText;
-            studiesButton.Location = new Point(251, 36);
+            studiesButton.Location = new Point(220, 27);
+            studiesButton.Margin = new Padding(3, 2, 3, 2);
             studiesButton.Name = "studiesButton";
-            studiesButton.Size = new Size(152, 56);
+            studiesButton.Size = new Size(133, 42);
             studiesButton.TabIndex = 1;
             studiesButton.Text = "Tanulmányok";
             studiesButton.UseVisualStyleBackColor = false;
@@ -88,11 +91,12 @@
             subjectsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             subjectsButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             subjectsButton.FlatStyle = FlatStyle.Flat;
-            subjectsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            subjectsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
-            subjectsButton.Location = new Point(423, 36);
+            subjectsButton.Location = new Point(370, 27);
+            subjectsButton.Margin = new Padding(3, 2, 3, 2);
             subjectsButton.Name = "subjectsButton";
-            subjectsButton.Size = new Size(152, 56);
+            subjectsButton.Size = new Size(133, 42);
             subjectsButton.TabIndex = 2;
             subjectsButton.Text = "Tárgyak";
             subjectsButton.UseVisualStyleBackColor = false;
@@ -107,11 +111,12 @@
             examsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             examsButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             examsButton.FlatStyle = FlatStyle.Flat;
-            examsButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            examsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             examsButton.ForeColor = SystemColors.ActiveCaptionText;
-            examsButton.Location = new Point(604, 36);
+            examsButton.Location = new Point(528, 27);
+            examsButton.Margin = new Padding(3, 2, 3, 2);
             examsButton.Name = "examsButton";
-            examsButton.Size = new Size(152, 56);
+            examsButton.Size = new Size(133, 42);
             examsButton.TabIndex = 3;
             examsButton.Text = "Vizsgázás";
             examsButton.UseVisualStyleBackColor = false;
@@ -126,11 +131,12 @@
             financesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             financesButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             financesButton.FlatStyle = FlatStyle.Flat;
-            financesButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            financesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             financesButton.ForeColor = SystemColors.ActiveCaptionText;
-            financesButton.Location = new Point(779, 36);
+            financesButton.Location = new Point(682, 27);
+            financesButton.Margin = new Padding(3, 2, 3, 2);
             financesButton.Name = "financesButton";
-            financesButton.Size = new Size(152, 56);
+            financesButton.Size = new Size(133, 42);
             financesButton.TabIndex = 4;
             financesButton.Text = "Pénzügyek";
             financesButton.UseVisualStyleBackColor = false;
@@ -138,9 +144,10 @@
             // 
             // visibleDataPanel
             // 
-            visibleDataPanel.Location = new Point(75, 108);
+            visibleDataPanel.Location = new Point(66, 81);
+            visibleDataPanel.Margin = new Padding(3, 2, 3, 2);
             visibleDataPanel.Name = "visibleDataPanel";
-            visibleDataPanel.Size = new Size(1044, 438);
+            visibleDataPanel.Size = new Size(914, 328);
             visibleDataPanel.TabIndex = 5;
             visibleDataPanel.Visible = false;
             // 
@@ -153,9 +160,10 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(1220, 12);
+            exitButton.Location = new Point(1068, 9);
+            exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(30, 30);
+            exitButton.Size = new Size(26, 22);
             exitButton.TabIndex = 7;
             toolTip1.SetToolTip(exitButton, "Kilépés");
             exitButton.UseVisualStyleBackColor = false;
@@ -170,22 +178,36 @@
             inboxButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             inboxButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             inboxButton.FlatStyle = FlatStyle.Flat;
-            inboxButton.Font = new Font("Snacker Comic Personal Use Only", 16.1999989F, FontStyle.Bold);
+            inboxButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             inboxButton.ForeColor = SystemColors.ActiveCaptionText;
-            inboxButton.Location = new Point(962, 36);
+            inboxButton.Location = new Point(842, 27);
+            inboxButton.Margin = new Padding(3, 2, 3, 2);
             inboxButton.Name = "inboxButton";
-            inboxButton.Size = new Size(152, 56);
+            inboxButton.Size = new Size(133, 42);
             inboxButton.TabIndex = 8;
             inboxButton.Text = "Postaláda";
             inboxButton.UseVisualStyleBackColor = false;
             inboxButton.Click += inboxButton_Click;
             // 
+            // HelpButton
+            // 
+            HelpButton.BackColor = Color.Transparent;
+            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.Location = new Point(12, 9);
+            HelpButton.Name = "HelpButton";
+            HelpButton.Size = new Size(27, 27);
+            HelpButton.TabIndex = 11;
+            HelpButton.Text = "?";
+            HelpButton.UseVisualStyleBackColor = false;
+            HelpButton.Click += HelpButton_Click;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.mainBack;
-            ClientSize = new Size(1262, 673);
+            ClientSize = new Size(1104, 505);
+            Controls.Add(HelpButton);
             Controls.Add(inboxButton);
             Controls.Add(exitButton);
             Controls.Add(visibleDataPanel);
@@ -195,6 +217,7 @@
             Controls.Add(studiesButton);
             Controls.Add(userDataButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "MainForm";
             FormClosing += MainForm_FormClosing;
@@ -215,5 +238,6 @@
         private Button exitButton;
         private ToolTip toolTip1;
         private Button inboxButton;
+        private Button HelpButton;
     }
 }
