@@ -16,5 +16,10 @@ namespace Saturn_Client
         {
             InitializeComponent();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Itt láthatod a tanulmányaidra vonatkozó adatokat, a Jogviszonyoddal és az aktuális félévvel kapcsolatban.");
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace Saturn_Client
         {
             InitializeComponent();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Itt megtudhatsz mindent a közelgő vizsgáiddal kapcsolatban. A vizsgák összes fontossabb adatát megtalálod.");
+        }
     }
 }

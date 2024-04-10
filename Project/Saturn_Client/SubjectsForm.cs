@@ -16,5 +16,10 @@ namespace Saturn_Client
         {
             InitializeComponent();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Itt megtekintheted a tárgyakat és azok adatait. Láthatod azt is, hogy az adott tárgyat már felvetted-e, vagy már teljesítetted.");
+        }
     }
 }

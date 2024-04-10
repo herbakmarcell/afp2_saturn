@@ -39,6 +39,7 @@
             userPic = new PictureBox();
             passPic = new PictureBox();
             regformButton = new Button();
+            HelpButton = new Button();
             ((System.ComponentModel.ISupportInitialize)logoBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passPic).BeginInit();
@@ -136,11 +137,24 @@
             regformButton.UseVisualStyleBackColor = false;
             regformButton.Click += regformButton_Click;
             // 
+            // HelpButton
+            // 
+            HelpButton.BackColor = Color.Transparent;
+            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.Location = new Point(13, 10);
+            HelpButton.Name = "HelpButton";
+            HelpButton.Size = new Size(27, 27);
+            HelpButton.TabIndex = 10;
+            HelpButton.Text = "?";
+            HelpButton.UseVisualStyleBackColor = false;
+            HelpButton.Click += HelpButton_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(588, 241);
+            Controls.Add(HelpButton);
             Controls.Add(regformButton);
             Controls.Add(passPic);
             Controls.Add(userPic);
@@ -174,5 +188,6 @@
         private PictureBox userPic;
         private PictureBox passPic;
         private Button regformButton;
+        private Button HelpButton;
     }
 }

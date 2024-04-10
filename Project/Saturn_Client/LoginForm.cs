@@ -76,7 +76,8 @@ namespace Saturn_Client
 
             var request = new RestRequest("/login", Method.Post);
 
-            request.AddBody(new { 
+            request.AddBody(new
+            {
                 saturnCode = loginSaturnCode,
                 password = loginPassword
             });
@@ -111,7 +112,7 @@ namespace Saturn_Client
         private void loginButton_Click(object sender, EventArgs e)
         {
             LoginAsync();
-            
+
         }
 
         private void regformButton_Click(object sender, EventArgs e)
@@ -119,6 +120,11 @@ namespace Saturn_Client
             RegFrom regFrom = new RegFrom();
             regFrom.Show();
             regformButton.Enabled = false;
+        }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("A SaturnKódod és Jelszavad megadása után, a Bejelentkezés gombra kattintva tudsz belépni az alkalmazásba.");
         }
     }
 }

@@ -16,5 +16,10 @@ namespace Saturn_Client
         {
             InitializeComponent();
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Ezen az oldalon, megtalálod az információkat az egyetemi pénzügyeiddel kapcsolatban. A fontos befizetések összegét és határidejét mindig tartsd figyelemmel");
+        }
     }
 }
