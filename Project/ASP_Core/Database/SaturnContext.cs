@@ -156,12 +156,8 @@ namespace ASP_Core.Database
         {
             User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
 
-            if (user == null)
-                return null;
-
             bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
-
-            if (!verfified)
+            if (user == null || !verfified)
                 return null;
 
             return user;
