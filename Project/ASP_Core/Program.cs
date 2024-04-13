@@ -5,6 +5,7 @@ using ASP_Core.Database.Models;
 using System.Diagnostics.Eventing.Reader;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ASP_Core.Services.Auth;
 
 namespace ASP_Core
 {
@@ -17,6 +18,7 @@ namespace ASP_Core
             // Add services to the container.
             //CreateDB();
             //CreateTemplateUser();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddControllers();
             builder.Services.AddDbContext<SaturnContext>();
 
