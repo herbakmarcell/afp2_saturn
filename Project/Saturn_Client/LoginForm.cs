@@ -19,7 +19,6 @@ namespace Saturn_Client
             InitializeComponent();
             InitFormStyle();
             ButtonStyle();
-            ImageStyle();
             passwordField.PasswordChar = '*';
             client = new RestClient("https://localhost:7204/api/Auth");
 
@@ -35,11 +34,6 @@ namespace Saturn_Client
         private void ButtonStyle()
         {
             exitButton.FlatAppearance.BorderSize = 0;
-        }
-
-        private void ImageStyle()
-        {
-            this.BackgroundImage = Properties.Resources.space;
         }
 
         private void exitButton_Click(object sender, EventArgs e)
