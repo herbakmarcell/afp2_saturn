@@ -82,56 +82,6 @@ namespace ASP_Core.Services.Auth
                 };
             }
 
-            if (!Regex.IsMatch(registerModel.Email, emailPattern))
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -1,
-                    Message = "Email formátuma nem megfelelő!"
-                };
-            }
-
-            if (!Regex.IsMatch(registerModel.Password, passwordPattern))
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -2,
-                    Message = "A jelszó formátuma nem megfelelő!"
-                };
-            }
-
-            if (!Regex.IsMatch(registerModel.LastName, lastNamePattern))
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -3,
-                    Message = "Utónév csak betűből állhat!"
-                };
-            }
-
-            if (!Regex.IsMatch(registerModel.FirstName, firstNamePattern))
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -4,
-                    Message = "Vezetéknév csak betűből állhat!"
-                };
-            }
-
-            if (!Regex.IsMatch(registerModel.PhoneNumber, phonePattern))
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -5,
-                    Message = "Telefonszám formátuma nem megfelelő!"
-                };
-            }
-
             if (registerModel.Roles == null)
             {
                 return new RegisterResponse
