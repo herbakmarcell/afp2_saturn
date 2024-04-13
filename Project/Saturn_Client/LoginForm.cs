@@ -120,5 +120,11 @@ namespace Saturn_Client
         {
             MessageBox.Show("A SaturnKódod és Jelszavad megadása után, a Bejelentkezés gombra kattintva tudsz belépni az alkalmazásba.");
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            regformButton.Visible = false;
+            regformButton.Enabled = false;
+        }
     }
 }
