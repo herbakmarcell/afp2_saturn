@@ -46,9 +46,14 @@ namespace ASP_Core.Controllers
 
         [HttpPost]
         [Route("register")]
-        [AllowAnonymous]
         public async Task<ActionResult<Response<RegisterResponse>>> Register([FromBody] RegisterModel registerModel)
         {
+            // TODO: Valamiért nem működik ez
+            if (!User.Identity.IsAuthenticated)
+            {
+                return BadRequest(new Response<string>("Unauthorized"));
+            }
+
             var registerResponse = authService.Register(registerModel);
 
             if (registerResponse.Code != 0)
