@@ -24,9 +24,9 @@ namespace ASP_Core.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService authService;
+        private readonly AuthIService authService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(AuthIService authService)
         {
             this.authService = authService;
         }

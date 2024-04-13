@@ -18,7 +18,7 @@ namespace ASP_Core
             // Add services to the container.
             //CreateDB();
             //CreateTemplateUser();
-            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<AuthIService, AuthService>();
             builder.Services.AddControllers();
             builder.Services.AddDbContext<SaturnContext>();
 

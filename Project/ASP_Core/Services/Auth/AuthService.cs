@@ -10,13 +10,13 @@ using System.Text;
 
 namespace ASP_Core.Services.Auth
 {
-    public interface IAuthService
+    public interface AuthIService
     {
         public LoginResponse? Login(LoginModel loginModel);
     }
 
 
-    public class AuthService : IAuthService
+    public class AuthService : AuthIService
     {
         private readonly SaturnContext saturnContext;
         public AuthService(SaturnContext saturnContext)
