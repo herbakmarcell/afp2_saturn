@@ -65,23 +65,12 @@ namespace ASP_Core.Services.Auth
 
         public RegisterResponse? Register(RegisterModel registerModel)
         {
-            Role? adminRole = saturnContext.Roles.FirstOrDefault(r => r.Name == "Admin" && r.User.SaturnCode == registerModel.AdminSaturnCode);
-            if (adminRole == null)
-            {
-                return new RegisterResponse
-                {
-                    SaturnCode = null,
-                    Code = -100,
-                    Message = "Nem rendelkezik a megfelelő jogosultsággal!"
-                };
-            }
-
             if (registerModel.Roles == null)
             {
                 return new RegisterResponse
                 {
                     SaturnCode = null,
-                    Code = -6,
+                    Code = -1,
                     Message = "Valamilyen jogkörnek kell lennie!"
                 };
             }
