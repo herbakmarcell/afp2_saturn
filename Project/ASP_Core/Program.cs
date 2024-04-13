@@ -60,28 +60,28 @@ namespace ASP_Core
             using (var context = new SaturnContext())
             {
                 context.Database.EnsureCreated();
+                //context.Seed();
             }
         }
-        //private static void CreateTemplateUser()
-        //{
-        //    using (var context = new SaturnContext())
-        //    {
-        //        User user = new User();
-        //        user.SaturnCode = "SATURN";
-        //        user.Password = " ";
-        //        user.LastName = "VEZETEKNEV";
-        //        user.FirstName = "KERESZTNEV";
-        //        user.Email = "example@example.com";
-        //        user.PhoneNumber = "+36701234567";
+        private static void CreateTemplateUser()
+        {
+            using (var context = new SaturnContext())
+            {
+                User user = new User();
+                user.SaturnCode = "ADMIN1";
+                user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
+                user.LastName = "Péter";
+                user.FirstName = "Admin";
+                user.Email = "admin@admin.com";
+                user.PhoneNumber = "+36201234567";
 
-        //        Role role = new Role();
-        //        role.Name = "Oktató";
-        //        user.Roles = new List<Role>();
-        //        user.Roles.Add(role);
+                Role role = new Role();
+                role.Name = "Admin";
+                user.Roles = [role];
 
-        //        context.Users.Add(user);
-        //        context.SaveChanges();
-        //    }
-        //}
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
     }
 }

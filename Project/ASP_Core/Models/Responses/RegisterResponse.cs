@@ -4,10 +4,8 @@ namespace ASP_Core.Models.Responses
 {
     public class RegisterResponse
     {
-        public string Password { get; set; }
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public string SaturnCode { get; set; }
+        public int Code { get; set; }
+        public string Message { get; set; }
     }
 }
