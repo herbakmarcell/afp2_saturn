@@ -18,15 +18,25 @@ namespace ASP_Core
             // Add services to the container.
             //CreateDB();
             //CreateTemplateUser();
+            builder.Services.AddAuthentication()
+                .AddJwtBearer("LocalAuthIssuer");
+
+            builder.Services.AddAuthorization();
             builder.Services.AddScoped<AuthIService, AuthService>();
             builder.Services.AddControllers();
             builder.Services.AddDbContext<SaturnContext>();
 
-            builder.Services.AddAuthentication()
-                .AddJwtBearer()
-                .AddJwtBearer("LocalAuthIssuer");
-                
-            builder.Services.AddAuthorization();
+            
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowSpecificOrigin",
+            //        builder =>
+            //        {
+            //            builder.WithOrigins("http://localhost:7204/")
+            //                   .AllowAnyHeader()
+            //                   .AllowAnyMethod();
+            //        });
+            //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -43,9 +53,10 @@ namespace ASP_Core
 
             app.UseHttpsRedirection();
 
-            app.UseCors();
+            
             app.UseAuthentication();
             app.UseAuthorization();
+            //app.UseCors();
 
 
             app.MapControllers();
