@@ -65,12 +65,6 @@ namespace ASP_Core.Services.Auth
 
         public RegisterResponse? Register(RegisterModel registerModel)
         {
-            string emailPattern = @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$";
-            string passwordPattern = @"^.{3,16}$";
-            string lastNamePattern = @"^[a-záéóöőúüűA-ZÁÉÓÖŐÚÜŰ.]+$";
-            string firstNamePattern = @"^[a-záéóöőúüűA-ZÁÉÓÖŐÚÜŰ.]+$";
-            string phonePattern = @"^\+\d{11}$";
-
             Role? adminRole = saturnContext.Roles.FirstOrDefault(r => r.Name == "Admin" && r.User.SaturnCode == registerModel.AdminSaturnCode);
             if (adminRole == null)
             {
