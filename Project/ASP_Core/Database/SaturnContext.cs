@@ -211,6 +211,7 @@ namespace ASP_Core.Database
                 FirstName = registerModel.FirstName,
                 Email = registerModel.Email,
                 PhoneNumber = registerModel.PhoneNumber,
+                Roles = new List<Role>()
             };
 
             foreach (var item in registerModel.Roles)
