@@ -92,14 +92,12 @@ namespace Saturn_Client
             {
                 await Console.Out.WriteLineAsync("try fazis");
                 var response = await client.ExecuteAsync(request);
-                LoginForm lf = new LoginForm();
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var responseContent = response.Content;
                     Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
                     MessageBox.Show(temp.message);
                     this.Hide();
-                    lf.Show();
                     await Console.Out.WriteLineAsync("siker fazis");
 
 
