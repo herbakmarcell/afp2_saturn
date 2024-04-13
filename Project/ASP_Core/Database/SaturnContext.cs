@@ -155,9 +155,14 @@ namespace ASP_Core.Database
         public User? LoginCheck(string saturnCode, string password)
         {
             User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
+            if (user == null)
+            {
+                return null;
+            }
 
             bool verfified = BCrypt.Net.BCrypt.Verify(password, user.Password);
-            if (user == null || !verfified)
+
+            if (!verfified)
                 return null;
 
             return user;
