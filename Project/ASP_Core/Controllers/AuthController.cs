@@ -3,6 +3,7 @@ using ASP_Core.Database.Models;
 using ASP_Core.Models;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
+using ASP_Core.Services.Auth;
 using Elfie.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,11 +24,11 @@ namespace ASP_Core.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly SaturnContext saturnContext;
+        private readonly IAuthService authService;
 
-        public AuthController(SaturnContext saturnContext)
+        public AuthController(IAuthService authService)
         {
-            this.saturnContext = saturnContext;
+            this.authService = authService;
         }
 
         [HttpPost]
@@ -35,87 +36,56 @@ namespace ASP_Core.Controllers
         [AllowAnonymous]
         public ActionResult<Response<LoginResponse>> Login([FromBody] LoginModel loginModel)
         {
-            User user = saturnContext.LoginCheck(loginModel.SaturnCode, loginModel.Password);
+            var resource = authService.Login(loginModel);
 
-            if (user == null)
-            {
-                return BadRequest(new Response<string>("Unauthorized"));
-            }
-
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaturnSuperSecretKey666XDWEARETHECHAMPIONSMYFRIEND"));
-            var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-                var claims = new[]
-                {
-                    new Claim("saturnCode", user.SaturnCode)
-                };
-
-                var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:7204/",
-                    audience: "https://localhost:7204/",
-                    claims,
-                    expires: DateTime.Now.AddDays(1),
-                    signingCredentials: signingCredentials
-                );
-
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-                LoginResponse userResponse = new LoginResponse
-                {
-                    Token = tokenString,
-                    SaturnCode = user.SaturnCode,
-                    Password = user.Password,
-                };
-
-            if (userResponse == null)
+            if (resource == null)
                 return BadRequest(new Response<string>("Unauthorized"));
 
-            return new OkObjectResult(new Response<LoginResponse>(userResponse));
+            return new OkObjectResult(new Response<LoginResponse>(resource));
         }
 
-        [HttpPost]
-        [Route("register")]
-        [AllowAnonymous]
-        public async Task<ActionResult<Response<string>>> Register([FromBody] RegisterModel registerModel)
-        {
-            User userExists;
-            string generatedSaturnCode = "";
-            do
-            {
+        //[HttpPost]
+        //[Route("register")]
+        //[AllowAnonymous]
+        //public async Task<ActionResult<Response<string>>> Register([FromBody] RegisterModel registerModel)
+        //{
+        //    User userExists;
+        //    string generatedSaturnCode = "";
+        //    do
+        //    {
                 
 
-                Random rd = new Random();
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        //        Random rd = new Random();
+        //        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-                for (int i = 0; i < 6; i++)
-                {
-                    generatedSaturnCode+= chars[rd.Next(chars.Length)];
-                }
+        //        for (int i = 0; i < 6; i++)
+        //        {
+        //            generatedSaturnCode+= chars[rd.Next(chars.Length)];
+        //        }
 
-                userExists = saturnContext.Users.FirstOrDefault(u =>  u.SaturnCode == generatedSaturnCode);
-            } while (userExists !=null);
+        //        userExists = saturnContext.Users.FirstOrDefault(u =>  u.SaturnCode == generatedSaturnCode);
+        //    } while (userExists !=null);
 
 
-            User user = new User();
-            user.SaturnCode = generatedSaturnCode;
-            user.Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password);
-            user.LastName = registerModel.LastName;
-            user.FirstName = registerModel.FirstName;
-            user.Email = registerModel.Email;
-            user.PhoneNumber =registerModel.PhoneNumber;
-            Role role = new Role();
-            role.Name = "Hallgató";
-            user.Roles = new List<Role>();
-            user.Roles.Add(role);
+        //    User user = new User();
+        //    user.SaturnCode = generatedSaturnCode;
+        //    user.Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password);
+        //    user.LastName = registerModel.LastName;
+        //    user.FirstName = registerModel.FirstName;
+        //    user.Email = registerModel.Email;
+        //    user.PhoneNumber =registerModel.PhoneNumber;
+        //    Role role = new Role();
+        //    role.Name = "Hallgató";
+        //    user.Roles = new List<Role>();
+        //    user.Roles.Add(role);
 
             
+        //    var newUser = await saturnContext.Register(user);
 
-            var newUser = await saturnContext.Register(user);
+        //    if (newUser == null)
+        //        return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
 
-            if (newUser == null)
-                return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
-
-            return new OkObjectResult(new Response<string>($"Sikeres regisztráció! Most már bejelentkezhet!\nAz ön Saturn kódja:\n{generatedSaturnCode}"));
-        }
+        //    return new OkObjectResult(new Response<string>($"Sikeres regisztráció! Most már bejelentkezhet!\nAz ön Saturn kódja:\n{generatedSaturnCode}"));
+        //}
     }
 }
