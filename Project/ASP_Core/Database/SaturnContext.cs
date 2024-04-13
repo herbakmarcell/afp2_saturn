@@ -226,17 +226,5 @@ namespace ASP_Core.Database
 
             return generatedSaturnCode;
         }
-
-        public List<Role>? UserRoles(string saturnCode)
-        {
-            User? searchedUser = Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
-
-            if (searchedUser == null)
-            {
-                return null;
-            }
-
-            return searchedUser.Roles;
-        }
     }
 }
