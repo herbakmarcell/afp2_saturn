@@ -45,6 +45,7 @@ namespace ASP_Core.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("register")]
         public async Task<ActionResult<Response<RegisterResponse>>> Register([FromBody] RegisterModel registerModel)
         {

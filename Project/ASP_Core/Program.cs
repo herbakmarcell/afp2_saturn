@@ -6,6 +6,8 @@ using System.Diagnostics.Eventing.Reader;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ASP_Core.Services.Auth;
+using ASP_Core.Services;
+using Microsoft.Net.Http.Headers;
 
 namespace ASP_Core
 {
@@ -19,7 +21,19 @@ namespace ASP_Core
             //CreateDB();
             //CreateTemplateUser();
             builder.Services.AddAuthentication()
-                .AddJwtBearer("LocalAuthIssuer");
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:7204/",
+                        ValidAudience = "https://localhost:7204/",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaturnSuperSecretKey666XDWEARETHECHAMPIONSMYFRIEND"))
+                    };
+                });
 
             builder.Services.AddAuthorization();
             builder.Services.AddScoped<AuthIService, AuthService>();
@@ -39,9 +53,21 @@ namespace ASP_Core
             //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Saturn", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Name = HeaderNames.Authorization,
+                    Scheme = "Bearer"
+                });
 
-            
+                c.OperationFilter<SecureEndpointAuthRequirementFilter>();
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
