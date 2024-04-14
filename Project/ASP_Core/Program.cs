@@ -8,6 +8,7 @@ using System.Text;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Identity;
 
 namespace ASP_Core
 {
@@ -40,17 +41,6 @@ namespace ASP_Core
             builder.Services.AddControllers();
             builder.Services.AddDbContext<SaturnContext>();
 
-            
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowSpecificOrigin",
-            //        builder =>
-            //        {
-            //            builder.WithOrigins("http://localhost:7204/")
-            //                   .AllowAnyHeader()
-            //                   .AllowAnyMethod();
-            //        });
-            //});
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>

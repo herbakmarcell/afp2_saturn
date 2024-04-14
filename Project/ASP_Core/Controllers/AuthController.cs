@@ -45,9 +45,9 @@ namespace ASP_Core.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [Route("register")]
-        public async Task<ActionResult<Response<RegisterResponse>>> Register([FromBody] RegisterModel registerModel)
+        public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
         {
             // TODO: Valamiért nem működik ez
             if (!User.Identity.IsAuthenticated)
