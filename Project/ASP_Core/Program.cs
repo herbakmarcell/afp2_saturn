@@ -6,6 +6,9 @@ using System.Diagnostics.Eventing.Reader;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ASP_Core.Services.Auth;
+using ASP_Core.Services;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Identity;
 
 namespace ASP_Core
 {
@@ -18,20 +21,44 @@ namespace ASP_Core
             // Add services to the container.
             //CreateDB();
             //CreateTemplateUser();
+            //builder.Services.AddIdentityCore<User>().AddRoles<Role>();
+            builder.Services.AddDbContext<SaturnContext>();
+            builder.Services.AddAuthentication()
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:7204/",
+                        ValidAudience = "https://localhost:7204/",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaturnSuperSecretKey666XDWEARETHECHAMPIONSMYFRIEND"))
+                    };
+                });
+            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(x => x.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
             builder.Services.AddScoped<AuthIService, AuthService>();
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<SaturnContext>();
 
-            builder.Services.AddAuthentication()
-                .AddJwtBearer()
-                .AddJwtBearer("LocalAuthIssuer");
-                
-            builder.Services.AddAuthorization();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Saturn", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Name = HeaderNames.Authorization,
+                    Scheme = "Bearer"
+                });
 
-            
+                c.OperationFilter<SecureEndpointAuthRequirementFilter>();
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -43,9 +70,10 @@ namespace ASP_Core
 
             app.UseHttpsRedirection();
 
-            app.UseCors();
+            
             app.UseAuthentication();
             app.UseAuthorization();
+            //app.UseCors();
 
 
             app.MapControllers();
@@ -60,28 +88,28 @@ namespace ASP_Core
             using (var context = new SaturnContext())
             {
                 context.Database.EnsureCreated();
+                //context.Seed();
             }
         }
-        //private static void CreateTemplateUser()
-        //{
-        //    using (var context = new SaturnContext())
-        //    {
-        //        User user = new User();
-        //        user.SaturnCode = "SATURN";
-        //        user.Password = " ";
-        //        user.LastName = "VEZETEKNEV";
-        //        user.FirstName = "KERESZTNEV";
-        //        user.Email = "example@example.com";
-        //        user.PhoneNumber = "+36701234567";
+        private static void CreateTemplateUser()
+        {
+            using (var context = new SaturnContext())
+            {
+                User user = new User();
+                user.SaturnCode = "ADMIN1";
+                user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
+                user.LastName = "Péter";
+                user.FirstName = "Admin";
+                user.Email = "admin@admin.com";
+                user.PhoneNumber = "+36201234567";
 
-        //        Role role = new Role();
-        //        role.Name = "Oktató";
-        //        user.Roles = new List<Role>();
-        //        user.Roles.Add(role);
+                Role role = new Role();
+                role.Name = "Admin";
+                user.Roles = [role];
 
-        //        context.Users.Add(user);
-        //        context.SaveChanges();
-        //    }
-        //}
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
     }
 }

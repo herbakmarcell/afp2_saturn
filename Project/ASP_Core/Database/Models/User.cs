@@ -13,5 +13,7 @@
         public List<Course> Courses { get; set; }
         public List<Exam> Exams { get; set; }
         public List<Grade> Grades { get; set; }
+
+        public string ReturnRoles { get => string.Join(',', Roles); }
     }
 }

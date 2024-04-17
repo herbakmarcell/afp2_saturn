@@ -11,7 +11,8 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 using NuGet.Protocol.Plugins;
 using BCrypt;
 using System.Text.RegularExpressions;
-    
+using ASP_Core.Models.Auth;
+
 
 namespace ASP_Core.Database
 {
@@ -19,11 +20,7 @@ namespace ASP_Core.Database
     {
         public SaturnContext()
         {
-            if (!this.Database.EnsureCreated())
-            {
-                Seed();
-            }
-            
+            this.Database.EnsureCreated();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -154,7 +151,7 @@ namespace ASP_Core.Database
 
         public User? LoginCheck(string saturnCode, string password)
         {
-            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
+            User? user = this.Users.Include(u=> u.Roles).FirstOrDefault(u => u.SaturnCode == saturnCode);
             if (user == null)
             {
                 return null;
@@ -170,14 +167,64 @@ namespace ASP_Core.Database
 
         public void Seed()
         {
+            User user = new User();
+            user.SaturnCode = "ADMIN1";
+            user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
+            user.LastName = "Péter";
+            user.FirstName = "Admin";
+            user.Email = "admin@admin.com";
+            user.PhoneNumber = "+36201234567";
 
+            Role role = new Role();
+            role.Name = "Admin";
+            user.Roles = [role];
+
+            Users.Add(user);
+            SaveChanges();
         }
-        public async Task<User> Register(User user)
-        {
-            Users.AddAsync(user);
-            SaveChangesAsync();
 
-            return user;
+        public string Register(RegisterModel registerModel)
+        {
+
+            User? userExists;
+            string generatedSaturnCode;
+            do
+            {
+                generatedSaturnCode = string.Empty;
+                
+                Random rd = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+                for (int i = 0; i < 6; i++)
+                {
+                    generatedSaturnCode += chars[rd.Next(chars.Length)];
+                }
+
+                userExists = Users.FirstOrDefault(u => u.SaturnCode == generatedSaturnCode);
+            } while (userExists != null);
+
+            User newUser = new User()
+            {
+                SaturnCode = generatedSaturnCode,
+                Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password),
+                LastName = registerModel.LastName,
+                FirstName = registerModel.FirstName,
+                Email = registerModel.Email,
+                PhoneNumber = registerModel.PhoneNumber,
+                Roles = new List<Role>()
+            };
+
+            foreach (var item in registerModel.Roles)
+            {
+                Role newRole = new Role();
+                newRole.Name = item;
+                newUser.Roles.Add(newRole);
+            }
+
+            Users.Add(newUser);
+            SaveChanges();
+
+            return generatedSaturnCode;
         }
     }
 }

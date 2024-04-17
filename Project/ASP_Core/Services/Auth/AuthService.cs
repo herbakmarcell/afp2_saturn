@@ -3,16 +3,19 @@ using ASP_Core.Database.Models;
 using ASP_Core.Models;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ASP_Core.Services.Auth
 {
     public interface AuthIService
     {
         public LoginResponse? Login(LoginModel loginModel);
+        public RegisterResponse? Register(RegisterModel registerModel);
     }
 
 
@@ -38,7 +41,8 @@ namespace ASP_Core.Services.Auth
 
             var claims = new[]
             {
-                    new Claim("saturnCode", user.SaturnCode)
+                    new Claim("saturnCode", user.SaturnCode),
+                    new Claim("roles",user.ReturnRoles)
                 };
 
             var tokenOptions = new JwtSecurityToken(
@@ -58,6 +62,39 @@ namespace ASP_Core.Services.Auth
                 Password = user.Password,
             };
             return userResponse;
+        }
+
+        public RegisterResponse? Register(RegisterModel registerModel)
+        {
+            if (registerModel.Roles == null)
+            {
+                return new RegisterResponse
+                {
+                    SaturnCode = null,
+                    Code = -1,
+                    Message = "Valamilyen jogkörnek kell lennie!"
+                };
+            }
+
+            string registerString = saturnContext.Register(registerModel);
+
+            if (registerModel == null)
+            {
+                return new RegisterResponse
+                {
+                    SaturnCode = null,
+                    Code = -101,
+                    Message = "Váratlan hiba"
+                };
+            }
+
+            return new RegisterResponse
+            {
+                SaturnCode = registerString,
+                Code = 0,
+                Message = "Sikeres regisztráció!"
+            };
+
         }
     }
 }
