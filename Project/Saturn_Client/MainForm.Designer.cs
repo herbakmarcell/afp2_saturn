@@ -178,13 +178,19 @@
             // HelpButton
             // 
             HelpButton.BackColor = Color.Transparent;
+            HelpButton.FlatAppearance.BorderSize = 0;
+            HelpButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.ForeColor = Color.DarkOrange;
             HelpButton.Location = new Point(14, 12);
             HelpButton.Margin = new Padding(3, 4, 3, 4);
             HelpButton.Name = "HelpButton";
             HelpButton.Size = new Size(31, 36);
             HelpButton.TabIndex = 11;
             HelpButton.Text = "?";
+            toolTip1.SetToolTip(HelpButton, "Használati útmutató");
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
