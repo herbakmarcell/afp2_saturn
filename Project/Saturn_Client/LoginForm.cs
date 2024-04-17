@@ -126,8 +126,8 @@ namespace Saturn_Client
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            regformButton.Visible = true;
-            regformButton.Enabled = true;
+            regformButton.Visible = false;
+            regformButton.Enabled = false;
         }
     }
 }
