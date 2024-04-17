@@ -21,6 +21,8 @@ namespace ASP_Core
             // Add services to the container.
             //CreateDB();
             //CreateTemplateUser();
+            //builder.Services.AddIdentityCore<User>().AddRoles<Role>();
+            builder.Services.AddDbContext<SaturnContext>();
             builder.Services.AddAuthentication()
                 .AddJwtBearer(option =>
                 {
@@ -35,11 +37,10 @@ namespace ASP_Core
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SaturnSuperSecretKey666XDWEARETHECHAMPIONSMYFRIEND"))
                     };
                 });
-
             builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(x => x.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
             builder.Services.AddScoped<AuthIService, AuthService>();
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<SaturnContext>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

@@ -41,7 +41,8 @@ namespace ASP_Core.Services.Auth
 
             var claims = new[]
             {
-                    new Claim("saturnCode", user.SaturnCode)
+                    new Claim("saturnCode", user.SaturnCode),
+                    new Claim("roles",user.ReturnRoles)
                 };
 
             var tokenOptions = new JwtSecurityToken(

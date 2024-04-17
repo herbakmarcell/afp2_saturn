@@ -20,7 +20,7 @@ namespace ASP_Core.Database
     {
         public SaturnContext()
         {
-            
+            this.Database.EnsureCreated();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -151,7 +151,7 @@ namespace ASP_Core.Database
 
         public User? LoginCheck(string saturnCode, string password)
         {
-            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
+            User? user = this.Users.Include(u=> u.Roles).FirstOrDefault(u => u.SaturnCode == saturnCode);
             if (user == null)
             {
                 return null;
@@ -221,8 +221,8 @@ namespace ASP_Core.Database
                 newUser.Roles.Add(newRole);
             }
 
-            Users.AddAsync(newUser);
-            SaveChangesAsync();
+            Users.Add(newUser);
+            SaveChanges();
 
             return generatedSaturnCode;
         }

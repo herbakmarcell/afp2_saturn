@@ -5,9 +5,6 @@ namespace ASP_Core.Models.Auth
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Admin Saturn szükséges")]
-        public string? AdminSaturnCode { get; set; }
-
         [Required(ErrorMessage = "Jelszó szükséges")]
         [StringLength(16, MinimumLength = 3, ErrorMessage = "A jelszónak legalább 3 és legfeljebb 16 karakter hosszúnak kell lennie.")]
         public string? Password { get; set; }
