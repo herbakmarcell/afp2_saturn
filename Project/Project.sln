@@ -11,9 +11,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C7
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fideszLogin.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fideszLogin.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fieldBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fieldBack.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\financesButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\financesButton.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\inboxButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\inboxButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginback.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginback.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg
@@ -22,7 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C7
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnicon.ico = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnicon.ico
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturntmalpha.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturntmalpha.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\space.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\space.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\studiesButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\studiesButton.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\subjectsButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\subjectsButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\user.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\user.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\userDataButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\userDataButton.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{37316D8F-B6C3-4E16-A49B-9C2F5EE62FDE}"

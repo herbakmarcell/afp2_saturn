@@ -105,7 +105,10 @@ namespace Saturn_Client
 
         private void loginButton_Click(object sender, EventArgs e)
         {
-            LoginAsync();
+            //LoginAsync();
+            this.Hide();
+            MainForm mainForm = new MainForm(this);
+            mainForm.Show();
 
         }
 
@@ -123,8 +126,8 @@ namespace Saturn_Client
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            regformButton.Visible = false;
-            regformButton.Enabled = false;
+            regformButton.Visible = true;
+            regformButton.Enabled = true;
         }
     }
 }

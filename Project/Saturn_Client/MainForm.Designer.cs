@@ -38,8 +38,8 @@
             visibleDataPanel = new Panel();
             exitButton = new Button();
             toolTip1 = new ToolTip(components);
-            inboxButton = new Button();
             HelpButton = new Button();
+            inboxButton = new Button();
             SuspendLayout();
             // 
             // userDataButton
@@ -71,7 +71,7 @@
             studiesButton.FlatStyle = FlatStyle.Flat;
             studiesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             studiesButton.ForeColor = SystemColors.ActiveCaptionText;
-            studiesButton.Location = new Point(251, 36);
+            studiesButton.Location = new Point(269, 36);
             studiesButton.Name = "studiesButton";
             studiesButton.Size = new Size(152, 56);
             studiesButton.TabIndex = 1;
@@ -89,7 +89,7 @@
             subjectsButton.FlatStyle = FlatStyle.Flat;
             subjectsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
-            subjectsButton.Location = new Point(423, 36);
+            subjectsButton.Location = new Point(464, 36);
             subjectsButton.Name = "subjectsButton";
             subjectsButton.Size = new Size(152, 56);
             subjectsButton.TabIndex = 2;
@@ -107,7 +107,7 @@
             examsButton.FlatStyle = FlatStyle.Flat;
             examsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             examsButton.ForeColor = SystemColors.ActiveCaptionText;
-            examsButton.Location = new Point(603, 36);
+            examsButton.Location = new Point(651, 36);
             examsButton.Name = "examsButton";
             examsButton.Size = new Size(152, 56);
             examsButton.TabIndex = 3;
@@ -125,7 +125,7 @@
             financesButton.FlatStyle = FlatStyle.Flat;
             financesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             financesButton.ForeColor = SystemColors.ActiveCaptionText;
-            financesButton.Location = new Point(779, 36);
+            financesButton.Location = new Point(843, 36);
             financesButton.Name = "financesButton";
             financesButton.Size = new Size(152, 56);
             financesButton.TabIndex = 4;
@@ -136,7 +136,7 @@
             // 
             visibleDataPanel.Location = new Point(75, 108);
             visibleDataPanel.Name = "visibleDataPanel";
-            visibleDataPanel.Size = new Size(1045, 437);
+            visibleDataPanel.Size = new Size(1109, 509);
             visibleDataPanel.TabIndex = 5;
             visibleDataPanel.Visible = false;
             // 
@@ -157,24 +157,6 @@
             exitButton.UseVisualStyleBackColor = false;
             exitButton.MouseClick += exitButton_MouseClick;
             // 
-            // inboxButton
-            // 
-            inboxButton.BackColor = Color.Transparent;
-            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
-            inboxButton.FlatAppearance.BorderSize = 0;
-            inboxButton.FlatAppearance.CheckedBackColor = Color.Transparent;
-            inboxButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
-            inboxButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
-            inboxButton.FlatStyle = FlatStyle.Flat;
-            inboxButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
-            inboxButton.ForeColor = SystemColors.ActiveCaptionText;
-            inboxButton.Location = new Point(962, 36);
-            inboxButton.Name = "inboxButton";
-            inboxButton.Size = new Size(152, 56);
-            inboxButton.TabIndex = 8;
-            inboxButton.UseVisualStyleBackColor = false;
-            inboxButton.Click += inboxButton_Click;
-            // 
             // HelpButton
             // 
             HelpButton.BackColor = Color.Transparent;
@@ -193,6 +175,24 @@
             toolTip1.SetToolTip(HelpButton, "Használati útmutató");
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
+            // 
+            // inboxButton
+            // 
+            inboxButton.BackColor = Color.Transparent;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            inboxButton.FlatAppearance.BorderSize = 0;
+            inboxButton.FlatAppearance.CheckedBackColor = Color.Transparent;
+            inboxButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            inboxButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            inboxButton.FlatStyle = FlatStyle.Flat;
+            inboxButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
+            inboxButton.ForeColor = SystemColors.ActiveCaptionText;
+            inboxButton.Location = new Point(1032, 36);
+            inboxButton.Name = "inboxButton";
+            inboxButton.Size = new Size(152, 56);
+            inboxButton.TabIndex = 8;
+            inboxButton.UseVisualStyleBackColor = false;
+            inboxButton.Click += inboxButton_Click;
             // 
             // MainForm
             // 
