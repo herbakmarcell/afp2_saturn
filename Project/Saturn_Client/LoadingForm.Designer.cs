@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoadingForm));
             timer1 = new System.Windows.Forms.Timer(components);
             pictureBox1 = new PictureBox();
             timer2 = new System.Windows.Forms.Timer(components);
@@ -60,6 +61,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(492, 463);
             Controls.Add(pictureBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LoadingForm";
             Opacity = 0D;
             Text = "LoadingForm";
