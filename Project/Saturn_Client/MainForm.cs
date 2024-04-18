@@ -46,8 +46,10 @@ namespace Saturn_Client
             childForm.FormBorderStyle = FormBorderStyle.None;
             this.visibleDataPanel.Controls.Add(childForm);
             this.visibleDataPanel.Tag = childForm;
+            this.visibleDataPanel.BackColor = Color.Transparent;
             childForm.BringToFront();
             childForm.Show();
+
         }
 
         public int Radius { get; set; } = 30;
@@ -65,7 +67,7 @@ namespace Saturn_Client
 
             Region = new Region(path);
 
-            using (Pen pen = new Pen(BackColor, 1))
+            using (Pen pen = new Pen(Color.Black, 3))
             {
                 e.Graphics.DrawPath(pen, path);
             }

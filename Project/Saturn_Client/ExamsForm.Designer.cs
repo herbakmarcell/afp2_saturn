@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -37,6 +38,7 @@
             label7 = new Label();
             label8 = new Label();
             HelpButton = new Button();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // label1
@@ -138,6 +140,10 @@
             // HelpButton
             // 
             HelpButton.BackColor = Color.Transparent;
+            HelpButton.FlatAppearance.BorderSize = 0;
+            HelpButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.Location = new Point(999, 16);
             HelpButton.Margin = new Padding(3, 4, 3, 4);
@@ -145,6 +151,7 @@
             HelpButton.Size = new Size(31, 36);
             HelpButton.TabIndex = 12;
             HelpButton.Text = "?";
+            toolTip1.SetToolTip(HelpButton, "Használati útmutató");
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
@@ -163,8 +170,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            ForeColor = Color.DarkOrange;
             Name = "ExamsForm";
             Text = "ExamsForm";
+            toolTip1.SetToolTip(this, "Használati útmutató");
             ResumeLayout(false);
             PerformLayout();
         }
@@ -180,5 +189,6 @@
         private Label label7;
         private Label label8;
         private Button HelpButton;
+        private ToolTip toolTip1;
     }
 }
