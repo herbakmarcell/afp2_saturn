@@ -41,7 +41,7 @@
             saturnCodeLabel.AutoSize = true;
             saturnCodeLabel.BackColor = Color.Transparent;
             saturnCodeLabel.Font = new Font("Comic Sans MS", 9F);
-            saturnCodeLabel.ForeColor = Color.Maroon;
+            saturnCodeLabel.ForeColor = Color.DarkOrange;
             saturnCodeLabel.Location = new Point(50, 27);
             saturnCodeLabel.Name = "saturnCodeLabel";
             saturnCodeLabel.Size = new Size(91, 20);
@@ -53,7 +53,7 @@
             familyNameLabel.AutoSize = true;
             familyNameLabel.BackColor = Color.Transparent;
             familyNameLabel.Font = new Font("Comic Sans MS", 9F);
-            familyNameLabel.ForeColor = Color.Maroon;
+            familyNameLabel.ForeColor = Color.DarkOrange;
             familyNameLabel.Location = new Point(50, 79);
             familyNameLabel.Name = "familyNameLabel";
             familyNameLabel.Size = new Size(94, 20);
@@ -65,7 +65,7 @@
             givenNameLabel.AutoSize = true;
             givenNameLabel.BackColor = Color.Transparent;
             givenNameLabel.Font = new Font("Comic Sans MS", 9F);
-            givenNameLabel.ForeColor = Color.Maroon;
+            givenNameLabel.ForeColor = Color.DarkOrange;
             givenNameLabel.Location = new Point(50, 128);
             givenNameLabel.Name = "givenNameLabel";
             givenNameLabel.Size = new Size(62, 20);
