@@ -40,6 +40,7 @@
             toolTip1 = new ToolTip(components);
             HelpButton = new Button();
             inboxButton = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // userDataButton
@@ -194,6 +195,11 @@
             inboxButton.UseVisualStyleBackColor = false;
             inboxButton.Click += inboxButton_Click;
             // 
+            // timer1
+            // 
+            timer1.Interval = 1600;
+            timer1.Tick += timer1_Tick;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -211,8 +217,10 @@
             Controls.Add(userDataButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
+            Opacity = 0D;
             Text = "MainForm";
             FormClosing += MainForm_FormClosing;
+            Load += MainForm_Load;
             MouseDown += MainForm_MouseDown;
             MouseMove += MainForm_MouseMove;
             MouseUp += MainForm_MouseUp;
@@ -231,5 +239,6 @@
         private ToolTip toolTip1;
         private Button inboxButton;
         private Button HelpButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }

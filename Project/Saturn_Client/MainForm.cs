@@ -147,5 +147,15 @@ namespace Saturn_Client
         {
             MessageBox.Show("A fõoldalon menüpontok között tudsz navigálni. Lásd: Saját, Tanulmányok, Tárgyak, Vizsgázás, Pénzügyek, Postaláda");
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Opacity = 1.00;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
     }
 }

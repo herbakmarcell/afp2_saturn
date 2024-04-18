@@ -107,9 +107,10 @@ namespace Saturn_Client
         {
             //LoginAsync();
             this.Hide();
+            LoadingForm loadingForm = new LoadingForm();
             MainForm mainForm = new MainForm(this);
             mainForm.Show();
-
+            loadingForm.Show();
         }
 
         private void regformButton_Click(object sender, EventArgs e)
