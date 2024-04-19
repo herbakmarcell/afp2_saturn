@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -44,48 +45,31 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<LoginResponse>(resource));
         }
 
-        //[HttpPost]
-        //[Route("register")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult<Response<string>>> Register([FromBody] RegisterModel registerModel)
-        //{
-        //    User userExists;
-        //    string generatedSaturnCode = "";
-        //    do
-        //    {
-                
+        [HttpPost]
+        [Authorize()]
+        [Route("register")]
+        public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
+        {
+            var claims = User.Claims;
+            string[] roles = claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',');
 
-        //        Random rd = new Random();
-        //        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            if(!roles.Contains("Admin"))
+            {
+                return BadRequest(new Response<string>("Not an admin"));
+            }
+            // TODO: Valamiért nem működik ez
+            //if ()
+            //{
+            //    return BadRequest(new Response<string>("Unauthorized"));
+            //}
 
-        //        for (int i = 0; i < 6; i++)
-        //        {
-        //            generatedSaturnCode+= chars[rd.Next(chars.Length)];
-        //        }
+            var registerResponse = authService.Register(registerModel);
 
-        //        userExists = saturnContext.Users.FirstOrDefault(u =>  u.SaturnCode == generatedSaturnCode);
-        //    } while (userExists !=null);
-
-
-        //    User user = new User();
-        //    user.SaturnCode = generatedSaturnCode;
-        //    user.Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password);
-        //    user.LastName = registerModel.LastName;
-        //    user.FirstName = registerModel.FirstName;
-        //    user.Email = registerModel.Email;
-        //    user.PhoneNumber =registerModel.PhoneNumber;
-        //    Role role = new Role();
-        //    role.Name = "Hallgató";
-        //    user.Roles = new List<Role>();
-        //    user.Roles.Add(role);
-
-            
-        //    var newUser = await saturnContext.Register(user);
-
-        //    if (newUser == null)
-        //        return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
-
-        //    return new OkObjectResult(new Response<string>($"Sikeres regisztráció! Most már bejelentkezhet!\nAz ön Saturn kódja:\n{generatedSaturnCode}"));
-        //}
+            if (registerResponse.Code != 0)
+            {
+                return BadRequest(new Response<string>(registerResponse.Message));
+            }
+            return new OkObjectResult(new Response<RegisterResponse>(registerResponse));
+        }
     }
 }
