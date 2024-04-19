@@ -5,6 +5,7 @@ using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,6 +17,9 @@ namespace ASP_Core.Services.Auth
     {
         public LoginResponse? Login(LoginModel loginModel);
         public RegisterResponse? Register(RegisterModel registerModel);
+        public ChangeResponse? Change(ChangeModel changeModel);
+
+        public string TokenWithSaturn(IEnumerable<Claim> claims);
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
     }
 
@@ -96,6 +100,18 @@ namespace ASP_Core.Services.Auth
                 Message = "Sikeres regisztráció!"
             };
 
+        }
+
+        public ChangeResponse? Change(ChangeModel changeModel)
+        {
+            return saturnContext.Change(changeModel);
+            
+        }
+
+        public string TokenWithSaturn(IEnumerable<Claim> claims)
+        {
+            if (claims == null) return null;
+            return claims.FirstOrDefault(c => c.Type == "saturnCode").Value.ToString();
         }
 
         public bool TokenHasRole(IEnumerable<Claim> claims, string role)
