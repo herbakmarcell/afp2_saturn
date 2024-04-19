@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             HelpButton = new Button();
+            toolTip1 = new ToolTip(components);
             SuspendLayout();
             // 
             // label1
@@ -40,9 +42,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Comic Sans MS", 7.8F);
             label1.ForeColor = Color.Maroon;
-            label1.Location = new Point(73, 37);
+            label1.Location = new Point(83, 49);
             label1.Name = "label1";
-            label1.Size = new Size(108, 15);
+            label1.Size = new Size(127, 18);
             label1.TabIndex = 1;
             label1.Text = "Jogviszony kezdete";
             // 
@@ -52,9 +54,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Comic Sans MS", 7.8F);
             label2.ForeColor = Color.Maroon;
-            label2.Location = new Point(73, 85);
+            label2.Location = new Point(83, 113);
             label2.Name = "label2";
-            label2.Size = new Size(86, 15);
+            label2.Size = new Size(103, 18);
             label2.TabIndex = 2;
             label2.Text = "Felvétel dátuma";
             // 
@@ -64,35 +66,41 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Comic Sans MS", 7.8F);
             label3.ForeColor = Color.Maroon;
-            label3.Location = new Point(73, 132);
+            label3.Location = new Point(83, 176);
             label3.Name = "label3";
-            label3.Size = new Size(80, 15);
+            label3.Size = new Size(93, 18);
             label3.TabIndex = 3;
             label3.Text = "Státusz: Aktív";
             // 
             // HelpButton
             // 
             HelpButton.BackColor = Color.Transparent;
+            HelpButton.FlatAppearance.BorderSize = 0;
+            HelpButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            HelpButton.Location = new Point(874, 12);
+            HelpButton.ForeColor = Color.DarkOrange;
+            HelpButton.Location = new Point(999, 16);
+            HelpButton.Margin = new Padding(3, 4, 3, 4);
             HelpButton.Name = "HelpButton";
-            HelpButton.Size = new Size(27, 27);
+            HelpButton.Size = new Size(31, 36);
             HelpButton.TabIndex = 12;
             HelpButton.Text = "?";
+            toolTip1.SetToolTip(HelpButton, "Használati útmutató");
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
             // StudiesForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.dataBack;
-            ClientSize = new Size(913, 340);
+            BackgroundImage = Properties.Resources.dataBackFinal;
+            ClientSize = new Size(1091, 462);
             Controls.Add(HelpButton);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "StudiesForm";
             Text = "StudiesForm";
             ResumeLayout(false);
@@ -105,5 +113,6 @@
         private Label label2;
         private Label label3;
         private Button HelpButton;
+        private ToolTip toolTip1;
     }
 }

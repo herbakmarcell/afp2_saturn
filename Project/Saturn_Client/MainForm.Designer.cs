@@ -38,14 +38,15 @@
             visibleDataPanel = new Panel();
             exitButton = new Button();
             toolTip1 = new ToolTip(components);
-            inboxButton = new Button();
             HelpButton = new Button();
+            inboxButton = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // userDataButton
             // 
             userDataButton.BackColor = Color.Transparent;
-            userDataButton.BackgroundImage = Properties.Resources.buttonBack;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
             userDataButton.FlatAppearance.BorderSize = 0;
             userDataButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             userDataButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -53,19 +54,17 @@
             userDataButton.FlatStyle = FlatStyle.Flat;
             userDataButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             userDataButton.ForeColor = SystemColors.ActiveCaptionText;
-            userDataButton.Location = new Point(66, 27);
-            userDataButton.Margin = new Padding(3, 2, 3, 2);
+            userDataButton.Location = new Point(75, 36);
             userDataButton.Name = "userDataButton";
-            userDataButton.Size = new Size(133, 42);
+            userDataButton.Size = new Size(152, 56);
             userDataButton.TabIndex = 0;
-            userDataButton.Text = "Saját adatok";
             userDataButton.UseVisualStyleBackColor = false;
             userDataButton.Click += userDataButton_Click;
             // 
             // studiesButton
             // 
             studiesButton.BackColor = Color.Transparent;
-            studiesButton.BackgroundImage = Properties.Resources.buttonBack;
+            studiesButton.BackgroundImage = Properties.Resources.studiesButton;
             studiesButton.FlatAppearance.BorderSize = 0;
             studiesButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             studiesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -73,19 +72,17 @@
             studiesButton.FlatStyle = FlatStyle.Flat;
             studiesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             studiesButton.ForeColor = SystemColors.ActiveCaptionText;
-            studiesButton.Location = new Point(220, 27);
-            studiesButton.Margin = new Padding(3, 2, 3, 2);
+            studiesButton.Location = new Point(269, 36);
             studiesButton.Name = "studiesButton";
-            studiesButton.Size = new Size(133, 42);
+            studiesButton.Size = new Size(152, 56);
             studiesButton.TabIndex = 1;
-            studiesButton.Text = "Tanulmányok";
             studiesButton.UseVisualStyleBackColor = false;
             studiesButton.Click += studiesButton_Click;
             // 
             // subjectsButton
             // 
             subjectsButton.BackColor = Color.Transparent;
-            subjectsButton.BackgroundImage = Properties.Resources.buttonBack;
+            subjectsButton.BackgroundImage = Properties.Resources.subjectsButton;
             subjectsButton.FlatAppearance.BorderSize = 0;
             subjectsButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             subjectsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -93,19 +90,17 @@
             subjectsButton.FlatStyle = FlatStyle.Flat;
             subjectsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
-            subjectsButton.Location = new Point(370, 27);
-            subjectsButton.Margin = new Padding(3, 2, 3, 2);
+            subjectsButton.Location = new Point(464, 36);
             subjectsButton.Name = "subjectsButton";
-            subjectsButton.Size = new Size(133, 42);
+            subjectsButton.Size = new Size(152, 56);
             subjectsButton.TabIndex = 2;
-            subjectsButton.Text = "Tárgyak";
             subjectsButton.UseVisualStyleBackColor = false;
             subjectsButton.Click += subjectsButton_Click;
             // 
             // examsButton
             // 
             examsButton.BackColor = Color.Transparent;
-            examsButton.BackgroundImage = Properties.Resources.buttonBack;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             examsButton.FlatAppearance.BorderSize = 0;
             examsButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             examsButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -113,19 +108,17 @@
             examsButton.FlatStyle = FlatStyle.Flat;
             examsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             examsButton.ForeColor = SystemColors.ActiveCaptionText;
-            examsButton.Location = new Point(528, 27);
-            examsButton.Margin = new Padding(3, 2, 3, 2);
+            examsButton.Location = new Point(651, 36);
             examsButton.Name = "examsButton";
-            examsButton.Size = new Size(133, 42);
+            examsButton.Size = new Size(152, 56);
             examsButton.TabIndex = 3;
-            examsButton.Text = "Vizsgázás";
             examsButton.UseVisualStyleBackColor = false;
             examsButton.Click += examsButton_Click;
             // 
             // financesButton
             // 
             financesButton.BackColor = Color.Transparent;
-            financesButton.BackgroundImage = Properties.Resources.buttonBack;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
             financesButton.FlatAppearance.BorderSize = 0;
             financesButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             financesButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -133,21 +126,18 @@
             financesButton.FlatStyle = FlatStyle.Flat;
             financesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             financesButton.ForeColor = SystemColors.ActiveCaptionText;
-            financesButton.Location = new Point(682, 27);
-            financesButton.Margin = new Padding(3, 2, 3, 2);
+            financesButton.Location = new Point(843, 36);
             financesButton.Name = "financesButton";
-            financesButton.Size = new Size(133, 42);
+            financesButton.Size = new Size(152, 56);
             financesButton.TabIndex = 4;
-            financesButton.Text = "Pénzügyek";
             financesButton.UseVisualStyleBackColor = false;
             financesButton.Click += financesButton_Click;
             // 
             // visibleDataPanel
             // 
-            visibleDataPanel.Location = new Point(66, 81);
-            visibleDataPanel.Margin = new Padding(3, 2, 3, 2);
+            visibleDataPanel.Location = new Point(75, 108);
             visibleDataPanel.Name = "visibleDataPanel";
-            visibleDataPanel.Size = new Size(914, 328);
+            visibleDataPanel.Size = new Size(1109, 509);
             visibleDataPanel.TabIndex = 5;
             visibleDataPanel.Visible = false;
             // 
@@ -160,19 +150,37 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(1068, 9);
-            exitButton.Margin = new Padding(3, 2, 3, 2);
+            exitButton.Location = new Point(1221, 12);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(26, 22);
+            exitButton.Size = new Size(30, 29);
             exitButton.TabIndex = 7;
             toolTip1.SetToolTip(exitButton, "Kilépés");
             exitButton.UseVisualStyleBackColor = false;
             exitButton.MouseClick += exitButton_MouseClick;
             // 
+            // HelpButton
+            // 
+            HelpButton.BackColor = Color.Transparent;
+            HelpButton.FlatAppearance.BorderSize = 0;
+            HelpButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            HelpButton.FlatStyle = FlatStyle.Flat;
+            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            HelpButton.ForeColor = Color.DarkOrange;
+            HelpButton.Location = new Point(14, 12);
+            HelpButton.Margin = new Padding(3, 4, 3, 4);
+            HelpButton.Name = "HelpButton";
+            HelpButton.Size = new Size(31, 36);
+            HelpButton.TabIndex = 11;
+            HelpButton.Text = "?";
+            toolTip1.SetToolTip(HelpButton, "Használati útmutató");
+            HelpButton.UseVisualStyleBackColor = false;
+            HelpButton.Click += HelpButton_Click;
+            // 
             // inboxButton
             // 
             inboxButton.BackColor = Color.Transparent;
-            inboxButton.BackgroundImage = Properties.Resources.buttonBack;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
             inboxButton.FlatAppearance.BorderSize = 0;
             inboxButton.FlatAppearance.CheckedBackColor = Color.Transparent;
             inboxButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
@@ -180,33 +188,24 @@
             inboxButton.FlatStyle = FlatStyle.Flat;
             inboxButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             inboxButton.ForeColor = SystemColors.ActiveCaptionText;
-            inboxButton.Location = new Point(842, 27);
-            inboxButton.Margin = new Padding(3, 2, 3, 2);
+            inboxButton.Location = new Point(1032, 36);
             inboxButton.Name = "inboxButton";
-            inboxButton.Size = new Size(133, 42);
+            inboxButton.Size = new Size(152, 56);
             inboxButton.TabIndex = 8;
-            inboxButton.Text = "Postaláda";
             inboxButton.UseVisualStyleBackColor = false;
             inboxButton.Click += inboxButton_Click;
             // 
-            // HelpButton
+            // timer1
             // 
-            HelpButton.BackColor = Color.Transparent;
-            HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            HelpButton.Location = new Point(12, 9);
-            HelpButton.Name = "HelpButton";
-            HelpButton.Size = new Size(27, 27);
-            HelpButton.TabIndex = 11;
-            HelpButton.Text = "?";
-            HelpButton.UseVisualStyleBackColor = false;
-            HelpButton.Click += HelpButton_Click;
+            timer1.Interval = 1600;
+            timer1.Tick += timer1_Tick;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.mainBack;
-            ClientSize = new Size(1104, 505);
+            ClientSize = new Size(1262, 673);
             Controls.Add(HelpButton);
             Controls.Add(inboxButton);
             Controls.Add(exitButton);
@@ -217,10 +216,11 @@
             Controls.Add(studiesButton);
             Controls.Add(userDataButton);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
+            Opacity = 0D;
             Text = "MainForm";
             FormClosing += MainForm_FormClosing;
+            Load += MainForm_Load;
             MouseDown += MainForm_MouseDown;
             MouseMove += MainForm_MouseMove;
             MouseUp += MainForm_MouseUp;
@@ -239,5 +239,6 @@
         private ToolTip toolTip1;
         private Button inboxButton;
         private Button HelpButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -85,6 +85,12 @@ namespace Saturn_Client
                     this.Hide();
                     MainForm mainForm = new MainForm(this);
                     mainForm.Show();
+                    //mûködõ register
+                    //this.Hide();
+                    //LoadingForm loadingForm = new LoadingForm();
+                    //MainForm mainForm = new MainForm(this);
+                    //mainForm.Show();
+                    //loadingForm.Show();
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -106,7 +112,12 @@ namespace Saturn_Client
         private void loginButton_Click(object sender, EventArgs e)
         {
             LoginAsync();
-
+            //hibás register
+            //this.Hide();
+            //LoadingForm loadingForm = new LoadingForm();
+            //MainForm mainForm = new MainForm(this);
+            //mainForm.Show();
+            //loadingForm.Show();
         }
 
         private void regformButton_Click(object sender, EventArgs e)

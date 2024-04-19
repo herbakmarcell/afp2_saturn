@@ -63,9 +63,9 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap buttonBack {
+        internal static System.Drawing.Bitmap dataBackFinal {
             get {
-                object obj = ResourceManager.GetObject("buttonBack", resourceCulture);
+                object obj = ResourceManager.GetObject("dataBackFinal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dataBack {
+        internal static System.Drawing.Bitmap examsButton {
             get {
-                object obj = ResourceManager.GetObject("dataBack", resourceCulture);
+                object obj = ResourceManager.GetObject("examsButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +106,26 @@ namespace Saturn_Client.Properties {
         internal static System.Drawing.Bitmap fieldBack {
             get {
                 object obj = ResourceManager.GetObject("fieldBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap financesButton {
+            get {
+                object obj = ResourceManager.GetObject("financesButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inboxButton {
+            get {
+                object obj = ResourceManager.GetObject("inboxButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,6 +173,16 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap saturn_gif {
+            get {
+                object obj = ResourceManager.GetObject("saturn_gif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap saturnbeta {
             get {
                 object obj = ResourceManager.GetObject("saturnbeta", resourceCulture);
@@ -193,9 +223,39 @@ namespace Saturn_Client.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap studiesButton {
+            get {
+                object obj = ResourceManager.GetObject("studiesButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subjectsButton {
+            get {
+                object obj = ResourceManager.GetObject("subjectsButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap userDataButton {
+            get {
+                object obj = ResourceManager.GetObject("userDataButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

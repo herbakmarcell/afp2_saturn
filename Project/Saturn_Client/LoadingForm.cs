@@ -11,16 +11,13 @@ using System.Windows.Forms;
 
 namespace Saturn_Client
 {
-    public partial class StudiesForm : Form
+    public partial class LoadingForm : Form
     {
-        public StudiesForm()
+
+        public LoadingForm()
         {
             InitializeComponent();
-        }
-
-        private void HelpButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Itt láthatod a tanulmányaidra vonatkozó adatokat, a Jogviszonyoddal és az aktuális félévvel kapcsolatban.");
+            InitFormStyle();
         }
 
         public int Radius { get; set; } = 30;
@@ -42,6 +39,30 @@ namespace Saturn_Client
             {
                 e.Graphics.DrawPath(pen, path);
             }
+        }
+
+
+        private void InitFormStyle()
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Opacity += 0.05;
+        }
+
+        private void LoadingForm_Load(object sender, EventArgs e)
+        {
+            timer1.Start();
+            timer2.Start();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
