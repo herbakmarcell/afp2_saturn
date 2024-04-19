@@ -51,9 +51,9 @@ namespace ASP_Core.Controllers
         [Route("register")]
         public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
         {
-            if(!authService.RolesFromToken(User.Claims).Contains("Admin"))
+            if(!authService.TokenHasRole(User.Claims, "Admin"))
             {
-                return BadRequest(new Response<string>("Missing Admin permission"));
+                return BadRequest(new Response<string>("Missing Admin permissions"));
             }
 
             var registerResponse = authService.Register(registerModel);
