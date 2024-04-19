@@ -16,6 +16,7 @@ namespace ASP_Core.Services.Auth
     {
         public LoginResponse? Login(LoginModel loginModel);
         public RegisterResponse? Register(RegisterModel registerModel);
+        public string[] RolesFromToken(IEnumerable<Claim> claims);
     }
 
 
@@ -95,6 +96,12 @@ namespace ASP_Core.Services.Auth
                 Message = "Sikeres regisztráció!"
             };
 
+        }
+
+        public string[] RolesFromToken(IEnumerable<Claim> claims)
+        {
+            if (claims == null) return new string[1];
+            return claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',');
         }
     }
 }
