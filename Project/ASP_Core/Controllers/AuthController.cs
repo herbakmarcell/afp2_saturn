@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -50,18 +51,10 @@ namespace ASP_Core.Controllers
         [Route("register")]
         public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
         {
-            var claims = User.Claims;
-            string[] roles = claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',');
-
-            if(!roles.Contains("Admin"))
+            if(!authService.TokenHasRole(User.Claims, "Admin"))
             {
-                return BadRequest(new Response<string>("Not an admin"));
+                return BadRequest(new Response<string>("Missing Admin permissions"));
             }
-            // TODO: Valamiért nem működik ez
-            //if ()
-            //{
-            //    return BadRequest(new Response<string>("Unauthorized"));
-            //}
 
             var registerResponse = authService.Register(registerModel);
 
