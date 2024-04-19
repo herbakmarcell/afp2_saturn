@@ -64,5 +64,35 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<RegisterResponse>(registerResponse));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("change")]
+        public ActionResult<Response<ChangeResponse>> Change([FromBody] ChangeModel changeModel)
+        {
+            if (string.IsNullOrEmpty(changeModel.SaturnCode))
+            {
+                changeModel.SaturnCode = authService.TokenWithSaturn(User.Claims);
+            }
+
+            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.SaturnCode != authService.TokenWithSaturn(User.Claims))
+            {
+                return BadRequest(new Response<string>("Can't change the others data without Admin permissions"));
+            }
+            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.NewRoles != null)
+            {
+                return BadRequest(new Response<string>("Only Admin can change the roles"));
+            }
+
+            ChangeResponse? changeResponse = authService.Change(changeModel);
+
+            if (changeResponse == null)
+            {
+                return BadRequest(new Response<string>("Unknown User or bad roles"));
+            }
+            return new OkObjectResult(new Response<ChangeResponse>(changeResponse));
+
+        }
+
     }
 }

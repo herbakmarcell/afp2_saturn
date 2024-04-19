@@ -110,6 +110,23 @@ namespace ASP_Core
                 context.Users.Add(user);
                 context.SaveChanges();
             }
+            using (var context = new SaturnContext())
+            {
+                User user = new User();
+                user.SaturnCode = "QAGSVA";
+                user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
+                user.LastName = "Marci";
+                user.FirstName = "Hallgato";
+                user.Email = "marc@student.com";
+                user.PhoneNumber = "+36201234567";
+
+                Role role = new Role();
+                role.Name = "Student";
+                user.Roles = [role];
+
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
         }
     }
 }
