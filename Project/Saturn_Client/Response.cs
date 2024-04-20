@@ -1,4 +1,5 @@
-﻿namespace Saturn_Client
+﻿
+namespace Saturn_Client
 {
     public class Response<T>
     {
@@ -23,6 +24,11 @@
         }
         public Response()
         {
+        }
+
+        public static explicit operator Response<T>(Response<string>? v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

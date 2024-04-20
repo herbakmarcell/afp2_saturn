@@ -43,8 +43,6 @@ namespace Saturn_Client
         private void regButton_Click(object sender, EventArgs e)
         {
             RegAsync();
-
-
         }
 
         private void RegFrom_MouseMove(object sender, MouseEventArgs e)
@@ -78,6 +76,7 @@ namespace Saturn_Client
             string password = Password_tbox.Text;
 
             var request = new RestRequest("/register", Method.Post);
+            request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
 
             request.AddBody(new
             {
@@ -95,8 +94,8 @@ namespace Saturn_Client
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var responseContent = response.Content;
-                    Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
-                    MessageBox.Show(temp.message);
+                    Response<RegisterResponse> temp = JsonSerializer.Deserialize<Response<RegisterResponse>>(responseContent);
+                    MessageBox.Show(temp.resource.message);
                     this.Hide();
                     await Console.Out.WriteLineAsync("siker fazis");
 

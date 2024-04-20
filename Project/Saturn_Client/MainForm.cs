@@ -24,6 +24,7 @@ namespace Saturn_Client
         {
             InitializeComponent();
             this.loginForm = loginForm;
+            new RegFrom().Show();
             InitFormStyle();
 
         }
