@@ -25,10 +25,5 @@ namespace Saturn_Client
         public Response()
         {
         }
-
-        public static explicit operator Response<T>(Response<string>? v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
