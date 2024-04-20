@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using RestSharp;
 using System.Net;
 using System.Text.Json;
+using System.CodeDom.Compiler;
 
 namespace Saturn_Client
 {
@@ -68,12 +69,12 @@ namespace Saturn_Client
         }
         public async void RegAsync()
         {
-            await Console.Out.WriteLineAsync("meghivva fazis");
             string firstname = FirstName_tbox.Text;
             string lastname = LastName_tbox.Text;
             string email = Email_tbox.Text;
             string phonenumber = PhoneNumber_tbox.Text;
             string password = Password_tbox.Text;
+            List<string> roles = new List<string>();
 
             var request = new RestRequest("/register", Method.Post);
             request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
@@ -84,12 +85,12 @@ namespace Saturn_Client
                 LastName = lastname,
                 Email = email,
                 Password = password,
-                PhoneNumber = phonenumber
+                PhoneNumber = phonenumber,
+                Roles = roles
             });
 
             try
             {
-                await Console.Out.WriteLineAsync("try fazis");
                 var response = await client.ExecuteAsync(request);
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -97,27 +98,20 @@ namespace Saturn_Client
                     Response<RegisterResponse> temp = JsonSerializer.Deserialize<Response<RegisterResponse>>(responseContent);
                     MessageBox.Show(temp.resource.message);
                     this.Hide();
-                    await Console.Out.WriteLineAsync("siker fazis");
-
-
-
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var responseContent = response.Content;
-                    Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
-                    MessageBox.Show("Hibás adatbevitel! \nHibaüzenet: " + temp.message);
-                    FirstName_tbox.Text = "";
-                    LastName_tbox.Text = "";
-                    Email_tbox.Text = "";
-                    PhoneNumber_tbox.Text = "";
-                    Password_tbox.Text = "";
-                    await Console.Out.WriteLineAsync("szar fazis");
+                    ErrorResponse errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseContent);
+                    MessageBox.Show("Hibás adatbevitel! \nHibaüzenet: " + errorResponse.errors[0]);
                 }
-                else
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
-
+                    var responseContent = response.Content;
+                    var errorResponse = JsonSerializer.Deserialize<Response<string>>(responseContent);
+                    MessageBox.Show("Hibás adatbevitel! \nHibaüzenet: " + errorResponse.message);
                 }
+                
             }
             catch (Exception ex)
             {
