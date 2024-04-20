@@ -53,15 +53,10 @@ namespace ASP_Core.Controllers
         {
             if(!authService.TokenHasRole(User.Claims, "Admin"))
             {
-                return BadRequest(new Response<string>("Missing Admin permissions"));
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-
             var registerResponse = authService.Register(registerModel);
 
-            if (registerResponse.Code != 0)
-            {
-                return BadRequest(new Response<string>(registerResponse.Message));
-            }
             return new OkObjectResult(new Response<RegisterResponse>(registerResponse));
         }
 
