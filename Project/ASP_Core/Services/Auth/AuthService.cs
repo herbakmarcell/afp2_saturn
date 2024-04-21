@@ -3,6 +3,7 @@ using ASP_Core.Database.Models;
 using ASP_Core.Models;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,6 +14,7 @@ namespace ASP_Core.Services.Auth
     public interface AuthIService
     {
         public LoginResponse? Login(LoginModel loginModel);
+        Task<User> GetUserBySaturnCode(string SaturnCode);
     }
 
 
@@ -22,6 +24,11 @@ namespace ASP_Core.Services.Auth
         public AuthService(SaturnContext saturnContext)
         {
             this.saturnContext = saturnContext;
+        }
+
+        public async Task<User> GetUserBySaturnCode(string SaturnCode)
+        {
+            return await saturnContext.Users.SingleOrDefaultAsync(users => users.SaturnCode == SaturnCode);
         }
 
         public LoginResponse? Login(LoginModel loginModel)
