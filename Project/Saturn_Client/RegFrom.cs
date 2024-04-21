@@ -96,7 +96,7 @@ namespace Saturn_Client
                 {
                     var responseContent = response.Content;
                     Response<RegisterResponse> temp = JsonSerializer.Deserialize<Response<RegisterResponse>>(responseContent);
-                    MessageBox.Show(temp.resource.message);
+                    MessageBox.Show(temp.resource.message + "\nRegisztrált Saturn Kód: " + temp.resource.saturnCode);
                     this.Hide();
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
