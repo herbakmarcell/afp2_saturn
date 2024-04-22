@@ -92,36 +92,38 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("user")]
-        public ActionResult<Response<string>> GetUser([FromHeader] string currentUser, [FromHeader] string saturnCode)
+        public ActionResult<Response<string>> GetUser([FromHeader] string saturnCode)
         {
-            if (saturnCode == null || currentUser==null)
-            {
-                return BadRequest(new Response<string>("Kérem adjon meg felhasználónevet!"));
-            }
+            UserDataResponse userData;
             if (!authService.TokenHasRole(User.Claims, "Admin") )
             {
-                if (currentUser != saturnCode)
+                User? user = authService.GetUser(authService.TokenWithSaturn(User.Claims));
+                userData = new UserDataResponse
                 {
-                    return Unauthorized(new Response<string>("Hallgatók csak a saját adatukat kérhetik le!"));
-                }
-                else
-                {
-                    User? user = authService.GetUser(saturnCode);
-                    if (user == null)
-                    {
-                        return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
-                    }
-                    return new OkObjectResult(new Response<UserDataResponse>("Felhasználó adatai átadva!"));
-                }
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber
+                };
+                return new OkObjectResult(new Response<UserDataResponse>(userData));
             }
             else
             {
+                saturnCode ??= authService.TokenWithSaturn(User.Claims);
+
                 User? user = authService.GetUser(saturnCode);
                 if (user == null)
                 {
                     return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
                 }
-                return new OkObjectResult(new Response<UserDataResponse>("Felhasználó adatai átadva!"));
+                userData = new UserDataResponse
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber
+                };
+                return new OkObjectResult(new Response<UserDataResponse>(userData));
             }
             
             
