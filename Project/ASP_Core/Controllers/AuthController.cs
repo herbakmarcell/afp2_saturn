@@ -92,18 +92,39 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("user")]
-        public ActionResult<Response<string>> GetUser([FromHeader] string saturnCode)
+        public ActionResult<Response<string>> GetUser([FromHeader] string currentUser, [FromHeader] string saturnCode)
         {
-            if (saturnCode == null)
+            if (saturnCode == null || currentUser==null)
             {
                 return BadRequest(new Response<string>("Kérem adjon meg felhasználónevet!"));
             }
-            User? user = authService.GetUser(saturnCode);
-            if (user == null)
+            if (!authService.TokenHasRole(User.Claims, "Admin") )
             {
-                return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
+                if (currentUser != saturnCode)
+                {
+                    return Unauthorized(new Response<string>("Hallgatók csak a saját adatukat kérhetik le!"));
+                }
+                else
+                {
+                    User? user = authService.GetUser(saturnCode);
+                    if (user == null)
+                    {
+                        return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
+                    }
+                    return new OkObjectResult(new Response<UserDataResponse>("Felhasználó adatai átadva!"));
+                }
             }
-            return new OkObjectResult(new Response<string>("Található ilyen felhasználó!"));
+            else
+            {
+                User? user = authService.GetUser(saturnCode);
+                if (user == null)
+                {
+                    return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
+                }
+                return new OkObjectResult(new Response<UserDataResponse>("Felhasználó adatai átadva!"));
+            }
+            
+            
         }
 
     }
