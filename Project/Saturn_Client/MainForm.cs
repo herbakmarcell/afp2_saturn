@@ -24,7 +24,7 @@ namespace Saturn_Client
         {
             InitializeComponent();
             this.loginForm = loginForm;
-            new RegFrom().Show();
+            //new RegFrom().Show();
             InitFormStyle();
 
         }
@@ -33,6 +33,12 @@ namespace Saturn_Client
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
+
+            if (!TokenContainer.IsAdmin)
+            {
+                registerButton.Visible = false;
+                registerButton.Enabled = false;
+            }
         }
 
         private void OpenChildForm(Form childForm, object btnSender)
@@ -157,6 +163,12 @@ namespace Saturn_Client
         private void MainForm_Load(object sender, EventArgs e)
         {
             timer1.Start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new RegFrom().Show();
+
         }
     }
 }
