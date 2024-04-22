@@ -166,8 +166,9 @@ namespace Saturn_Client
 
         private void regButton_Click(object sender, EventArgs e)
         {
-            new RegFrom().Show();
-            
+            OpenChildForm(new RegFrom(), sender);
+            visibleDataPanel.Visible = true;
+
         }
     }
 }

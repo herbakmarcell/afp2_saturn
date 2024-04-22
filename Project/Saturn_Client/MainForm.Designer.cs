@@ -210,11 +210,17 @@
             // 
             // regButton
             // 
-            regButton.Location = new Point(986, 468);
+            regButton.BackColor = Color.Transparent;
+            regButton.BackgroundImage = Properties.Resources.regbuttontemp;
+            regButton.FlatAppearance.BorderSize = 0;
+            regButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            regButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            regButton.FlatStyle = FlatStyle.Flat;
+            regButton.Location = new Point(890, 468);
             regButton.Name = "regButton";
-            regButton.Size = new Size(75, 23);
+            regButton.Size = new Size(146, 34);
             regButton.TabIndex = 12;
-            regButton.UseVisualStyleBackColor = true;
+            regButton.UseVisualStyleBackColor = false;
             regButton.Click += regButton_Click;
             // 
             // MainForm
