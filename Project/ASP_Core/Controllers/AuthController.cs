@@ -16,6 +16,7 @@ using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
 using Org.BouncyCastle.Asn1.Cmp;
 using System;
+using System.Composition;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -86,7 +87,23 @@ namespace ASP_Core.Controllers
                 return BadRequest(new Response<string>("Unknown User or bad roles"));
             }
             return new OkObjectResult(new Response<ChangeResponse>(changeResponse));
+        }
 
+        [HttpGet]
+        [Authorize()]
+        [Route("user")]
+        public ActionResult<Response<string>> GetUser([FromHeader] string saturnCode)
+        {
+            if (saturnCode == null)
+            {
+                return BadRequest(new Response<string>("Kérem adjon meg felhasználónevet!"));
+            }
+            User? user = authService.GetUser(saturnCode);
+            if (user == null)
+            {
+                return BadRequest(new Response<string>("Nincs ilyen felhasználó!"));
+            }
+            return new OkObjectResult(new Response<string>("Található ilyen felhasználó!"));
         }
 
     }
