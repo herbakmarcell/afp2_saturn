@@ -2,10 +2,10 @@
 {
     public class UserDataResponse
     {
-        public string SaturnCode { get; }
-        public string LastName { get; }
-        public string FirstName { get; }
-        public string Email { get;}
-        public string PhoneNumber { get; }
+        public string SaturnCode { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
