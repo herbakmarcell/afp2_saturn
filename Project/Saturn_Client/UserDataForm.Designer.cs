@@ -46,9 +46,9 @@
             saturnCodeLabel.ForeColor = Color.DarkOrange;
             saturnCodeLabel.Location = new Point(50, 31);
             saturnCodeLabel.Name = "saturnCodeLabel";
-            saturnCodeLabel.Size = new Size(140, 31);
+            saturnCodeLabel.Size = new Size(147, 31);
             saturnCodeLabel.TabIndex = 0;
-            saturnCodeLabel.Text = "Saturn kód:";
+            saturnCodeLabel.Text = "Saturn kód: ";
             // 
             // familyNameLabel
             // 
@@ -58,9 +58,9 @@
             familyNameLabel.ForeColor = Color.DarkOrange;
             familyNameLabel.Location = new Point(50, 101);
             familyNameLabel.Name = "familyNameLabel";
-            familyNameLabel.Size = new Size(146, 31);
+            familyNameLabel.Size = new Size(153, 31);
             familyNameLabel.TabIndex = 1;
-            familyNameLabel.Text = "Vezetéknév:";
+            familyNameLabel.Text = "Vezetéknév: ";
             // 
             // givenNameLabel
             // 
@@ -70,9 +70,9 @@
             givenNameLabel.ForeColor = Color.DarkOrange;
             givenNameLabel.Location = new Point(50, 175);
             givenNameLabel.Name = "givenNameLabel";
-            givenNameLabel.Size = new Size(96, 31);
+            givenNameLabel.Size = new Size(103, 31);
             givenNameLabel.TabIndex = 2;
-            givenNameLabel.Text = "Utónév:";
+            givenNameLabel.Text = "Utónév: ";
             // 
             // HelpButton
             // 
@@ -101,9 +101,9 @@
             emailLabel.ForeColor = Color.DarkOrange;
             emailLabel.Location = new Point(50, 258);
             emailLabel.Name = "emailLabel";
-            emailLabel.Size = new Size(86, 31);
+            emailLabel.Size = new Size(93, 31);
             emailLabel.TabIndex = 13;
-            emailLabel.Text = "E-mail:";
+            emailLabel.Text = "E-mail: ";
             // 
             // phoneLabel
             // 
@@ -113,9 +113,9 @@
             phoneLabel.ForeColor = Color.DarkOrange;
             phoneLabel.Location = new Point(50, 339);
             phoneLabel.Name = "phoneLabel";
-            phoneLabel.Size = new Size(158, 31);
+            phoneLabel.Size = new Size(165, 31);
             phoneLabel.TabIndex = 14;
-            phoneLabel.Text = "Telefonszám:";
+            phoneLabel.Text = "Telefonszám: ";
             // 
             // UserDataForm
             // 

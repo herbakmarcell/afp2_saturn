@@ -30,8 +30,9 @@ namespace Saturn_Client
         private async void loadUserData()
         {
             var request = new RestRequest("/user", Method.Get);
-            //try
-            //{
+            try
+            {
+                request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
                 request.AddHeader("saturnCode", TokenContainer.GetSaturnCode);
                 var response = await client.ExecuteAsync(request);
 
@@ -39,11 +40,11 @@ namespace Saturn_Client
                 {
                     var responseContent = response.Content;
                     Response<UserDataResponse> responseData = JsonSerializer.Deserialize<Response<UserDataResponse>>(response.Content);
-                    this.saturnCodeLabel.Text = responseData.resource.saturnCode;
-                    this.familyNameLabel.Text = responseData.resource.lastName;
-                    this.givenNameLabel.Text = responseData.resource.firstName;
-                    this.emailLabel.Text = responseData.resource.email;
-                    this.phoneLabel.Text = responseData.resource.phoneNumber;
+                    this.saturnCodeLabel.Text += responseData.resource.saturnCode;
+                    this.familyNameLabel.Text += responseData.resource.lastName;
+                    this.givenNameLabel.Text += responseData.resource.firstName;
+                    this.emailLabel.Text += responseData.resource.email;
+                    this.phoneLabel.Text += responseData.resource.phoneNumber;
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -51,16 +52,15 @@ namespace Saturn_Client
                     Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
                     MessageBox.Show("Hibás felhasználónév vagy jelszó! \nHibaüzenet: " + temp.message);
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Váratlan hiba! \nBővebben: " + ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Váratlan hiba! \nBővebben: " + ex.Message);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadUserData();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
