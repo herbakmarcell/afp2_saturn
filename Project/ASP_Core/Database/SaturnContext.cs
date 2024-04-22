@@ -13,6 +13,7 @@ using BCrypt;
 using System.Text.RegularExpressions;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
+using Humanizer.DateTimeHumanizeStrategy;
 
 
 namespace ASP_Core.Database
@@ -294,6 +295,11 @@ namespace ASP_Core.Database
             }
             SaveChanges();
             return changeResponse;
+        }
+
+        public User? UserWithSaturnCode(string saturnCode)
+        {
+            return this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
         }
     }
 }
