@@ -1,4 +1,5 @@
-﻿namespace Saturn_Client
+﻿
+namespace Saturn_Client
 {
     public class Response<T>
     {

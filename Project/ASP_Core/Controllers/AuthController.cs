@@ -12,11 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
+using Org.BouncyCastle.Asn1.Cmp;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+
 namespace ASP_Core.Controllers
 {
     [Route("api/[controller]")]
@@ -43,71 +46,48 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<LoginResponse>(resource));
         }
 
-        
-
-        [HttpGet("Users/{SaturnCode}")]
-        public async Task<IActionResult> GetUser(string saturnCode)
+        [HttpPost]
+        [Authorize()]
+        [Route("register")]
+        public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
         {
-            try
+            if(!authService.TokenHasRole(User.Claims, "Admin"))
             {
-                var user = await authService.GetUserBySaturnCode(saturnCode);
-                if (user == null)
-                {
-                    return NotFound();
-                }
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            var registerResponse = authService.Register(registerModel);
 
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return StatusCode(500, "Internal server error");
-            }
+            return new OkObjectResult(new Response<RegisterResponse>(registerResponse));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("change")]
+        public ActionResult<Response<ChangeResponse>> Change([FromBody] ChangeModel changeModel)
+        {
+            if (string.IsNullOrEmpty(changeModel.SaturnCode))
+            {
+                changeModel.SaturnCode = authService.TokenWithSaturn(User.Claims);
+            }
+
+            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.SaturnCode != authService.TokenWithSaturn(User.Claims))
+            {
+                return BadRequest(new Response<string>("Can't change the others data without Admin permissions"));
+            }
+            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.NewRoles != null)
+            {
+                return BadRequest(new Response<string>("Only Admin can change the roles"));
+            }
+
+            ChangeResponse? changeResponse = authService.Change(changeModel);
+
+            if (changeResponse == null)
+            {
+                return BadRequest(new Response<string>("Unknown User or bad roles"));
+            }
+            return new OkObjectResult(new Response<ChangeResponse>(changeResponse));
+
+        }
+
     }
-
-    //[HttpPost]
-    //[Route("register")]
-    //[AllowAnonymous]
-    //public async Task<ActionResult<Response<string>>> Register([FromBody] RegisterModel registerModel)
-    //{
-    //    User userExists;
-    //    string generatedSaturnCode = "";
-    //    do
-    //    {
-
-
-    //        Random rd = new Random();
-    //        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    //        for (int i = 0; i < 6; i++)
-    //        {
-    //            generatedSaturnCode+= chars[rd.Next(chars.Length)];
-    //        }
-
-    //        userExists = saturnContext.Users.FirstOrDefault(u =>  u.SaturnCode == generatedSaturnCode);
-    //    } while (userExists !=null);
-
-
-    //    User user = new User();
-    //    user.SaturnCode = generatedSaturnCode;
-    //    user.Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password);
-    //    user.LastName = registerModel.LastName;
-    //    user.FirstName = registerModel.FirstName;
-    //    user.Email = registerModel.Email;
-    //    user.PhoneNumber =registerModel.PhoneNumber;
-    //    Role role = new Role();
-    //    role.Name = "Hallgató";
-    //    user.Roles = new List<Role>();
-    //    user.Roles.Add(role);
-
-
-    //    var newUser = await saturnContext.Register(user);
-
-    //    if (newUser == null)
-    //        return BadRequest(new Response<string>("Hiba a felhasználó létrehozásakor!"));
-
-    //    return new OkObjectResult(new Response<string>($"Sikeres regisztráció! Most már bejelentkezhet!\nAz ön Saturn kódja:\n{generatedSaturnCode}"));
-    //}
 }
-

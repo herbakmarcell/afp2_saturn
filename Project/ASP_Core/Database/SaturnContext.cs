@@ -11,7 +11,9 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 using NuGet.Protocol.Plugins;
 using BCrypt;
 using System.Text.RegularExpressions;
-    
+using ASP_Core.Models.Auth;
+using ASP_Core.Models.Responses;
+
 
 namespace ASP_Core.Database
 {
@@ -19,11 +21,7 @@ namespace ASP_Core.Database
     {
         public SaturnContext()
         {
-            if (!this.Database.EnsureCreated())
-            {
-                Seed();
-            }
-            
+            this.Database.EnsureCreated();
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -154,7 +152,7 @@ namespace ASP_Core.Database
 
         public User? LoginCheck(string saturnCode, string password)
         {
-            User? user = this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
+            User? user = this.Users.Include(u => u.Roles).FirstOrDefault(u => u.SaturnCode == saturnCode);
             if (user == null)
             {
                 return null;
@@ -170,14 +168,132 @@ namespace ASP_Core.Database
 
         public void Seed()
         {
+            User user = new User();
+            user.SaturnCode = "ADMIN1";
+            user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
+            user.LastName = "Péter";
+            user.FirstName = "Admin";
+            user.Email = "admin@admin.com";
+            user.PhoneNumber = "+36201234567";
 
+            Role role = new Role();
+            role.Name = "Admin";
+            user.Roles = [role];
+
+            Users.Add(user);
+            SaveChanges();
         }
-        public async Task<User> Register(User user)
-        {
-            Users.AddAsync(user);
-            SaveChangesAsync();
 
-            return user;
+        public string Register(RegisterModel registerModel)
+        {
+
+            User? userExists;
+            string generatedSaturnCode;
+            do
+            {
+                generatedSaturnCode = string.Empty;
+                
+                Random rd = new Random();
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+                for (int i = 0; i < 6; i++)
+                {
+                    generatedSaturnCode += chars[rd.Next(chars.Length)];
+                }
+
+                userExists = Users.FirstOrDefault(u => u.SaturnCode == generatedSaturnCode);
+            } while (userExists != null);
+
+            User newUser = new User()
+            {
+                SaturnCode = generatedSaturnCode,
+                Password = BCrypt.Net.BCrypt.HashPassword(registerModel.Password),
+                LastName = registerModel.LastName,
+                FirstName = registerModel.FirstName,
+                Email = registerModel.Email,
+                PhoneNumber = registerModel.PhoneNumber,
+                Roles = new List<Role>()
+            };
+
+            foreach (var item in registerModel.Roles)
+            {
+                Role newRole = new Role();
+                newRole.Name = item;
+                newUser.Roles.Add(newRole);
+            }
+
+            Users.Add(newUser);
+            SaveChanges();
+
+            return generatedSaturnCode;
+        }
+
+        public ChangeResponse? Change(ChangeModel changeModel)
+        {
+            ChangeResponse changeResponse = new ChangeResponse();
+            User? user = this.Users.Include(u => u.Roles).FirstOrDefault(u => u.SaturnCode == changeModel.SaturnCode);
+
+            if (user == null)
+            {
+                return null;
+            }
+            changeResponse.SaturnCode = user.SaturnCode;
+            if (changeModel.NewPassword != null && !BCrypt.Net.BCrypt.Verify(changeModel.NewPassword, user.Password)) 
+            { 
+                user.Password = BCrypt.Net.BCrypt.HashPassword(changeModel.NewPassword);
+                changeResponse.NewPassword = "Password has changed";
+            }
+
+            if (changeModel.NewLastName != null && user.LastName != changeModel.NewLastName)
+            {
+                user.LastName = changeModel.NewLastName;
+                changeResponse.NewLastName = changeModel.NewLastName;
+            }
+            if (changeModel.NewFirstName != null && user.FirstName != changeModel.NewFirstName) 
+            {
+                user.FirstName = changeModel.NewFirstName;
+                changeResponse.NewFirstName = changeModel.NewFirstName;
+            }
+            if (changeModel.NewEmail != null && user.Email != changeModel.NewEmail)
+            {
+                user.Email = changeModel.NewEmail;
+                changeResponse.NewEmail = changeModel.NewEmail;
+            }
+            if (changeModel.NewPhoneNumber != null && user.PhoneNumber != changeModel.NewPhoneNumber)
+            {
+                user.PhoneNumber = changeModel.NewPhoneNumber;
+                changeResponse.NewPhone = changeModel.NewPhoneNumber;
+            }
+                
+            if (changeModel.NewRoles != null)
+            {
+                string[] validRoles = { "Student", "Teacher", "Admin" };
+                string[] roles = user.ReturnRoles.Split(',');
+                changeResponse.NewRoles = new List<string>();
+
+                foreach (var newUserRole in changeModel.NewRoles)
+                {
+                    if (!validRoles.Contains(newUserRole)) return null;
+                    if (!roles.Contains(newUserRole))
+                    {
+                        Role newRole = new Role();
+                        newRole.Name = newUserRole;
+                        user.Roles.Add(newRole);
+                        changeResponse.NewRoles.Add("+"+newUserRole);
+                    }
+                }
+                foreach (var oldUserRole in roles)
+                {
+                    if (!changeModel.NewRoles.Contains(oldUserRole))
+                    {
+                        Role oldRole = this.Roles.Include(r => r.User).FirstOrDefault(r => r.Name == oldUserRole && r.User.SaturnCode == changeModel.SaturnCode);
+                        user.Roles.Remove(oldRole);
+                        changeResponse.NewRoles.Add("-"+oldUserRole);
+                    }
+                }
+            }
+            SaveChanges();
+            return changeResponse;
         }
     }
 }

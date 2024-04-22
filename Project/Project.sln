@@ -9,20 +9,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saturn_Client", "Saturn_Cli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C732-562D-4D66-9692-F264E0A3AE57}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\buttonBack.png
-		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBack.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBackFinal.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBackFinal.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fideszLogin.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fideszLogin.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fieldBack.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\fieldBack.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\financesButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\financesButton.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\inboxButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\inboxButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginback.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginback.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\loginButtonpic.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\mainBack.jpg
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\passkey.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\passkey.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturn gif.gif = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturn gif.gif
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnbeta.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnbeta.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnicon.ico = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturnicon.ico
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturntmalpha.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\saturntmalpha.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\space.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\space.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\studiesButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\studiesButton.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\subjectsButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\subjectsButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\user.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\user.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\userDataButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\userDataButton.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Font", "Font", "{37316D8F-B6C3-4E16-A49B-9C2F5EE62FDE}"

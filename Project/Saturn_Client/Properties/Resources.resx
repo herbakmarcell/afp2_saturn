@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="buttonBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\buttonBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="dataBackFinal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataBackFinal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dataBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dataBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="examsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\examsButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exiticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exiticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -132,6 +132,12 @@
   </data>
   <data name="fieldBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fieldBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="financesButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\financesButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inboxButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inboxButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loginback" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loginback.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,10 +160,22 @@
   <data name="saturntmalpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\saturntmalpha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="saturn_gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saturn gif.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="space" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\space.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="studiesButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\studiesButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="subjectsButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\subjectsButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="user" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="userDataButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\userDataButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
