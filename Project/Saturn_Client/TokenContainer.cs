@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +26,17 @@ namespace Saturn_Client
             }
         }
 
+        public static string? GetSaturnCode {
+            get
+            {
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var jwtToken = tokenHandler.ReadJwtToken(Token);
+
+                var claims = jwtToken.Claims;
+
+                return claims.FirstOrDefault(c => c.Type == "saturnCode").Value.ToString();
+            }
+        }
     }
 }
