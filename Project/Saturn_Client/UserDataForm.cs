@@ -24,6 +24,16 @@ namespace Saturn_Client
             InitializeComponent();
             client = new RestClient("https://localhost:7204/api/Auth");
             loadUserData();
+            hideUpdateFunctions();
+        }
+        private void hideUpdateFunctions()
+        {
+            saturncodeTB.Visible = false;
+            firstnameTB.Visible = false;
+            lastnameTB.Visible = false;
+            emailTB.Visible = false;
+            phonenumberTB.Visible = false;
+            saveChangesButton.Visible = false;
         }
 
 
@@ -65,7 +75,7 @@ namespace Saturn_Client
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Itt megtekintheted a felhasználói fiókod adatait. A SaturnKódodat és a nevedet.");
+            MessageBox.Show("Itt megtekintheted a felhasználói fiókod adatait, a SaturnKódodat és a nevedet. A Módosítás gommbal pedig megváltoztathatod a személyes adataidat.");
         }
         public int Radius { get; set; } = 30;
 
@@ -86,6 +96,27 @@ namespace Saturn_Client
             {
                 e.Graphics.DrawPath(pen, path);
             }
+        }
+
+        private void updateUserDataButton_Click(object sender, EventArgs e)
+        {
+            saturncodeTB.Visible = true;
+            firstnameTB.Visible = true;
+            lastnameTB.Visible = true;
+            emailTB.Visible = true;
+            phonenumberTB.Visible = true;
+            saveChangesButton.Visible = true;
+
+            this.saturnCodeLabel.Text = "Saturn Kód:";
+            this.familyNameLabel.Text = "Vezetéknév:";
+            this.givenNameLabel.Text = "Utónév:";
+            this.emailLabel.Text = "E-mail:";
+            this.phoneLabel.Text = "Telefonszám:";
+        }
+
+        private void saveChangesButton_Click(object sender, EventArgs e)
+        {
+            //backend
         }
     }
 }
