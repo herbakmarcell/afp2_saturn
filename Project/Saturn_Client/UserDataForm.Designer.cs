@@ -43,6 +43,12 @@
             emailTB = new TextBox();
             phonenumberTB = new TextBox();
             saveChangesButton = new Button();
+            passwordLabel = new Label();
+            passwordTB = new TextBox();
+            rolesLabel = new Label();
+            rolesAdminCB = new CheckBox();
+            rolesTeacherCB = new CheckBox();
+            rolesStudentCB = new CheckBox();
             SuspendLayout();
             // 
             // saturnCodeLabel
@@ -189,6 +195,69 @@
             saveChangesButton.UseVisualStyleBackColor = false;
             saveChangesButton.Click += saveChangesButton_Click;
             // 
+            // passwordLabel
+            // 
+            passwordLabel.AutoSize = true;
+            passwordLabel.BackColor = Color.Transparent;
+            passwordLabel.FlatStyle = FlatStyle.Flat;
+            passwordLabel.Font = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            passwordLabel.ForeColor = Color.DarkOrange;
+            passwordLabel.Location = new Point(44, 308);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new Size(76, 26);
+            passwordLabel.TabIndex = 22;
+            passwordLabel.Text = "Jelszó:";
+            // 
+            // passwordTB
+            // 
+            passwordTB.Location = new Point(185, 313);
+            passwordTB.Name = "passwordTB";
+            passwordTB.Size = new Size(100, 23);
+            passwordTB.TabIndex = 23;
+            // 
+            // rolesLabel
+            // 
+            rolesLabel.AutoSize = true;
+            rolesLabel.BackColor = Color.Transparent;
+            rolesLabel.FlatStyle = FlatStyle.Flat;
+            rolesLabel.Font = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            rolesLabel.ForeColor = Color.DarkOrange;
+            rolesLabel.Location = new Point(339, 22);
+            rolesLabel.Name = "rolesLabel";
+            rolesLabel.Size = new Size(80, 26);
+            rolesLabel.TabIndex = 24;
+            rolesLabel.Text = "Jogkör:";
+            // 
+            // rolesAdminCB
+            // 
+            rolesAdminCB.AutoSize = true;
+            rolesAdminCB.Location = new Point(439, 30);
+            rolesAdminCB.Name = "rolesAdminCB";
+            rolesAdminCB.Size = new Size(15, 14);
+            rolesAdminCB.TabIndex = 25;
+            rolesAdminCB.UseVisualStyleBackColor = true;
+            rolesAdminCB.CheckedChanged += rolesAdminCB_CheckedChanged;
+            // 
+            // rolesTeacherCB
+            // 
+            rolesTeacherCB.AutoSize = true;
+            rolesTeacherCB.Location = new Point(460, 30);
+            rolesTeacherCB.Name = "rolesTeacherCB";
+            rolesTeacherCB.Size = new Size(15, 14);
+            rolesTeacherCB.TabIndex = 26;
+            rolesTeacherCB.UseVisualStyleBackColor = true;
+            rolesTeacherCB.CheckedChanged += rolesTeacherCB_CheckedChanged;
+            // 
+            // rolesStudentCB
+            // 
+            rolesStudentCB.AutoSize = true;
+            rolesStudentCB.Location = new Point(481, 30);
+            rolesStudentCB.Name = "rolesStudentCB";
+            rolesStudentCB.Size = new Size(15, 14);
+            rolesStudentCB.TabIndex = 27;
+            rolesStudentCB.UseVisualStyleBackColor = true;
+            rolesStudentCB.CheckedChanged += rolesStudentCB_CheckedChanged;
+            // 
             // UserDataForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -196,6 +265,12 @@
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(955, 346);
+            Controls.Add(rolesStudentCB);
+            Controls.Add(rolesTeacherCB);
+            Controls.Add(rolesAdminCB);
+            Controls.Add(rolesLabel);
+            Controls.Add(passwordTB);
+            Controls.Add(passwordLabel);
             Controls.Add(saveChangesButton);
             Controls.Add(phonenumberTB);
             Controls.Add(emailTB);
@@ -232,5 +307,11 @@
         private TextBox emailTB;
         private TextBox phonenumberTB;
         private Button saveChangesButton;
+        private Label passwordLabel;
+        private TextBox passwordTB;
+        private Label rolesLabel;
+        private CheckBox rolesAdminCB;
+        private CheckBox rolesTeacherCB;
+        private CheckBox rolesStudentCB;
     }
 }
