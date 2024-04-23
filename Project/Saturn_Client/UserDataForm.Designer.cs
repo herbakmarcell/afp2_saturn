@@ -34,43 +34,45 @@
             givenNameLabel = new Label();
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
+            emailLabel = new Label();
+            phoneLabel = new Label();
             SuspendLayout();
             // 
             // saturnCodeLabel
             // 
             saturnCodeLabel.AutoSize = true;
             saturnCodeLabel.BackColor = Color.Transparent;
-            saturnCodeLabel.Font = new Font("Comic Sans MS", 9F);
+            saturnCodeLabel.Font = new Font("Comic Sans MS", 13.8F);
             saturnCodeLabel.ForeColor = Color.DarkOrange;
-            saturnCodeLabel.Location = new Point(50, 27);
+            saturnCodeLabel.Location = new Point(50, 31);
             saturnCodeLabel.Name = "saturnCodeLabel";
-            saturnCodeLabel.Size = new Size(91, 20);
+            saturnCodeLabel.Size = new Size(147, 31);
             saturnCodeLabel.TabIndex = 0;
-            saturnCodeLabel.Text = "Saturn kód:";
+            saturnCodeLabel.Text = "Saturn kód: ";
             // 
             // familyNameLabel
             // 
             familyNameLabel.AutoSize = true;
             familyNameLabel.BackColor = Color.Transparent;
-            familyNameLabel.Font = new Font("Comic Sans MS", 9F);
+            familyNameLabel.Font = new Font("Comic Sans MS", 13.8F);
             familyNameLabel.ForeColor = Color.DarkOrange;
-            familyNameLabel.Location = new Point(50, 79);
+            familyNameLabel.Location = new Point(50, 101);
             familyNameLabel.Name = "familyNameLabel";
-            familyNameLabel.Size = new Size(94, 20);
+            familyNameLabel.Size = new Size(153, 31);
             familyNameLabel.TabIndex = 1;
-            familyNameLabel.Text = "Vezetéknév:";
+            familyNameLabel.Text = "Vezetéknév: ";
             // 
             // givenNameLabel
             // 
             givenNameLabel.AutoSize = true;
             givenNameLabel.BackColor = Color.Transparent;
-            givenNameLabel.Font = new Font("Comic Sans MS", 9F);
+            givenNameLabel.Font = new Font("Comic Sans MS", 13.8F);
             givenNameLabel.ForeColor = Color.DarkOrange;
-            givenNameLabel.Location = new Point(50, 128);
+            givenNameLabel.Location = new Point(50, 175);
             givenNameLabel.Name = "givenNameLabel";
-            givenNameLabel.Size = new Size(62, 20);
+            givenNameLabel.Size = new Size(103, 31);
             givenNameLabel.TabIndex = 2;
-            givenNameLabel.Text = "Utónév:";
+            givenNameLabel.Text = "Utónév: ";
             // 
             // HelpButton
             // 
@@ -91,6 +93,30 @@
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
+            // emailLabel
+            // 
+            emailLabel.AutoSize = true;
+            emailLabel.BackColor = Color.Transparent;
+            emailLabel.Font = new Font("Comic Sans MS", 13.8F);
+            emailLabel.ForeColor = Color.DarkOrange;
+            emailLabel.Location = new Point(50, 258);
+            emailLabel.Name = "emailLabel";
+            emailLabel.Size = new Size(93, 31);
+            emailLabel.TabIndex = 13;
+            emailLabel.Text = "E-mail: ";
+            // 
+            // phoneLabel
+            // 
+            phoneLabel.AutoSize = true;
+            phoneLabel.BackColor = Color.Transparent;
+            phoneLabel.Font = new Font("Comic Sans MS", 13.8F);
+            phoneLabel.ForeColor = Color.DarkOrange;
+            phoneLabel.Location = new Point(50, 339);
+            phoneLabel.Name = "phoneLabel";
+            phoneLabel.Size = new Size(165, 31);
+            phoneLabel.TabIndex = 14;
+            phoneLabel.Text = "Telefonszám: ";
+            // 
             // UserDataForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -98,6 +124,8 @@
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1091, 462);
+            Controls.Add(phoneLabel);
+            Controls.Add(emailLabel);
             Controls.Add(HelpButton);
             Controls.Add(givenNameLabel);
             Controls.Add(familyNameLabel);
@@ -110,11 +138,12 @@
         }
 
         #endregion
-
-        private Label saturnCodeLabel;
         private Label familyNameLabel;
         private Label givenNameLabel;
         private Button HelpButton;
         private ToolTip toolTip1;
+        private Label emailLabel;
+        private Label phoneLabel;
+        public Label saturnCodeLabel;
     }
 }

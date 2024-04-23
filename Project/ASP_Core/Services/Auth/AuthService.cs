@@ -15,6 +15,7 @@ namespace ASP_Core.Services.Auth
 {
     public interface AuthIService
     {
+        public User? GetUser(string saturnCode);
         public LoginResponse? Login(LoginModel loginModel);
         public RegisterResponse? Register(RegisterModel registerModel);
         public ChangeResponse? Change(ChangeModel changeModel);
@@ -32,6 +33,10 @@ namespace ASP_Core.Services.Auth
             this.saturnContext = saturnContext;
         }
 
+        public User? GetUser(string saturnCode)
+        {
+            return saturnContext.UserWithSaturnCode(saturnCode);
+        }
         public LoginResponse? Login(LoginModel loginModel)
         {
             User? user = saturnContext.LoginCheck(loginModel.SaturnCode, loginModel.Password);
