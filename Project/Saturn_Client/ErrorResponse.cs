@@ -22,6 +22,11 @@ namespace Saturn_Client
         public string[] Email { get; set; }
         public string[] PhoneNumber { get; set; }
         public string[] Password { get; set; }
+        public string[] NewFirstName { get; set; }
+        public string[] NewLastName { get; set; }
+        public string[] NewEmail { get; set; }
+        public string[] NewPhoneNumber { get; set; }
+        public string[] NewPassword { get; set; }
 
         public object this[int index]
         {
@@ -46,6 +51,26 @@ namespace Saturn_Client
                 if (Password != null)
                 {
                     return Password[index];
+                }
+                if (NewFirstName != null)
+                {
+                    return NewFirstName[index];
+                }
+                if (NewLastName != null)
+                {
+                    return NewLastName[index];
+                }
+                if (NewEmail != null)
+                {
+                    return NewEmail[index];
+                }
+                if (NewPhoneNumber != null)
+                {
+                    return NewPhoneNumber[index];
+                }
+                if (NewPassword != null)
+                {
+                    return NewPassword[index];
                 }
                 return null;
             }
