@@ -40,6 +40,9 @@ namespace Saturn_Client
             rolesTeacherCB.Visible = false;
             rolesStudentCB.Visible = false;
             rolesLabel.Visible = false;
+            admincbLabel.Visible = false;
+            teachercbLabel.Visible = false;
+            studentcbLabel.Visible = false;
 
         }
 
@@ -122,6 +125,9 @@ namespace Saturn_Client
                 rolesAdminCB.Visible = true;
                 rolesTeacherCB.Visible = true;
                 rolesStudentCB.Visible = true;
+                admincbLabel.Visible = true;                
+                teachercbLabel.Visible = true;                
+                studentcbLabel.Visible = true;                
                 rolesLabel.Visible = true;
                 this.saturnCodeLabel.Text = "Saturn Kód:";
                 rolesAdminCB.Checked = true;

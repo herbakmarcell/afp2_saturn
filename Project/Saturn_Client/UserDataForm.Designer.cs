@@ -49,6 +49,9 @@
             rolesAdminCB = new CheckBox();
             rolesTeacherCB = new CheckBox();
             rolesStudentCB = new CheckBox();
+            admincbLabel = new Label();
+            teachercbLabel = new Label();
+            studentcbLabel = new Label();
             SuspendLayout();
             // 
             // saturnCodeLabel
@@ -241,7 +244,7 @@
             // rolesTeacherCB
             // 
             rolesTeacherCB.AutoSize = true;
-            rolesTeacherCB.Location = new Point(460, 30);
+            rolesTeacherCB.Location = new Point(439, 50);
             rolesTeacherCB.Name = "rolesTeacherCB";
             rolesTeacherCB.Size = new Size(15, 14);
             rolesTeacherCB.TabIndex = 26;
@@ -251,12 +254,51 @@
             // rolesStudentCB
             // 
             rolesStudentCB.AutoSize = true;
-            rolesStudentCB.Location = new Point(481, 30);
+            rolesStudentCB.Location = new Point(439, 70);
             rolesStudentCB.Name = "rolesStudentCB";
             rolesStudentCB.Size = new Size(15, 14);
             rolesStudentCB.TabIndex = 27;
             rolesStudentCB.UseVisualStyleBackColor = true;
             rolesStudentCB.CheckedChanged += rolesStudentCB_CheckedChanged;
+            // 
+            // admincbLabel
+            // 
+            admincbLabel.AutoSize = true;
+            admincbLabel.BackColor = Color.Transparent;
+            admincbLabel.FlatStyle = FlatStyle.Flat;
+            admincbLabel.Font = new Font("Comic Sans MS", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            admincbLabel.ForeColor = Color.DarkOrange;
+            admincbLabel.Location = new Point(460, 26);
+            admincbLabel.Name = "admincbLabel";
+            admincbLabel.Size = new Size(45, 18);
+            admincbLabel.TabIndex = 28;
+            admincbLabel.Text = "Admin";
+            // 
+            // teachercbLabel
+            // 
+            teachercbLabel.AutoSize = true;
+            teachercbLabel.BackColor = Color.Transparent;
+            teachercbLabel.FlatStyle = FlatStyle.Flat;
+            teachercbLabel.Font = new Font("Comic Sans MS", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            teachercbLabel.ForeColor = Color.DarkOrange;
+            teachercbLabel.Location = new Point(460, 47);
+            teachercbLabel.Name = "teachercbLabel";
+            teachercbLabel.Size = new Size(44, 18);
+            teachercbLabel.TabIndex = 29;
+            teachercbLabel.Text = "Tanár";
+            // 
+            // studentcbLabel
+            // 
+            studentcbLabel.AutoSize = true;
+            studentcbLabel.BackColor = Color.Transparent;
+            studentcbLabel.FlatStyle = FlatStyle.Flat;
+            studentcbLabel.Font = new Font("Comic Sans MS", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            studentcbLabel.ForeColor = Color.DarkOrange;
+            studentcbLabel.Location = new Point(460, 70);
+            studentcbLabel.Name = "studentcbLabel";
+            studentcbLabel.Size = new Size(59, 18);
+            studentcbLabel.TabIndex = 30;
+            studentcbLabel.Text = "Hallgató";
             // 
             // UserDataForm
             // 
@@ -265,6 +307,9 @@
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(955, 346);
+            Controls.Add(studentcbLabel);
+            Controls.Add(teachercbLabel);
+            Controls.Add(admincbLabel);
             Controls.Add(rolesStudentCB);
             Controls.Add(rolesTeacherCB);
             Controls.Add(rolesAdminCB);
@@ -313,5 +358,8 @@
         private CheckBox rolesAdminCB;
         private CheckBox rolesTeacherCB;
         private CheckBox rolesStudentCB;
+        private Label admincbLabel;
+        private Label teachercbLabel;
+        private Label studentcbLabel;
     }
 }
