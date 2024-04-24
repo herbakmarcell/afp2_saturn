@@ -14,7 +14,7 @@
 | T04 | Regisztráció hibás adatokkal | A felhasználó értesítést kap arról, hogy hibás adatokat adott meg. | Az eredmény megfelel az elvárásoknak. | Nincs probléma. |
 | T05 | Regisztráció Admin jogkör nélkül | A felhasználó értesítést kap arról, hogy nincs jogosultsága a műveletre. | Az eredmény megfelel az elvárásoknak. | Nincs probléma. |
 | T06 | Regisztráció megfelelő adatokkal és Admin jogkörrel | Regisztráció megtörténik, adatbázisba eltárolódik, és a felhasználó értesítést kap a sikeres regisztációról. | Az eredmény megfelel az elvárásoknak. | Nincs probléma. |
-| T06 | Felhasználó saját adatainak megjelenítése | A felhasználó saját adatai megjelennek. | A saturnkód kivételével minden adat megjelenik | Javításra vár. |
+| T07 | Felhasználó saját adatainak megjelenítése | A felhasználó saját adatai megjelennek. | A saturnkód kivételével minden adat megjelenik | Javításra vár. |
 
  ## Megjelenés
 
