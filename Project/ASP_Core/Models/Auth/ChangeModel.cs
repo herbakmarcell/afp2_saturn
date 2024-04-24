@@ -12,10 +12,10 @@ namespace ASP_Core.Models.Auth
         [StringLength(16, MinimumLength = 3, ErrorMessage = "Az új jelszó legfeljebb 16 karakter hosszú lehet.")]
         public string? NewPassword { get; set; }
 
-        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az új utónév nem megfelelő formátumú.")]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az új vezetéknév nem megfelelő formátumú.")]
         public string? NewLastName { get; set; }
 
-        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az új vezetéknév nem megfelelő formátumú.")]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az új utónév nem megfelelő formátumú.")]
         public string? NewFirstName { get; set; }
 
         [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$", ErrorMessage = "Az új email nem megfelelő formátumú.")]
