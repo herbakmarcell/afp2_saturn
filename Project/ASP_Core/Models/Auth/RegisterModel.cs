@@ -9,11 +9,11 @@ namespace ASP_Core.Models.Auth
         [StringLength(16, MinimumLength = 3, ErrorMessage = "A jelszónak legalább 3 és legfeljebb 16 karakter hosszúnak kell lennie.")]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "Utónév szükséges")]
+        [Required(ErrorMessage = "Vezetéknév szükséges")]
         [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az utónév nem megfelelő formátumú.")]
         public string? LastName { get; set; }
 
-        [Required(ErrorMessage = "Vezetéknév szükséges")]
+        [Required(ErrorMessage = "Utónév szükséges")]
         [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "A vezetéknév nem megfelelő formátumú.")]
         public string? FirstName { get; set; }
 
