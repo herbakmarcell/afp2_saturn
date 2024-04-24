@@ -10,11 +10,11 @@ namespace ASP_Core.Models.Auth
         public string? Password { get; set; }
 
         [Required(ErrorMessage = "Vezetéknév szükséges")]
-        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az utónév nem megfelelő formátumú.")]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "A vezetéknév nem megfelelő formátumú.")]
         public string? LastName { get; set; }
 
         [Required(ErrorMessage = "Utónév szükséges")]
-        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "A vezetéknév nem megfelelő formátumú.")]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÖŐÚÜŰáéíóöőúüű'-]+$", ErrorMessage = "Az utónév nem megfelelő formátumú.")]
         public string? FirstName { get; set; }
 
         [Required(ErrorMessage = "Email szükséges")]
