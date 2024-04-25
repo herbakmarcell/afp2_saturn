@@ -33,7 +33,7 @@ namespace ASP_Core.Controllers
 
             List<ReceivedMessageResponse> receivedMessageResponses = messageService.GetReceivedMessages(saturnCode, sender);
             if (receivedMessageResponses == null) return BadRequest(new Response<string>("No existing user with messages."));
-            return null;
+            return new OkObjectResult(new Response<List<ReceivedMessageResponse>>(receivedMessageResponses));
         }
     }
 }

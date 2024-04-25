@@ -32,7 +32,7 @@ namespace ASP_Core.Database
         public DbSet<ClassModel> Classes { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Semester> Semesters { get; set; }
-        public DbSet<MessageModel> Messages { get; set; }
+        public DbSet<MessageModel> MessageModel { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         { 
@@ -321,10 +321,8 @@ namespace ASP_Core.Database
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
-            if (sender == null) receivedMessages = Messages.Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
-            else receivedMessages = Messages.Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
-
-            return receivedMessages;
+            if (sender == null) return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            else return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
 
         }
     }
