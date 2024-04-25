@@ -26,11 +26,11 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("received")]
-        public ActionResult<Response<List<ReceivedMessageResponse>>> GetReceivedMessages([FromHeader] string? saturnCode, [FromHeader] string? sender)
+        public ActionResult<Response<List<ReceivedMessageResponse>>> GetReceivedMessages(string? saturnCode, string? sender)
         {
             saturnCode ??= commonService.TokenWithSaturn(User.Claims);
             sender ??= null;
-
+            if (!commonService.TokenHasRole(User.Claims,"Admin") && saturnCode != commonService.TokenWithSaturn(User.Claims)) return BadRequest(new Response<string>("Insufficent permission to watch others mailbox."));
             List<ReceivedMessageResponse> receivedMessageResponses = messageService.GetReceivedMessages(saturnCode, sender);
             if (receivedMessageResponses == null) return BadRequest(new Response<string>("No existing user with messages."));
             return new OkObjectResult(new Response<List<ReceivedMessageResponse>>(receivedMessageResponses));
