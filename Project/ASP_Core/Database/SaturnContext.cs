@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
 using Humanizer.DateTimeHumanizeStrategy;
+using ASP_Core.Models.Message;
 
 
 namespace ASP_Core.Database
@@ -316,13 +317,36 @@ namespace ASP_Core.Database
             return this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
         }
 
-        public List<MessageModel> GetReceivedMessage(string saturnCode, string? sender)
+        public List<MessageModel> GetReceivedMessages(string saturnCode, string? sender)
         {
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
             if (sender == null) return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
             else return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
+
+        }
+
+        public List<MessageModel> GetSentMessages(string sender)
+        {
+            User? receiverUser = UserWithSaturnCode(sender);
+            if (receiverUser == null) return null;
+            return MessageModel.Where(mm => mm.Sender.SaturnCode == sender).ToList();
+        }
+
+        public SendMessageResponse SendMessage(MessageModel messageModel)
+        {
+            MessageModel.Add(messageModel);
+            SaveChanges();
+
+            SendMessageResponse messageResponse = new SendMessageResponse
+            {
+                Sender = messageModel.Sender.SaturnCode,
+                Subject = messageModel.Subject,
+                Content = messageModel.Content,
+                Receivers = messageModel.Receivers.Select(u => u.SaturnCode).ToList()
+            };
+            return messageResponse;
 
         }
     }
