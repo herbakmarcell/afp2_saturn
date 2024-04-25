@@ -54,6 +54,7 @@ namespace ASP_Core.Database
             SemesterTableBuilder(modelBuilder);
             SubjectTableBuilder(modelBuilder);
             UserTableBuilder(modelBuilder);
+            MessageTableBuilder(modelBuilder);
         }
 
         private void ClassTableBuilder(ModelBuilder modelBuilder)
@@ -147,7 +148,19 @@ namespace ASP_Core.Database
                 entity.HasMany(e => e.Courses).WithMany(c => c.Students);
                 entity.HasMany(e => e.Grades).WithOne(g => g.User);
                 entity.HasMany(e => e.Exams).WithMany(e => e.Students);
-                //entity.HasMany(e => e.Exams).WithOne(e => e.Prof);
+                entity.HasMany(e => e.SentMessages).WithOne(e => e.Sender);
+                entity.HasMany(e => e.ReceivedMessages).WithMany(e => e.Receivers);
+            });
+        }
+        private void MessageTableBuilder(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<MessageModel>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Subject).IsRequired();
+                entity.Property(e => e.Content).IsRequired();
+                entity.HasOne(e => e.Sender).WithMany(u => u.SentMessages);
+                entity.HasMany(e => e.Receivers).WithMany(u => u.ReceivedMessages);
             });
         }
 
