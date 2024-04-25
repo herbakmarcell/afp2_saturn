@@ -31,7 +31,8 @@ namespace ASP_Core.Database
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ClassModel> Classes { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<Semester> Semesters { get; set; }       
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<MessageModel> Messages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         { 
