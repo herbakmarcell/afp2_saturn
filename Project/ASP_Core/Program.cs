@@ -40,6 +40,7 @@ namespace ASP_Core
             builder.Services.AddAuthorization();
             builder.Services.AddAuthorization(x => x.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
             builder.Services.AddScoped<AuthIService, AuthService>();
+            builder.Services.AddScoped<ICommonService, CommonService>();
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
