@@ -95,7 +95,7 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("user")]
-        public ActionResult<Response<UserDataResponse>> GetUser([FromHeader] string saturnCode)
+        public ActionResult<Response<UserDataResponse>> GetUser([FromHeader] string? saturnCode)
         {
             UserDataResponse userData;
             if (!commonService.TokenHasRole(User.Claims, "Admin") )
