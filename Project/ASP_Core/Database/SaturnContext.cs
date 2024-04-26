@@ -336,7 +336,8 @@ namespace ASP_Core.Database
 
         public SendMessageResponse SendMessage(MessageModel messageModel)
         {
-            MessageModel.Add(messageModel);
+            this.Users.Include(u => u.SentMessages).First(u => u == messageModel.Sender).SentMessages.Add(messageModel);
+            this.Users.Include(u => u.ReceivedMessages).ToList().ForEach(u => u.ReceivedMessages.Add(messageModel));
             SaveChanges();
 
             SendMessageResponse messageResponse = new SendMessageResponse
@@ -348,6 +349,22 @@ namespace ASP_Core.Database
             };
             return messageResponse;
 
+        }
+
+        public DeleteMessageResponse DeleteMessage(DeleteMessageModel deleteMessageModel)
+        {
+            User? user = this.Users.Include(u => u.SentMessages).Include(u => u.ReceivedMessages).FirstOrDefault(u => u.SaturnCode == deleteMessageModel.SaturnCode);
+            if (user == null) return null;
+
+            MessageModel? message;
+            if (deleteMessageModel.IsSent) message = this.MessageModel.FirstOrDefault(m => m.Subject == deleteMessageModel.Subject && m.Sender == user);
+            else message = this.MessageModel.Include(mm => mm.Receivers).FirstOrDefault(m => m.Subject == deleteMessageModel.Subject && m.Receivers.Contains(user));
+            if (message == null) return null;
+
+            if (deleteMessageModel.IsSent) MessageModel.Remove(message);
+            else message.Receivers.Remove(user);
+
+            return new DeleteMessageResponse { Subject = deleteMessageModel.Subject, SaturnCode = deleteMessageModel.SaturnCode, IsDeleted = true };
         }
     }
 }
