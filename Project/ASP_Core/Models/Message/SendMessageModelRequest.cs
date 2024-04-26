@@ -2,7 +2,7 @@
 
 namespace ASP_Core.Models.Message
 {
-    public class SendMessageModel
+    public class SendMessageModelRequest
     {
         public string? Sender { get; set; }
         [Required(ErrorMessage = "Tárgy megadása szükséges")]
