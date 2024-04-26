@@ -11,7 +11,8 @@ namespace ASP_Core.Services.Auth
     {
         public List<ReceivedMessageResponse> GetReceivedMessages(string? saturnCode, string? sender);
         public List<SentMessageResponse> GetSentMessages(string sender);
-        public SendMessageResponse SendMessage(SendMessageModel messageModel);
+        public SendMessageResponse? SendMessage(SendMessageModel messageModel);
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModel deleteModel);
     }
 
     public class MessageService : IMessageService
@@ -82,6 +83,12 @@ namespace ASP_Core.Services.Auth
 
             SendMessageResponse messageResponse = saturnContext.SendMessage(message);
             return messageResponse;
+        }
+
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModel deleteModel)
+        {
+
+            return saturnContext.DeleteMessage(deleteModel);
         }
     }
 }

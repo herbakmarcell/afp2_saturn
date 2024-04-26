@@ -59,5 +59,22 @@ namespace ASP_Core.Controllers
             if (messageResponse == null) return BadRequest(new Response<string>("Invalid sender or no real recievers."));
             return new OkObjectResult(new Response<SendMessageResponse>(messageResponse));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("delete")]
+        public ActionResult<Response<DeleteMessageResponse>> DeleteMessage([FromBody] DeleteMessageModel deleteMessageModel)
+        {
+            if (string.IsNullOrEmpty(deleteMessageModel.SaturnCode)) deleteMessageModel.SaturnCode = commonService.TokenWithSaturn(User.Claims);
+
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && deleteMessageModel.SaturnCode != commonService.TokenWithSaturn(User.Claims))
+                return BadRequest(new Response<string>("Can't delete the others data without Admin permissions"));
+
+            DeleteMessageResponse? deleteResponse = messageService.DeleteMessage(deleteMessageModel);
+
+            if (deleteResponse == null) return BadRequest(new Response<string>("Unknown User or message does not exists"));
+
+            return new OkObjectResult(new Response<DeleteMessageResponse>(deleteResponse));
+        }
     }
 }
