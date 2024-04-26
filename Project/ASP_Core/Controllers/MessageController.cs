@@ -43,7 +43,7 @@ namespace ASP_Core.Controllers
         public ActionResult<Response<List<SentMessageResponse>>> GetSentMessages(string? sender)
         {
             sender ??= commonService.TokenWithSaturn(User.Claims);
-            if (!commonService.TokenHasRole(User.Claims, "Admin")) return BadRequest(new Response<string>("Insufficent permission to watch others mailbox."));
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && sender != commonService.TokenWithSaturn(User.Claims)) return BadRequest(new Response<string>("Insufficent permission to watch others mailbox."));
             List<SentMessageResponse> sentMessageResponses = messageService.GetSentMessages(sender);
             if (sentMessageResponses == null) return BadRequest(new Response<string>("No existing user with messages."));
             return new OkObjectResult(new Response<List<SentMessageResponse>>(sentMessageResponses));
@@ -52,7 +52,7 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("send")]
-        public ActionResult<Response<SendMessageResponse>> SendMessage([FromBody] SendMessageModel messageModel)
+        public ActionResult<Response<SendMessageResponse>> SendMessage([FromBody] SendMessageModelRequest messageModel)
         {
             messageModel.Sender = commonService.TokenWithSaturn(User.Claims);
             SendMessageResponse messageResponse = messageService.SendMessage(messageModel);
@@ -63,7 +63,7 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("delete")]
-        public ActionResult<Response<DeleteMessageResponse>> DeleteMessage([FromBody] DeleteMessageModel deleteMessageModel)
+        public ActionResult<Response<DeleteMessageResponse>> DeleteMessage([FromBody] DeleteMessageModelRequest deleteMessageModel)
         {
             if (string.IsNullOrEmpty(deleteMessageModel.SaturnCode)) deleteMessageModel.SaturnCode = commonService.TokenWithSaturn(User.Claims);
 
