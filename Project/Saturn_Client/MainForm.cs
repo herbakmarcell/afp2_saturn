@@ -83,6 +83,12 @@ namespace Saturn_Client
         private void userDataButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new UserDataForm(), sender);
+            userDataButton.BackgroundImage = Properties.Resources.clickuser;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
+            subjectsButton.BackgroundImage= Properties.Resources.subjectsButton;
+            studiesButton.BackgroundImage=Properties.Resources.studiesButton;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             visibleDataPanel.Visible = true;
         }
 
@@ -122,30 +128,60 @@ namespace Saturn_Client
         private void inboxButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new InboxForm(), sender);
+            inboxButton.BackgroundImage = Properties.Resources.clickinbox;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
+            subjectsButton.BackgroundImage = Properties.Resources.subjectsButton;
+            studiesButton.BackgroundImage = Properties.Resources.studiesButton;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             visibleDataPanel.Visible = true;
         }
 
         private void studiesButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new StudiesForm(), sender);
+            studiesButton.BackgroundImage = Properties.Resources.clickstudies;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
+            subjectsButton.BackgroundImage = Properties.Resources.subjectsButton;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             visibleDataPanel.Visible = true;
         }
 
         private void subjectsButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new SubjectsForm(), sender);
+            subjectsButton.BackgroundImage = Properties.Resources.clicksubjects;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
+            studiesButton.BackgroundImage = Properties.Resources.studiesButton;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             visibleDataPanel.Visible = true;
         }
 
         private void examsButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new ExamsForm(), sender);
+            examsButton.BackgroundImage = Properties.Resources.clickexams;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            financesButton.BackgroundImage = Properties.Resources.financesButton;
+            subjectsButton.BackgroundImage = Properties.Resources.subjectsButton;
+            studiesButton.BackgroundImage = Properties.Resources.studiesButton;
             visibleDataPanel.Visible = true;
         }
 
         private void financesButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FinancesForm(), sender);
+            financesButton.BackgroundImage = Properties.Resources.clickfinances;
+            userDataButton.BackgroundImage = Properties.Resources.userDataButton;
+            inboxButton.BackgroundImage = Properties.Resources.inboxButton;
+            subjectsButton.BackgroundImage = Properties.Resources.subjectsButton;
+            studiesButton.BackgroundImage = Properties.Resources.studiesButton;
+            examsButton.BackgroundImage = Properties.Resources.examsButton;
             visibleDataPanel.Visible = true;
         }
 

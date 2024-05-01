@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saturn_Client", "Saturn_Cli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{4EB5C732-562D-4D66-9692-F264E0A3AE57}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickexams.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickexams.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickfinances.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickfinances.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickinbox.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickinbox.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickstudies.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickstudies.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clicksubjects.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clicksubjects.png
+		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickuser.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\clickuser.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBackFinal.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\dataBackFinal.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\examsButton.png
 		..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png = ..\..\..\..\Asztali gép\Main\Egyetem\IV. félév\AFP2\exiticon.png
