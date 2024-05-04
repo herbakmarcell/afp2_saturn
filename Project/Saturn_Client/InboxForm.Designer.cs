@@ -65,10 +65,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(29, 30);
+            dataGridView1.Location = new Point(32, 77);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(936, 398);
+            dataGridView1.Size = new Size(936, 343);
             dataGridView1.TabIndex = 20;
             // 
             // linkLabel1
@@ -77,7 +77,7 @@
             linkLabel1.BackColor = Color.Transparent;
             linkLabel1.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel1.LinkColor = Color.DarkOrange;
-            linkLabel1.Location = new Point(971, 173);
+            linkLabel1.Location = new Point(835, 51);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(121, 23);
             linkLabel1.TabIndex = 21;
@@ -92,7 +92,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Comic Sans MS", 13.8F);
             label1.ForeColor = Color.DarkOrange;
-            label1.Location = new Point(43, 39);
+            label1.Location = new Point(46, 86);
             label1.Name = "label1";
             label1.Size = new Size(111, 31);
             label1.TabIndex = 22;
@@ -104,7 +104,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Comic Sans MS", 13.8F);
             label2.ForeColor = Color.DarkOrange;
-            label2.Location = new Point(43, 85);
+            label2.Location = new Point(46, 132);
             label2.Name = "label2";
             label2.Size = new Size(91, 31);
             label2.TabIndex = 23;
@@ -116,7 +116,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Comic Sans MS", 13.8F);
             label3.ForeColor = Color.DarkOrange;
-            label3.Location = new Point(43, 141);
+            label3.Location = new Point(46, 188);
             label3.Name = "label3";
             label3.Size = new Size(98, 31);
             label3.TabIndex = 24;
@@ -124,31 +124,31 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(160, 43);
+            textBox1.Location = new Point(163, 90);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(134, 27);
             textBox1.TabIndex = 25;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(160, 85);
+            textBox2.Location = new Point(163, 132);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(134, 27);
             textBox2.TabIndex = 26;
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(43, 175);
+            richTextBox1.Location = new Point(46, 222);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(892, 235);
+            richTextBox1.Size = new Size(892, 164);
             richTextBox1.TabIndex = 27;
             richTextBox1.Text = "";
             // 
             // button1
             // 
-            button1.Location = new Point(813, 83);
+            button1.Location = new Point(726, 132);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(94, 54);
             button1.TabIndex = 28;
             button1.Text = "Küldés";
             button1.UseVisualStyleBackColor = true;
