@@ -53,6 +53,11 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("content", "Üzenet");
         }
 
+        public void DeleteMessage()
+        {
+
+        }
+
         public void RefreshReceivedData()
         {
             var request = new RestRequest("/received", Method.Get);

@@ -65,10 +65,10 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(32, 77);
+            dataGridView1.Location = new Point(32, 65);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(936, 343);
+            dataGridView1.Size = new Size(936, 355);
             dataGridView1.TabIndex = 20;
             // 
             // linkLabel1
@@ -77,7 +77,7 @@
             linkLabel1.BackColor = Color.Transparent;
             linkLabel1.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel1.LinkColor = Color.DarkOrange;
-            linkLabel1.Location = new Point(835, 51);
+            linkLabel1.Location = new Point(834, 27);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(121, 23);
             linkLabel1.TabIndex = 21;
