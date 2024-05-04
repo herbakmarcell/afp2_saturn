@@ -146,11 +146,14 @@
             // 
             // button1
             // 
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
             button1.Location = new Point(726, 132);
             button1.Name = "button1";
             button1.Size = new Size(94, 54);
             button1.TabIndex = 28;
-            button1.Text = "Küldés";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
