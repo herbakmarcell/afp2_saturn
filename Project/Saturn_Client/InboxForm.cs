@@ -28,6 +28,8 @@ namespace Saturn_Client
             HideSend(false);
             client = new RestClient("https://localhost:7204/api/Message/");
             RefreshReceivedData();
+            linkLabel1.Visible = false;
+            ShowLabel();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -97,6 +99,14 @@ namespace Saturn_Client
             catch (Exception ex)
             {
                 MessageBox.Show("An unexpected error occurred!\nDetails: " + ex.Message);
+            }
+        }
+
+        public void ShowLabel()
+        {
+            if (TokenContainer.IsAdmin)
+            {
+                linkLabel1.Visible = true;
             }
         }
 
