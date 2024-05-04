@@ -58,9 +58,9 @@ namespace Saturn_Client
             dataGridView1.Columns.Add(buttonColumn);
         }
 
-        public void DeleteMessage()
+        public void DeleteMessage(int messageId)
         {
-
+           
         }
 
         public void RefreshReceivedData()
@@ -189,6 +189,10 @@ namespace Saturn_Client
         private void button1_Click(object sender, EventArgs e)
         {
             SendMessage();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }
