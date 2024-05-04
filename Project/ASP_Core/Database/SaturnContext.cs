@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
 using Humanizer.DateTimeHumanizeStrategy;
+using ASP_Core.Models.Message;
 
 
 namespace ASP_Core.Database
@@ -31,7 +32,8 @@ namespace ASP_Core.Database
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ClassModel> Classes { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<Semester> Semesters { get; set; }       
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<MessageModel> MessageModel { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         { 
@@ -313,6 +315,63 @@ namespace ASP_Core.Database
         public User? UserWithSaturnCode(string saturnCode)
         {
             return this.Users.FirstOrDefault(u => u.SaturnCode == saturnCode);
+        }
+
+        public List<MessageModel> GetReceivedMessages(string saturnCode, string? sender)
+        {
+            User? receiverUser = UserWithSaturnCode(saturnCode);
+            if (receiverUser == null) return null;
+            List<MessageModel> receivedMessages;
+            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            else return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
+
+        }
+
+        public List<MessageModel> GetSentMessages(string sender)
+        {
+            User? receiverUser = UserWithSaturnCode(sender);
+            if (receiverUser == null) return null;
+            return MessageModel.Include(u=> u.Sender).Where(mm => mm.Sender.SaturnCode == sender).ToList();
+        }
+
+
+        //make a sendMessage method that returns with a messageresponse and adds the message to the database
+        public SendMessageResponse SendMessage(MessageModel messageModel)
+        {
+            // get the receivers saturncode from the messageModel
+            List<string> receivers = new List<string>();
+            foreach (var receiver in messageModel.Receivers)
+            {
+                User? user = UserWithSaturnCode(receiver.SaturnCode);
+                if (user != null) receivers.Add(user.SaturnCode);
+            }
+            MessageModel newMessage = new MessageModel
+            {
+                Subject = messageModel.Subject,
+                Content = messageModel.Content,
+                Sender = messageModel.Sender,
+                Receivers = messageModel.Receivers
+            };
+            this.Users.Include(u => u.SentMessages).FirstOrDefault(u => u.SaturnCode == messageModel.Sender.SaturnCode).SentMessages.Add(newMessage);
+            foreach (var receiver in messageModel.Receivers)
+            {
+                this.Users.Include(u => u.ReceivedMessages).FirstOrDefault(u => u.SaturnCode == receiver.SaturnCode).ReceivedMessages.Add(newMessage);
+            }
+            SaveChanges();
+            return new SendMessageResponse { Subject = messageModel.Subject, Content = messageModel.Content, Sender = messageModel.Sender.SaturnCode, Receivers = receivers };
+        }
+
+        // implement deletemessage
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteMessageModel)
+        {
+            User? user = UserWithSaturnCode(deleteMessageModel.SaturnCode);
+            if (user == null) return null;
+            MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
+            if (message == null) return null;
+            if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
+            MessageModel.Remove(message);
+            SaveChanges();
+            return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
     }
 }

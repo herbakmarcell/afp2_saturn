@@ -15,6 +15,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 using NuGet.Protocol;
 using NuGet.Protocol.Plugins;
 using Org.BouncyCastle.Asn1.Cmp;
+using Org.BouncyCastle.Asn1.Esf;
 using System;
 using System.Composition;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,10 +29,12 @@ namespace ASP_Core.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AuthIService authService;
+        private readonly ICommonService commonService;
 
-        public AuthController(AuthIService authService)
+        public AuthController(AuthIService authService, ICommonService commonService)
         {
             this.authService = authService;
+            this.commonService = commonService;
         }
 
         [HttpPost]
@@ -52,7 +55,7 @@ namespace ASP_Core.Controllers
         [Route("register")]
         public ActionResult<Response<RegisterResponse>> Register([FromBody] RegisterModel registerModel)
         {
-            if(!authService.TokenHasRole(User.Claims, "Admin"))
+            if(!commonService.TokenHasRole(User.Claims, "Admin"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
@@ -68,14 +71,14 @@ namespace ASP_Core.Controllers
         {
             if (string.IsNullOrEmpty(changeModel.SaturnCode))
             {
-                changeModel.SaturnCode = authService.TokenWithSaturn(User.Claims);
+                changeModel.SaturnCode = commonService.TokenWithSaturn(User.Claims);
             }
 
-            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.SaturnCode != authService.TokenWithSaturn(User.Claims))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && changeModel.SaturnCode != commonService.TokenWithSaturn(User.Claims))
             {
                 return BadRequest(new Response<string>("Can't change the others data without Admin permissions"));
             }
-            if (!authService.TokenHasRole(User.Claims, "Admin") && changeModel.NewRoles != null)
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && changeModel.NewRoles != null)
             {
                 return BadRequest(new Response<string>("Only Admin can change the roles"));
             }
@@ -92,12 +95,12 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("user")]
-        public ActionResult<Response<UserDataResponse>> GetUser([FromHeader] string saturnCode)
+        public ActionResult<Response<UserDataResponse>> GetUser([FromHeader] string? saturnCode)
         {
             UserDataResponse userData;
-            if (!authService.TokenHasRole(User.Claims, "Admin") )
+            if (!commonService.TokenHasRole(User.Claims, "Admin") )
             {
-                User? user = authService.GetUser(authService.TokenWithSaturn(User.Claims));
+                User? user = authService.GetUser(commonService.TokenWithSaturn(User.Claims));
                 userData = new UserDataResponse
                 {
                     Email = user.Email,
@@ -109,7 +112,7 @@ namespace ASP_Core.Controllers
             }
             else
             {
-                saturnCode ??= authService.TokenWithSaturn(User.Claims);
+                saturnCode ??= commonService.TokenWithSaturn(User.Claims);
 
                 User? user = authService.GetUser(saturnCode);
                 if (user == null)
