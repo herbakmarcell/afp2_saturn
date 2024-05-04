@@ -322,8 +322,8 @@ namespace ASP_Core.Database
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
-            if (sender == null) return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
-            else return MessageModel.Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
+            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            else return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
 
         }
 
@@ -331,40 +331,47 @@ namespace ASP_Core.Database
         {
             User? receiverUser = UserWithSaturnCode(sender);
             if (receiverUser == null) return null;
-            return MessageModel.Where(mm => mm.Sender.SaturnCode == sender).ToList();
+            return MessageModel.Include(u=> u.Sender).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
+
+        //make a sendMessage method that returns with a messageresponse and adds the message to the database
         public SendMessageResponse SendMessage(MessageModel messageModel)
         {
-            this.Users.Include(u => u.SentMessages).First(u => u == messageModel.Sender).SentMessages.Add(messageModel);
-            this.Users.Include(u => u.ReceivedMessages).ToList().ForEach(u => u.ReceivedMessages.Add(messageModel));
-            SaveChanges();
-
-            SendMessageResponse messageResponse = new SendMessageResponse
+            // get the receivers saturncode from the messageModel
+            List<string> receivers = new List<string>();
+            foreach (var receiver in messageModel.Receivers)
             {
-                Sender = messageModel.Sender.SaturnCode,
+                User? user = UserWithSaturnCode(receiver.SaturnCode);
+                if (user != null) receivers.Add(user.SaturnCode);
+            }
+            MessageModel newMessage = new MessageModel
+            {
                 Subject = messageModel.Subject,
                 Content = messageModel.Content,
-                Receivers = messageModel.Receivers.Select(u => u.SaturnCode).ToList()
+                Sender = messageModel.Sender,
+                Receivers = messageModel.Receivers
             };
-            return messageResponse;
-
+            this.Users.Include(u => u.SentMessages).FirstOrDefault(u => u.SaturnCode == messageModel.Sender.SaturnCode).SentMessages.Add(newMessage);
+            foreach (var receiver in messageModel.Receivers)
+            {
+                this.Users.Include(u => u.ReceivedMessages).FirstOrDefault(u => u.SaturnCode == receiver.SaturnCode).ReceivedMessages.Add(newMessage);
+            }
+            SaveChanges();
+            return new SendMessageResponse { Subject = messageModel.Subject, Content = messageModel.Content, Sender = messageModel.Sender.SaturnCode, Receivers = receivers };
         }
 
-        public DeleteMessageResponse DeleteMessage(DeleteMessageModel deleteMessageModel)
+        // implement deletemessage
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteMessageModel)
         {
-            User? user = this.Users.Include(u => u.SentMessages).Include(u => u.ReceivedMessages).FirstOrDefault(u => u.SaturnCode == deleteMessageModel.SaturnCode);
+            User? user = UserWithSaturnCode(deleteMessageModel.SaturnCode);
             if (user == null) return null;
-
-            MessageModel? message;
-            if (deleteMessageModel.IsSent) message = this.MessageModel.FirstOrDefault(m => m.Subject == deleteMessageModel.Subject && m.Sender == user);
-            else message = this.MessageModel.Include(mm => mm.Receivers).FirstOrDefault(m => m.Subject == deleteMessageModel.Subject && m.Receivers.Contains(user));
+            MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
             if (message == null) return null;
-
-            if (deleteMessageModel.IsSent) MessageModel.Remove(message);
-            else message.Receivers.Remove(user);
-
-            return new DeleteMessageResponse { Subject = deleteMessageModel.Subject, SaturnCode = deleteMessageModel.SaturnCode, IsDeleted = true };
+            if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
+            MessageModel.Remove(message);
+            SaveChanges();
+            return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
     }
 }

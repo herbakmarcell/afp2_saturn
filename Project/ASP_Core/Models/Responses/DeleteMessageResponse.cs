@@ -3,7 +3,6 @@
     public class DeleteMessageResponse
     {
         public string? SaturnCode { get; set; }
-        public string? Subject { get; set; }
-        public bool IsDeleted { get; set; }
+        public int MessageId { get; set; }
     }
 }

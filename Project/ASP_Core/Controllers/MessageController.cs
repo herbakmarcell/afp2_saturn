@@ -65,14 +65,14 @@ namespace ASP_Core.Controllers
         [Route("delete")]
         public ActionResult<Response<DeleteMessageResponse>> DeleteMessage([FromBody] DeleteMessageModelRequest deleteMessageModel)
         {
-            if (string.IsNullOrEmpty(deleteMessageModel.SaturnCode)) deleteMessageModel.SaturnCode = commonService.TokenWithSaturn(User.Claims);
+            deleteMessageModel.SaturnCode ??= commonService.TokenWithSaturn(User.Claims);
 
-            if (!commonService.TokenHasRole(User.Claims, "Admin") && deleteMessageModel.SaturnCode != commonService.TokenWithSaturn(User.Claims))
-                return BadRequest(new Response<string>("Can't delete the others data without Admin permissions"));
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+                return BadRequest(new Response<string>("Can't delete message without Admin permissions"));
 
             DeleteMessageResponse? deleteResponse = messageService.DeleteMessage(deleteMessageModel);
 
-            if (deleteResponse == null) return BadRequest(new Response<string>("Unknown User or message does not exists"));
+            if (deleteResponse == null) return BadRequest(new Response<string>("Message does not exists"));
 
             return new OkObjectResult(new Response<DeleteMessageResponse>(deleteResponse));
         }

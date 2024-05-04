@@ -11,8 +11,8 @@ namespace ASP_Core.Services.Auth
     {
         public List<ReceivedMessageResponse> GetReceivedMessages(string? saturnCode, string? sender);
         public List<SentMessageResponse> GetSentMessages(string sender);
-        public SendMessageResponse? SendMessage(SendMessageModel messageModel);
-        public DeleteMessageResponse? DeleteMessage(DeleteMessageModel deleteModel);
+        public SendMessageResponse? SendMessage(SendMessageModelRequest messageModel);
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteModel);
     }
 
     public class MessageService : IMessageService
@@ -58,7 +58,7 @@ namespace ASP_Core.Services.Auth
             return sentMessages;
         }
 
-        public SendMessageResponse? SendMessage(SendMessageModel messageModel)
+        public SendMessageResponse? SendMessage(SendMessageModelRequest messageModel)
         {
             if (messageModel.Receivers.Count == 0)
                 return null;
@@ -85,10 +85,22 @@ namespace ASP_Core.Services.Auth
             return messageResponse;
         }
 
-        public DeleteMessageResponse? DeleteMessage(DeleteMessageModel deleteModel)
+        // implement deletemessage
+        public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteModel)
         {
+            User? user = saturnContext.UserWithSaturnCode(deleteModel.SaturnCode);
+            if (user == null)
+                return null;
 
-            return saturnContext.DeleteMessage(deleteModel);
+            DeleteMessageResponse? message = saturnContext.DeleteMessage(deleteModel);
+            if (message == null)
+                return null;
+
+            return new DeleteMessageResponse
+            {
+                SaturnCode = deleteModel.SaturnCode,
+                MessageId = message.MessageId
+            };
         }
     }
 }
