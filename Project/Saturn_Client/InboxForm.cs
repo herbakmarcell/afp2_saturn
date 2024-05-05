@@ -148,7 +148,9 @@ namespace Saturn_Client
 
         public void ResetText()
         {
-
+            textBox1.Text = "";
+            textBox2.Text = "";
+            richTextBox1.Text = "";
         }
         public void SendMessage()
         {
