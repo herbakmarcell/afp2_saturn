@@ -52,11 +52,12 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("sender", "Név");
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
-            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].FillWeight = 1;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Törlés";
+            buttonColumn.Name = "Törlés";
             buttonColumn.Text = "Törlés";
             buttonColumn.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(buttonColumn);
@@ -64,7 +65,38 @@ namespace Saturn_Client
 
         public void DeleteMessage(int messageId)
         {
-           
+            var request = new RestRequest("/delete", Method.Post);
+            request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
+
+            try
+            {
+                request.AddBody(new
+                {
+                    SaturnCode = TokenContainer.GetSaturnCode,
+                    MessageId = messageId
+                });
+
+                var response = client.Execute(request);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    MessageBox.Show("Message deleted successfully.");
+                    RefreshReceivedData();
+                }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var temp = JsonSerializer.Deserialize<Response<string>>(response.Content);
+                    MessageBox.Show("Error: " + temp.message);
+                }
+                else
+                {
+                    MessageBox.Show($"Unexpected response: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unexpected error occurred!\nDetails: " + ex.Message);
+            }
         }
 
         public void RefreshReceivedData()
@@ -187,6 +219,7 @@ namespace Saturn_Client
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(true);
+            DeleteMessage(1);
             dataGridView1.Hide();
         }
 
