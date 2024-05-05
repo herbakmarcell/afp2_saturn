@@ -105,6 +105,11 @@ namespace Saturn_Client
             }
         }
 
+        public void RefreshSentData()
+        {
+
+        }
+
         public void RefreshReceivedData()
         {
             var request = new RestRequest("/received", Method.Get);
