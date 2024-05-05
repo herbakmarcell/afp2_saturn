@@ -28,7 +28,15 @@ namespace Saturn_Client
             InitializeMessageDataGridView();
             HideSend(false);
             client = new RestClient("https://localhost:7204/api/Message/");
-            RefreshReceivedData();
+            if (TokenContainer.IsAdmin)
+            {
+                RefreshSentData();
+            }
+            else
+            {
+                RefreshReceivedData();
+
+            }
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -56,8 +64,9 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("sender", "Név");
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.Columns[2].FillWeight = 1;
+            dataGridView1.Columns.Add("receivers", "Címzettek");
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].FillWeight = 1;
             dataGridView1.Columns[0].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
@@ -107,7 +116,7 @@ namespace Saturn_Client
 
         public void RefreshSentData()
         {
-
+           
         }
 
         public void RefreshReceivedData()

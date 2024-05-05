@@ -11,7 +11,6 @@ namespace Saturn_Client
         public int id { get; set; }
         public string subject { get; set; }
         public string content { get; set; }
-
         public string sender { get; set; }
         public List<string> receivers { get; set; }
     }
