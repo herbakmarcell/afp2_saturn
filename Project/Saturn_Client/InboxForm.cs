@@ -186,7 +186,8 @@ namespace Saturn_Client
                     textBox1.Text = string.Join(",", responseData.resource.receivers);
                     textBox2.Text = responseData.resource.subject;
                     richTextBox1.Text = responseData.resource.content;
-                    MessageBox.Show("Üzenet sikeresen elküldve:");
+                    ResetText();
+                    MessageBox.Show("Üzenet sikeresen elküldve!");
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
