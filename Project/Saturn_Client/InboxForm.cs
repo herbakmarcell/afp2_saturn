@@ -53,12 +53,12 @@ namespace Saturn_Client
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Columns.Add("id", "ID");
-            dataGridView1.Columns[0].Visible = false;
             dataGridView1.Columns.Add("sender", "Név");
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].FillWeight = 1;
+            dataGridView1.Columns[0].Visible = true;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Művelet";
@@ -70,6 +70,7 @@ namespace Saturn_Client
 
         public void DeleteMessage(int messageId)
         {
+
             var request = new RestRequest("/delete", Method.Post);
             request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
 
@@ -126,7 +127,7 @@ namespace Saturn_Client
 
                         foreach (var message in responseData.resource)
                         {
-                            dataGridView1.Rows.Add(message.sender, message.subject, message.content);
+                            dataGridView1.Rows.Add(message.id, message.sender, message.subject, message.content);
                         }
                     }
                     else
@@ -242,6 +243,12 @@ namespace Saturn_Client
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == dataGridView1.Columns["Törlés"].Index && e.RowIndex >= 0)
+            {
+                int messageId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
+                MessageBox.Show(messageId.ToString());
+                DeleteMessage(messageId);
+            }
         }
     }
 }
