@@ -219,7 +219,6 @@ namespace Saturn_Client
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(true);
-            DeleteMessage(1);
             dataGridView1.Hide();
         }
 
