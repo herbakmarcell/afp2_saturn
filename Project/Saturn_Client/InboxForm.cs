@@ -58,7 +58,7 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("content", "Üzenet");
             dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[2].FillWeight = 1;
-            dataGridView1.Columns[0].Visible = true;
+            dataGridView1.Columns[0].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
             buttonColumn.HeaderText = "Művelet";
