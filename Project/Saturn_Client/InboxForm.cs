@@ -96,7 +96,7 @@ namespace Saturn_Client
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Message deleted successfully.");
-                    RefreshReceivedData();
+                    RefreshSentData();
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
