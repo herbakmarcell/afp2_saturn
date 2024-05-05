@@ -52,6 +52,7 @@ namespace Saturn_Client
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.Columns.Add("id", "ID");
             dataGridView1.Columns.Add("sender", "Név");
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
