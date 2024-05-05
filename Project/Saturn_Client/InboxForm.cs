@@ -49,6 +49,8 @@ namespace Saturn_Client
 
         private void InitializeMessageDataGridView()
         {
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Columns.Add("sender", "Név");
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
