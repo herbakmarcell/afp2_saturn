@@ -146,6 +146,10 @@ namespace Saturn_Client
             }
         }
 
+        public void ResetText()
+        {
+
+        }
         public void SendMessage()
         {
             string pattern = "^[a-zA-Z0-9,]*$";
@@ -225,6 +229,7 @@ namespace Saturn_Client
         private void button1_Click(object sender, EventArgs e)
         {
             SendMessage();
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
