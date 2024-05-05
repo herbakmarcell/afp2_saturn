@@ -59,7 +59,7 @@ namespace Saturn_Client
             dataGridView1.Columns[2].FillWeight = 1;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.HeaderText = "Törlés";
+            buttonColumn.HeaderText = "Művelet";
             buttonColumn.Name = "Törlés";
             buttonColumn.Text = "Törlés";
             buttonColumn.UseColumnTextForButtonValue = true;
