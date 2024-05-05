@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -52,6 +53,9 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("subject", "Tárgy");
             dataGridView1.Columns.Add("content", "Üzenet");
             DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].FillWeight = 1;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             buttonColumn.HeaderText = "Törlés";
             buttonColumn.Text = "Törlés";
             buttonColumn.UseColumnTextForButtonValue = true;
