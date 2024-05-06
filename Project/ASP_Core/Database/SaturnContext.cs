@@ -331,7 +331,7 @@ namespace ASP_Core.Database
         {
             User? receiverUser = UserWithSaturnCode(sender);
             if (receiverUser == null) return null;
-            return MessageModel.Include(u=> u.Sender).Where(mm => mm.Sender.SaturnCode == sender).ToList();
+            return MessageModel.Include(u=> u.Sender).Include(u=> u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
 
