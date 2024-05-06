@@ -361,14 +361,14 @@ namespace ASP_Core.Database
             return new SendMessageResponse { Subject = messageModel.Subject, Content = messageModel.Content, Sender = messageModel.Sender.SaturnCode, Receivers = receivers };
         }
 
-        // implement deletemessage
         public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteMessageModel)
         {
             User? user = UserWithSaturnCode(deleteMessageModel.SaturnCode);
             if (user == null) return null;
             MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
             if (message == null) return null;
-            if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
+            // ideiglenesen kiszedve, hogy bármilyen üzenetet lehessen törölni
+            //if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
             MessageModel.Remove(message);
             SaveChanges();
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
