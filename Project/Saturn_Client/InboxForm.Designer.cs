@@ -206,6 +206,7 @@
             label4.Size = new Size(100, 28);
             label4.TabIndex = 32;
             label4.Text = "Üzenetek";
+            label4.Visible = false;
             // 
             // InboxForm
             // 
