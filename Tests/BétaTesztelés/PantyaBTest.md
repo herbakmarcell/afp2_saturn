@@ -12,4 +12,5 @@
 | T02 | Postaládára való kattintás | A felhasználó megtekintheti az üzeneteit | Az üzenetek megjelennek | Nincs probléma. |
 | T03 | Üzenet küldése gomb | Megjelenik az üzenetküldés panel | A panel megjelenik | Nincs probléma. |
 | T04 | Üzenet küldése | A felhasználó sikeresen tud üzenetet küldeni | A felhasználó sikeresen el tudta küldeni az üzenetet| Nincs probléma. |
-| T05 | Üzenetek törlése | A felhasználó ki tudja törölni az üzeneteit | Csak Admin felhasználó tudja kitörölni az üzeneteket| Javításra 
+| T05 | Üzenetek törlése | A felhasználó ki tudja törölni az üzeneteit | Csak Admin felhasználó tudja kitörölni az üzeneteket| Javításra vár. |
+| T06 | Üzenetek törlése Adminként | Az Admin képes az üzenetek törlésére | Az Admin jelenleg csak az elküldött üzeneteket tudja törölni | Javításra vár |
