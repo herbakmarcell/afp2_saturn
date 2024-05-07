@@ -15,6 +15,8 @@ using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
 using Humanizer.DateTimeHumanizeStrategy;
 using ASP_Core.Models.Message;
+using ASP_Core.Models.Exam;
+using ASP_Core.Services.Exam;
 
 
 namespace ASP_Core.Database
@@ -322,8 +324,8 @@ namespace ASP_Core.Database
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
-            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
-            else return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
+            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u=> u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            else return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
 
         }
 
@@ -331,7 +333,7 @@ namespace ASP_Core.Database
         {
             User? receiverUser = UserWithSaturnCode(sender);
             if (receiverUser == null) return null;
-            return MessageModel.Include(u=> u.Sender).Where(mm => mm.Sender.SaturnCode == sender).ToList();
+            return MessageModel.Include(u=> u.Sender).Include(u=> u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
 
@@ -361,17 +363,60 @@ namespace ASP_Core.Database
             return new SendMessageResponse { Subject = messageModel.Subject, Content = messageModel.Content, Sender = messageModel.Sender.SaturnCode, Receivers = receivers };
         }
 
-        // implement deletemessage
         public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteMessageModel)
         {
             User? user = UserWithSaturnCode(deleteMessageModel.SaturnCode);
             if (user == null) return null;
             MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
             if (message == null) return null;
-            if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
+            // ideiglenesen kiszedve, hogy bármilyen üzenetet lehessen törölni
+            //if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
             MessageModel.Remove(message);
             SaveChanges();
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
+        }
+
+        public AddExamToUserResponse? AddExamToUser(ExamUserModel examuser)
+        {
+            if (Exams.FirstOrDefault(e => e.Id == examuser.ExamId) == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "Nem található ilyen exam",
+                    ExamsId = examuser.ExamId,
+                    Success = false
+                };
+            }
+            if (Users.First(e => e.SaturnCode == examuser.SaturnCode) == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "Nem található ilyen user",
+                    ExamsId = examuser.ExamId,
+                    Success = false
+                };
+            }
+            if (Exams.First(e => e.Id == examuser.ExamId) != null && Users.First(u => u.SaturnCode == examuser.SaturnCode) != null)
+            {
+                Users.First(u => u.SaturnCode == examuser.SaturnCode).Exams.Add(Exams.First(e => e.Id == examuser.ExamId));
+                Exams.First(e => e.Id == examuser.ExamId).Students.Add(Users.First(u => u.SaturnCode == examuser.SaturnCode));
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "siker",
+                    ExamsId = examuser.ExamId,
+                    Success = true
+                };
+            }
+            return new AddExamToUserResponse
+            {
+                StudentSaturnCode = examuser.SaturnCode,
+                Message = "váratlan hiba",
+                ExamsId = examuser.ExamId,
+                Success = false
+            };
         }
     }
 }
