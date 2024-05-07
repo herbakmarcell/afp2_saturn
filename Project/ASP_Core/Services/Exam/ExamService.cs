@@ -43,8 +43,45 @@ namespace ASP_Core.Services.Exam
         }
         public AddExamToUserResponse? AddExamToUser(ExamUserModel examuser)
         {
-            AddExamToUserResponse addExamToUserResponse = saturnContext.AddExamToUser(examuser);
-            return addExamToUserResponse;
+            
+            if (examuser== null)
+            {
+                return new AddExamToUserResponse
+                {
+                    Message = "váratlan hiba",
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Success = false,
+                    ExamsId = examuser.ExamId
+                };
+            }
+            if (examuser.ExamId == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    Message = "váratlan hiba",
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Success = false,
+                    ExamsId = examuser.ExamId
+                };
+            }
+            if (examuser.SaturnCode == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    Message = "váratlan hiba",
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Success = false,
+                    ExamsId = examuser.ExamId
+                };
+            }
+            saturnContext.AddExamToUser(examuser);
+            return new AddExamToUserResponse
+            {
+                Message = "sikeres lefutás",
+                StudentSaturnCode = examuser.SaturnCode,
+                Success = true,
+                ExamsId = examuser.ExamId
+            };
         }
     
         
