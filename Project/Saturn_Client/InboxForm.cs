@@ -136,10 +136,8 @@ namespace Saturn_Client
 
                         foreach (var message in responseData.resource)
                         {
-                            // Convert list of receivers into a single string
                             string receiversString = message.receivers != null ? string.Join(", ", message.receivers) : "";
 
-                            // Add message data to the DataGridView
                             dataGridView1.Rows.Add(message.id, message.sender, message.subject, message.content, receiversString);
                         }
                     }
@@ -306,7 +304,6 @@ namespace Saturn_Client
             if (e.ColumnIndex == dataGridView1.Columns["Törlés"].Index && e.RowIndex >= 0)
             {
                 int messageId = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["ID"].Value);
-                MessageBox.Show(messageId.ToString());
                 DeleteMessage(messageId);
             }
         }
