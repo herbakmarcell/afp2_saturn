@@ -30,7 +30,6 @@ namespace ASP_Core.Database
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Exam> Exams { get; set; }
-        public DbSet<Examuser> Examusers { get; set; }
         public DbSet<ClassModel> Classes { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Semester> Semesters { get; set; }
@@ -375,16 +374,11 @@ namespace ASP_Core.Database
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
 
-        public AddExamToUserResponse? Addexamtouser(Examuser examuser)
+        public AddExamToUserResponse? Addexamtouser(Exam exam,User user)
         {
-            if (examuser.ExamsId != null && examuser.StudentSaturnCode != null)
-            {
-                
-                AddExamToUserResponse addExamToUserResponse = new AddExamToUserResponse { ExamsId = examuser.ExamsId, StudentSaturnCode = examuser.StudentSaturnCode };
-                Examusers.Add(examuser);
-                SaveChanges();
-                return addExamToUserResponse;
-            }
+
+            Users.FirstOrDefault(u => u.SaturnCode == user.SaturnCode).Exams.Add(exam);
+            AddExamToUserResponse addExamToUserResponse = new AddExamToUserResponse { ExamsId = exam.Id, StudentSaturnCode = user.SaturnCode };
             return null;
         }
     }
