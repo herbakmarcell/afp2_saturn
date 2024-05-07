@@ -302,6 +302,7 @@ namespace Saturn_Client
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(false);
+            RefreshReceivedData();
             dataGridView1.Show();
             linkLabel2.Visible = false;
             label4.Visible = true;
