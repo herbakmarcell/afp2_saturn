@@ -9,6 +9,7 @@ using ASP_Core.Services.Auth;
 using ASP_Core.Services;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Identity;
+using ASP_Core.Services.Exam;
 
 namespace ASP_Core
 {
@@ -42,6 +43,8 @@ namespace ASP_Core
             builder.Services.AddScoped<AuthIService, AuthService>();
             builder.Services.AddScoped<ICommonService, CommonService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
+            builder.Services.AddScoped<ExamIService, ExamService>();
+
             builder.Services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
