@@ -40,6 +40,7 @@
             textBox2 = new TextBox();
             richTextBox1 = new RichTextBox();
             button1 = new Button();
+            linkLabel2 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -161,12 +162,27 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.BackColor = Color.Transparent;
+            linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
+            linkLabel2.LinkColor = Color.DarkOrange;
+            linkLabel2.Location = new Point(766, 29);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(62, 23);
+            linkLabel2.TabIndex = 29;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "<Vissza";
+            linkLabel2.VisitedLinkColor = Color.DarkOrange;
+            // 
             // InboxForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1091, 462);
+            Controls.Add(linkLabel2);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
             Controls.Add(textBox2);
@@ -196,5 +212,6 @@
         private TextBox textBox2;
         private RichTextBox richTextBox1;
         private Button button1;
+        private LinkLabel linkLabel2;
     }
 }
