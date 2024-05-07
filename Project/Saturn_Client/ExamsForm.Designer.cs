@@ -29,113 +29,43 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
+            examsDataGridView = new DataGridView();
+            subject = new DataGridViewTextBoxColumn();
+            subjectCode = new DataGridViewTextBoxColumn();
+            course = new DataGridViewTextBoxColumn();
+            type = new DataGridViewTextBoxColumn();
+            startingTime = new DataGridViewTextBoxColumn();
+            personLimit = new DataGridViewTextBoxColumn();
+            classroom = new DataGridViewTextBoxColumn();
+            teacher = new DataGridViewTextBoxColumn();
+            myExamsButton = new Button();
+            backButton = new Button();
+            addExamButton = new Button();
+            applyButton = new Button();
+            updateExamButton = new Button();
+            deleteExamButton = new Button();
+            updateExamInDBButton = new Button();
+            addExamToDBButton = new Button();
+            subjectLabel = new Label();
+            subjectcodeLabel = new Label();
+            courseLabel = new Label();
+            typeLabel = new Label();
+            startLabel = new Label();
+            limitLabel = new Label();
+            classroomLabel = new Label();
+            teacherLabel = new Label();
+            subjectTB = new TextBox();
+            subjectcodeTB = new TextBox();
+            courseTB = new TextBox();
+            typeTB = new TextBox();
+            startTB = new TextBox();
+            limitTB = new TextBox();
+            classroomTB = new TextBox();
+            teacherTB = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)examsDataGridView).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Comic Sans MS", 9F);
-            label1.ForeColor = Color.Maroon;
-            label1.Location = new Point(38, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Tárgy";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Comic Sans MS", 9F);
-            label2.ForeColor = Color.Maroon;
-            label2.Location = new Point(88, 21);
-            label2.Name = "label2";
-            label2.Size = new Size(76, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Tárgykód";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Comic Sans MS", 9F);
-            label3.ForeColor = Color.Maroon;
-            label3.Location = new Point(163, 21);
-            label3.Name = "label3";
-            label3.Size = new Size(56, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Kurzus";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Comic Sans MS", 9F);
-            label4.ForeColor = Color.Maroon;
-            label4.Location = new Point(221, 21);
-            label4.Name = "label4";
-            label4.Size = new Size(46, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Típus";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Comic Sans MS", 9F);
-            label5.ForeColor = Color.Maroon;
-            label5.Location = new Point(271, 21);
-            label5.Name = "label5";
-            label5.Size = new Size(58, 20);
-            label5.TabIndex = 4;
-            label5.Text = "Kezdés";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Comic Sans MS", 9F);
-            label6.ForeColor = Color.Maroon;
-            label6.Location = new Point(333, 21);
-            label6.Name = "label6";
-            label6.Size = new Size(68, 20);
-            label6.TabIndex = 5;
-            label6.Text = "Fő/Limit";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Comic Sans MS", 9F);
-            label7.ForeColor = Color.Maroon;
-            label7.Location = new Point(403, 21);
-            label7.Name = "label7";
-            label7.Size = new Size(53, 20);
-            label7.TabIndex = 6;
-            label7.Text = "Terem";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Comic Sans MS", 9F);
-            label8.ForeColor = Color.Maroon;
-            label8.Location = new Point(459, 21);
-            label8.Name = "label8";
-            label8.Size = new Size(60, 20);
-            label8.TabIndex = 7;
-            label8.Text = "Oktató";
             // 
             // HelpButton
             // 
@@ -145,50 +75,397 @@
             HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            HelpButton.Location = new Point(999, 16);
-            HelpButton.Margin = new Padding(3, 4, 3, 4);
+            HelpButton.Location = new Point(916, 12);
             HelpButton.Name = "HelpButton";
-            HelpButton.Size = new Size(31, 36);
+            HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 12;
             HelpButton.Text = "?";
             toolTip1.SetToolTip(HelpButton, "Használati útmutató");
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
+            // examsDataGridView
+            // 
+            examsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            examsDataGridView.Columns.AddRange(new DataGridViewColumn[] { subject, subjectCode, course, type, startingTime, personLimit, classroom, teacher });
+            examsDataGridView.Location = new Point(28, 47);
+            examsDataGridView.Name = "examsDataGridView";
+            examsDataGridView.Size = new Size(843, 238);
+            examsDataGridView.TabIndex = 13;
+            // 
+            // subject
+            // 
+            subject.HeaderText = "Tárgy";
+            subject.Name = "subject";
+            // 
+            // subjectCode
+            // 
+            subjectCode.HeaderText = "Tárgykód";
+            subjectCode.Name = "subjectCode";
+            // 
+            // course
+            // 
+            course.HeaderText = "Kurzus";
+            course.Name = "course";
+            // 
+            // type
+            // 
+            type.HeaderText = "Típus";
+            type.Name = "type";
+            // 
+            // startingTime
+            // 
+            startingTime.HeaderText = "Kezdés";
+            startingTime.Name = "startingTime";
+            // 
+            // personLimit
+            // 
+            personLimit.HeaderText = "Fő/Limit";
+            personLimit.Name = "personLimit";
+            // 
+            // classroom
+            // 
+            classroom.HeaderText = "Terem";
+            classroom.Name = "classroom";
+            // 
+            // teacher
+            // 
+            teacher.HeaderText = "Oktató";
+            teacher.Name = "teacher";
+            // 
+            // myExamsButton
+            // 
+            myExamsButton.BackColor = Color.Transparent;
+            myExamsButton.FlatAppearance.BorderSize = 0;
+            myExamsButton.FlatStyle = FlatStyle.Flat;
+            myExamsButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            myExamsButton.Location = new Point(765, 12);
+            myExamsButton.Name = "myExamsButton";
+            myExamsButton.Size = new Size(115, 34);
+            myExamsButton.TabIndex = 14;
+            myExamsButton.Text = "Felvett vizsgáim";
+            myExamsButton.UseVisualStyleBackColor = false;
+            myExamsButton.Click += myExamsButton_Click;
+            // 
+            // backButton
+            // 
+            backButton.BackColor = Color.Transparent;
+            backButton.FlatAppearance.BorderSize = 0;
+            backButton.FlatStyle = FlatStyle.Flat;
+            backButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            backButton.Location = new Point(708, 12);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(60, 34);
+            backButton.TabIndex = 15;
+            backButton.Text = "<Vissza";
+            backButton.UseVisualStyleBackColor = false;
+            backButton.Click += backButton_Click;
+            // 
+            // addExamButton
+            // 
+            addExamButton.BackColor = Color.Transparent;
+            addExamButton.FlatAppearance.BorderSize = 0;
+            addExamButton.FlatStyle = FlatStyle.Flat;
+            addExamButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            addExamButton.Location = new Point(664, 291);
+            addExamButton.Name = "addExamButton";
+            addExamButton.Size = new Size(127, 34);
+            addExamButton.TabIndex = 16;
+            addExamButton.Text = "Vizsga Hozzáadása";
+            addExamButton.UseVisualStyleBackColor = false;
+            addExamButton.Click += addExamButton_Click;
+            // 
+            // applyButton
+            // 
+            applyButton.BackColor = Color.Transparent;
+            applyButton.FlatAppearance.BorderSize = 0;
+            applyButton.FlatStyle = FlatStyle.Flat;
+            applyButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            applyButton.Location = new Point(797, 291);
+            applyButton.Name = "applyButton";
+            applyButton.Size = new Size(83, 34);
+            applyButton.TabIndex = 17;
+            applyButton.Text = "Jelentkezés";
+            applyButton.UseVisualStyleBackColor = false;
+            applyButton.Click += applyButton_Click;
+            // 
+            // updateExamButton
+            // 
+            updateExamButton.BackColor = Color.Transparent;
+            updateExamButton.FlatAppearance.BorderSize = 0;
+            updateExamButton.FlatStyle = FlatStyle.Flat;
+            updateExamButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            updateExamButton.Location = new Point(531, 291);
+            updateExamButton.Name = "updateExamButton";
+            updateExamButton.Size = new Size(127, 34);
+            updateExamButton.TabIndex = 18;
+            updateExamButton.Text = "Vizsga Módosítása";
+            updateExamButton.UseVisualStyleBackColor = false;
+            updateExamButton.Click += updateExamButton_Click;
+            // 
+            // deleteExamButton
+            // 
+            deleteExamButton.BackColor = Color.Transparent;
+            deleteExamButton.FlatAppearance.BorderSize = 0;
+            deleteExamButton.FlatStyle = FlatStyle.Flat;
+            deleteExamButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            deleteExamButton.Location = new Point(426, 291);
+            deleteExamButton.Name = "deleteExamButton";
+            deleteExamButton.Size = new Size(99, 34);
+            deleteExamButton.TabIndex = 19;
+            deleteExamButton.Text = "Vizsga Törlése";
+            deleteExamButton.UseVisualStyleBackColor = false;
+            deleteExamButton.Click += deleteExamButton_Click;
+            // 
+            // updateExamInDBButton
+            // 
+            updateExamInDBButton.BackColor = Color.Transparent;
+            updateExamInDBButton.FlatAppearance.BorderSize = 0;
+            updateExamInDBButton.FlatStyle = FlatStyle.Flat;
+            updateExamInDBButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            updateExamInDBButton.Location = new Point(531, 251);
+            updateExamInDBButton.Name = "updateExamInDBButton";
+            updateExamInDBButton.Size = new Size(127, 34);
+            updateExamInDBButton.TabIndex = 20;
+            updateExamInDBButton.Text = "Vizsga Módosítása";
+            updateExamInDBButton.UseVisualStyleBackColor = false;
+            updateExamInDBButton.Click += updateExamInDBButton_Click_1;
+            // 
+            // addExamToDBButton
+            // 
+            addExamToDBButton.BackColor = Color.Transparent;
+            addExamToDBButton.FlatAppearance.BorderSize = 0;
+            addExamToDBButton.FlatStyle = FlatStyle.Flat;
+            addExamToDBButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            addExamToDBButton.Location = new Point(664, 251);
+            addExamToDBButton.Name = "addExamToDBButton";
+            addExamToDBButton.Size = new Size(127, 34);
+            addExamToDBButton.TabIndex = 21;
+            addExamToDBButton.Text = "Vizsga Hozzáadása";
+            addExamToDBButton.UseVisualStyleBackColor = false;
+            addExamToDBButton.Click += addExamToDBButton_Click;
+            // 
+            // subjectLabel
+            // 
+            subjectLabel.AutoSize = true;
+            subjectLabel.BackColor = Color.Transparent;
+            subjectLabel.FlatStyle = FlatStyle.Flat;
+            subjectLabel.Location = new Point(28, 47);
+            subjectLabel.Name = "subjectLabel";
+            subjectLabel.Size = new Size(35, 15);
+            subjectLabel.TabIndex = 22;
+            subjectLabel.Text = "Tárgy";
+            // 
+            // subjectcodeLabel
+            // 
+            subjectcodeLabel.AutoSize = true;
+            subjectcodeLabel.BackColor = Color.Transparent;
+            subjectcodeLabel.FlatStyle = FlatStyle.Flat;
+            subjectcodeLabel.Location = new Point(134, 47);
+            subjectcodeLabel.Name = "subjectcodeLabel";
+            subjectcodeLabel.Size = new Size(55, 15);
+            subjectcodeLabel.TabIndex = 23;
+            subjectcodeLabel.Text = "Tárgykód";
+            // 
+            // courseLabel
+            // 
+            courseLabel.AutoSize = true;
+            courseLabel.BackColor = Color.Transparent;
+            courseLabel.FlatStyle = FlatStyle.Flat;
+            courseLabel.Location = new Point(240, 47);
+            courseLabel.Name = "courseLabel";
+            courseLabel.Size = new Size(42, 15);
+            courseLabel.TabIndex = 24;
+            courseLabel.Text = "Kurzus";
+            // 
+            // typeLabel
+            // 
+            typeLabel.AutoSize = true;
+            typeLabel.BackColor = Color.Transparent;
+            typeLabel.FlatStyle = FlatStyle.Flat;
+            typeLabel.Location = new Point(346, 47);
+            typeLabel.Name = "typeLabel";
+            typeLabel.Size = new Size(35, 15);
+            typeLabel.TabIndex = 25;
+            typeLabel.Text = "Típus";
+            // 
+            // startLabel
+            // 
+            startLabel.AutoSize = true;
+            startLabel.BackColor = Color.Transparent;
+            startLabel.FlatStyle = FlatStyle.Flat;
+            startLabel.Location = new Point(451, 47);
+            startLabel.Name = "startLabel";
+            startLabel.Size = new Size(43, 15);
+            startLabel.TabIndex = 26;
+            startLabel.Text = "Kezdés";
+            // 
+            // limitLabel
+            // 
+            limitLabel.AutoSize = true;
+            limitLabel.BackColor = Color.Transparent;
+            limitLabel.FlatStyle = FlatStyle.Flat;
+            limitLabel.Location = new Point(558, 47);
+            limitLabel.Name = "limitLabel";
+            limitLabel.Size = new Size(52, 15);
+            limitLabel.TabIndex = 27;
+            limitLabel.Text = "Fő/Limit";
+            // 
+            // classroomLabel
+            // 
+            classroomLabel.AutoSize = true;
+            classroomLabel.BackColor = Color.Transparent;
+            classroomLabel.FlatStyle = FlatStyle.Flat;
+            classroomLabel.Location = new Point(664, 47);
+            classroomLabel.Name = "classroomLabel";
+            classroomLabel.Size = new Size(39, 15);
+            classroomLabel.TabIndex = 28;
+            classroomLabel.Text = "Terem";
+            // 
+            // teacherLabel
+            // 
+            teacherLabel.AutoSize = true;
+            teacherLabel.BackColor = Color.Transparent;
+            teacherLabel.FlatStyle = FlatStyle.Flat;
+            teacherLabel.Location = new Point(770, 47);
+            teacherLabel.Name = "teacherLabel";
+            teacherLabel.Size = new Size(43, 15);
+            teacherLabel.TabIndex = 29;
+            teacherLabel.Text = "Oktató";
+            // 
+            // subjectTB
+            // 
+            subjectTB.Location = new Point(28, 65);
+            subjectTB.Name = "subjectTB";
+            subjectTB.Size = new Size(100, 23);
+            subjectTB.TabIndex = 30;
+            // 
+            // subjectcodeTB
+            // 
+            subjectcodeTB.Location = new Point(134, 65);
+            subjectcodeTB.Name = "subjectcodeTB";
+            subjectcodeTB.Size = new Size(100, 23);
+            subjectcodeTB.TabIndex = 31;
+            // 
+            // courseTB
+            // 
+            courseTB.Location = new Point(240, 65);
+            courseTB.Name = "courseTB";
+            courseTB.Size = new Size(100, 23);
+            courseTB.TabIndex = 32;
+            // 
+            // typeTB
+            // 
+            typeTB.Location = new Point(346, 65);
+            typeTB.Name = "typeTB";
+            typeTB.Size = new Size(100, 23);
+            typeTB.TabIndex = 33;
+            // 
+            // startTB
+            // 
+            startTB.Location = new Point(452, 65);
+            startTB.Name = "startTB";
+            startTB.Size = new Size(100, 23);
+            startTB.TabIndex = 34;
+            // 
+            // limitTB
+            // 
+            limitTB.Location = new Point(558, 65);
+            limitTB.Name = "limitTB";
+            limitTB.Size = new Size(100, 23);
+            limitTB.TabIndex = 35;
+            // 
+            // classroomTB
+            // 
+            classroomTB.Location = new Point(664, 65);
+            classroomTB.Name = "classroomTB";
+            classroomTB.Size = new Size(100, 23);
+            classroomTB.TabIndex = 36;
+            // 
+            // teacherTB
+            // 
+            teacherTB.Location = new Point(770, 65);
+            teacherTB.Name = "teacherTB";
+            teacherTB.Size = new Size(100, 23);
+            teacherTB.TabIndex = 37;
+            // 
             // ExamsForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(1091, 462);
+            ClientSize = new Size(955, 346);
+            Controls.Add(examsDataGridView);
+            Controls.Add(teacherTB);
+            Controls.Add(classroomTB);
+            Controls.Add(limitTB);
+            Controls.Add(startTB);
+            Controls.Add(typeTB);
+            Controls.Add(courseTB);
+            Controls.Add(subjectcodeTB);
+            Controls.Add(subjectTB);
+            Controls.Add(teacherLabel);
+            Controls.Add(classroomLabel);
+            Controls.Add(limitLabel);
+            Controls.Add(startLabel);
+            Controls.Add(typeLabel);
+            Controls.Add(courseLabel);
+            Controls.Add(subjectcodeLabel);
+            Controls.Add(subjectLabel);
+            Controls.Add(addExamToDBButton);
+            Controls.Add(updateExamInDBButton);
+            Controls.Add(deleteExamButton);
+            Controls.Add(updateExamButton);
+            Controls.Add(applyButton);
+            Controls.Add(addExamButton);
+            Controls.Add(backButton);
+            Controls.Add(myExamsButton);
             Controls.Add(HelpButton);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
             ForeColor = Color.DarkOrange;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ExamsForm";
             Text = "ExamsForm";
             toolTip1.SetToolTip(this, "Használati útmutató");
+            ((System.ComponentModel.ISupportInitialize)examsDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
         private Button HelpButton;
         private ToolTip toolTip1;
+        private DataGridView examsDataGridView;
+        private DataGridViewTextBoxColumn subject;
+        private DataGridViewTextBoxColumn subjectCode;
+        private DataGridViewTextBoxColumn course;
+        private DataGridViewTextBoxColumn type;
+        private DataGridViewTextBoxColumn startingTime;
+        private DataGridViewTextBoxColumn personLimit;
+        private DataGridViewTextBoxColumn classroom;
+        private DataGridViewTextBoxColumn teacher;
+        private Button myExamsButton;
+        private Button backButton;
+        private Button addExamButton;
+        private Button applyButton;
+        private Button updateExamButton;
+        private Button deleteExamButton;
+        private Button updateExamInDBButton;
+        private Button addExamToDBButton;
+        private Label subjectLabel;
+        private Label subjectcodeLabel;
+        private Label courseLabel;
+        private Label typeLabel;
+        private Label startLabel;
+        private Label limitLabel;
+        private Label classroomLabel;
+        private Label teacherLabel;
+        private TextBox subjectTB;
+        private TextBox subjectcodeTB;
+        private TextBox courseTB;
+        private TextBox typeTB;
+        private TextBox startTB;
+        private TextBox limitTB;
+        private TextBox classroomTB;
+        private TextBox teacherTB;
     }
 }
