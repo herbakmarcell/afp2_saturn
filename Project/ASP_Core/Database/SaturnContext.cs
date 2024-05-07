@@ -322,8 +322,8 @@ namespace ASP_Core.Database
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
-            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
-            else return MessageModel.Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
+            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u=> u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            else return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
 
         }
 
@@ -331,7 +331,7 @@ namespace ASP_Core.Database
         {
             User? receiverUser = UserWithSaturnCode(sender);
             if (receiverUser == null) return null;
-            return MessageModel.Include(u=> u.Sender).Where(mm => mm.Sender.SaturnCode == sender).ToList();
+            return MessageModel.Include(u=> u.Sender).Include(u=> u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
 
@@ -361,14 +361,14 @@ namespace ASP_Core.Database
             return new SendMessageResponse { Subject = messageModel.Subject, Content = messageModel.Content, Sender = messageModel.Sender.SaturnCode, Receivers = receivers };
         }
 
-        // implement deletemessage
         public DeleteMessageResponse? DeleteMessage(DeleteMessageModelRequest deleteMessageModel)
         {
             User? user = UserWithSaturnCode(deleteMessageModel.SaturnCode);
             if (user == null) return null;
             MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
             if (message == null) return null;
-            if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
+            // ideiglenesen kiszedve, hogy bármilyen üzenetet lehessen törölni
+            //if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
             MessageModel.Remove(message);
             SaveChanges();
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
