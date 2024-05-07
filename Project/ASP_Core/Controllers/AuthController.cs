@@ -132,17 +132,7 @@ namespace ASP_Core.Controllers
             
         }
 
-        [HttpPost]
-        [Authorize()]
-        [Route("addexamtouser")]
-        public ActionResult<Response<ChangeResponse>> AddExamToUser([FromBody] Exam exam, [FromBody] User user)
-        {
-
-            AddExamToUserResponse? addExamToUserResponse = authService.AddExamToUser(exam, user);
-
-            
-            return new OkObjectResult(new Response<AddExamToUserResponse>(addExamToUserResponse));
-        }
+        
 
     }
 }

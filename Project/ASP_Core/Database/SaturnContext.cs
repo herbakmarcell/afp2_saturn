@@ -15,6 +15,8 @@ using ASP_Core.Models.Auth;
 using ASP_Core.Models.Responses;
 using Humanizer.DateTimeHumanizeStrategy;
 using ASP_Core.Models.Message;
+using ASP_Core.Models.Exam;
+using ASP_Core.Services.Exam;
 
 
 namespace ASP_Core.Database
@@ -374,12 +376,46 @@ namespace ASP_Core.Database
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
 
-        public AddExamToUserResponse? Addexamtouser(Exam exam,User user)
+        public AddExamToUserResponse? AddExamToUser(ExamUserModel examuser)
         {
-
-            Users.FirstOrDefault(u => u.SaturnCode == user.SaturnCode).Exams.Add(exam);
-            AddExamToUserResponse addExamToUserResponse = new AddExamToUserResponse { ExamsId = exam.Id, StudentSaturnCode = user.SaturnCode };
-            return null;
+            if (Exams.FirstOrDefault(e => e.Id == examuser.ExamId) == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "Nem található ilyen exam",
+                    ExamsId = examuser.ExamId,
+                    Success = false
+                };
+            }
+            if (Users.FirstOrDefault(e => e.SaturnCode == examuser.SaturnCode) == null)
+            {
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "Nem található ilyen user",
+                    ExamsId = examuser.ExamId,
+                    Success = false
+                };
+            }
+            if (Exams.FirstOrDefault(e => e.Id == examuser.ExamId) != null && Users.FirstOrDefault(u => u.SaturnCode == examuser.SaturnCode) != null)
+            {
+                Users.FirstOrDefault(u => u.SaturnCode == examuser.SaturnCode).Exams.Add(Exams.FirstOrDefault(e => e.Id == examuser.ExamId));
+                return new AddExamToUserResponse
+                {
+                    StudentSaturnCode = examuser.SaturnCode,
+                    Message = "siker",
+                    ExamsId = examuser.ExamId,
+                    Success = true
+                };
+            }
+            return new AddExamToUserResponse
+            {
+                StudentSaturnCode = examuser.SaturnCode,
+                Message = "váratlan hiba",
+                ExamsId = examuser.ExamId,
+                Success = false
+            };
         }
     }
 }
