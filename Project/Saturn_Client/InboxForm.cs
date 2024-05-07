@@ -27,6 +27,7 @@ namespace Saturn_Client
             InitializeComponent();
             InitializeMessageDataGridView();
             HideSend(false);
+            linkLabel2.Visible = false;
             client = new RestClient("https://localhost:7204/api/Message/");
             if (TokenContainer.IsAdmin)
             {
