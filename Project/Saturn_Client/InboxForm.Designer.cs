@@ -192,6 +192,7 @@
             linkLabel3.TabStop = true;
             linkLabel3.Text = "Elküldött üzenetek";
             linkLabel3.VisitedLinkColor = Color.DarkOrange;
+            linkLabel3.LinkClicked += linkLabel3_LinkClicked;
             // 
             // InboxForm
             // 

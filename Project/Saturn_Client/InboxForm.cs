@@ -297,7 +297,6 @@ namespace Saturn_Client
         private void button1_Click(object sender, EventArgs e)
         {
             SendMessage();
-
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -312,7 +311,15 @@ namespace Saturn_Client
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(false);
+            dataGridView1.Show();
             linkLabel2.Visible = false;
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RefreshSentData();
+            dataGridView1.Hide();
+            linkLabel2.Visible = true;
         }
     }
 }
