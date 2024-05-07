@@ -304,6 +304,8 @@ namespace Saturn_Client
             HideSend(false);
             dataGridView1.Show();
             linkLabel2.Visible = false;
+            label4.Visible = true;
+            label4.Text = "Bejövő üzenetek";
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -312,6 +314,8 @@ namespace Saturn_Client
             HideSend(false);
             dataGridView1.Show();
             linkLabel2.Visible = true;
+            label4.Visible = true;
+            label4.Text = "Elküldött üzenetek";
         }
     }
 }
