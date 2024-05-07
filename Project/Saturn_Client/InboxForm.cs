@@ -290,6 +290,7 @@ namespace Saturn_Client
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(true);
+            linkLabel2.Visible = true;
             dataGridView1.Hide();
         }
 
@@ -311,6 +312,7 @@ namespace Saturn_Client
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             HideSend(false);
+            linkLabel2.Visible = false;
         }
     }
 }

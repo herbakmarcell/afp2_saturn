@@ -174,6 +174,7 @@
             linkLabel2.TabIndex = 29;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "<Vissza";
+            linkLabel2.Visible = false;
             linkLabel2.VisitedLinkColor = Color.DarkOrange;
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
