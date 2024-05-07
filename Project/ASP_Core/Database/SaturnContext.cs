@@ -388,7 +388,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Users.FirstOrDefault(e => e.SaturnCode == examuser.SaturnCode) == null)
+            if (Users.First(e => e.SaturnCode == examuser.SaturnCode) == null)
             {
                 return new AddExamToUserResponse
                 {
@@ -398,9 +398,10 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Exams.FirstOrDefault(e => e.Id == examuser.ExamId) != null && Users.FirstOrDefault(u => u.SaturnCode == examuser.SaturnCode) != null)
+            if (Exams.First(e => e.Id == examuser.ExamId) != null && Users.First(u => u.SaturnCode == examuser.SaturnCode) != null)
             {
-                Users.FirstOrDefault(u => u.SaturnCode == examuser.SaturnCode).Exams.Add(Exams.FirstOrDefault(e => e.Id == examuser.ExamId));
+                Users.First(u => u.SaturnCode == examuser.SaturnCode).Exams.Add(Exams.First(e => e.Id == examuser.ExamId));
+                Exams.First(e => e.Id == examuser.ExamId).Students.Add(Users.First(u => u.SaturnCode == examuser.SaturnCode));
                 return new AddExamToUserResponse
                 {
                     StudentSaturnCode = examuser.SaturnCode,
