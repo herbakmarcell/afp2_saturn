@@ -309,7 +309,8 @@ namespace Saturn_Client
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RefreshSentData();
-            dataGridView1.Hide();
+            HideSend(false);
+            dataGridView1.Show();
             linkLabel2.Visible = true;
         }
     }
