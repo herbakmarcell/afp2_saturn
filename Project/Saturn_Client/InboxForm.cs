@@ -27,8 +27,8 @@ namespace Saturn_Client
             InitializeComponent();
             InitializeMessageDataGridView();
             HideSend(false);
-            RefreshSentData();
             client = new RestClient("https://localhost:7204/api/Message/");
+            RefreshReceivedData();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
