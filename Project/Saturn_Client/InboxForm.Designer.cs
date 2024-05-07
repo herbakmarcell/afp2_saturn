@@ -42,6 +42,7 @@
             button1 = new Button();
             linkLabel2 = new LinkLabel();
             linkLabel3 = new LinkLabel();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -169,7 +170,7 @@
             linkLabel2.BackColor = Color.Transparent;
             linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel2.LinkColor = Color.DarkOrange;
-            linkLabel2.Location = new Point(612, 29);
+            linkLabel2.Location = new Point(612, 27);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(62, 23);
             linkLabel2.TabIndex = 29;
@@ -185,7 +186,7 @@
             linkLabel3.BackColor = Color.Transparent;
             linkLabel3.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel3.LinkColor = Color.DarkOrange;
-            linkLabel3.Location = new Point(680, 29);
+            linkLabel3.Location = new Point(680, 27);
             linkLabel3.Name = "linkLabel3";
             linkLabel3.Size = new Size(148, 23);
             linkLabel3.TabIndex = 30;
@@ -194,12 +195,25 @@
             linkLabel3.VisitedLinkColor = Color.DarkOrange;
             linkLabel3.LinkClicked += linkLabel3_LinkClicked;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label4.ForeColor = Color.DarkOrange;
+            label4.Location = new Point(32, 32);
+            label4.Name = "label4";
+            label4.Size = new Size(100, 28);
+            label4.TabIndex = 32;
+            label4.Text = "Üzenetek";
+            // 
             // InboxForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1091, 462);
+            Controls.Add(label4);
             Controls.Add(linkLabel3);
             Controls.Add(linkLabel2);
             Controls.Add(button1);
@@ -233,5 +247,6 @@
         private Button button1;
         private LinkLabel linkLabel2;
         private LinkLabel linkLabel3;
+        private Label label4;
     }
 }
