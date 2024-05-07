@@ -135,7 +135,7 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addexamtouser")]
-        public ActionResult<Response<ChangeResponse>> AddExamToUser([FromBody] AddexamtouserModel addexamtouserModel)
+        public ActionResult<Response<ChangeResponse>> AddExamToUser([FromBody] Examuser addexamtouserModel)
         {
 
             AddExamToUserResponse? addExamToUserResponse = authService.AddExamToUser(addexamtouserModel);
