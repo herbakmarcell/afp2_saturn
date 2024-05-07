@@ -116,7 +116,53 @@ namespace Saturn_Client
 
         public void RefreshSentData()
         {
-           
+            var request = new RestRequest("/sent", Method.Get);
+
+            try
+            {
+                request.AddHeader("Authorization", $"Bearer {TokenContainer.Token}");
+
+                var response = client.Execute(request);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var responseContent = response.Content;
+
+                    var responseData = JsonSerializer.Deserialize<Response<List<SentMessageResponse>>>(responseContent);
+
+                    if (responseData != null && responseData.resource != null)
+                    {
+                        dataGridView1.Rows.Clear();
+
+                        foreach (var message in responseData.resource)
+                        {
+                            // Convert list of receivers into a single string
+                            string receiversString = message.receivers != null ? string.Join(", ", message.receivers) : "";
+
+                            // Add message data to the DataGridView
+                            dataGridView1.Rows.Add(message.id, message.sender, message.subject, message.content, receiversString);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No messages received.");
+                    }
+                }
+                else if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var responseContent = response.Content;
+                    var temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
+                    MessageBox.Show("Error: " + temp.message);
+                }
+                else
+                {
+                    MessageBox.Show($"Unexpected response: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An unexpected error occurred!\nDetails: " + ex.Message);
+            }
         }
 
         public void RefreshReceivedData()
