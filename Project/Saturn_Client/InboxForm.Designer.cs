@@ -41,6 +41,7 @@
             richTextBox1 = new RichTextBox();
             button1 = new Button();
             linkLabel2 = new LinkLabel();
+            linkLabel3 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -168,7 +169,7 @@
             linkLabel2.BackColor = Color.Transparent;
             linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel2.LinkColor = Color.DarkOrange;
-            linkLabel2.Location = new Point(766, 27);
+            linkLabel2.Location = new Point(612, 29);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(62, 23);
             linkLabel2.TabIndex = 29;
@@ -178,12 +179,27 @@
             linkLabel2.VisitedLinkColor = Color.DarkOrange;
             linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
+            // linkLabel3
+            // 
+            linkLabel3.AutoSize = true;
+            linkLabel3.BackColor = Color.Transparent;
+            linkLabel3.Font = new Font("Comic Sans MS", 9.2F);
+            linkLabel3.LinkColor = Color.DarkOrange;
+            linkLabel3.Location = new Point(680, 29);
+            linkLabel3.Name = "linkLabel3";
+            linkLabel3.Size = new Size(148, 23);
+            linkLabel3.TabIndex = 30;
+            linkLabel3.TabStop = true;
+            linkLabel3.Text = "Elküldött üzenetek";
+            linkLabel3.VisitedLinkColor = Color.DarkOrange;
+            // 
             // InboxForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1091, 462);
+            Controls.Add(linkLabel3);
             Controls.Add(linkLabel2);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
@@ -215,5 +231,6 @@
         private RichTextBox richTextBox1;
         private Button button1;
         private LinkLabel linkLabel2;
+        private LinkLabel linkLabel3;
     }
 }
