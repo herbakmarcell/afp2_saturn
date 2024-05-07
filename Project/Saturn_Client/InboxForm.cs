@@ -28,15 +28,6 @@ namespace Saturn_Client
             InitializeMessageDataGridView();
             HideSend(false);
             client = new RestClient("https://localhost:7204/api/Message/");
-            if (TokenContainer.IsAdmin)
-            {
-                RefreshSentData();
-            }
-            else
-            {
-                RefreshReceivedData();
-
-            }
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
