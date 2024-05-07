@@ -168,13 +168,14 @@
             linkLabel2.BackColor = Color.Transparent;
             linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel2.LinkColor = Color.DarkOrange;
-            linkLabel2.Location = new Point(766, 29);
+            linkLabel2.Location = new Point(766, 27);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(62, 23);
             linkLabel2.TabIndex = 29;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "<Vissza";
             linkLabel2.VisitedLinkColor = Color.DarkOrange;
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
             // 
             // InboxForm
             // 

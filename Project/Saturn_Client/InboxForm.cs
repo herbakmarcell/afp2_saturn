@@ -307,5 +307,10 @@ namespace Saturn_Client
                 DeleteMessage(messageId);
             }
         }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            HideSend(false);
+        }
     }
 }
