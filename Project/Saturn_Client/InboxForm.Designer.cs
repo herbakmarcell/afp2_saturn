@@ -203,9 +203,9 @@
             label4.ForeColor = Color.DarkOrange;
             label4.Location = new Point(32, 32);
             label4.Name = "label4";
-            label4.Size = new Size(100, 28);
+            label4.Size = new Size(165, 28);
             label4.TabIndex = 32;
-            label4.Text = "Üzenetek";
+            label4.Text = "Bejövő üzenetek";
             label4.Visible = false;
             // 
             // InboxForm
