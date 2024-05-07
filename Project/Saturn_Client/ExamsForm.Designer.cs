@@ -41,6 +41,9 @@
             classroom = new DataGridViewTextBoxColumn();
             teacher = new DataGridViewTextBoxColumn();
             myExamsButton = new Button();
+            backButton = new Button();
+            addExamButton = new Button();
+            applyButton = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -52,7 +55,7 @@
             HelpButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            HelpButton.Location = new Point(874, 12);
+            HelpButton.Location = new Point(916, 12);
             HelpButton.Name = "HelpButton";
             HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 12;
@@ -116,12 +119,51 @@
             myExamsButton.FlatAppearance.BorderSize = 0;
             myExamsButton.FlatStyle = FlatStyle.Flat;
             myExamsButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
-            myExamsButton.Location = new Point(753, 30);
+            myExamsButton.Location = new Point(765, 25);
             myExamsButton.Name = "myExamsButton";
             myExamsButton.Size = new Size(115, 34);
             myExamsButton.TabIndex = 14;
             myExamsButton.Text = "Felvett vizsgáim";
             myExamsButton.UseVisualStyleBackColor = false;
+            // 
+            // backButton
+            // 
+            backButton.BackColor = Color.Transparent;
+            backButton.FlatAppearance.BorderSize = 0;
+            backButton.FlatStyle = FlatStyle.Flat;
+            backButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            backButton.Location = new Point(708, 25);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(60, 34);
+            backButton.TabIndex = 15;
+            backButton.Text = "<Vissza";
+            backButton.UseVisualStyleBackColor = false;
+            // 
+            // addExamButton
+            // 
+            addExamButton.BackColor = Color.Transparent;
+            addExamButton.FlatAppearance.BorderSize = 0;
+            addExamButton.FlatStyle = FlatStyle.Flat;
+            addExamButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            addExamButton.Location = new Point(664, 234);
+            addExamButton.Name = "addExamButton";
+            addExamButton.Size = new Size(127, 34);
+            addExamButton.TabIndex = 16;
+            addExamButton.Text = "Vizsga Hozzáadása";
+            addExamButton.UseVisualStyleBackColor = false;
+            // 
+            // applyButton
+            // 
+            applyButton.BackColor = Color.Transparent;
+            applyButton.FlatAppearance.BorderSize = 0;
+            applyButton.FlatStyle = FlatStyle.Flat;
+            applyButton.Font = new Font("Comic Sans MS", 9F, FontStyle.Underline, GraphicsUnit.Point, 238);
+            applyButton.Location = new Point(797, 234);
+            applyButton.Name = "applyButton";
+            applyButton.Size = new Size(83, 34);
+            applyButton.TabIndex = 17;
+            applyButton.Text = "Jelentkezés";
+            applyButton.UseVisualStyleBackColor = false;
             // 
             // ExamsForm
             // 
@@ -129,6 +171,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(955, 346);
+            Controls.Add(applyButton);
+            Controls.Add(addExamButton);
+            Controls.Add(backButton);
             Controls.Add(myExamsButton);
             Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
@@ -154,5 +199,8 @@
         private DataGridViewTextBoxColumn classroom;
         private DataGridViewTextBoxColumn teacher;
         private Button myExamsButton;
+        private Button backButton;
+        private Button addExamButton;
+        private Button applyButton;
     }
 }
