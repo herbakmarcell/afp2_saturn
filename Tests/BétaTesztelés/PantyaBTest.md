@@ -20,3 +20,4 @@
 | # | Teszteset | Várható eredmény | Valós eredmény | Megjegyzés |
 |------------|------------|---------------|--------------------|------------|
 | T01 | Üzenetek megjelenítése | Megjelenik az üzenetek grafikus felülete. | Az üzenetek grafikus felülete hibamentesen megjelenik | Nincs probléma. |
+| T02 | Üzenet küldésének megjelenítése | Megjelenik az üzenetküldő panel| Az üzenetküldés grafikus felülete hibamentesen megjelenik | Nincs probléma. |
