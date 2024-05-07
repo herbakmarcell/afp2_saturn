@@ -373,5 +373,15 @@ namespace ASP_Core.Database
             SaveChanges();
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
+
+        public AddExamToUserResponse? Addexamtouser(AddexamtouserModel addexamtouserModel)
+        {
+            if (addexamtouserModel.ExamsId != null && addexamtouserModel.StudentSaturnCode != null)
+            {
+                AddExamToUserResponse addExamToUserResponse = new AddExamToUserResponse { ExamsId = addexamtouserModel.ExamsId, StudentSaturnCode = addexamtouserModel.StudentSaturnCode };
+                return addExamToUserResponse;
+            }
+            return null;
+        }
     }
 }

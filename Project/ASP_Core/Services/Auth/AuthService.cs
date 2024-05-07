@@ -19,6 +19,7 @@ namespace ASP_Core.Services.Auth
         public LoginResponse? Login(LoginModel loginModel);
         public RegisterResponse? Register(RegisterModel registerModel);
         public ChangeResponse? Change(ChangeModel changeModel);
+        public ChangeResponse? AddExamToUser(AddexamtouserModel addexamtouserModel);
     }
 
 
@@ -108,6 +109,11 @@ namespace ASP_Core.Services.Auth
         {
             return saturnContext.Change(changeModel);
             
+        }
+
+        public AddExamToUserResponse? AddExamToUser(AddexamtouserModel addexamtouserModel)
+        {
+            return saturnContext.Addexamtouser(addexamtouserModel);
         }
     }
 }
