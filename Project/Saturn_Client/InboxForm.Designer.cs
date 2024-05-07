@@ -206,7 +206,6 @@
             label4.Size = new Size(165, 28);
             label4.TabIndex = 32;
             label4.Text = "Bejövő üzenetek";
-            label4.Visible = false;
             // 
             // InboxForm
             // 
