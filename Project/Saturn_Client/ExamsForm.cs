@@ -1,21 +1,49 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Saturn_Client
 {
     public partial class ExamsForm : Form
     {
+        private RestClient client;
         public ExamsForm()
         {
             InitializeComponent();
+            client = new RestClient("https://localhost:7204/api/Auth");
+            hideExamFunctions();
+            showRoleFunctions();
+        }
+        private void hideExamFunctions()
+        {
+            backButton.Visible = false;
+            myExamsButton.Visible = false;
+            applyButton.Visible = false;
+            addExamButton.Visible = false;
+        }
+        private void showRoleFunctions()
+        {
+            myExamsButton.Visible = true;
+            applyButton.Visible = true;
+            if (TokenContainer.IsAdmin)
+            {
+                myExamsButton.Visible = false;
+                applyButton.Visible = false;
+                addExamButton.Visible = true;
+            }           
+           
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -42,6 +70,26 @@ namespace Saturn_Client
             {
                 e.Graphics.DrawPath(pen, path);
             }
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void myExamsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addExamButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

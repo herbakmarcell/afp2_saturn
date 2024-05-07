@@ -125,6 +125,7 @@
             myExamsButton.TabIndex = 14;
             myExamsButton.Text = "Felvett vizsgáim";
             myExamsButton.UseVisualStyleBackColor = false;
+            myExamsButton.Click += myExamsButton_Click;
             // 
             // backButton
             // 
@@ -138,6 +139,7 @@
             backButton.TabIndex = 15;
             backButton.Text = "<Vissza";
             backButton.UseVisualStyleBackColor = false;
+            backButton.Click += backButton_Click;
             // 
             // addExamButton
             // 
@@ -151,6 +153,7 @@
             addExamButton.TabIndex = 16;
             addExamButton.Text = "Vizsga Hozzáadása";
             addExamButton.UseVisualStyleBackColor = false;
+            addExamButton.Click += addExamButton_Click;
             // 
             // applyButton
             // 
@@ -164,6 +167,7 @@
             applyButton.TabIndex = 17;
             applyButton.Text = "Jelentkezés";
             applyButton.UseVisualStyleBackColor = false;
+            applyButton.Click += applyButton_Click;
             // 
             // ExamsForm
             // 
