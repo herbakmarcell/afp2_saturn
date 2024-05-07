@@ -138,13 +138,10 @@ namespace ASP_Core.Controllers
         public ActionResult<Response<ChangeResponse>> AddExamToUser([FromBody] AddexamtouserModel addexamtouserModel)
         {
 
-            AddExamToUserResponse? addExamToUserResponse = authService.Change(addexamtouserModel);
+            AddExamToUserResponse? addExamToUserResponse = authService.AddExamToUser(addexamtouserModel);
 
-            if (changeResponse == null)
-            {
-                return BadRequest(new Response<string>("Unknown User or bad roles"));
-            }
-            return new OkObjectResult(new Response<ChangeResponse>(changeResponse));
+            
+            return new OkObjectResult(new Response<AddExamToUserResponse>(addExamToUserResponse));
         }
 
     }
