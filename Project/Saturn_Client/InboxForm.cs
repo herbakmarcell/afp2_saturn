@@ -306,6 +306,7 @@ namespace Saturn_Client
             HideSend(false);
             RefreshReceivedData();
             dataGridView1.Show();
+            dataGridView1.Columns[0].Visible = false;
             linkLabel2.Visible = false;
             label4.Visible = true;
             label4.Text = "Bejövő üzenetek";
