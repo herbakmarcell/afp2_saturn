@@ -448,7 +448,7 @@ namespace ASP_Core.Database
                 return new StandardExamResponse
                 {
                     Message = "nincs átadva az exam",
-                    Success = true
+                    Success = false
                 };
             }
             if (Courses.FirstOrDefault(e => e.Code == examModel.CourseCode)==null)
@@ -456,7 +456,7 @@ namespace ASP_Core.Database
                 return new StandardExamResponse
                 {
                     Message = "nincs megadott kurzuskóddal rendelkező kurzus",
-                    Success = true
+                    Success = false
                 };
             }
             if (Semesters.FirstOrDefault(s => s.Id == examModel.Id) == null)
@@ -464,7 +464,7 @@ namespace ASP_Core.Database
                 return new StandardExamResponse
                 {
                     Message = "nincs megadott semesteridvel rendelkező semester",
-                    Success = true
+                    Success = false
                 };
             }
             Exam newexam = new Exam 
@@ -492,7 +492,7 @@ namespace ASP_Core.Database
                 return new StandardExamResponse
                 {
                     Message = "nincs átadva az exam",
-                    Success = true
+                    Success = false
                 };
             }
             if (Exams.FirstOrDefault(e=>e.Id==examId)==null)
@@ -500,7 +500,7 @@ namespace ASP_Core.Database
                 return new StandardExamResponse
                 {
                     Message = "nem létezik ilyen exam",
-                    Success = true
+                    Success = false
                 };
             }
             
@@ -517,6 +517,54 @@ namespace ASP_Core.Database
             return new StandardExamResponse
             {
                 Message = "Sikeresen törölte az examot",
+                Success = true
+            };
+        }
+
+        public StandardExamResponse? EditExam(ExamModel examModel)
+        {
+            if (examModel == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva a módosított exam",
+                    Success = false
+                };
+            }
+            if (Exams.FirstOrDefault(e => e.Id == examModel.Id) == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nem létezik ilyen módosítandó exam",
+                    Success = false
+                };
+            }
+            Exam modifiableExam = Exams.FirstOrDefault(e => e.Id == examModel.Id);
+            Exam newExam = new Exam
+            {
+                Course = modifiableExam.Course,
+                Id = examModel.Id,
+                Grades = modifiableExam.Grades,
+                MaxSize = examModel.MaxSize,
+                Prof = examModel.Prof,
+                Semester = modifiableExam.Semester,
+                Students = modifiableExam.Students
+            };
+            foreach (User user in Users)
+            {
+                if (user.Exams.Contains(Exams.FirstOrDefault(e => e.Id == examModel.Id)))
+                {
+                    user.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examModel.Id));
+                    user.Exams.Add(newExam);
+                }
+            }
+
+            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == modifiableExam.Id));
+            this.Exams.Add(newExam);
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeresen megváltoztatta az examot",
                 Success = true
             };
         }

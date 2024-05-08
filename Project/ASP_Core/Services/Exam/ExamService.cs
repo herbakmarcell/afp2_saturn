@@ -23,6 +23,7 @@ namespace ASP_Core.Services.Exam
         public ListExamsResponse? ListExams();
         public StandardExamResponse? AddNewExam(ExamModel examModel);
         public StandardExamResponse? DeleteExam(int examId);
+        public StandardExamResponse? EditExam(ExamModel examModel);
     }
     public class ExamService : ExamIService
     {
@@ -99,7 +100,12 @@ namespace ASP_Core.Services.Exam
 
         public StandardExamResponse? DeleteExam(int examId)
         {
-            
+            return saturnContext.DeleteExam(examId);
+        }
+
+        public StandardExamResponse? EditExam(ExamModel examModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }
