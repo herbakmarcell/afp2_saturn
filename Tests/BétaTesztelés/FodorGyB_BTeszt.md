@@ -14,7 +14,7 @@
 | T04 | Üzenetek küldése | Az aktív felhasználó tud üzenetet küldeni más felhasználóknak | A felhasználó elküldte az üzenetet. | Nincs hiba. |
 | T05 | Üzenetek fogadása | A felhasználó fogadja az üzeneteket amiket küldtek neki. | A felhasználó megkapja és látja a beérkezett üzeneteket. | Nincs hiba. |
 | T06 | Üzenetek küldése több felhasználónak | Egy felhasználó képes több felhasználónak is üzenetet küldeni. Vesszővel elválasztva a címzetteket. | A felhasználó el tudja küldeni az üzenetet több felhasználónak a helyes formátummal. | Nincs hiba. |
-| T06 | Üzenetek fogadás több címzett esetén | Az összes címzuett megkapja a nekik küldött üzenetet. | A címzettek megkapják az üzeneteket. | Nincs hiba. |
+| T07 | Üzenetek fogadás több címzett esetén | Az összes címzuett megkapja a nekik küldött üzenetet. | A címzettek megkapják az üzeneteket. | Nincs hiba. |
 
  ## Megjelenés
 
