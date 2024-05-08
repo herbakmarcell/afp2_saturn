@@ -71,12 +71,12 @@ namespace ASP_Core.Controllers
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            StandardExamResponse addNewExamResponse = examService.AddNewExam(examModel);
-            if (addNewExamResponse.Success == false)
+            StandardExamResponse StandardExamResponse = examService.DeleteExam(examId);
+            if (StandardExamResponse.Success == false)
             {
-                return BadRequest(new Response<string>(addNewExamResponse.Message));
+                return BadRequest(new Response<string>(StandardExamResponse.Message));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse.Message));
+            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
         }
     }
 }
