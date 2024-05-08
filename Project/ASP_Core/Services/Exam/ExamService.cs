@@ -23,6 +23,7 @@ namespace ASP_Core.Services.Exam
         public ListExamsResponse? ListExams();
         public ListExamsResponse? SearchExamsByProf(string profname);
         public ListExamsResponse? SearchExamsById(int id);
+        public ListExamsResponse? SearchExamsBySemester(int semesterId);
         public ListExamsResponse? SearchExamsBySizeMin(int size);
         public ListExamsResponse? SearchExamsBySizeMax(int size);
         public ListExamsResponse? SearchExamsByCourse(string courseCode);
@@ -136,6 +137,12 @@ namespace ASP_Core.Services.Exam
         public ListExamsResponse? SearchExamsByCourse(string courseCode)
         {
             return saturnContext.SearchExamByCourse(courseCode);
+        }
+
+
+        public ListExamsResponse? SearchExamsBySemester(int semesterId)
+        {
+            return saturnContext.SearchExamBySemester(semesterId);
         }
     }
 }
