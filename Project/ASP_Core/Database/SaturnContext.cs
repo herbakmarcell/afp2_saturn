@@ -856,5 +856,36 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+        public ExamUserCountResponse? ExamUserCount(int examId)
+        {
+            int usercount = 0;
+            if (Exams.Count() == 0)
+            {
+                return new ExamUserCountResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false,
+                    usercount=0
+                };
+            }
+            foreach (User user in Users)
+            {
+                foreach (Exam exam in user.Exams)
+                {
+                    if (exam.Id==examId)
+                    {
+                        usercount++;
+                    }
+                }
+            }
+            return new ExamUserCountResponse
+            {
+                usercount = usercount,
+                Message = "Sikeres megszámolás",
+                Success = true
+            };
+        }
     }
 }

@@ -176,5 +176,20 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
+
+
+
+        [HttpPost]
+        [Authorize()]
+        [Route("examusercount")]
+        public ActionResult<Response<ExamUserCountResponse>> ExamUserCount([FromBody]int ExamId)
+        {
+            ExamUserCountResponse examUserCountResponse = examService.ExamUserCount(ExamId);
+            if (examUserCountResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(examUserCountResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListExamsResponse>(examUserCountResponse.Message));
+        }
     }
 }
