@@ -78,5 +78,22 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("editexam")]
+        public ActionResult<Response<StandardExamResponse>> EditExam([FromBody] ExamModel examModel)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            StandardExamResponse StandardExamResponse = examService.EditExam(examModel);
+            if (StandardExamResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(StandardExamResponse.Message));
+            }
+            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
+        }
     }
 }

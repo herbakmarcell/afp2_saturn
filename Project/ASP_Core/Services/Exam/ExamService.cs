@@ -105,7 +105,7 @@ namespace ASP_Core.Services.Exam
 
         public StandardExamResponse? EditExam(ExamModel examModel)
         {
-            throw new NotImplementedException();
+            return saturnContext.EditExam(examModel);
         }
     }
 }
