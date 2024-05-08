@@ -709,5 +709,54 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+
+        public ListExamsResponse? SearchExamBySizeMax(int size)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams = new List<Exam>();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+                if (exam.MaxSize <= size)
+                {
+                    specexams.Add(exam);
+                }
+            }
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            foreach (Exam sexam in specexams)
+            {
+                specexamsModel.Add(new ExamModel
+                {
+                    CourseCode = sexam.Course.Code,
+                    Id = sexam.Id,
+                    MaxSize = sexam.MaxSize,
+                    Prof = sexam.Prof,
+                    SemesterId = sexam.Semester.Id
+                });
+            }
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
     }
 }
