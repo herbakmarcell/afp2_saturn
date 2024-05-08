@@ -31,6 +31,7 @@ namespace Saturn_Client
             RefreshReceivedData();
         }
 
+
         private void HelpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Az Üzenetek oldalon, láthatod a beérkezett és elküldött üzeneteidet. Küldhetsz üzenetet másoknak és kezelheted a már meglévőket.");
@@ -88,7 +89,14 @@ namespace Saturn_Client
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Message deleted successfully.");
-                    RefreshSentData();
+                    if (label4.Text == "Bejövő üzenetek")
+                    {
+                        RefreshReceivedData();
+                    }
+                    else
+                    {
+                        RefreshSentData();
+                    }
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -109,6 +117,8 @@ namespace Saturn_Client
         public void RefreshSentData()
         {
             var request = new RestRequest("/sent", Method.Get);
+
+            dataGridView1.Columns[4].Visible = true;
 
             try
             {
@@ -158,6 +168,8 @@ namespace Saturn_Client
         public void RefreshReceivedData()
         {
             var request = new RestRequest("/received", Method.Get);
+
+            dataGridView1.Columns[4].Visible=false;
 
             try
             {
@@ -249,7 +261,7 @@ namespace Saturn_Client
                 {
                     var responseContent = response.Content;
                     Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
-                    MessageBox.Show("Baly: " + temp.message);
+                    MessageBox.Show("Baly: " + response.Content);
                 }
             }
             catch (Exception ex)
@@ -306,7 +318,6 @@ namespace Saturn_Client
             HideSend(false);
             RefreshReceivedData();
             dataGridView1.Show();
-            dataGridView1.Columns[4].Visible = false;
             linkLabel2.Visible = false;
             label4.Visible = true;
             label4.Text = "Bejövő üzenetek";
@@ -317,7 +328,6 @@ namespace Saturn_Client
             RefreshSentData();
             HideSend(false);
             dataGridView1.Show();
-            dataGridView1.Columns[4].Visible = true;
             linkLabel2.Visible = true;
             label4.Visible = true;
             label4.Text = "Elküldött üzenetek";
