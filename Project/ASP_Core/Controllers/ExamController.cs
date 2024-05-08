@@ -95,5 +95,18 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("searchexamsbyprof")]
+        public ActionResult<Response<ListExamsResponse>> SearchExamsByProf([FromBody] string profname)
+        {
+            ListExamsResponse listExamsResponse = examService.SearchExamsByProf(profname);
+            if (listExamsResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listExamsResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+        }
     }
 }
