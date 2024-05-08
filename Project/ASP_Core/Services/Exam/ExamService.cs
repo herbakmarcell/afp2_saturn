@@ -21,6 +21,8 @@ namespace ASP_Core.Services.Exam
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public AddExamToUserResponse? AddExamToUser(ExamUserModel userexam);
         public ListExamsResponse? ListExams();
+        public StandardExamResponse? AddNewExam(ExamModel examModel);
+        public StandardExamResponse? DeleteExam(int examId);
     }
     public class ExamService : ExamIService
     {
@@ -88,6 +90,16 @@ namespace ASP_Core.Services.Exam
         public ListExamsResponse? ListExams()
         {
             return saturnContext.ListExams();
+        }
+
+        public StandardExamResponse? AddNewExam(ExamModel examModel)
+        {
+            return saturnContext.AddNewExams(examModel);
+        }
+
+        public StandardExamResponse? DeleteExam(int examId)
+        {
+            
         }
     }
 }

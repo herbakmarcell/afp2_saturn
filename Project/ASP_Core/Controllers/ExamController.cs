@@ -50,5 +50,33 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
+        [HttpPost]
+        [Authorize()]
+        [Route("addnewexam")]
+        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]ExamModel examModel)
+        {
+            StandardExamResponse addNewExamResponse = examService.AddNewExam(examModel);
+            if (addNewExamResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(addNewExamResponse.Message));
+            }
+            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse.Message));
+        }
+        [HttpPost]
+        [Authorize()]
+        [Route("deleteexam")]
+        public ActionResult<Response<StandardExamResponse>> DeleteExam([FromBody] int examId)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            StandardExamResponse addNewExamResponse = examService.AddNewExam(examModel);
+            if (addNewExamResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(addNewExamResponse.Message));
+            }
+            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse.Message));
+        }
     }
 }

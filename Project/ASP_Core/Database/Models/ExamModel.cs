@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public int MaxSize { get; set; }
         public string Prof { get; set; }
-        public Course Course { get; set; }
-        public Semester Semester { get; set; }
+        public string CourseCode { get; set; }
+        public int SemesterId { get; set; }
 
     }
 }

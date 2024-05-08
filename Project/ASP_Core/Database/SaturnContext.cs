@@ -440,5 +440,85 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+        public StandardExamResponse? AddNewExams(ExamModel examModel)
+        {
+            if (examModel==null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva az exam",
+                    Success = true
+                };
+            }
+            if (Courses.FirstOrDefault(e => e.Code == examModel.CourseCode)==null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs megadott kurzuskóddal rendelkező kurzus",
+                    Success = true
+                };
+            }
+            if (Semesters.FirstOrDefault(s => s.Id == examModel.Id) == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs megadott semesteridvel rendelkező semester",
+                    Success = true
+                };
+            }
+            Exam newexam = new Exam 
+            {
+                Course=Courses.FirstOrDefault(e=>e.Code ==examModel.CourseCode),
+                Grades= new List<Grade>(),
+                Semester=Semesters.FirstOrDefault(s=>s.Id==examModel.Id),
+                Students=new List<User>(),
+                MaxSize= examModel.MaxSize,
+                Id= examModel.Id,
+                Prof = examModel.Prof
+            };
+            this.Exams.Add(newexam);
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeres hozzáadás",
+                Success = true
+            };
+        }
+        public StandardExamResponse? DeleteExam(int examId)
+        {
+            if (examId == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva az exam",
+                    Success = true
+                };
+            }
+            if (Exams.FirstOrDefault(e=>e.Id==examId)==null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nem létezik ilyen exam",
+                    Success = true
+                };
+            }
+            
+            foreach (User user in Users)
+            {
+                if (user.Exams.Contains(Exams.FirstOrDefault(e => e.Id == examId)))
+                {
+                    user.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
+                }
+            }
+
+            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeresen törölte az examot",
+                Success = true
+            };
+        }
     }
 }
