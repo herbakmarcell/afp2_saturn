@@ -418,5 +418,27 @@ namespace ASP_Core.Database
                 Success = false
             };
         }
+        public ListExamsResponse? ListExams()
+        {
+            if (Exams.Count()==0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<ExamModel> examModels = new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+                examModels.Add(this.Exams.Include(e => e.Grades).Include(e => e.Id).Include(e => e.Course).Include(e => e.Course) as ExamModel);
+            }
+            return new ListExamsResponse
+            {
+                Exams = examModels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
     }
 }

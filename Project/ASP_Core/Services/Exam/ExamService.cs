@@ -20,6 +20,7 @@ namespace ASP_Core.Services.Exam
         public string TokenWithSaturn(IEnumerable<Claim> claims);
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public AddExamToUserResponse? AddExamToUser(ExamUserModel userexam);
+        public ListExamsResponse? ListExams();
     }
     public class ExamService : ExamIService
     {
@@ -83,7 +84,10 @@ namespace ASP_Core.Services.Exam
                 ExamsId = examuser.ExamId
             };
         }
-    
-        
+
+        public ListExamsResponse? ListExams()
+        {
+            return saturnContext.ListExams();
+        }
     }
 }
