@@ -108,5 +108,32 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("searchexamsbyid")]
+        public ActionResult<Response<ListExamsResponse>> SearchExamsById([FromBody] int id)
+        {
+            ListExamsResponse listExamsResponse = examService.SearchExamsById(id);
+            if (listExamsResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listExamsResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+        }
+
+
+        [HttpPost]
+        [Authorize()]
+        [Route("searchexamsbySizeMin")]
+        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMin([FromBody] int size)
+        {
+            ListExamsResponse listExamsResponse = examService.SearchExamsBySizeMin(size);
+            if (listExamsResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listExamsResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+        }
     }
 }
