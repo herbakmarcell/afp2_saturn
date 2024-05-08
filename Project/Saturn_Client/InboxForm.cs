@@ -22,6 +22,8 @@ namespace Saturn_Client
     {
         private RestClient client;
 
+        private bool isReceivedData;
+
         public InboxForm()
         {
             InitializeComponent();
@@ -89,7 +91,7 @@ namespace Saturn_Client
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Message deleted successfully.");
-                    if (label4.Text == "Bejövő üzenetek")
+                    if (isReceivedData)
                     {
                         RefreshReceivedData();
                     }
@@ -97,6 +99,7 @@ namespace Saturn_Client
                     {
                         RefreshSentData();
                     }
+
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -318,6 +321,7 @@ namespace Saturn_Client
             HideSend(false);
             RefreshReceivedData();
             dataGridView1.Show();
+            isReceivedData = true;
             linkLabel2.Visible = false;
             label4.Visible = true;
             label4.Text = "Bejövő üzenetek";
@@ -327,6 +331,7 @@ namespace Saturn_Client
         {
             RefreshSentData();
             HideSend(false);
+            isReceivedData = false;
             dataGridView1.Show();
             linkLabel2.Visible = true;
             label4.Visible = true;
