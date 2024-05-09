@@ -418,5 +418,436 @@ namespace ASP_Core.Database
                 Success = false
             };
         }
+        public ListExamsResponse? ListExams()
+        {
+            if (Exams.Count()==0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<ExamModel> examModels = new List<ExamModel>();
+            foreach (Exam ex in Exams)
+            {
+                examModels.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
+            }
+            return new ListExamsResponse
+            {
+                Exams = examModels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+        public StandardExamResponse? AddNewExams(CreateExamRequestModel createExamRequestModel)
+        {
+            Course jokurzus = new Course();
+            foreach (Course course in Courses)
+            {
+                if (course.Code==createExamRequestModel.CourseCode)
+                {
+                    jokurzus=course;
+                }
+            }
+            if (jokurzus.Code!=createExamRequestModel.CourseCode)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
+                    Success = false
+                };
+            }
+
+            Semester joszemeszter = new Semester();
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id==createExamRequestModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                }
+            }
+            if (joszemeszter.Id!=createExamRequestModel.SemesterId)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
+            if (createExamRequestModel==null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva az exam",
+                    Success = false
+                };
+            }
+
+            if (jokurzus == null || joszemeszter == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "Üres a kurzus vagy szemeszter bruh",
+                    Success = false
+                };
+            }
+            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
+            Exam newexam = new Exam 
+            {
+                Course=jokurzus,
+                Grades= new List<Grade>(),
+                Semester=joszemeszter,
+                Students=new List<User>(),
+                MaxSize= createExamRequestModel.MaxSize,
+                Prof = createExamRequestModel.Prof
+            };
+            this.Exams.Add(newexam);
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeres hozzáadás",
+                Success = true
+            };
+        }
+        public StandardExamResponse? DeleteExam(int examId)
+        {
+            if (examId == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva az exam",
+                    Success = false
+                };
+            }
+            if (Exams.FirstOrDefault(e=>e.Id==examId)==null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nem létezik ilyen exam",
+                    Success = false
+                };
+            }
+            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeresen törölte az examot",
+                Success = true
+            };
+
+
+
+
+        }
+
+        public StandardExamResponse? EditExam(ExamModel examModel)
+        {
+            if (examModel == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs átadva a módosított exam",
+                    Success = false
+                };
+            }
+            if (Exams.FirstOrDefault(e => e.Id == examModel.Id) == null)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nem létezik ilyen módosítandó exam",
+                    Success = false
+                };
+            }
+            Exam modifiableExam = Exams.FirstOrDefault(e => e.Id == examModel.Id);
+            Exam newExam = new Exam
+            {
+                Course = modifiableExam.Course,
+                Id = examModel.Id,
+                Grades = modifiableExam.Grades,
+                MaxSize = examModel.MaxSize,
+                Prof = examModel.Prof,
+                Semester = modifiableExam.Semester,
+                Students = modifiableExam.Students
+            };
+            foreach (User user in Users)
+            {
+                if (user.Exams.Contains(Exams.FirstOrDefault(e => e.Id == examModel.Id)))
+                {
+                    user.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examModel.Id));
+                    user.Exams.Add(newExam);
+                }
+            }
+
+            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == modifiableExam.Id));
+            this.Exams.Add(newExam);
+            SaveChanges();
+            return new StandardExamResponse
+            {
+                Message = "Sikeresen megváltoztatta az examot",
+                Success = true
+            };
+        }
+
+
+        public ListExamsResponse? SearchExamByProf(string profid)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams= new List<Exam>();
+            List<ExamModel> specexamsModel= new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+                if (exam.Prof==profid)
+                {
+                    specexams.Add(exam);
+                }
+            }
+            if (specexams.Count()==0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+        public ListExamsResponse? SearchExamById(int id)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams = new List<Exam>();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+                if (exam.Id == id)
+                {
+                    specexams.Add(exam);
+                }
+            }
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+        public ListExamsResponse? SearchExamBySizeMin(int size)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams = new List<Exam>();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+                if (exam.MaxSize >= size)
+                {
+                    specexams.Add(exam);
+                }
+            }
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+
+        public ListExamsResponse? SearchExamBySizeMax(int size)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams = new List<Exam>();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            foreach (Exam exam in Exams)
+            {
+
+                if (exam.MaxSize <= size)
+                {
+                    specexams.Add(exam);
+                }
+            }
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+            
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListExamsResponse? SearchExamByCourse(string courseCode)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<Exam> specexams = Exams.Where(e => e.Course.Code == courseCode).ToList();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            Exams.Include(e => e.Course.Code==courseCode);
+            
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            foreach (Exam ex in specexams)
+            {
+                specexamsModel.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
+            }
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+
+
+        public ListExamsResponse? SearchExamBySemester(int semesterId)
+        {
+            if (Exams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false
+                };
+            }
+            List<ExamModel> specexamsModel = new List<ExamModel>();
+            List<Exam> specexams = Exams.Where(e => e.Semester.Id == semesterId).ToList();
+            if (specexams.Count() == 0)
+            {
+                return new ListExamsResponse
+                {
+                    Message = "nincs a keresésnek megfelelő vizsga",
+                    Success = false
+                };
+            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+
+            return new ListExamsResponse
+            {
+                Exams = specexamsModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ExamUserCountResponse? ExamUserCount(int examId)
+        {
+            int usercount = 0;
+            if (Exams.Count() == 0)
+            {
+                return new ExamUserCountResponse
+                {
+                    Message = "Nem létezik még vizsga",
+                    Success = false,
+                    usercount=0
+                };
+            }
+            foreach (User user in Users)
+            {
+                if (user.Exams != null)
+                {
+                    if (user.Exams.Count != 0)
+                    {
+                        foreach (Exam exam in user.Exams)
+                        {
+                            if (exam.Id == examId)
+                            {
+                                usercount++;
+                            }
+                        }
+                    }
+                }
+                
+                
+            }
+            return new ExamUserCountResponse
+            {
+                usercount = usercount,
+                Message = "Sikeres megszámolás",
+                Success = true
+            };
+        }
     }
 }

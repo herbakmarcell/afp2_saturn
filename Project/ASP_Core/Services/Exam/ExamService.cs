@@ -20,6 +20,17 @@ namespace ASP_Core.Services.Exam
         public string TokenWithSaturn(IEnumerable<Claim> claims);
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public AddExamToUserResponse? AddExamToUser(ExamUserModel userexam);
+        public ListExamsResponse? ListExams();
+        public ListExamsResponse? SearchExamsByProf(string profid);
+        public ListExamsResponse? SearchExamsById(int id);
+        public ListExamsResponse? SearchExamsBySemester(int semesterId);
+        public ListExamsResponse? SearchExamsBySizeMin(int size);
+        public ListExamsResponse? SearchExamsBySizeMax(int size);
+        public ListExamsResponse? SearchExamsByCourse(string courseCode);
+        public ExamUserCountResponse? ExamUserCount(int examId);
+        public StandardExamResponse? AddNewExam(CreateExamRequestModel createExamRequestModel);
+        public StandardExamResponse? DeleteExam(int examId);
+        public StandardExamResponse? EditExam(ExamModel examModel);
     }
     public class ExamService : ExamIService
     {
@@ -83,7 +94,61 @@ namespace ASP_Core.Services.Exam
                 ExamsId = examuser.ExamId
             };
         }
-    
-        
+
+        public ListExamsResponse? ListExams()
+        {
+            return saturnContext.ListExams();
+        }
+
+        public StandardExamResponse? AddNewExam(CreateExamRequestModel createExamRequestModel)
+        {
+            return saturnContext.AddNewExams(createExamRequestModel);
+        }
+
+        public StandardExamResponse? DeleteExam(int examId)
+        {
+            return saturnContext.DeleteExam(examId);
+        }
+
+        public StandardExamResponse? EditExam(ExamModel examModel)
+        {
+            return saturnContext.EditExam(examModel);
+        }
+
+        public ListExamsResponse? SearchExamsByProf(string profid)
+        {
+            return saturnContext.SearchExamByProf(profid);
+        }
+
+        public ListExamsResponse? SearchExamsById(int id)
+        {
+            return saturnContext.SearchExamById(id);
+        }
+
+        public ListExamsResponse? SearchExamsBySizeMin(int size)
+        {
+            return saturnContext.SearchExamBySizeMin(size);
+        }
+
+        public ListExamsResponse? SearchExamsBySizeMax(int size)
+        {
+            return saturnContext.SearchExamBySizeMax(size);
+        }
+
+        public ListExamsResponse? SearchExamsByCourse(string courseCode)
+        {
+            return saturnContext.SearchExamByCourse(courseCode);
+        }
+
+
+        public ListExamsResponse? SearchExamsBySemester(int semesterId)
+        {
+            return saturnContext.SearchExamBySemester(semesterId);
+        }
+
+        public ExamUserCountResponse? ExamUserCount(int examId)
+        {
+            return saturnContext.ExamUserCount(examId);
+        }
     }
 }
