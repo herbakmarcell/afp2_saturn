@@ -441,9 +441,9 @@ namespace ASP_Core.Database
             };
         }
 
-        public StandardExamResponse? AddNewExams(ExamModel examModel)
+        public StandardExamResponse? AddNewExams(CreateExamRequestModel createExamRequestModel)
         {
-            if (examModel==null)
+            if (createExamRequestModel==null)
             {
                 return new StandardExamResponse
                 {
@@ -451,7 +451,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Courses.FirstOrDefault(e => e.Code == examModel.CourseCode)==null)
+            if (Courses.FirstOrDefault(e => e.Code == createExamRequestModel.CourseCode)==null)
             {
                 return new StandardExamResponse
                 {
@@ -459,7 +459,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Semesters.FirstOrDefault(s => s.Id == examModel.Id) == null)
+            if (Semesters.FirstOrDefault(s => s.Id == createExamRequestModel.SemesterId) == null)
             {
                 return new StandardExamResponse
                 {
@@ -469,13 +469,12 @@ namespace ASP_Core.Database
             }
             Exam newexam = new Exam 
             {
-                Course=Courses.FirstOrDefault(e=>e.Code ==examModel.CourseCode),
+                Course=Courses.FirstOrDefault(e=>e.Code ==createExamRequestModel.CourseCode),
                 Grades= new List<Grade>(),
-                Semester=Semesters.FirstOrDefault(s=>s.Id==examModel.Id),
+                Semester=Semesters.FirstOrDefault(s=>s.Id==createExamRequestModel.SemesterId),
                 Students=new List<User>(),
-                MaxSize= examModel.MaxSize,
-                Id= examModel.Id,
-                Prof = examModel.Prof
+                MaxSize= createExamRequestModel.MaxSize,
+                Prof = createExamRequestModel.Prof
             };
             this.Exams.Add(newexam);
             SaveChanges();

@@ -53,9 +53,9 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addnewexam")]
-        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]ExamModel examModel)
+        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]CreateExamRequestModel createExamRequestModel)
         {
-            StandardExamResponse addNewExamResponse = examService.AddNewExam(examModel);
+            StandardExamResponse addNewExamResponse = examService.AddNewExam(createExamRequestModel);
             if (addNewExamResponse.Success == false)
             {
                 return BadRequest(new Response<string>(addNewExamResponse.Message));

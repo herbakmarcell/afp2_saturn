@@ -28,7 +28,7 @@ namespace ASP_Core.Services.Exam
         public ListExamsResponse? SearchExamsBySizeMax(int size);
         public ListExamsResponse? SearchExamsByCourse(string courseCode);
         public ExamUserCountResponse? ExamUserCount(int examId);
-        public StandardExamResponse? AddNewExam(ExamModel examModel);
+        public StandardExamResponse? AddNewExam(CreateExamRequestModel createExamRequestModel);
         public StandardExamResponse? DeleteExam(int examId);
         public StandardExamResponse? EditExam(ExamModel examModel);
     }
@@ -100,9 +100,9 @@ namespace ASP_Core.Services.Exam
             return saturnContext.ListExams();
         }
 
-        public StandardExamResponse? AddNewExam(ExamModel examModel)
+        public StandardExamResponse? AddNewExam(CreateExamRequestModel createExamRequestModel)
         {
-            return saturnContext.AddNewExams(examModel);
+            return saturnContext.AddNewExams(createExamRequestModel);
         }
 
         public StandardExamResponse? DeleteExam(int examId)
