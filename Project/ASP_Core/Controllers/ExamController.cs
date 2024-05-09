@@ -38,7 +38,7 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<AddExamToUserResponse>(addExamToUserResponse));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("listexams")]
         public ActionResult<Response<ListExamsResponse>> ListExams()
@@ -62,7 +62,7 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse.Message));
         }
-        [HttpPost]
+        [HttpDelete]
         [Authorize()]
         [Route("deleteexam")]
         public ActionResult<Response<StandardExamResponse>> DeleteExam([FromBody] int examId)
@@ -79,7 +79,7 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
         }
 
-        [HttpPost]
+        [HttpPut]
         [Authorize()]
         [Route("editexam")]
         public ActionResult<Response<StandardExamResponse>> EditExam([FromBody] ExamModel examModel)
@@ -96,12 +96,12 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbyprof")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsByProf([FromBody] string profname)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsByProf([FromQuery] string profid)
         {
-            ListExamsResponse listExamsResponse = examService.SearchExamsByProf(profname);
+            ListExamsResponse listExamsResponse = examService.SearchExamsByProf(profid);
             if (listExamsResponse.Success == false)
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
@@ -109,10 +109,10 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbyid")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsById([FromBody] int id)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsById([FromQuery] int id)
         {
             ListExamsResponse listExamsResponse = examService.SearchExamsById(id);
             if (listExamsResponse.Success == false)
@@ -123,10 +123,10 @@ namespace ASP_Core.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbySizeMin")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMin([FromBody] int size)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMin([FromQuery] int size)
         {
             ListExamsResponse listExamsResponse = examService.SearchExamsBySizeMin(size);
             if (listExamsResponse.Success == false)
@@ -136,10 +136,10 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbySizeMax")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMax([FromBody] int size)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMax([FromQuery] int size)
         {
             ListExamsResponse listExamsResponse = examService.SearchExamsBySizeMax(size);
             if (listExamsResponse.Success == false)
@@ -151,10 +151,10 @@ namespace ASP_Core.Controllers
 
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbycourse")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsByCourse([FromBody] string courseCode)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsByCourse([FromQuery] string courseCode)
         {
             ListExamsResponse listExamsResponse = examService.SearchExamsByCourse(courseCode);
             if (listExamsResponse.Success == false)
@@ -164,10 +164,10 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("searchexamsbysemester")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySemester([FromBody] int semesterId)
+        public ActionResult<Response<ListExamsResponse>> SearchExamsBySemester([FromQuery] int semesterId)
         {
             ListExamsResponse listExamsResponse = examService.SearchExamsBySemester(semesterId);
             if (listExamsResponse.Success == false)
@@ -179,10 +179,10 @@ namespace ASP_Core.Controllers
 
 
 
-        [HttpPost]
+        [HttpGet]
         [Authorize()]
         [Route("examusercount")]
-        public ActionResult<Response<ExamUserCountResponse>> ExamUserCount([FromBody]int ExamId)
+        public ActionResult<Response<ExamUserCountResponse>> ExamUserCount([FromQuery]int ExamId)
         {
             ExamUserCountResponse examUserCountResponse = examService.ExamUserCount(ExamId);
             if (examUserCountResponse.Success == false)

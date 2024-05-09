@@ -429,10 +429,7 @@ namespace ASP_Core.Database
                 };
             }
             List<ExamModel> examModels = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                examModels.Add(this.Exams.Include(e => e.Grades).Include(e => e.Id).Include(e => e.Course).Include(e => e.Course) as ExamModel);
-            }
+            examModels.Add(this.Exams.Include(e => e.Grades).Include(e => e.Id).Include(e => e.Course).Include(e => e.Course) as ExamModel);
             return new ListExamsResponse
             {
                 Exams = examModels,
@@ -569,7 +566,7 @@ namespace ASP_Core.Database
         }
 
 
-        public ListExamsResponse? SearchExamByProf(string profname)
+        public ListExamsResponse? SearchExamByProf(string profid)
         {
             if (Exams.Count() == 0)
             {
@@ -583,7 +580,7 @@ namespace ASP_Core.Database
             List<ExamModel> specexamsModel= new List<ExamModel>();
             foreach (Exam exam in Exams)
             {
-                if (exam.Prof==profname)
+                if (exam.Prof==profid)
                 {
                     specexams.Add(exam);
                 }
