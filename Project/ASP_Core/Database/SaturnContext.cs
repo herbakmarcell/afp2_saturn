@@ -443,6 +443,40 @@ namespace ASP_Core.Database
 
         public StandardExamResponse? AddNewExams(CreateExamRequestModel createExamRequestModel)
         {
+            Course jokurzus = new Course();
+            foreach (Course course in Courses)
+            {
+                if (course.Code==createExamRequestModel.CourseCode)
+                {
+                    jokurzus=course;
+                }
+            }
+            if (jokurzus.Code!=createExamRequestModel.CourseCode)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
+                    Success = false
+                };
+            }
+
+            Semester joszemeszter = new Semester();
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id==createExamRequestModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                }
+            }
+            if (joszemeszter.Id!=createExamRequestModel.SemesterId)
+            {
+                return new StandardExamResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
             if (createExamRequestModel==null)
             {
                 return new StandardExamResponse
@@ -470,9 +504,9 @@ namespace ASP_Core.Database
             //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
             Exam newexam = new Exam 
             {
-                Course=Courses.FirstOrDefault(e=>e.Code ==createExamRequestModel.CourseCode),
+                Course=jokurzus,
                 Grades= new List<Grade>(),
-                Semester=Semesters.FirstOrDefault(s=>s.Id==createExamRequestModel.SemesterId),
+                Semester=joszemeszter,
                 Students=new List<User>(),
                 MaxSize= createExamRequestModel.MaxSize,
                 Prof = createExamRequestModel.Prof
@@ -729,14 +763,6 @@ namespace ASP_Core.Database
             }
             List<Exam> specexams = new List<Exam>();
             List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Course course in Courses)
-            {
-                if (course.Code==courseCode)
-                {
-
-                    break;
-                }
-            }
             foreach (Exam exam in Exams)
             {
                 if (exam.Course!=null)
@@ -746,7 +772,11 @@ namespace ASP_Core.Database
                         specexams.Add(exam);
                     }
                 }
-                
+                return new ListExamsResponse
+                {
+                    Message = "NINCS KURZUS HOZZÁRENDELVE AZ EXAMHOZ",
+                    Success = false
+                };
             }
             if (specexams.Count() == 0)
             {
@@ -792,7 +822,12 @@ namespace ASP_Core.Database
                         specexams.Add(exam);
                     }
                 }
-                
+                return new ListExamsResponse
+                {
+                    Message = "NINCS szemeszter HOZZÁRENDELVE AZ EXAMHOZ",
+                    Success = false
+                };
+
             }
             if (specexams.Count() == 0)
             {

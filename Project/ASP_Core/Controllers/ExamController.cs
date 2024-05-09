@@ -159,7 +159,7 @@ namespace ASP_Core.Controllers
             ListExamsResponse listExamsResponse = examService.SearchExamsByCourse(courseCode);
             if (listExamsResponse.Success == false)
             {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
+                return BadRequest(new Response<ListExamsResponse>(listExamsResponse));
             }
             return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
