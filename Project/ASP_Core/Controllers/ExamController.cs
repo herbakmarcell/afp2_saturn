@@ -48,7 +48,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
         [HttpPost]
         [Authorize()]
@@ -60,7 +60,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(addNewExamResponse.Message));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse.Message));
+            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse));
         }
         [HttpDelete]
         [Authorize()]
@@ -76,7 +76,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(StandardExamResponse.Message));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
+            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse));
         }
 
         [HttpPut]
@@ -93,7 +93,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(StandardExamResponse.Message));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse.Message));
+            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse));
         }
 
         [HttpGet]
@@ -106,7 +106,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
         [HttpGet]
@@ -119,7 +119,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
 
@@ -133,7 +133,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
         [HttpGet]
@@ -146,7 +146,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
 
@@ -161,7 +161,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
         [HttpGet]
@@ -174,7 +174,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(listExamsResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse.Message));
+            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
         }
 
 
@@ -189,7 +189,7 @@ namespace ASP_Core.Controllers
             {
                 return BadRequest(new Response<string>(examUserCountResponse.Message));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(examUserCountResponse.Message));
+            return new OkObjectResult(new Response<ExamUserCountResponse>(examUserCountResponse));
         }
     }
 }

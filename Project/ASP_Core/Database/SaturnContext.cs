@@ -429,7 +429,10 @@ namespace ASP_Core.Database
                 };
             }
             List<ExamModel> examModels = new List<ExamModel>();
-            examModels.Add(this.Exams.Include(e => e.Grades).Include(e => e.Id).Include(e => e.Course).Include(e => e.Course) as ExamModel);
+            foreach (Exam ex in Exams)
+            {
+                examModels.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
+            }
             return new ListExamsResponse
             {
                 Exams = examModels,
@@ -464,6 +467,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
+            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
             Exam newexam = new Exam 
             {
                 Course=Courses.FirstOrDefault(e=>e.Code ==createExamRequestModel.CourseCode),
@@ -499,15 +503,6 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            
-            foreach (User user in Users)
-            {
-                if (user.Exams.Contains(Exams.FirstOrDefault(e => e.Id == examId)))
-                {
-                    user.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
-                }
-            }
-
             this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
             SaveChanges();
             return new StandardExamResponse
@@ -515,6 +510,10 @@ namespace ASP_Core.Database
                 Message = "Sikeresen törölte az examot",
                 Success = true
             };
+
+
+
+
         }
 
         public StandardExamResponse? EditExam(ExamModel examModel)
@@ -593,17 +592,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
-            {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
-            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
 
             return new ListExamsResponse
             {
@@ -640,17 +629,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
-            {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
-            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
 
             return new ListExamsResponse
             {
@@ -686,17 +665,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
-            {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
-            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
 
             return new ListExamsResponse
             {
@@ -722,6 +691,7 @@ namespace ASP_Core.Database
             List<ExamModel> specexamsModel = new List<ExamModel>();
             foreach (Exam exam in Exams)
             {
+
                 if (exam.MaxSize <= size)
                 {
                     specexams.Add(exam);
@@ -735,17 +705,8 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
-            {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
-            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
+            
 
             return new ListExamsResponse
             {
@@ -756,7 +717,7 @@ namespace ASP_Core.Database
         }
 
 
-        public ListExamsResponse? SearchExamByCourse(string courdeCode)
+        public ListExamsResponse? SearchExamByCourse(string courseCode)
         {
             if (Exams.Count() == 0)
             {
@@ -768,12 +729,24 @@ namespace ASP_Core.Database
             }
             List<Exam> specexams = new List<Exam>();
             List<ExamModel> specexamsModel = new List<ExamModel>();
+            foreach (Course course in Courses)
+            {
+                if (course.Code==courseCode)
+                {
+
+                    break;
+                }
+            }
             foreach (Exam exam in Exams)
             {
-                if (exam.Course.Code == courdeCode)
+                if (exam.Course!=null)
                 {
-                    specexams.Add(exam);
+                    if (exam.Course.Code == courseCode)
+                    {
+                        specexams.Add(exam);
+                    }
                 }
+                
             }
             if (specexams.Count() == 0)
             {
@@ -783,18 +756,10 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
+            foreach (Exam ex in specexams)
             {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
+                specexamsModel.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
             }
-
             return new ListExamsResponse
             {
                 Exams = specexamsModel,
@@ -820,10 +785,14 @@ namespace ASP_Core.Database
             List<ExamModel> specexamsModel = new List<ExamModel>();
             foreach (Exam exam in Exams)
             {
-                if (exam.Semester.Id==semesterId)
+                if (exam.Semester!= null)
                 {
-                    specexams.Add(exam);
+                    if (exam.Semester.Id == semesterId)
+                    {
+                        specexams.Add(exam);
+                    }
                 }
+                
             }
             if (specexams.Count() == 0)
             {
@@ -833,17 +802,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            foreach (Exam sexam in specexams)
-            {
-                specexamsModel.Add(new ExamModel
-                {
-                    CourseCode = sexam.Course.Code,
-                    Id = sexam.Id,
-                    MaxSize = sexam.MaxSize,
-                    Prof = sexam.Prof,
-                    SemesterId = sexam.Semester.Id
-                });
-            }
+            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
 
             return new ListExamsResponse
             {
@@ -868,13 +827,21 @@ namespace ASP_Core.Database
             }
             foreach (User user in Users)
             {
-                foreach (Exam exam in user.Exams)
+                if (user.Exams != null)
                 {
-                    if (exam.Id==examId)
+                    if (user.Exams.Count != 0)
                     {
-                        usercount++;
+                        foreach (Exam exam in user.Exams)
+                        {
+                            if (exam.Id == examId)
+                            {
+                                usercount++;
+                            }
+                        }
                     }
                 }
+                
+                
             }
             return new ExamUserCountResponse
             {

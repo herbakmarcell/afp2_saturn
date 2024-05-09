@@ -21,7 +21,7 @@ namespace ASP_Core.Services.Exam
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public AddExamToUserResponse? AddExamToUser(ExamUserModel userexam);
         public ListExamsResponse? ListExams();
-        public ListExamsResponse? SearchExamsByProf(string profname);
+        public ListExamsResponse? SearchExamsByProf(string profid);
         public ListExamsResponse? SearchExamsById(int id);
         public ListExamsResponse? SearchExamsBySemester(int semesterId);
         public ListExamsResponse? SearchExamsBySizeMin(int size);
@@ -115,9 +115,9 @@ namespace ASP_Core.Services.Exam
             return saturnContext.EditExam(examModel);
         }
 
-        public ListExamsResponse? SearchExamsByProf(string profname)
+        public ListExamsResponse? SearchExamsByProf(string profid)
         {
-            return saturnContext.SearchExamByProf(profname);
+            return saturnContext.SearchExamByProf(profid);
         }
 
         public ListExamsResponse? SearchExamsById(int id)
