@@ -485,19 +485,12 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Courses.FirstOrDefault(e => e.Code == createExamRequestModel.CourseCode)==null)
+
+            if (jokurzus == null || joszemeszter == null)
             {
                 return new StandardExamResponse
                 {
-                    Message = "nincs megadott kurzuskóddal rendelkező kurzus",
-                    Success = false
-                };
-            }
-            if (Semesters.FirstOrDefault(s => s.Id == createExamRequestModel.SemesterId) == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nincs megadott semesteridvel rendelkező semester",
+                    Message = "Üres a kurzus vagy szemeszter bruh",
                     Success = false
                 };
             }
@@ -761,23 +754,10 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            List<Exam> specexams = new List<Exam>();
+            List<Exam> specexams = Exams.Where(e => e.Course.Code == courseCode).ToList();
             List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                if (exam.Course!=null)
-                {
-                    if (exam.Course.Code == courseCode)
-                    {
-                        specexams.Add(exam);
-                    }
-                }
-                return new ListExamsResponse
-                {
-                    Message = "NINCS KURZUS HOZZÁRENDELVE AZ EXAMHOZ",
-                    Success = false
-                };
-            }
+            Exams.Include(e => e.Course.Code==courseCode);
+            
             if (specexams.Count() == 0)
             {
                 return new ListExamsResponse
@@ -811,24 +791,8 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            List<Exam> specexams = new List<Exam>();
             List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                if (exam.Semester!= null)
-                {
-                    if (exam.Semester.Id == semesterId)
-                    {
-                        specexams.Add(exam);
-                    }
-                }
-                return new ListExamsResponse
-                {
-                    Message = "NINCS szemeszter HOZZÁRENDELVE AZ EXAMHOZ",
-                    Success = false
-                };
-
-            }
+            List<Exam> specexams = Exams.Where(e => e.Semester.Id == semesterId).ToList();
             if (specexams.Count() == 0)
             {
                 return new ListExamsResponse
