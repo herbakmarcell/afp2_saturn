@@ -23,6 +23,7 @@ namespace ASP_Core.Services.Exam
         public StandardClassResponse? AddNewClass(CreateClassRequestModel createClassRequestModel);
         public StandardClassResponse? DeleteClass(int classId);
         public StandardClassResponse? EditClass(EditClassModel editClassModel);
+        public ListClassResponse? SearchClassesById(int id);
     }
     public class ClassService : ClassIService
     {
@@ -58,6 +59,11 @@ namespace ASP_Core.Services.Exam
         public StandardClassResponse? EditClass(EditClassModel editClassModel)
         {
             return saturnContext.EditClass(editClassModel);
+        }
+
+        public ListClassResponse? SearchClassesById(int id)
+        {
+            return saturnContext.SearchClassById(id);
         }
     }
 }

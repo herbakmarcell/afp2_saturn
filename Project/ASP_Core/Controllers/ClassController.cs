@@ -61,5 +61,19 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<StandardClassResponse>(StandardClassResponse));
         }
+
+
+        [HttpGet]
+        [Authorize()]
+        [Route("searchclassesbyid")]
+        public ActionResult<Response<ListClassResponse>> SearchClassesById([FromQuery] int id)
+        {
+            ListClassResponse listClassesResponse = ClassService.SearchClassesById(id);
+            if (listClassesResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listClassesResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
+        }
     }
 }
