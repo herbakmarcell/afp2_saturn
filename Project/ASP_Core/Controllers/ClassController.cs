@@ -114,5 +114,19 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
         }
+
+
+        [HttpGet]
+        [Authorize()]
+        [Route("searchclassesbyendmax")]
+        public ActionResult<Response<ListClassResponse>> SearchClassesByEndmax([FromQuery] DateTime Time)
+        {
+            ListClassResponse listClassesResponse = ClassService.SearchClassesByEndmax(Time);
+            if (listClassesResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listClassesResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
+        }
     }
 }

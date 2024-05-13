@@ -26,7 +26,8 @@ namespace ASP_Core.Services.Exam
         public ListClassResponse? SearchClassesById(int id);
         public ListClassResponse? SearchClassesByStartmin(DateTime startTime);
         public ListClassResponse? SearchClassesByStartmax(DateTime startTime);
-        public ListClassResponse? SearchClassesByEndmin(DateTime startTime);
+        public ListClassResponse? SearchClassesByEndmin(DateTime Time);
+        public ListClassResponse? SearchClassesByEndmax(DateTime Time);
     }
     public class ClassService : ClassIService
     {
@@ -82,6 +83,11 @@ namespace ASP_Core.Services.Exam
         public ListClassResponse? SearchClassesByEndmin(DateTime Time)
         {
             return saturnContext.SearchClassByEndmin(Time);
+        }
+
+        public ListClassResponse? SearchClassesByEndmax(DateTime Time)
+        {
+            return saturnContext.SearchClassByEndmax(Time);
         }
     }
 }
