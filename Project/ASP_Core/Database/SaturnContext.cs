@@ -1143,5 +1143,40 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+        public ListClassResponse? SearchClassByEndmin(DateTime Time)
+        {
+            if (Classes.Count() == 0)
+            {
+                return new ListClassResponse
+                {
+                    Message = "Nem létezik még óra",
+                    Success = false
+                };
+            }
+            List<ClassModel> specclasses = new List<ClassModel>();
+            foreach (ClassModel xclass in Classes)
+            {
+                if (xclass.EndTime >= Time)
+                {
+                    specclasses.Add(xclass);
+                }
+            }
+            if (specclasses.Count() == 0)
+            {
+                return new ListClassResponse
+                {
+                    Message = "nincs a keresésnek megfelelő óra",
+                    Success = false
+                };
+            }
+            return new ListClassResponse
+            {
+                Classes = specclasses,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
     }
 }
