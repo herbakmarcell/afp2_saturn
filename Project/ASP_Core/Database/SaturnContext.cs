@@ -950,8 +950,97 @@ namespace ASP_Core.Database
             };
 
 
+        }
 
 
+
+        public StandardClassResponse? EditClass(EditClassModel editClassModel)
+        {
+            if (editClassModel == null)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nincs átadva a módosított class",
+                    Success = false
+                };
+            }
+            if (Classes.FirstOrDefault(e => e.Id == editClassModel.Id) == null)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nem létezik ilyen módosítandó class",
+                    Success = false
+                };
+            }
+            Course jokurzus = new Course();
+            foreach (Course course in Courses)
+            {
+                if (course.Code == editClassModel.CourseCode)
+                {
+                    jokurzus = course;
+                }
+            }
+            if (jokurzus.Code != editClassModel.CourseCode)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
+                    Success = false
+                };
+            }
+
+
+            Room joroom = new Room();
+            foreach (Room room in Rooms)
+            {
+                if (room.Code == editClassModel.RoomCode)
+                {
+                    joroom = room;
+                }
+            }
+            if (joroom.Code != editClassModel.RoomCode)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nincs terem a megadott teremkóddal",
+                    Success = false
+                };
+            }
+            if (editClassModel== null)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nincs átadva a legenerálandó class",
+                    Success = false
+                };
+            }
+
+            if (joroom == null || jokurzus == null)
+            {
+                return new StandardClassResponse
+                {
+                    Message = "nincs megadott kurzus vagy szoba",
+                    Success = false
+                };
+            }
+            ClassModel modifiableClass = Classes.FirstOrDefault(e => e.Id == editClassModel.Id);
+            ClassModel newClass = new ClassModel
+            {
+                Course= jokurzus,
+                StartTime = editClassModel.StartTime,
+                EndTime= editClassModel.EndTime,
+                Id= editClassModel.Id,
+                Room=joroom
+            };
+
+            this.Classes.Remove(Classes.FirstOrDefault(e => e.Id == editClassModel.Id));
+            this.Classes.Add(newClass);
+            SaveChanges();
+            return new StandardClassResponse
+            {
+                Message = "Sikeresen megváltoztatta az classt",
+                Success = true
+            };
         }
     }
 }

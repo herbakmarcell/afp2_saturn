@@ -44,5 +44,22 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<StandardClassResponse>(classResponse));
         }
+
+        [HttpPut]
+        [Authorize()]
+        [Route("editclass")]
+        public ActionResult<Response<StandardExamResponse>> EditClass([FromBody] EditClassModel editClassModel)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            StandardClassResponse StandardClassResponse = ClassService.EditClass(editClassModel);
+            if (StandardClassResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(StandardClassResponse.Message));
+            }
+            return new OkObjectResult(new Response<StandardClassResponse>(StandardClassResponse));
+        }
     }
 }
