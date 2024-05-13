@@ -75,5 +75,17 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
         }
+        [HttpGet]
+        [Authorize()]
+        [Route("searchclassesbystart")]
+        public ActionResult<Response<ListClassResponse>> SearchClassesByStartmin([FromQuery] DateTime startTime)
+        {
+            ListClassResponse listClassesResponse = ClassService.SearchClassesByStartmin(startTime);
+            if (listClassesResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listClassesResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
+        }
     }
 }
