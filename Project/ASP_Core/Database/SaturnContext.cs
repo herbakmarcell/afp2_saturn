@@ -1328,5 +1328,51 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+        public ListCourseResponse? SearchCoursesByType(string type)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (type =="")
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem adtál meg típust.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses)
+            {
+                if (course.Type ==type)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
     }
 }

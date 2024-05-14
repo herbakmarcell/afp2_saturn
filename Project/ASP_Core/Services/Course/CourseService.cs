@@ -8,6 +8,7 @@ using ASP_Core.Models.Responses;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
+using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -28,6 +29,7 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesByCreditmax(int credit);
         public ListCourseResponse? SearchCoursesBySizemin(int size);
         public ListCourseResponse? SearchCoursesBySizemax(int size);
+        public ListCourseResponse? SearchCoursesByType(string type);
     }
     public class CourseService : CourseIService
     {
@@ -92,6 +94,11 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesBySizemax(int size)
         {
             return saturnContext.SearchCoursesBySizemax(size);
+        }
+
+        public ListCourseResponse? SearchCoursesByType(string type)
+        {
+            return saturnContext.SearchCoursesByType(type);
         }
     }
 }
