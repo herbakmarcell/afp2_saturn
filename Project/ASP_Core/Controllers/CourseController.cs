@@ -21,5 +21,18 @@ namespace ASP_Core.Controllers
             this.CourseService = courseService;
             this.commonService = commonService;
         }
+
+        [HttpPost]
+        [Authorize()]
+        [Route("addnewcourse")]
+        public ActionResult<Response<NewCourseResponse>> AddnewCourse([FromBody] ListCourseModel courseModel)
+        {
+            NewCourseResponse newCourseResponse = CourseService.AddNewCourse(courseModel);
+            if (newCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(newCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+        }
     }
 }

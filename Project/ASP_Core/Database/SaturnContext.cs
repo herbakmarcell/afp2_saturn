@@ -849,5 +849,107 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+
+        public NewCourseResponse? AddNewCourse(ListCourseModel courseModel)
+        {
+
+            foreach (Course course in Courses)
+            {
+                if (course.Code==courseModel.Code)
+                {
+                    return new NewCourseResponse
+                    {
+                        Message = "Már van a megadott kurzuskóddal kurzus!",
+                        Success = false
+                    };
+                }
+            }
+
+
+            Subject josubject = new Subject();
+            foreach (Subject subject in Subjects)
+            {
+                if (subject.Code==courseModel.SubjectCode)
+                {
+                    josubject = subject;
+                }
+            }
+            if (josubject.Code!= courseModel.SubjectCode)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs subject a megadott subjectkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "newm lehet a kredit nullánál kissebb",
+                    Success = false
+                };
+            }
+            Semester joszemeszter = new Semester();
+            joszemeszter.Id = -1;
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id == courseModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                    //hibát dob mivel elvileg üres a semester éve ezért manuálisan adok meg neki
+                }
+            }
+            if (joszemeszter.Id != courseModel.SemesterId)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva a kurzus",
+                    Success = false
+                };
+            }
+
+            if (josubject == null || joszemeszter == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "Üres a kurzus vagy subject",
+                    Success = false
+                };
+            }
+            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
+            Course newcourse = new Course
+            {
+                Code = courseModel.Code,
+                Classes = new List<ClassModel>(),
+                Students = new List<User>(),
+                Credit = courseModel.Credit,
+                CurrentSemester = joszemeszter,
+                Exams = new List<Exam>(),
+                Subject = josubject,
+                MaxSize = courseModel.MaxSize,
+                Grades = new List<Grade>(),
+                Prof = courseModel.Prof,
+                Type = courseModel.Type
+            };
+            this.Courses.Add(newcourse);
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = "Sikeres hozzáadás",
+                Success = true
+            };
+        }
     }
 }
