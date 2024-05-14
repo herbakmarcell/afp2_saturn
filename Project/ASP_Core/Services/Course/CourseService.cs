@@ -24,6 +24,7 @@ namespace ASP_Core.Services.Course
         public NewCourseResponse? EditCourse(ListCourseModel courseModel);
         public ListCourseResponse? ListCourses();
         public ListCourseResponse? SearchCoursesByProf(string profId);
+        public ListCourseResponse? SearchCoursesByCreditmin(int credit);
     }
     public class CourseService : CourseIService
     {
@@ -68,6 +69,11 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesByProf(string profId)
         {
             return saturnContext.SearchCoursesByProf(profId);
+        }
+
+        public ListCourseResponse? SearchCoursesByCreditmin(int credit)
+        {
+            return saturnContext.SearchCoursesByCreditmin(credit);
         }
     }
 }
