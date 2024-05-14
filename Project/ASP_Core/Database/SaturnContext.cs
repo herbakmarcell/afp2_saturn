@@ -1003,5 +1003,109 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+
+
+        public NewCourseResponse? EditCourse(ListCourseModel courseModel)
+        {
+            if (courseModel == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva a módosított course",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a kredit minuszban",
+                    Success = false
+                };
+            }
+            if (courseModel.MaxSize<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a maxszám minuszban",
+                    Success = false
+                };
+            }
+            Subject josubject = new Subject();
+            foreach (Subject subject in Subjects)
+            {
+                if (subject.Code == courseModel.SubjectCode)
+                {
+                    josubject = subject;
+                }
+            }
+            if (josubject.Code != courseModel.SubjectCode)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs subject a megadott subjectkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit < 0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "newm lehet a kredit nullánál kissebb",
+                    Success = false
+                };
+            }
+            Semester joszemeszter = new Semester();
+            joszemeszter.Id = -1;
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id == courseModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                }
+            }
+            if (joszemeszter.Id != courseModel.SemesterId)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
+            if (Courses.FirstOrDefault(e => e.Code == courseModel.Code) == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem létezik ilyen módosítandó kurzus",
+                    Success = false
+                };
+            }
+            Course modifiableCourse = Courses.FirstOrDefault(e => e.Code == courseModel.Code);
+            Course newCourse= new Course
+            {
+                Code=courseModel.Code,
+                Classes=modifiableCourse.Classes,
+                Credit=courseModel.Credit,
+                CurrentSemester=joszemeszter,
+                Students=modifiableCourse.Students,
+                Subject=josubject,
+                MaxSize=courseModel.MaxSize,
+                Exams=modifiableCourse.Exams,
+                Grades=modifiableCourse.Grades,
+                Prof=courseModel.Prof,
+                Type=courseModel.Type
+            };
+
+            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseModel.Code));
+            this.Courses.Add(newCourse);
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = $"Sikeresen megváltoztatta a {courseModel.Code} kurzust",
+                Success = true
+            };
+        }
     }
 }

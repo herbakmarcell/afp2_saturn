@@ -64,5 +64,23 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
         }
+
+
+        [HttpPut]
+        [Authorize()]
+        [Route("editcourse")]
+        public ActionResult<Response<NewCourseResponse>> EditCourse([FromBody] ListCourseModel courseModel)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            NewCourseResponse newCourseResponse = CourseService.EditCourse(courseModel);
+            if (newCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(newCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+        }
     }
 }

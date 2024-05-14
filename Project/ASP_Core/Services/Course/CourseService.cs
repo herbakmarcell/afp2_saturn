@@ -21,6 +21,7 @@ namespace ASP_Core.Services.Course
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public NewCourseResponse? AddNewCourse(ListCourseModel courseModel);
         public NewCourseResponse? DeleteCourse(string courseCode);
+        public NewCourseResponse? EditCourse(ListCourseModel courseModel);
         public ListCourseResponse? ListCourses();
     }
     public class CourseService : CourseIService
@@ -56,6 +57,11 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? ListCourses()
         {
             return saturnContext.ListCourses();
+        }
+
+        public NewCourseResponse? EditCourse(ListCourseModel courseModel)
+        {
+            return saturnContext.EditCourse(courseModel);
         }
     }
 }
