@@ -20,6 +20,7 @@ namespace ASP_Core.Services.Course
         public string TokenWithSaturn(IEnumerable<Claim> claims);
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
         public NewCourseResponse? AddNewCourse(ListCourseModel courseModel);
+        public NewCourseResponse? DeleteCourse(string courseCode);
     }
     public class CourseService : CourseIService
     {
@@ -44,6 +45,11 @@ namespace ASP_Core.Services.Course
         public NewCourseResponse? AddNewCourse(ListCourseModel courseModel)
         {
             return saturnContext.AddNewCourse(courseModel);
+        }
+
+        public NewCourseResponse? DeleteCourse(string courseCode)
+        {
+            return saturnContext.DeleteCourse(courseCode);
         }
     }
 }

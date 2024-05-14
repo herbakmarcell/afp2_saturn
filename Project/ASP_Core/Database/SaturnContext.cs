@@ -900,7 +900,6 @@ namespace ASP_Core.Database
                 if (semester.Id == courseModel.SemesterId)
                 {
                     joszemeszter = semester;
-                    //hibát dob mivel elvileg üres a semester éve ezért manuálisan adok meg neki
                 }
             }
             if (joszemeszter.Id != courseModel.SemesterId)
@@ -950,6 +949,37 @@ namespace ASP_Core.Database
                 Message = "Sikeres hozzáadás",
                 Success = true
             };
+        }
+
+        public NewCourseResponse? DeleteCourse(string courseCode)
+        {
+            if (courseCode == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva az kurzuskód",
+                    Success = false
+                };
+            }
+            if (Courses.FirstOrDefault(e => e.Code == courseCode) == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem létezik ilyen kurzus",
+                    Success = false
+                };
+            }
+            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseCode));
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = $"Sikeresen törölte a {courseCode} kurzust!",
+                Success = true
+            };
+
+
+
+
         }
     }
 }

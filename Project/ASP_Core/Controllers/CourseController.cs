@@ -34,5 +34,22 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
         }
+
+        [HttpDelete]
+        [Authorize()]
+        [Route("deletecourse")]
+        public ActionResult<Response<NewCourseResponse>> DeleteCourse([FromBody] string courseCode)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            NewCourseResponse newCourseResponse = CourseService.DeleteCourse(courseCode);
+            if (newCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(newCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+        }
     }
 }
