@@ -867,6 +867,61 @@ namespace ASP_Core.Database
                 }
             }
 
+            if (courseModel.SemesterId<1)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "NEM LEHET A SZEMESZTER ID-JA 1-NÉL KISSEBB!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Credit < 0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nwm lehet a kredit 0-nál kissebb!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Type=="")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a tipus ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.SubjectCode== "")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a subject code ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Code == "")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a kurzuskód ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.MaxSize <0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a férőhely kissebb mint nulla!",
+                    Success = false
+                };
+            }
+
+            
 
             Subject josubject = new Subject();
             foreach (Subject subject in Subjects)
@@ -946,7 +1001,7 @@ namespace ASP_Core.Database
             SaveChanges();
             return new NewCourseResponse
             {
-                Message = "Sikeres hozzáadás",
+                Message = $"Sikeres hozzáadás!   semester in:{courseModel.SemesterId}  out:{newcourse.CurrentSemester.Id}  subject in:{courseModel.SubjectCode} out:{newcourse.Subject.Code}",
                 Success = true
             };
         }
@@ -1356,6 +1411,56 @@ namespace ASP_Core.Database
                 {
                     speccourse.Add(course);
                 }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesBySemester(int semesterId)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (semesterId <1)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a szemeszterId kissebb mint 1.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses)
+            {
+                if (course.CurrentSemester!= null)
+                {
+                    if (course.CurrentSemester.Id == semesterId)
+                    {
+                        speccourse.Add(course);
+                    }
+                }
+                
             }
             if (speccourse.Count() == 0)
             {

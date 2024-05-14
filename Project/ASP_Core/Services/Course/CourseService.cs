@@ -30,6 +30,7 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesBySizemin(int size);
         public ListCourseResponse? SearchCoursesBySizemax(int size);
         public ListCourseResponse? SearchCoursesByType(string type);
+        public ListCourseResponse? SearchCoursesBySemester(int semesterId);
     }
     public class CourseService : CourseIService
     {
@@ -99,6 +100,11 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesByType(string type)
         {
             return saturnContext.SearchCoursesByType(type);
+        }
+
+        public ListCourseResponse? SearchCoursesBySemester(int semesterId)
+        {
+            return saturnContext.SearchCoursesBySemester(semesterId);
         }
     }
 }

@@ -165,5 +165,19 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
         }
+
+
+        [HttpGet]
+        [Authorize()]
+        [Route("searchcoursesbysemester")]
+        public ActionResult<Response<ListCourseResponse>> SearchCoursesBySemester([FromQuery] int semesterId)
+        {
+            ListCourseResponse listCourseResponse = CourseService.SearchCoursesBySemester(semesterId);
+            if (listCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+        }
     }
 }
