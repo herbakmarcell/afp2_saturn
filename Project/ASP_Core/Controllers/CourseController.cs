@@ -51,5 +51,18 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
         }
+
+        [HttpGet]
+        [Authorize()]
+        [Route("listcourses")]
+        public ActionResult<Response<ListCourseResponse>> ListCourses()
+        {
+            ListCourseResponse listCourseResponse = CourseService.ListCourses();
+            if (listCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+        }
     }
 }

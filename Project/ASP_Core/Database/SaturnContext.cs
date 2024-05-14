@@ -978,8 +978,30 @@ namespace ASP_Core.Database
             };
 
 
+        }
 
 
+        public ListCourseResponse? ListCourses()
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            List<ListCourseModel> courseModels = new List<ListCourseModel>();
+            foreach (Course course in Courses)
+            {
+                courseModels.Add(new ListCourseModel { Code=course.Code,Credit=course.Credit,SubjectCode=(course.Subject?.Code==null)? "Nincs valamiért":course.Subject.Code, MaxSize =course.MaxSize,Prof=course.Prof,SemesterId=(course.CurrentSemester?.Id==null)?-1:course.CurrentSemester.Id,Type=course.Type});
+            }
+            return new ListCourseResponse
+            {
+                Courses = courseModels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
         }
     }
 }
