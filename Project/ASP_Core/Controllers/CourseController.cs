@@ -109,5 +109,19 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
         }
+
+
+        [HttpGet]
+        [Authorize()]
+        [Route("searchcoursesbycreditmax")]
+        public ActionResult<Response<ListCourseResponse>> SearchCoursesByCreditmax([FromQuery] int credit)
+        {
+            ListCourseResponse listCourseResponse = CourseService.SearchCoursesByCreditmax(credit);
+            if (listCourseResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listCourseResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+        }
     }
 }
