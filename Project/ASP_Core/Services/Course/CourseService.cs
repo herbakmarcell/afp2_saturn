@@ -27,6 +27,7 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesByCreditmin(int credit);
         public ListCourseResponse? SearchCoursesByCreditmax(int credit);
         public ListCourseResponse? SearchCoursesBySizemin(int size);
+        public ListCourseResponse? SearchCoursesBySizemax(int size);
     }
     public class CourseService : CourseIService
     {
@@ -86,6 +87,11 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesBySizemin(int size)
         {
             return saturnContext.SearchCoursesBySizemin(size);
+        }
+
+        public ListCourseResponse? SearchCoursesBySizemax(int size)
+        {
+            return saturnContext.SearchCoursesBySizemax(size);
         }
     }
 }
