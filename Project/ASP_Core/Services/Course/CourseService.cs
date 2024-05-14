@@ -23,6 +23,7 @@ namespace ASP_Core.Services.Course
         public NewCourseResponse? DeleteCourse(string courseCode);
         public NewCourseResponse? EditCourse(ListCourseModel courseModel);
         public ListCourseResponse? ListCourses();
+        public ListCourseResponse? SearchCoursesByProf(string profId);
     }
     public class CourseService : CourseIService
     {
@@ -62,6 +63,11 @@ namespace ASP_Core.Services.Course
         public NewCourseResponse? EditCourse(ListCourseModel courseModel)
         {
             return saturnContext.EditCourse(courseModel);
+        }
+
+        public ListCourseResponse? SearchCoursesByProf(string profId)
+        {
+            return saturnContext.SearchCoursesByProf(profId);
         }
     }
 }
