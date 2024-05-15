@@ -22,6 +22,8 @@ namespace Saturn_Client
     {
         private RestClient client;
 
+        private bool isReceivedData;
+
         public InboxForm()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace Saturn_Client
             client = new RestClient("https://localhost:7204/api/Message/");
             RefreshReceivedData();
         }
+
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
@@ -88,7 +91,15 @@ namespace Saturn_Client
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Message deleted successfully.");
-                    RefreshSentData();
+                    if (isReceivedData)
+                    {
+                        RefreshReceivedData();
+                    }
+                    else
+                    {
+                        RefreshSentData();
+                    }
+
                 }
                 else if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
@@ -109,6 +120,8 @@ namespace Saturn_Client
         public void RefreshSentData()
         {
             var request = new RestRequest("/sent", Method.Get);
+
+            dataGridView1.Columns[4].Visible = true;
 
             try
             {
@@ -158,6 +171,8 @@ namespace Saturn_Client
         public void RefreshReceivedData()
         {
             var request = new RestRequest("/received", Method.Get);
+
+            dataGridView1.Columns[4].Visible=false;
 
             try
             {
@@ -249,7 +264,7 @@ namespace Saturn_Client
                 {
                     var responseContent = response.Content;
                     Response<string> temp = JsonSerializer.Deserialize<Response<string>>(responseContent);
-                    MessageBox.Show("Baly: " + temp.message);
+                    MessageBox.Show("Baly: " + response.Content);
                 }
             }
             catch (Exception ex)
@@ -281,6 +296,7 @@ namespace Saturn_Client
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            label4.Visible = false;
             HideSend(true);
             linkLabel2.Visible = true;
             dataGridView1.Hide();
@@ -305,6 +321,7 @@ namespace Saturn_Client
             HideSend(false);
             RefreshReceivedData();
             dataGridView1.Show();
+            isReceivedData = true;
             linkLabel2.Visible = false;
             label4.Visible = true;
             label4.Text = "Bejövő üzenetek";
@@ -314,6 +331,7 @@ namespace Saturn_Client
         {
             RefreshSentData();
             HideSend(false);
+            isReceivedData = false;
             dataGridView1.Show();
             linkLabel2.Visible = true;
             label4.Visible = true;
