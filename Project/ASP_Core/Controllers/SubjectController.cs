@@ -48,5 +48,23 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
         }
 
+
+        [HttpDelete]
+        [Authorize()]
+        [Route("deletesubject")]
+        public ActionResult<Response<ListSubjectResponse>> DeleteSubject([FromBody] string subjectCode)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            ListSubjectResponse listSubjectResponse = subjectService.DeleteSubject(subjectCode);
+            if (listSubjectResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listSubjectResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+        }
+
     }
 }

@@ -1956,5 +1956,37 @@ namespace ASP_Core.Database
             };
 
         }
+
+
+        public ListSubjectResponse? DeleteSubject(string subjectCode)
+        {
+            if (subjectCode == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nincs átadva az subjectcode",
+                    Success = false
+                };
+            }
+            if (Subjects.FirstOrDefault(e => e.Code == subjectCode) == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nem létezik ilyen subject",
+                    Success = false
+                };
+            }
+            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code== subjectCode));
+            SaveChanges();
+            return new ListSubjectResponse
+            {
+                Message = "Sikeresen törölte az subjectet",
+                Success = true
+            };
+
+
+
+
+        }
     }
 }

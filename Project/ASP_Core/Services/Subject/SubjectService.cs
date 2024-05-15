@@ -22,6 +22,7 @@ namespace ASP_Core.Services.Subject
 
         public ListSubjectResponse? ListSubjects();
         public ListSubjectResponse? AddNewSubject(SubjectModel subject);
+        public ListSubjectResponse? DeleteSubject(string subjectCode);
     }
     public class SubjectService : SubjectIService
     {
@@ -52,6 +53,11 @@ namespace ASP_Core.Services.Subject
         public ListSubjectResponse? AddNewSubject(SubjectModel subject)
         {
             return saturnContext.AddNewSubject(subject);
+        }
+
+        public ListSubjectResponse? DeleteSubject(string subjectCode)
+        {
+            return saturnContext.DeleteSubject(subjectCode);
         }
     }
 }
