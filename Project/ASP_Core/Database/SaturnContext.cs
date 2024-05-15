@@ -1892,5 +1892,28 @@ namespace ASP_Core.Database
                 Success = true
             };
         }
+
+        public ListSubjectResponse? ListSubjects()
+        {
+            if (Subjects.Count() == 0)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "Nem létezik még tárgy",
+                    Success = false
+                };
+            }
+            List<SubjectModel> subjectmodels = new List<SubjectModel>();
+            foreach (Subject subject in Subjects)
+            {
+                subjectmodels.Add(new SubjectModel { Code= subject.Code,Name=subject.Name});
+            }
+            return new ListSubjectResponse
+            {
+                Subjects=subjectmodels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
     }
 }
