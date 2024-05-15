@@ -55,10 +55,9 @@
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.ForeColor = Color.DarkOrange;
-            HelpButton.Location = new Point(999, 16);
-            HelpButton.Margin = new Padding(3, 4, 3, 4);
+            HelpButton.Location = new Point(874, 12);
             HelpButton.Name = "HelpButton";
-            HelpButton.Size = new Size(31, 36);
+            HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 19;
             HelpButton.Text = "?";
             toolTip1.SetToolTip(HelpButton, "Használati útmutató");
@@ -68,11 +67,12 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(32, 65);
+            dataGridView1.Location = new Point(28, 49);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(936, 355);
+            dataGridView1.Size = new Size(819, 266);
             dataGridView1.TabIndex = 20;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -82,9 +82,9 @@
             linkLabel1.BackColor = Color.Transparent;
             linkLabel1.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel1.LinkColor = Color.DarkOrange;
-            linkLabel1.Location = new Point(834, 27);
+            linkLabel1.Location = new Point(730, 20);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(121, 23);
+            linkLabel1.Size = new Size(101, 18);
             linkLabel1.TabIndex = 21;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Üzenet küldése";
@@ -97,9 +97,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Comic Sans MS", 13.8F);
             label1.ForeColor = Color.DarkOrange;
-            label1.Location = new Point(46, 86);
+            label1.Location = new Point(40, 64);
             label1.Name = "label1";
-            label1.Size = new Size(111, 31);
+            label1.Size = new Size(91, 26);
             label1.TabIndex = 22;
             label1.Text = "Címzett: ";
             // 
@@ -109,9 +109,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Comic Sans MS", 13.8F);
             label2.ForeColor = Color.DarkOrange;
-            label2.Location = new Point(46, 132);
+            label2.Location = new Point(40, 99);
             label2.Name = "label2";
-            label2.Size = new Size(91, 31);
+            label2.Size = new Size(76, 26);
             label2.TabIndex = 23;
             label2.Text = "Tárgy: ";
             // 
@@ -121,31 +121,34 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Comic Sans MS", 13.8F);
             label3.ForeColor = Color.DarkOrange;
-            label3.Location = new Point(46, 188);
+            label3.Location = new Point(40, 141);
             label3.Name = "label3";
-            label3.Size = new Size(98, 31);
+            label3.Size = new Size(81, 26);
             label3.TabIndex = 24;
             label3.Text = "Üzenet:";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(163, 90);
+            textBox1.Location = new Point(143, 68);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(134, 27);
+            textBox1.Size = new Size(118, 23);
             textBox1.TabIndex = 25;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(163, 132);
+            textBox2.Location = new Point(143, 99);
+            textBox2.Margin = new Padding(3, 2, 3, 2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(134, 27);
+            textBox2.Size = new Size(118, 23);
             textBox2.TabIndex = 26;
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(46, 222);
+            richTextBox1.Location = new Point(40, 166);
+            richTextBox1.Margin = new Padding(3, 2, 3, 2);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(892, 164);
+            richTextBox1.Size = new Size(781, 124);
             richTextBox1.TabIndex = 27;
             richTextBox1.Text = "";
             // 
@@ -157,9 +160,10 @@
             button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
             button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(726, 132);
+            button1.Location = new Point(669, 110);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(152, 56);
+            button1.Size = new Size(152, 52);
             button1.TabIndex = 28;
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -170,9 +174,9 @@
             linkLabel2.BackColor = Color.Transparent;
             linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel2.LinkColor = Color.DarkOrange;
-            linkLabel2.Location = new Point(612, 27);
+            linkLabel2.Location = new Point(538, 20);
             linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(62, 23);
+            linkLabel2.Size = new Size(51, 18);
             linkLabel2.TabIndex = 29;
             linkLabel2.TabStop = true;
             linkLabel2.Text = "<Vissza";
@@ -186,9 +190,9 @@
             linkLabel3.BackColor = Color.Transparent;
             linkLabel3.Font = new Font("Comic Sans MS", 9.2F);
             linkLabel3.LinkColor = Color.DarkOrange;
-            linkLabel3.Location = new Point(680, 27);
+            linkLabel3.Location = new Point(595, 20);
             linkLabel3.Name = "linkLabel3";
-            linkLabel3.Size = new Size(148, 23);
+            linkLabel3.Size = new Size(121, 18);
             linkLabel3.TabIndex = 30;
             linkLabel3.TabStop = true;
             linkLabel3.Text = "Elküldött üzenetek";
@@ -201,18 +205,18 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             label4.ForeColor = Color.DarkOrange;
-            label4.Location = new Point(32, 32);
+            label4.Location = new Point(28, 16);
             label4.Name = "label4";
-            label4.Size = new Size(165, 28);
+            label4.Size = new Size(128, 23);
             label4.TabIndex = 32;
             label4.Text = "Bejövő üzenetek";
             // 
             // InboxForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(1091, 462);
+            ClientSize = new Size(955, 346);
             Controls.Add(label4);
             Controls.Add(linkLabel3);
             Controls.Add(linkLabel2);
@@ -226,6 +230,7 @@
             Controls.Add(linkLabel1);
             Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "InboxForm";
             Text = "Inbox";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

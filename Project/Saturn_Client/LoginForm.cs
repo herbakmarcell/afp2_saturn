@@ -23,6 +23,27 @@ namespace Saturn_Client
 
         }
 
+        public int Radius { get; set; } = 30;
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, Radius * 2, Radius * 2, 180, 90);
+            path.AddArc(Width - Radius * 2, 0, Radius * 2, Radius * 2, 270, 90);
+            path.AddArc(Width - Radius * 2, Height - Radius * 2, Radius * 2, Radius * 2, 0, 90);
+            path.AddArc(0, Height - Radius * 2, Radius * 2, Radius * 2, 90, 90);
+            path.CloseAllFigures();
+
+            Region = new Region(path);
+
+            using (Pen pen = new Pen(Color.Black, 3))
+            {
+                e.Graphics.DrawPath(pen, path);
+            }
+        }
+
         private void InitFormStyle()
         {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
