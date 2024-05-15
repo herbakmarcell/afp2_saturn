@@ -46,6 +46,7 @@ namespace ASP_Core
             builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddScoped<ExamIService, ExamService>();
             builder.Services.AddScoped<CourseIService, CourseService>();
+            builder.Services.AddScoped<ClassIService, ClassService>();
 
             builder.Services.AddControllers();
 
@@ -105,7 +106,7 @@ namespace ASP_Core
                 User user = new User();
                 user.SaturnCode = "ADMIN1";
                 user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
-                user.LastName = "Péter";
+                user.LastName = "Pï¿½ter";
                 user.FirstName = "Admin";
                 user.Email = "admin@admin.com";
                 user.PhoneNumber = "+36201234567";
