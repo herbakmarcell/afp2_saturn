@@ -10,6 +10,7 @@ using ASP_Core.Services;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Identity;
 using ASP_Core.Services.Exam;
+using ASP_Core.Services.Course;
 
 namespace ASP_Core
 {
@@ -44,6 +45,7 @@ namespace ASP_Core
             builder.Services.AddScoped<ICommonService, CommonService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddScoped<ExamIService, ExamService>();
+            builder.Services.AddScoped<CourseIService, CourseService>();
             builder.Services.AddScoped<ClassIService, ClassService>();
 
             builder.Services.AddControllers();
@@ -104,7 +106,7 @@ namespace ASP_Core
                 User user = new User();
                 user.SaturnCode = "ADMIN1";
                 user.Password = BCrypt.Net.BCrypt.HashPassword("GoofyAAH");
-                user.LastName = "Péter";
+                user.LastName = "Pï¿½ter";
                 user.FirstName = "Admin";
                 user.Email = "admin@admin.com";
                 user.PhoneNumber = "+36201234567";

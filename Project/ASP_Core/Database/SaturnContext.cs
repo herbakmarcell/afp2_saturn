@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MySql.EntityFrameworkCore.Extensions;
 using ASP_Core.Database.Models;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -846,6 +846,686 @@ namespace ASP_Core.Database
             {
                 usercount = usercount,
                 Message = "Sikeres megszámolás",
+                Success = true
+            };
+        }
+
+
+
+        public NewCourseResponse? AddNewCourse(ListCourseModel courseModel)
+        {
+
+            foreach (Course course in Courses)
+            {
+                if (course.Code==courseModel.Code)
+                {
+                    return new NewCourseResponse
+                    {
+                        Message = "Már van a megadott kurzuskóddal kurzus!",
+                        Success = false
+                    };
+                }
+            }
+
+            if (courseModel.SemesterId<1)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "NEM LEHET A SZEMESZTER ID-JA 1-NÉL KISSEBB!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Credit < 0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nwm lehet a kredit 0-nál kissebb!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Type=="")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a tipus ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.SubjectCode== "")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a subject code ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.Code == "")
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a kurzuskód ures!",
+                    Success = false
+                };
+            }
+
+            if (courseModel.MaxSize <0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a férőhely kissebb mint nulla!",
+                    Success = false
+                };
+            }
+
+            
+
+            Subject josubject = new Subject();
+            foreach (Subject subject in Subjects)
+            {
+                if (subject.Code==courseModel.SubjectCode)
+                {
+                    josubject = subject;
+                }
+            }
+            if (josubject.Code!= courseModel.SubjectCode)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs subject a megadott subjectkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "newm lehet a kredit nullánál kissebb",
+                    Success = false
+                };
+            }
+            Semester joszemeszter = new Semester();
+            joszemeszter.Id = -1;
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id == courseModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                }
+            }
+            if (joszemeszter.Id != courseModel.SemesterId)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva a kurzus",
+                    Success = false
+                };
+            }
+
+            if (josubject == null || joszemeszter == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "Üres a kurzus vagy subject",
+                    Success = false
+                };
+            }
+            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
+            Course newcourse = new Course
+            {
+                Code = courseModel.Code,
+                Classes = new List<ClassModel>(),
+                Students = new List<User>(),
+                Credit = courseModel.Credit,
+                CurrentSemester = joszemeszter,
+                Exams = new List<Exam>(),
+                Subject = josubject,
+                MaxSize = courseModel.MaxSize,
+                Grades = new List<Grade>(),
+                Prof = courseModel.Prof,
+                Type = courseModel.Type
+            };
+            this.Courses.Add(newcourse);
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = $"Sikeres hozzáadás!   semester in:{courseModel.SemesterId}  out:{newcourse.CurrentSemester.Id}  subject in:{courseModel.SubjectCode} out:{newcourse.Subject.Code}",
+                Success = true
+            };
+        }
+
+        public NewCourseResponse? DeleteCourse(string courseCode)
+        {
+            if (courseCode == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva az kurzuskód",
+                    Success = false
+                };
+            }
+            if (Courses.FirstOrDefault(e => e.Code == courseCode) == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem létezik ilyen kurzus",
+                    Success = false
+                };
+            }
+            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseCode));
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = $"Sikeresen törölte a {courseCode} kurzust!",
+                Success = true
+            };
+
+
+        }
+
+
+        public ListCourseResponse? ListCourses()
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            List<ListCourseModel> courseModels = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c=>c.Subject).Include(c=>c.CurrentSemester))
+            {
+                courseModels.Add(new ListCourseModel { Code=course.Code,Credit=course.Credit,SubjectCode=(course.Subject?.Code==null)? "Nincs valamiért":course.Subject.Code, MaxSize =course.MaxSize,Prof=course.Prof,SemesterId=(course.CurrentSemester?.Id==null)?-1:course.CurrentSemester.Id,Type=course.Type});
+            }
+            return new ListCourseResponse
+            {
+                Courses = courseModels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+
+        public NewCourseResponse? EditCourse(ListCourseModel courseModel)
+        {
+            if (courseModel == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs átadva a módosított course",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a kredit minuszban",
+                    Success = false
+                };
+            }
+            if (courseModel.MaxSize<0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem lehet a maxszám minuszban",
+                    Success = false
+                };
+            }
+            Subject josubject = new Subject();
+            foreach (Subject subject in Subjects)
+            {
+                if (subject.Code == courseModel.SubjectCode)
+                {
+                    josubject = subject;
+                }
+            }
+            if (josubject.Code != courseModel.SubjectCode)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs subject a megadott subjectkóddal",
+                    Success = false
+                };
+            }
+            if (courseModel.Credit < 0)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "newm lehet a kredit nullánál kissebb",
+                    Success = false
+                };
+            }
+            Semester joszemeszter = new Semester();
+            joszemeszter.Id = -1;
+
+            foreach (Semester semester in Semesters)
+            {
+                if (semester.Id == courseModel.SemesterId)
+                {
+                    joszemeszter = semester;
+                }
+            }
+            if (joszemeszter.Id != courseModel.SemesterId)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nincs szemeszter a megadott szemeszterkóddal",
+                    Success = false
+                };
+            }
+            if (Courses.FirstOrDefault(e => e.Code == courseModel.Code) == null)
+            {
+                return new NewCourseResponse
+                {
+                    Message = "nem létezik ilyen módosítandó kurzus",
+                    Success = false
+                };
+            }
+            Course modifiableCourse = Courses.FirstOrDefault(e => e.Code == courseModel.Code);
+            Course newCourse= new Course
+            {
+                Code=courseModel.Code,
+                Classes=modifiableCourse.Classes,
+                Credit=courseModel.Credit,
+                CurrentSemester=joszemeszter,
+                Students=modifiableCourse.Students,
+                Subject=josubject,
+                MaxSize=courseModel.MaxSize,
+                Exams=modifiableCourse.Exams,
+                Grades=modifiableCourse.Grades,
+                Prof=courseModel.Prof,
+                Type=courseModel.Type
+            };
+
+            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseModel.Code));
+            this.Courses.Add(newCourse);
+            SaveChanges();
+            return new NewCourseResponse
+            {
+                Message = $"Sikeresen megváltoztatta a {courseModel.Code} kurzust",
+                Success = true
+            };
+        }
+
+
+
+        public ListCourseResponse? SearchCoursesByProf(string profid)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.Prof == profid)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code=spec.Code,SubjectCode=spec.Subject?.Code,SemesterId=spec.CurrentSemester?.Id,MaxSize=spec.MaxSize,Credit=spec.Credit,Prof=spec.Prof,Type=spec.Type}));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+        public ListCourseResponse? SearchCoursesByCreditmin(int credit)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (credit<0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a kredit minuszban.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.Credit >= credit)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesByCreditmax(int credit)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (credit < 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a kredit minuszban.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.Credit < credit)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+        public ListCourseResponse? SearchCoursesBySizemin(int size)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (size < 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a férőhely minuszban.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.MaxSize >= size)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesBySizemax(int size)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (size < 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a férőhely minuszban.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.MaxSize < size)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesByType(string type)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (type =="")
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem adtál meg típust.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.Type ==type)
+                {
+                    speccourse.Add(course);
+                }
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesBySemester(int semesterId)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (semesterId <1)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet a szemeszterId kissebb mint 1.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.CurrentSemester!= null)
+                {
+                    if (course.CurrentSemester.Id == semesterId)
+                    {
+                        speccourse.Add(course);
+                    }
+                }
+                
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListCourseResponse? SearchCoursesBySubject(string subjectCode)
+        {
+            if (Courses.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "Nem létezik még kurzus",
+                    Success = false
+                };
+            }
+            if (subjectCode =="")
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nem lehet öres a subjectkód.",
+                    Success = false
+                };
+            }
+            List<Course> speccourse = new List<Course>();
+            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            {
+                if (course.CurrentSemester != null)
+                {
+                    if (course.Subject.Code == subjectCode)
+                    {
+                        speccourse.Add(course);
+                    }
+                }
+
+            }
+            if (speccourse.Count() == 0)
+            {
+                return new ListCourseResponse
+                {
+                    Message = "nincs a keresésnek megfelelő kurzus",
+                    Success = false
+                };
+            }
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+
+            return new ListCourseResponse
+            {
+                Courses = speccoursesModel,
+                Message = "Sikeres kilistázás",
                 Success = true
             };
         }
