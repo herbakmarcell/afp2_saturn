@@ -1985,8 +1985,43 @@ namespace ASP_Core.Database
             };
 
 
+        }
 
+        public ListSubjectResponse? EditSubject(SubjectModel subject)
+        {
+            if (subject == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nincs átadva a módosított subject",
+                    Success = false
+                };
+            }
+            
+            if (Subjects.FirstOrDefault(e => e.Code == subject.Code) == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nem létezik ilyen módosítandó subject",
+                    Success = false
+                };
+            }
+            Subject modifiableSubject = Subjects.FirstOrDefault(e => e.Code == subject.Code);
+            Subject newsubject = new Subject
+            {
+                Code = subject.Code,
+                Courses = modifiableSubject.Courses,
+                Name = subject.Name
+            };
 
+            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code == subject.Code));
+            this.Subjects.Add(newsubject);
+            SaveChanges();
+            return new ListSubjectResponse
+            {
+                Message = $"Sikeresen megváltoztatta a {subject.Code} subjectet",
+                Success = true
+            };
         }
     }
 }

@@ -66,5 +66,23 @@ namespace ASP_Core.Controllers
             return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
         }
 
+
+        [HttpPut]
+        [Authorize()]
+        [Route("editsubject")]
+        public ActionResult<Response<ListSubjectResponse>> EditSubject([FromBody] SubjectModel subjectModel)
+        {
+            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            {
+                return Unauthorized(new Response<string>("Missing Admin permissions"));
+            }
+            ListSubjectResponse listSubjectResponse = subjectService.EditSubject(subjectModel);
+            if (listSubjectResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listSubjectResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+        }
+
     }
 }
