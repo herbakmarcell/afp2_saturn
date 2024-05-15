@@ -21,6 +21,7 @@ namespace ASP_Core.Services.Subject
         public bool TokenHasRole(IEnumerable<Claim> claims, string role);
 
         public ListSubjectResponse? ListSubjects();
+        public ListSubjectResponse? AddNewSubject(SubjectModel subject);
     }
     public class SubjectService : SubjectIService
     {
@@ -46,6 +47,11 @@ namespace ASP_Core.Services.Subject
         public ListSubjectResponse? ListSubjects()
         {
             return saturnContext.ListSubjects();
+        }
+
+        public ListSubjectResponse? AddNewSubject(SubjectModel subject)
+        {
+            return saturnContext.AddNewSubject(subject);
         }
     }
 }

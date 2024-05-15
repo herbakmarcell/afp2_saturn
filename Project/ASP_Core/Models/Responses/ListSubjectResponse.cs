@@ -5,6 +5,6 @@
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        public List<SubjectModel> Subjects { get; set; }
+        public List<SubjectModel>? Subjects { get; set; }
     }
 }

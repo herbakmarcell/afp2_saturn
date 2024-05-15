@@ -4,6 +4,7 @@ using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
 using ASP_Core.Services.Auth;
+using ASP_Core.Services.Exam;
 using ASP_Core.Services.Subject;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,19 @@ namespace ASP_Core.Controllers
             }
             return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
         }
-        
+
+        [HttpPost]
+        [Authorize()]
+        [Route("addnewsubject")]
+        public ActionResult<Response<ListSubjectResponse>> AddnewSubject([FromBody] SubjectModel subject)
+        {
+            ListSubjectResponse listSubjectResponse = subjectService.AddNewSubject(subject);
+            if (listSubjectResponse.Success == false)
+            {
+                return BadRequest(new Response<string>(listSubjectResponse.Message));
+            }
+            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+        }
+
     }
 }
