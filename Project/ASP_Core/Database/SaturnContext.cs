@@ -1047,7 +1047,7 @@ namespace ASP_Core.Database
                 };
             }
             List<ListCourseModel> courseModels = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c=>c.Subject).Include(c=>c.CurrentSemester))
             {
                 courseModels.Add(new ListCourseModel { Code=course.Code,Credit=course.Credit,SubjectCode=(course.Subject?.Code==null)? "Nincs valamiért":course.Subject.Code, MaxSize =course.MaxSize,Prof=course.Prof,SemesterId=(course.CurrentSemester?.Id==null)?-1:course.CurrentSemester.Id,Type=course.Type});
             }
@@ -1177,7 +1177,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.Prof == profid)
                 {
@@ -1222,7 +1222,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.Credit >= credit)
                 {
@@ -1268,7 +1268,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.Credit < credit)
                 {
@@ -1313,7 +1313,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.MaxSize >= size)
                 {
@@ -1359,7 +1359,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.MaxSize < size)
                 {
@@ -1405,7 +1405,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.Type ==type)
                 {
@@ -1451,7 +1451,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.CurrentSemester!= null)
                 {
@@ -1501,7 +1501,7 @@ namespace ASP_Core.Database
             }
             List<Course> speccourse = new List<Course>();
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses)
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
                 if (course.CurrentSemester != null)
                 {
