@@ -54,7 +54,7 @@
             usernameField.BackColor = Color.White;
             usernameField.BorderStyle = BorderStyle.None;
             usernameField.Font = new Font("Comic Sans MS", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            usernameField.Location = new Point(84, 101);
+            usernameField.Location = new Point(100, 105);
             usernameField.Margin = new Padding(3, 2, 3, 2);
             usernameField.MaxLength = 6;
             usernameField.Name = "usernameField";
@@ -65,7 +65,7 @@
             // 
             passwordField.BackColor = Color.White;
             passwordField.BorderStyle = BorderStyle.None;
-            passwordField.Location = new Point(84, 137);
+            passwordField.Location = new Point(100, 145);
             passwordField.Margin = new Padding(3, 2, 3, 2);
             passwordField.MaxLength = 16;
             passwordField.Name = "passwordField";
@@ -108,7 +108,7 @@
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.ForeColor = Color.DarkOrange;
-            HelpButton.Location = new Point(613, 241);
+            HelpButton.Location = new Point(645, 12);
             HelpButton.Name = "HelpButton";
             HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 10;
@@ -195,7 +195,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.loginback;
-            ClientSize = new Size(684, 411);
+            ClientSize = new Size(684, 378);
             Controls.Add(passwordField);
             Controls.Add(pictureBox2);
             Controls.Add(usernameField);
