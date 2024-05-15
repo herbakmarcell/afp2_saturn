@@ -72,24 +72,26 @@
             regButton.ForeColor = SystemColors.ControlText;
             regButton.Location = new Point(112, 290);
             regButton.Name = "regButton";
-            regButton.Size = new Size(153, 49);
+            regButton.Size = new Size(152, 52);
             regButton.TabIndex = 0;
             regButton.UseVisualStyleBackColor = false;
             regButton.Click += regButton_Click;
             // 
             // FirstName_tbox
             // 
+            FirstName_tbox.BorderStyle = BorderStyle.None;
             FirstName_tbox.Location = new Point(87, 68);
             FirstName_tbox.Name = "FirstName_tbox";
-            FirstName_tbox.Size = new Size(201, 23);
+            FirstName_tbox.Size = new Size(201, 16);
             FirstName_tbox.TabIndex = 3;
             FirstName_tbox.TextChanged += FirstName_tbox_TextChanged;
             // 
             // LastName_tbox
             // 
+            LastName_tbox.BorderStyle = BorderStyle.None;
             LastName_tbox.Location = new Point(87, 114);
             LastName_tbox.Name = "LastName_tbox";
-            LastName_tbox.Size = new Size(201, 23);
+            LastName_tbox.Size = new Size(201, 16);
             LastName_tbox.TabIndex = 4;
             LastName_tbox.TextChanged += LastName_tbox_TextChanged;
             // 
@@ -116,7 +118,7 @@
             exitButton.Location = new Point(913, 7);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
-            exitButton.Size = new Size(30, 30);
+            exitButton.Size = new Size(30, 27);
             exitButton.TabIndex = 6;
             exitButton.UseVisualStyleBackColor = false;
             exitButton.Click += exitButton_Click;
@@ -143,26 +145,29 @@
             // 
             // Email_tbox
             // 
+            Email_tbox.BorderStyle = BorderStyle.None;
             Email_tbox.Location = new Point(87, 167);
             Email_tbox.Name = "Email_tbox";
-            Email_tbox.Size = new Size(201, 23);
+            Email_tbox.Size = new Size(201, 16);
             Email_tbox.TabIndex = 10;
             Email_tbox.TextChanged += Email_tbox_TextChanged;
             // 
             // PhoneNumber_tbox
             // 
+            PhoneNumber_tbox.BorderStyle = BorderStyle.None;
             PhoneNumber_tbox.Location = new Point(87, 216);
             PhoneNumber_tbox.Name = "PhoneNumber_tbox";
-            PhoneNumber_tbox.Size = new Size(201, 23);
+            PhoneNumber_tbox.Size = new Size(201, 16);
             PhoneNumber_tbox.TabIndex = 11;
             PhoneNumber_tbox.TextChanged += PhoneNumber_tbox_TextChanged;
             // 
             // Password_tbox
             // 
+            Password_tbox.BorderStyle = BorderStyle.None;
             Password_tbox.Location = new Point(87, 262);
             Password_tbox.Name = "Password_tbox";
             Password_tbox.PasswordChar = '*';
-            Password_tbox.Size = new Size(201, 23);
+            Password_tbox.Size = new Size(201, 16);
             Password_tbox.TabIndex = 12;
             Password_tbox.TextChanged += Password_tbox_TextChanged;
             // 
@@ -245,7 +250,7 @@
             pictureBox3.Location = new Point(56, 58);
             pictureBox3.Margin = new Padding(3, 2, 3, 2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(243, 33);
+            pictureBox3.Size = new Size(280, 50);
             pictureBox3.TabIndex = 19;
             pictureBox3.TabStop = false;
             // 
@@ -256,7 +261,7 @@
             pictureBox4.Location = new Point(56, 105);
             pictureBox4.Margin = new Padding(3, 2, 3, 2);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(243, 33);
+            pictureBox4.Size = new Size(280, 50);
             pictureBox4.TabIndex = 20;
             pictureBox4.TabStop = false;
             // 
@@ -267,7 +272,7 @@
             pictureBox5.Location = new Point(56, 157);
             pictureBox5.Margin = new Padding(3, 2, 3, 2);
             pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(243, 33);
+            pictureBox5.Size = new Size(280, 50);
             pictureBox5.TabIndex = 21;
             pictureBox5.TabStop = false;
             // 
@@ -278,7 +283,7 @@
             pictureBox6.Location = new Point(56, 206);
             pictureBox6.Margin = new Padding(3, 2, 3, 2);
             pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(243, 33);
+            pictureBox6.Size = new Size(280, 50);
             pictureBox6.TabIndex = 22;
             pictureBox6.TabStop = false;
             // 
@@ -289,7 +294,7 @@
             pictureBox7.Location = new Point(56, 252);
             pictureBox7.Margin = new Padding(3, 2, 3, 2);
             pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(243, 33);
+            pictureBox7.Size = new Size(280, 50);
             pictureBox7.TabIndex = 23;
             pictureBox7.TabStop = false;
             // 

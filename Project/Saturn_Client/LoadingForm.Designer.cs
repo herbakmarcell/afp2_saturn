@@ -44,9 +44,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.saturn_gif;
-            pictureBox1.Location = new Point(-9, -38);
+            pictureBox1.Location = new Point(-8, -28);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(510, 510);
+            pictureBox1.Size = new Size(500, 500);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -57,11 +58,12 @@
             // 
             // LoadingForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(492, 463);
+            ClientSize = new Size(484, 461);
             Controls.Add(pictureBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LoadingForm";
             Opacity = 0D;
             Text = "LoadingForm";

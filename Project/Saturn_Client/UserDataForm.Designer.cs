@@ -143,7 +143,7 @@
             updateUserDataButton.ForeColor = SystemColors.ControlText;
             updateUserDataButton.Location = new Point(780, 282);
             updateUserDataButton.Name = "updateUserDataButton";
-            updateUserDataButton.Size = new Size(153, 52);
+            updateUserDataButton.Size = new Size(152, 52);
             updateUserDataButton.TabIndex = 15;
             updateUserDataButton.UseVisualStyleBackColor = false;
             updateUserDataButton.Click += updateUserDataButton_Click;
