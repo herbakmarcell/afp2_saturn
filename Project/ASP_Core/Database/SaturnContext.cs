@@ -38,7 +38,7 @@ namespace ASP_Core.Database
         public DbSet<MessageModel> MessageModel { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        { 
+        {
             var connectionString = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build()
@@ -114,7 +114,7 @@ namespace ASP_Core.Database
         }
         private void RoomTableBuilder(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Room>(entity => 
+            modelBuilder.Entity<Room>(entity =>
             {
                 entity.HasKey(e => e.Code);
                 entity.HasMany(e => e.Classes).WithOne(c => c.Room);
@@ -122,7 +122,7 @@ namespace ASP_Core.Database
         }
         private void SemesterTableBuilder(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Semester>(entity => 
+            modelBuilder.Entity<Semester>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Year).IsRequired();
@@ -210,7 +210,7 @@ namespace ASP_Core.Database
             do
             {
                 generatedSaturnCode = string.Empty;
-                
+
                 Random rd = new Random();
                 const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -256,8 +256,8 @@ namespace ASP_Core.Database
                 return null;
             }
             changeResponse.SaturnCode = user.SaturnCode;
-            if (changeModel.NewPassword != null && !BCrypt.Net.BCrypt.Verify(changeModel.NewPassword, user.Password)) 
-            { 
+            if (changeModel.NewPassword != null && !BCrypt.Net.BCrypt.Verify(changeModel.NewPassword, user.Password))
+            {
                 user.Password = BCrypt.Net.BCrypt.HashPassword(changeModel.NewPassword);
                 changeResponse.NewPassword = "Password has changed";
             }
@@ -267,7 +267,7 @@ namespace ASP_Core.Database
                 user.LastName = changeModel.NewLastName;
                 changeResponse.NewLastName = changeModel.NewLastName;
             }
-            if (changeModel.NewFirstName != null && user.FirstName != changeModel.NewFirstName) 
+            if (changeModel.NewFirstName != null && user.FirstName != changeModel.NewFirstName)
             {
                 user.FirstName = changeModel.NewFirstName;
                 changeResponse.NewFirstName = changeModel.NewFirstName;
@@ -282,7 +282,7 @@ namespace ASP_Core.Database
                 user.PhoneNumber = changeModel.NewPhoneNumber;
                 changeResponse.NewPhone = changeModel.NewPhoneNumber;
             }
-                
+
             if (changeModel.NewRoles != null)
             {
                 string[] validRoles = { "Student", "Teacher", "Admin" };
@@ -297,7 +297,7 @@ namespace ASP_Core.Database
                         Role newRole = new Role();
                         newRole.Name = newUserRole;
                         user.Roles.Add(newRole);
-                        changeResponse.NewRoles.Add("+"+newUserRole);
+                        changeResponse.NewRoles.Add("+" + newUserRole);
                     }
                 }
                 foreach (var oldUserRole in roles)
@@ -306,7 +306,7 @@ namespace ASP_Core.Database
                     {
                         Role oldRole = this.Roles.Include(r => r.User).FirstOrDefault(r => r.Name == oldUserRole && r.User.SaturnCode == changeModel.SaturnCode);
                         user.Roles.Remove(oldRole);
-                        changeResponse.NewRoles.Add("-"+oldUserRole);
+                        changeResponse.NewRoles.Add("-" + oldUserRole);
                     }
                 }
             }
@@ -324,7 +324,7 @@ namespace ASP_Core.Database
             User? receiverUser = UserWithSaturnCode(saturnCode);
             if (receiverUser == null) return null;
             List<MessageModel> receivedMessages;
-            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u=> u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
+            if (string.IsNullOrEmpty(sender)) return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser)).ToList();
             else return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Receivers.Contains(receiverUser) && mm.Sender == UserWithSaturnCode(sender)).ToList();
 
         }
@@ -333,7 +333,7 @@ namespace ASP_Core.Database
         {
             User? receiverUser = UserWithSaturnCode(sender);
             if (receiverUser == null) return null;
-            return MessageModel.Include(u=> u.Sender).Include(u=> u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
+            return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
 
@@ -420,7 +420,7 @@ namespace ASP_Core.Database
         }
         public ListExamsResponse? ListExams()
         {
-            if (Exams.Count()==0)
+            if (Exams.Count() == 0)
             {
                 return new ListExamsResponse
                 {
@@ -446,12 +446,12 @@ namespace ASP_Core.Database
             Course jokurzus = new Course();
             foreach (Course course in Courses)
             {
-                if (course.Code==createExamRequestModel.CourseCode)
+                if (course.Code == createExamRequestModel.CourseCode)
                 {
-                    jokurzus=course;
+                    jokurzus = course;
                 }
             }
-            if (jokurzus.Code!=createExamRequestModel.CourseCode)
+            if (jokurzus.Code != createExamRequestModel.CourseCode)
             {
                 return new StandardExamResponse
                 {
@@ -464,12 +464,12 @@ namespace ASP_Core.Database
 
             foreach (Semester semester in Semesters)
             {
-                if (semester.Id==createExamRequestModel.SemesterId)
+                if (semester.Id == createExamRequestModel.SemesterId)
                 {
                     joszemeszter = semester;
                 }
             }
-            if (joszemeszter.Id!=createExamRequestModel.SemesterId)
+            if (joszemeszter.Id != createExamRequestModel.SemesterId)
             {
                 return new StandardExamResponse
                 {
@@ -477,7 +477,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (createExamRequestModel==null)
+            if (createExamRequestModel == null)
             {
                 return new StandardExamResponse
                 {
@@ -495,13 +495,13 @@ namespace ASP_Core.Database
                 };
             }
             //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
-            Exam newexam = new Exam 
+            Exam newexam = new Exam
             {
-                Course=jokurzus,
-                Grades= new List<Grade>(),
-                Semester=joszemeszter,
-                Students=new List<User>(),
-                MaxSize= createExamRequestModel.MaxSize,
+                Course = jokurzus,
+                Grades = new List<Grade>(),
+                Semester = joszemeszter,
+                Students = new List<User>(),
+                MaxSize = createExamRequestModel.MaxSize,
                 Prof = createExamRequestModel.Prof
             };
             this.Exams.Add(newexam);
@@ -522,7 +522,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (Exams.FirstOrDefault(e=>e.Id==examId)==null)
+            if (Exams.FirstOrDefault(e => e.Id == examId) == null)
             {
                 return new StandardExamResponse
                 {
@@ -602,16 +602,16 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            List<Exam> specexams= new List<Exam>();
-            List<ExamModel> specexamsModel= new List<ExamModel>();
+            List<Exam> specexams = new List<Exam>();
+            List<ExamModel> specexamsModel = new List<ExamModel>();
             foreach (Exam exam in Exams)
             {
-                if (exam.Prof==profid)
+                if (exam.Prof == profid)
                 {
                     specexams.Add(exam);
                 }
             }
-            if (specexams.Count()==0)
+            if (specexams.Count() == 0)
             {
                 return new ListExamsResponse
                 {
@@ -733,7 +733,7 @@ namespace ASP_Core.Database
                 };
             }
             specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-            
+
 
             return new ListExamsResponse
             {
@@ -756,8 +756,8 @@ namespace ASP_Core.Database
             }
             List<Exam> specexams = Exams.Where(e => e.Course.Code == courseCode).ToList();
             List<ExamModel> specexamsModel = new List<ExamModel>();
-            Exams.Include(e => e.Course.Code==courseCode);
-            
+            Exams.Include(e => e.Course.Code == courseCode);
+
             if (specexams.Count() == 0)
             {
                 return new ListExamsResponse
@@ -821,7 +821,7 @@ namespace ASP_Core.Database
                 {
                     Message = "Nem létezik még vizsga",
                     Success = false,
-                    usercount=0
+                    usercount = 0
                 };
             }
             foreach (User user in Users)
@@ -839,8 +839,8 @@ namespace ASP_Core.Database
                         }
                     }
                 }
-                
-                
+
+
             }
             return new ExamUserCountResponse
             {
@@ -857,7 +857,7 @@ namespace ASP_Core.Database
 
             foreach (Course course in Courses)
             {
-                if (course.Code==courseModel.Code)
+                if (course.Code == courseModel.Code)
                 {
                     return new NewCourseResponse
                     {
@@ -867,7 +867,7 @@ namespace ASP_Core.Database
                 }
             }
 
-            if (courseModel.SemesterId<1)
+            if (courseModel.SemesterId < 1)
             {
                 return new NewCourseResponse
                 {
@@ -885,7 +885,7 @@ namespace ASP_Core.Database
                 };
             }
 
-            if (courseModel.Type=="")
+            if (courseModel.Type == "")
             {
                 return new NewCourseResponse
                 {
@@ -894,7 +894,7 @@ namespace ASP_Core.Database
                 };
             }
 
-            if (courseModel.SubjectCode== "")
+            if (courseModel.SubjectCode == "")
             {
                 return new NewCourseResponse
                 {
@@ -912,7 +912,7 @@ namespace ASP_Core.Database
                 };
             }
 
-            if (courseModel.MaxSize <0)
+            if (courseModel.MaxSize < 0)
             {
                 return new NewCourseResponse
                 {
@@ -921,17 +921,17 @@ namespace ASP_Core.Database
                 };
             }
 
-            
+
 
             Subject josubject = new Subject();
             foreach (Subject subject in Subjects)
             {
-                if (subject.Code==courseModel.SubjectCode)
+                if (subject.Code == courseModel.SubjectCode)
                 {
                     josubject = subject;
                 }
             }
-            if (josubject.Code!= courseModel.SubjectCode)
+            if (josubject.Code != courseModel.SubjectCode)
             {
                 return new NewCourseResponse
                 {
@@ -939,7 +939,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (courseModel.Credit<0)
+            if (courseModel.Credit < 0)
             {
                 return new NewCourseResponse
                 {
@@ -1047,9 +1047,9 @@ namespace ASP_Core.Database
                 };
             }
             List<ListCourseModel> courseModels = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c=>c.Subject).Include(c=>c.CurrentSemester))
+            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
-                courseModels.Add(new ListCourseModel { Code=course.Code,Credit=course.Credit,SubjectCode=(course.Subject?.Code==null)? "Nincs valamiért":course.Subject.Code, MaxSize =course.MaxSize,Prof=course.Prof,SemesterId=(course.CurrentSemester?.Id==null)?-1:course.CurrentSemester.Id,Type=course.Type});
+                courseModels.Add(new ListCourseModel { Code = course.Code, Credit = course.Credit, SubjectCode = (course.Subject?.Code == null) ? "Nincs valamiért" : course.Subject.Code, MaxSize = course.MaxSize, Prof = course.Prof, SemesterId = (course.CurrentSemester?.Id == null) ? -1 : course.CurrentSemester.Id, Type = course.Type });
             }
             return new ListCourseResponse
             {
@@ -1071,7 +1071,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (courseModel.Credit<0)
+            if (courseModel.Credit < 0)
             {
                 return new NewCourseResponse
                 {
@@ -1079,7 +1079,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (courseModel.MaxSize<0)
+            if (courseModel.MaxSize < 0)
             {
                 return new NewCourseResponse
                 {
@@ -1138,19 +1138,19 @@ namespace ASP_Core.Database
                 };
             }
             Course modifiableCourse = Courses.FirstOrDefault(e => e.Code == courseModel.Code);
-            Course newCourse= new Course
+            Course newCourse = new Course
             {
-                Code=courseModel.Code,
-                Classes=modifiableCourse.Classes,
-                Credit=courseModel.Credit,
-                CurrentSemester=joszemeszter,
-                Students=modifiableCourse.Students,
-                Subject=josubject,
-                MaxSize=courseModel.MaxSize,
-                Exams=modifiableCourse.Exams,
-                Grades=modifiableCourse.Grades,
-                Prof=courseModel.Prof,
-                Type=courseModel.Type
+                Code = courseModel.Code,
+                Classes = modifiableCourse.Classes,
+                Credit = courseModel.Credit,
+                CurrentSemester = joszemeszter,
+                Students = modifiableCourse.Students,
+                Subject = josubject,
+                MaxSize = courseModel.MaxSize,
+                Exams = modifiableCourse.Exams,
+                Grades = modifiableCourse.Grades,
+                Prof = courseModel.Prof,
+                Type = courseModel.Type
             };
 
             this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseModel.Code));
@@ -1192,7 +1192,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code=spec.Code,SubjectCode=spec.Subject?.Code,SemesterId=spec.CurrentSemester?.Id,MaxSize=spec.MaxSize,Credit=spec.Credit,Prof=spec.Prof,Type=spec.Type}));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
 
             return new ListCourseResponse
             {
@@ -1212,7 +1212,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (credit<0)
+            if (credit < 0)
             {
                 return new ListCourseResponse
                 {
@@ -1395,7 +1395,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (type =="")
+            if (type == "")
             {
                 return new ListCourseResponse
                 {
@@ -1407,7 +1407,7 @@ namespace ASP_Core.Database
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
             foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
-                if (course.Type ==type)
+                if (course.Type == type)
                 {
                     speccourse.Add(course);
                 }
@@ -1441,7 +1441,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (semesterId <1)
+            if (semesterId < 1)
             {
                 return new ListCourseResponse
                 {
@@ -1453,14 +1453,14 @@ namespace ASP_Core.Database
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
             foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
-                if (course.CurrentSemester!= null)
+                if (course.CurrentSemester != null)
                 {
                     if (course.CurrentSemester.Id == semesterId)
                     {
                         speccourse.Add(course);
                     }
                 }
-                
+
             }
             if (speccourse.Count() == 0)
             {
@@ -1491,7 +1491,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (subjectCode =="")
+            if (subjectCode == "")
             {
                 return new ListCourseResponse
                 {
@@ -1554,7 +1554,7 @@ namespace ASP_Core.Database
             Room joroom = new Room();
             foreach (Room room in Rooms)
             {
-                if (room.Code==createClassRequestModel.Roomcode)
+                if (room.Code == createClassRequestModel.Roomcode)
                 {
                     joroom = room;
                 }
@@ -1587,10 +1587,10 @@ namespace ASP_Core.Database
             //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
             ClassModel newclass = new ClassModel
             {
-                Course=jokurzus,
-                StartTime=createClassRequestModel.StartTime,
-                EndTime=createClassRequestModel.EndTime,
-                Room=joroom
+                Course = jokurzus,
+                StartTime = createClassRequestModel.StartTime,
+                EndTime = createClassRequestModel.EndTime,
+                Room = joroom
             };
             this.Classes.Add(newclass);
             SaveChanges();
@@ -1686,7 +1686,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            if (editClassModel== null)
+            if (editClassModel == null)
             {
                 return new StandardClassResponse
                 {
@@ -1706,11 +1706,11 @@ namespace ASP_Core.Database
             ClassModel modifiableClass = Classes.FirstOrDefault(e => e.Id == editClassModel.Id);
             ClassModel newClass = new ClassModel
             {
-                Course= jokurzus,
+                Course = jokurzus,
                 StartTime = editClassModel.StartTime,
-                EndTime= editClassModel.EndTime,
-                Id= editClassModel.Id,
-                Room=joroom
+                EndTime = editClassModel.EndTime,
+                Id = editClassModel.Id,
+                Room = joroom
             };
 
             this.Classes.Remove(Classes.FirstOrDefault(e => e.Id == editClassModel.Id));
@@ -1751,7 +1751,7 @@ namespace ASP_Core.Database
             }
             return new ListClassResponse
             {
-                Classes=specclasses,
+                Classes = specclasses,
                 Message = "Sikeres kilistázás",
                 Success = true
             };
@@ -1889,6 +1889,137 @@ namespace ASP_Core.Database
             {
                 Classes = specclasses,
                 Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+        public ListSubjectResponse? ListSubjects()
+        {
+            if (Subjects.Count() == 0)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "Nem létezik még tárgy",
+                    Success = false
+                };
+            }
+            List<SubjectModel> subjectmodels = new List<SubjectModel>();
+            foreach (Subject subject in Subjects)
+            {
+                subjectmodels.Add(new SubjectModel { Code = subject.Code, Name = subject.Name });
+            }
+            return new ListSubjectResponse
+            {
+                Subjects = subjectmodels,
+                Message = "Sikeres kilistázás",
+                Success = true
+            };
+        }
+
+
+        public ListSubjectResponse? AddNewSubject(SubjectModel subject)
+        {
+            if (subject.Code=="")
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "üres a kód",
+                    Success = false
+                };
+            }
+            if (subject.Name == "")
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "üres a név",
+                    Success = false
+                };
+            }
+            foreach (Subject subject1 in Subjects)
+            {
+                if (subject1.Code == subject.Code)
+                {
+                    return new ListSubjectResponse
+                    {
+                        Message = "Már létezik ilyen subject",
+                        Success = false
+                    };
+                }
+            }
+
+            Subjects.Add(new Subject { Code = subject.Code, Courses = new List<Course>(), Name = subject.Name });
+            SaveChanges();
+            return new ListSubjectResponse
+            {
+                Message = "subject létrehozva",
+                Success = true
+            };
+
+        }
+
+
+        public ListSubjectResponse? DeleteSubject(string subjectCode)
+        {
+            if (subjectCode == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nincs átadva az subjectcode",
+                    Success = false
+                };
+            }
+            if (Subjects.FirstOrDefault(e => e.Code == subjectCode) == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nem létezik ilyen subject",
+                    Success = false
+                };
+            }
+            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code== subjectCode));
+            SaveChanges();
+            return new ListSubjectResponse
+            {
+                Message = "Sikeresen törölte az subjectet",
+                Success = true
+            };
+
+
+        }
+
+        public ListSubjectResponse? EditSubject(SubjectModel subject)
+        {
+            if (subject == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nincs átadva a módosított subject",
+                    Success = false
+                };
+            }
+            
+            if (Subjects.FirstOrDefault(e => e.Code == subject.Code) == null)
+            {
+                return new ListSubjectResponse
+                {
+                    Message = "nem létezik ilyen módosítandó subject",
+                    Success = false
+                };
+            }
+            Subject modifiableSubject = Subjects.FirstOrDefault(e => e.Code == subject.Code);
+            Subject newsubject = new Subject
+            {
+                Code = subject.Code,
+                Courses = modifiableSubject.Courses,
+                Name = subject.Name
+            };
+
+            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code == subject.Code));
+            this.Subjects.Add(newsubject);
+            SaveChanges();
+            return new ListSubjectResponse
+            {
+                Message = $"Sikeresen megváltoztatta a {subject.Code} subjectet",
                 Success = true
             };
         }

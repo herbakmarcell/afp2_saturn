@@ -11,6 +11,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Identity;
 using ASP_Core.Services.Exam;
 using ASP_Core.Services.Course;
+using ASP_Core.Services.Subject;
 
 namespace ASP_Core
 {
@@ -47,6 +48,7 @@ namespace ASP_Core
             builder.Services.AddScoped<ExamIService, ExamService>();
             builder.Services.AddScoped<CourseIService, CourseService>();
             builder.Services.AddScoped<ClassIService, ClassService>();
+            builder.Services.AddScoped<SubjectIService, SubjectService>();
 
             builder.Services.AddControllers();
 
