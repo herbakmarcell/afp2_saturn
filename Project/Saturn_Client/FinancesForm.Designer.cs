@@ -70,6 +70,8 @@
             // 
             button1.BackColor = Color.Transparent;
             button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = Properties.Resources.uploadButton;
             button1.Location = new Point(943, 104);
