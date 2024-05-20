@@ -31,6 +31,7 @@
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
             button1 = new Button();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -61,11 +62,24 @@
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = false;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Comic Sans MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label4.ForeColor = Color.DarkOrange;
+            label4.Location = new Point(48, 64);
+            label4.Name = "label4";
+            label4.Size = new Size(221, 23);
+            label4.TabIndex = 33;
+            label4.Text = "Mennyit szeretne feltölteni?";
+            // 
             // LegalMoneyPrinter3140
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(302, 262);
+            Controls.Add(label4);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(pictureBox1);
@@ -81,5 +95,6 @@
         private TextBox textBox1;
         private PictureBox pictureBox1;
         private Button button1;
+        private Label label4;
     }
 }
