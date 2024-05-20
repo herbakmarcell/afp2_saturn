@@ -16,8 +16,15 @@ namespace Saturn_Client
         public LegalMoneyPrinter3140()
         {
             InitializeComponent();
+            InitFormStyle();
         }
 
+        private void InitFormStyle()
+        {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
 
         public int Radius { get; set; } = 30;
 

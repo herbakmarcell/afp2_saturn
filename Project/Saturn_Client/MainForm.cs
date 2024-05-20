@@ -24,7 +24,6 @@ namespace Saturn_Client
         {
             InitializeComponent();
             this.loginForm = loginForm;
-
             InitFormStyle();
 
         }
