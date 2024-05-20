@@ -2,6 +2,8 @@
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
+using ASP_Core.Models.Responses.POST;
 using ASP_Core.Models.Responses.PUT;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
@@ -24,16 +26,16 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addexamtouser")]
-        public ActionResult<Response<AddExamToUserResponse>> AddExamToUser([FromBody] AddExamUserModel examuser)
+        public ActionResult<Response<AddExamToUserResponse>> AddExamToUser([FromBody] AddExamUserModel examUser)
         {
-            if (examuser.SaturnCode==null || examuser.ExamId==null)
+            if (!commonService.TokenHasRole(User.Claims,"Admin") && examUser.SaturnCode != commonService.TokenWithSaturn(User.Claims))
             {
-                return BadRequest(new Response<string>("Hibás adatok "));
+                return Unauthorized(new Response<string>("Nem tud felvenni másnak vizsgát admin nélkül!"));
             }
-            AddExamToUserResponse? addExamToUserResponse = examService.AddExamToUser(examuser);
-            if (addExamToUserResponse.Success==false)
+            AddExamToUserResponse? addExamToUserResponse = examService.AddExamToUser(examUser);
+            if (addExamToUserResponse == null)
             {
-                return BadRequest(new Response<string>(addExamToUserResponse.Message));
+                return BadRequest(new Response<string>("Hiba a vizsga felvétele közben!"));
             }
             return new OkObjectResult(new Response<AddExamToUserResponse>(addExamToUserResponse));
         }
@@ -41,155 +43,113 @@ namespace ASP_Core.Controllers
         [HttpGet]
         [Authorize()]
         [Route("listexams")]
-        public ActionResult<Response<ListExamsResponse>> ListExams()
+        public ActionResult<Response<List<ExamModelResponse>>> ListExams()
         {
-            ListExamsResponse listExamsResponse = examService.ListExams();
-            if (listExamsResponse.Success == false)
+            List<ExamModelResponse>? listExamsResponse = examService.ListExams();
+            if (listExamsResponse == null)
             {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
+                return BadRequest(new Response<string>("Nincsennek vizsgák!"));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
+            return new OkObjectResult(new Response<List<ExamModelResponse>>(listExamsResponse));
         }
+
         [HttpPost]
         [Authorize()]
         [Route("addnewexam")]
-        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]AddExamRequest createExamRequestModel)
+        public ActionResult<Response<ExamModelResponse>> AddnewExam([FromBody] AddExamRequest createExamRequestModel)
         {
-            StandardExamResponse addNewExamResponse = examService.AddNewExam(createExamRequestModel);
-            if (addNewExamResponse.Success == false)
+            ExamModelResponse? response = examService.AddNewExam(createExamRequestModel);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(addNewExamResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen vizsga hozzáadása!"));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(addNewExamResponse));
+            return new OkObjectResult(new Response<ExamModelResponse>(response));
         }
+
         [HttpDelete]
         [Authorize()]
         [Route("deleteexam")]
-        public ActionResult<Response<StandardExamResponse>> DeleteExam([FromBody] int examId)
+        public ActionResult<Response<ExamModelResponse>> DeleteExam([FromBody] int examId)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
-                return Unauthorized(new Response<string>("Missing Admin permissions"));
+                return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
-            StandardExamResponse StandardExamResponse = examService.DeleteExam(examId);
-            if (StandardExamResponse.Success == false)
+            ExamModelResponse? response = examService.DeleteExam(examId);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(StandardExamResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen vizsga törlése!"));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse));
+            return new OkObjectResult(new Response<ExamModelResponse>(response));
         }
 
         [HttpPut]
         [Authorize()]
         [Route("editexam")]
-        public ActionResult<Response<StandardExamResponse>> EditExam([FromBody] ExamRequest examModel)
+        public ActionResult<Response<ExamModelResponse>> EditExam([FromBody] ExamRequest examModel)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            StandardExamResponse StandardExamResponse = examService.EditExam(examModel);
-            if (StandardExamResponse.Success == false)
+            ExamModelResponse? response = examService.EditExam(examModel);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(StandardExamResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen vizsga szerkesztés!"));
             }
-            return new OkObjectResult(new Response<StandardExamResponse>(StandardExamResponse));
+            return new OkObjectResult(new Response<ExamModelResponse>(response));
         }
 
         [HttpGet]
         [Authorize()]
         [Route("searchexamsbyprof")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsByProf([FromQuery] string profid)
+        public ActionResult<Response<List<ExamModelResponse>>> SearchExamsByProf([FromQuery] string profid)
         {
-            ListExamsResponse listExamsResponse = examService.SearchExamsByProf(profid);
-            if (listExamsResponse.Success == false)
+            List <ExamModelResponse> response = examService.SearchExamsByProf(profid);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
+                return BadRequest(new Response<string>("Nincsen vizsga ehhez a professzorhoz!"));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
+            return new OkObjectResult(new Response<List<ExamModelResponse>>(response));
         }
 
         [HttpGet]
         [Authorize()]
         [Route("searchexamsbyid")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsById([FromQuery] int id)
+        public ActionResult<Response<ExamModelResponse>> SearchExamById([FromQuery] int id)
         {
-            ListExamsResponse listExamsResponse = examService.SearchExamsById(id);
-            if (listExamsResponse.Success == false)
+            ExamModelResponse? response = examService.SearchExamById(id);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
+                return BadRequest(new Response<string>("Nincs vizsga ezzel az ID-val!"));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
+            return new OkObjectResult(new Response<ExamModelResponse>(response));
         }
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchexamsbySizeMin")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMin([FromQuery] int size)
-        {
-            ListExamsResponse listExamsResponse = examService.SearchExamsBySizeMin(size);
-            if (listExamsResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
-        }
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchexamsbySizeMax")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySizeMax([FromQuery] int size)
-        {
-            ListExamsResponse listExamsResponse = examService.SearchExamsBySizeMax(size);
-            if (listExamsResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
-        }
-
-
 
         [HttpGet]
         [Authorize()]
         [Route("searchexamsbycourse")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsByCourse([FromQuery] string courseCode)
+        public ActionResult<Response<List<ExamModelResponse>>> SearchExamsByCourse([FromQuery] string courseCode)
         {
-            ListExamsResponse listExamsResponse = examService.SearchExamsByCourse(courseCode);
-            if (listExamsResponse.Success == false)
+            List<ExamModelResponse> response = examService.SearchExamsByCourse(courseCode);
+            if (response == null)
             {
-                return BadRequest(new Response<ListExamsResponse>(listExamsResponse));
+                return BadRequest(new Response<string>("Ennek a kurzusnak nincsennek vizsgái!"));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
+            return new OkObjectResult(new Response<List<ExamModelResponse>>(response));
         }
 
         [HttpGet]
         [Authorize()]
         [Route("searchexamsbysemester")]
-        public ActionResult<Response<ListExamsResponse>> SearchExamsBySemester([FromQuery] int semesterId)
+        public ActionResult<Response<List<ExamModelResponse>>> SearchExamsBySemester([FromQuery] int semesterId)
         {
-            ListExamsResponse listExamsResponse = examService.SearchExamsBySemester(semesterId);
-            if (listExamsResponse.Success == false)
+            List<ExamModelResponse> response = examService.SearchExamsBySemester(semesterId);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(listExamsResponse.Message));
+                return BadRequest(new Response<string>("Ebben a szemeszterben még nincsennek vizsgák!"));
             }
-            return new OkObjectResult(new Response<ListExamsResponse>(listExamsResponse));
-        }
-
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("examusercount")]
-        public ActionResult<Response<ExamUserCountResponse>> ExamUserCount([FromQuery]int ExamId)
-        {
-            ExamUserCountResponse examUserCountResponse = examService.ExamUserCount(ExamId);
-            if (examUserCountResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(examUserCountResponse.Message));
-            }
-            return new OkObjectResult(new Response<ExamUserCountResponse>(examUserCountResponse));
+            return new OkObjectResult(new Response<List<ExamModelResponse>>(response));
         }
     }
 }

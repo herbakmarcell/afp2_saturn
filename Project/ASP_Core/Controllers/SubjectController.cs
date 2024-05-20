@@ -3,6 +3,7 @@ using ASP_Core.Models;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.DELETE;
 using ASP_Core.Models.Subject;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
@@ -15,74 +16,74 @@ namespace ASP_Core.Controllers
 {
     public class SubjectController : ControllerBase
     {
-        private readonly SubjectIService subjectService;
+        private readonly ISubjectService subjectService;
         private readonly ICommonService commonService;
-        public SubjectController(SubjectIService subjectService, ICommonService commonService)
+        public SubjectController(ISubjectService subjectService, ICommonService commonService)
         {
-            this.subjectService =subjectService;
+            this.subjectService = subjectService;
             this.commonService = commonService;
         }
 
         [HttpGet]
         [Authorize()]
         [Route("listsubjects")]
-        public ActionResult<Response<ListSubjectResponse>> ListSubjects()
+        public ActionResult<Response<List<SubjectResponse>>> ListSubjects()
         {
-            ListSubjectResponse listSubjectResponse = subjectService.ListSubjects();
-            if (listSubjectResponse.Success == false)
+            List<SubjectResponse>? subjects = subjectService.ListSubjects();
+            if (subjects == null)
             {
-                return BadRequest(new Response<string>(listSubjectResponse.Message));
+                return BadRequest(new Response<string>(""));
             }
-            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+            return new OkObjectResult(new Response<List<SubjectResponse>>(subjects));
         }
 
         [HttpPost]
         [Authorize()]
         [Route("addnewsubject")]
-        public ActionResult<Response<ListSubjectResponse>> AddnewSubject([FromBody] SubjectModel subject)
+        public ActionResult<Response<SubjectResponse>> AddnewSubject([FromBody] SubjectModel subject)
         {
-            ListSubjectResponse listSubjectResponse = subjectService.AddNewSubject(subject);
-            if (listSubjectResponse.Success == false)
+            SubjectResponse? addedSubject = subjectService.AddNewSubject(subject);
+            if (addedSubject == null)
             {
-                return BadRequest(new Response<string>(listSubjectResponse.Message));
+                return BadRequest(new Response<string>("Tantárgy hozzáadása nem lehetséges!"));
             }
-            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+            return new OkObjectResult(new Response<SubjectResponse>(addedSubject));
         }
 
 
         [HttpDelete]
         [Authorize()]
         [Route("deletesubject")]
-        public ActionResult<Response<ListSubjectResponse>> DeleteSubject([FromBody] string subjectCode)
+        public ActionResult<Response<DeleteSubjectResponse>> DeleteSubject(string subjectCode)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
-                return Unauthorized(new Response<string>("Missing Admin permissions"));
+                return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
-            ListSubjectResponse listSubjectResponse = subjectService.DeleteSubject(subjectCode);
-            if (listSubjectResponse.Success == false)
+            DeleteSubjectResponse? deleteSubject = subjectService.DeleteSubject(subjectCode);
+            if (deleteSubject == null)
             {
-                return BadRequest(new Response<string>(listSubjectResponse.Message));
+                return BadRequest(new Response<string>("Tárgy törlése sikertelen!"));
             }
-            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+            return new OkObjectResult(new Response<DeleteSubjectResponse>(deleteSubject));
         }
 
 
         [HttpPut]
         [Authorize()]
         [Route("editsubject")]
-        public ActionResult<Response<ListSubjectResponse>> EditSubject([FromBody] SubjectModel subjectModel)
+        public ActionResult<Response<SubjectResponse>> EditSubject([FromBody] SubjectModel subjectModel)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            ListSubjectResponse listSubjectResponse = subjectService.EditSubject(subjectModel);
-            if (listSubjectResponse.Success == false)
+            SubjectResponse? editSubject = subjectService.EditSubject(subjectModel);
+            if (editSubject == null)
             {
-                return BadRequest(new Response<string>(listSubjectResponse.Message));
+                return BadRequest(new Response<string>("Hiba a tárgy módosítása közben!"));
             }
-            return new OkObjectResult(new Response<ListSubjectResponse>(listSubjectResponse));
+            return new OkObjectResult(new Response<SubjectResponse>(editSubject));
         }
 
     }

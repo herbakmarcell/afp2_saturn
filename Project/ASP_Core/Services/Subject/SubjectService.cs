@@ -5,6 +5,7 @@ using ASP_Core.Models;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.DELETE;
 using ASP_Core.Models.Subject;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
@@ -16,17 +17,14 @@ using System.Text.RegularExpressions;
 
 namespace ASP_Core.Services.Subject
 {
-    public interface SubjectIService
-    {
-        public string TokenWithSaturn(IEnumerable<Claim> claims);
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role);
-
-        public ListSubjectResponse? ListSubjects();
-        public ListSubjectResponse? AddNewSubject(SubjectModel subject);
-        public ListSubjectResponse? DeleteSubject(string subjectCode);
-        public ListSubjectResponse? EditSubject(SubjectModel subject);
+    public interface ISubjectService
+    { 
+        public List<SubjectResponse>? ListSubjects();
+        public SubjectResponse? AddNewSubject(SubjectModel subject);
+        public DeleteSubjectResponse? DeleteSubject(string subjectCode);
+        public SubjectResponse? EditSubject(SubjectModel subject);
     }
-    public class SubjectService : SubjectIService
+    public class SubjectService : ISubjectService
     {
         private readonly SaturnContext saturnContext;
         public SubjectService(SaturnContext saturnContext)
@@ -34,35 +32,22 @@ namespace ASP_Core.Services.Subject
             this.saturnContext = saturnContext;
         }
 
-
-        public string TokenWithSaturn(IEnumerable<Claim> claims)
-        {
-            if (claims == null) return null;
-            return claims.FirstOrDefault(c => c.Type == "saturnCode").Value.ToString();
-        }
-
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role)
-        {
-            if (claims == null) return false;
-            return claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',').Contains(role);
-        }
-
-        public ListSubjectResponse? ListSubjects()
+        public List<SubjectResponse>? ListSubjects()
         {
             return saturnContext.ListSubjects();
         }
 
-        public ListSubjectResponse? AddNewSubject(SubjectModel subject)
+        public SubjectResponse? AddNewSubject(SubjectModel subject)
         {
             return saturnContext.AddNewSubject(subject);
         }
 
-        public ListSubjectResponse? DeleteSubject(string subjectCode)
+        public DeleteSubjectResponse? DeleteSubject(string subjectCode)
         {
             return saturnContext.DeleteSubject(subjectCode);
         }
 
-        public ListSubjectResponse? EditSubject(SubjectModel subject)
+        public SubjectResponse? EditSubject(SubjectModel subject)
         {
             return saturnContext.EditSubject(subject);
         }

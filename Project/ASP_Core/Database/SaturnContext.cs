@@ -840,9 +840,9 @@ namespace ASP_Core.Database
             return classesBySearch;
         }
 
-        public List<SubjectModel> ListSubjects()
+        public List<SubjectResponse> ListSubjects()
         {
-            return Subjects.Select(subject => new SubjectModel
+            return Subjects.Select(subject => new SubjectResponse
             {
                 Code = subject.Code,
                 Name = subject.Name
@@ -880,7 +880,7 @@ namespace ASP_Core.Database
             return response;
         }
 
-        public SubjectResponse EditSubject(SubjectModel subjectModel)
+        public SubjectResponse? EditSubject(SubjectModel subjectModel)
         {
             Subject? subject = Subjects.FirstOrDefault(e => e.Code == subjectModel.Code);
             if (subject == null) return null;
