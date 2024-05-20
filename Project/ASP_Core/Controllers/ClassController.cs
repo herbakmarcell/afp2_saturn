@@ -26,7 +26,7 @@ namespace ASP_Core.Controllers
         public ActionResult<Response<ClassResponse?>> AddClass([FromBody] AddClassRequest addClassRequest)
         {
             ClassResponse? classResponse = ClassService.AddClass(addClassRequest);
-            if (!commonService.TokenHasRole(User.Claims,"Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
@@ -42,7 +42,7 @@ namespace ASP_Core.Controllers
         public ActionResult<Response<ClassResponse>> DeleteClass([FromQuery] int classId)
         {
             ClassResponse? classResponse = ClassService.DeleteClass(classId);
-            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }

@@ -42,7 +42,7 @@ namespace ASP_Core.Controllers
         [Route("deletecourse")]
         public ActionResult<Response<CourseResponse>> DeleteCourse(string courseCode)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Nincs megfelelő jogosultság!"));
             }
@@ -73,7 +73,7 @@ namespace ASP_Core.Controllers
         [Route("editcourse")]
         public ActionResult<Response<CourseResponse>> EditCourse([FromBody] CourseRequest courseModel)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Hiányzó jogosultság!"));
             }

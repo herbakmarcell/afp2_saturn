@@ -88,7 +88,7 @@ namespace ASP_Core.Controllers
         [Route("editexam")]
         public ActionResult<Response<ExamModelResponse>> EditExam([FromBody] ExamRequest examModel)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
