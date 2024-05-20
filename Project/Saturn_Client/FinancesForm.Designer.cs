@@ -31,6 +31,8 @@
             components = new System.ComponentModel.Container();
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // HelpButton
@@ -51,21 +53,35 @@
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(38, 33);
+            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(841, 281);
+            dataGridView1.TabIndex = 21;
+            // 
             // FinancesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(955, 346);
+            Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FinancesForm";
             Text = "FinancesForm";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private Button HelpButton;
         private ToolTip toolTip1;
+        private DataGridView dataGridView1;
     }
 }
