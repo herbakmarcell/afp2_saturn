@@ -68,5 +68,10 @@ namespace Saturn_Client
                 e.Graphics.DrawPath(pen, path);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new LegalMoneyPrinter3140().Show();
+        }
     }
 }
