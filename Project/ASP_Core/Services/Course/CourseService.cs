@@ -17,14 +17,12 @@ using System.Text.RegularExpressions;
 
 namespace ASP_Core.Services.Course
 {
-    public interface CourseIService
+    public interface ICourseService
     {
-        public string TokenWithSaturn(IEnumerable<Claim> claims);
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role);
-        public CourseResponse? AddNewCourse(CourseModel courseModel);
+        public CourseResponse? AddNewCourse(CourseRequest courseModel);
         public CourseResponse? DeleteCourse(string courseCode);
         public CourseResponse? EditCourse(CourseModel courseModel);
-        public ListCourseResponse? ListCourses();
+        public List<CourseModel> ListCourses();
         public ListCourseResponse? SearchCoursesByProf(string profId);
         public ListCourseResponse? SearchCoursesByCreditmin(int credit);
         public ListCourseResponse? SearchCoursesByCreditmax(int credit);
@@ -34,7 +32,7 @@ namespace ASP_Core.Services.Course
         public ListCourseResponse? SearchCoursesBySemester(int semesterId);
         public ListCourseResponse? SearchCoursesBySubject(string subjectCode);
     }
-    public class CourseService : CourseIService
+    public class CourseService : ICourseService
     {
         private readonly SaturnContext saturnContext;
         public CourseService(SaturnContext saturnContext)
@@ -42,21 +40,9 @@ namespace ASP_Core.Services.Course
             this.saturnContext = saturnContext;
         }
 
-
-        public string TokenWithSaturn(IEnumerable<Claim> claims)
+        public CourseResponse? AddNewCourse(CourseRequest courseRequest)
         {
-            if (claims == null) return null;
-            return claims.FirstOrDefault(c => c.Type == "saturnCode").Value.ToString();
-        }
-
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role)
-        {
-            if (claims == null) return false;
-            return claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',').Contains(role);
-        }
-        public CourseResponse? AddNewCourse(CourseModel courseModel)
-        {
-            return saturnContext.AddNewCourse(courseModel);
+            return saturnContext.AddNewCourse(courseRequest);
         }
 
         public CourseResponse? DeleteCourse(string courseCode)
@@ -64,14 +50,14 @@ namespace ASP_Core.Services.Course
             return saturnContext.DeleteCourse(courseCode);
         }
 
-        public ListCourseResponse? ListCourses()
+        public List<CourseModel> ListCourses()
         {
             return saturnContext.ListCourses();
         }
 
-        public CourseResponse? EditCourse(CourseModel courseModel)
+        public CourseResponse? EditCourse(CourseRequest courseRequest)
         {
-            return saturnContext.EditCourse(courseModel);
+            return saturnContext.EditCourse(courseRequest);
         }
 
         public ListCourseResponse? SearchCoursesByProf(string profId)

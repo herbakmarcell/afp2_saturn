@@ -15,9 +15,9 @@ namespace ASP_Core.Controllers
 {
     public class CourseController : ControllerBase
     {
-        private readonly CourseIService CourseService;
+        private readonly ICourseService CourseService;
         private readonly ICommonService commonService;
-        public CourseController(CourseIService courseService, ICommonService commonService)
+        public CourseController(ICourseService courseService, ICommonService commonService)
         {
             this.CourseService = courseService;
             this.commonService = commonService;
