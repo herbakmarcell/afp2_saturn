@@ -33,6 +33,7 @@
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
             button1 = new Button();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -77,12 +78,25 @@
             button1.TabIndex = 22;
             button1.UseVisualStyleBackColor = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label1.ForeColor = Color.DarkOrange;
+            label1.Location = new Point(943, 78);
+            label1.Name = "label1";
+            label1.Size = new Size(159, 23);
+            label1.TabIndex = 23;
+            label1.Text = "Egyenleg feltöltése";
+            // 
             // FinancesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1111, 494);
+            Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
@@ -91,6 +105,7 @@
             Text = "FinancesForm";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -98,5 +113,6 @@
         private ToolTip toolTip1;
         private DataGridView dataGridView1;
         private Button button1;
+        private Label label1;
     }
 }
