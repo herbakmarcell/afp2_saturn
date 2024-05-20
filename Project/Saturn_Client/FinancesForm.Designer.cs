@@ -61,7 +61,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(928, 394);
+            dataGridView1.Size = new Size(899, 394);
             dataGridView1.TabIndex = 21;
             // 
             // FinancesForm
