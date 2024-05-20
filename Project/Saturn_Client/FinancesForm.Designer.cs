@@ -67,12 +67,15 @@
             // 
             // button1
             // 
-            button1.Location = new Point(985, 178);
+            button1.BackColor = Color.Transparent;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = Properties.Resources.uploadButton;
+            button1.Location = new Point(943, 104);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(152, 56);
             button1.TabIndex = 22;
-            button1.Text = "Feltöltés";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             // 
             // FinancesForm
             // 
