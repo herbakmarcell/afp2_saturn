@@ -1,9 +1,9 @@
-﻿using ASP_Core.Database.Models;
-using ASP_Core.Models;
+﻿using ASP_Core.Models;
 using ASP_Core.Models.Course;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Course;
 using ASP_Core.Services.Exam;
@@ -26,31 +26,31 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addnewcourse")]
-        public ActionResult<Response<NewCourseResponse>> AddnewCourse([FromBody] ListCourseModel courseModel)
+        public ActionResult<Response<CourseResponse>> AddnewCourse([FromBody] CourseModel courseModel)
         {
-            NewCourseResponse newCourseResponse = CourseService.AddNewCourse(courseModel);
+            CourseResponse newCourseResponse = CourseService.AddNewCourse(courseModel);
             if (newCourseResponse.Success == false)
             {
                 return BadRequest(new Response<string>(newCourseResponse.Message));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
         [HttpDelete]
         [Authorize()]
         [Route("deletecourse")]
-        public ActionResult<Response<NewCourseResponse>> DeleteCourse([FromBody] string courseCode)
+        public ActionResult<Response<CourseResponse>> DeleteCourse([FromBody] string courseCode)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            NewCourseResponse newCourseResponse = CourseService.DeleteCourse(courseCode);
+            CourseResponse newCourseResponse = CourseService.DeleteCourse(courseCode);
             if (newCourseResponse.Success == false)
             {
                 return BadRequest(new Response<string>(newCourseResponse.Message));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
         [HttpGet]
@@ -70,18 +70,18 @@ namespace ASP_Core.Controllers
         [HttpPut]
         [Authorize()]
         [Route("editcourse")]
-        public ActionResult<Response<NewCourseResponse>> EditCourse([FromBody] ListCourseModel courseModel)
+        public ActionResult<Response<CourseResponse>> EditCourse([FromBody] CourseModel courseModel)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            NewCourseResponse newCourseResponse = CourseService.EditCourse(courseModel);
+            CourseResponse newCourseResponse = CourseService.EditCourse(courseModel);
             if (newCourseResponse.Success == false)
             {
                 return BadRequest(new Response<string>(newCourseResponse.Message));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
 

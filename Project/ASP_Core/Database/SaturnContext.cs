@@ -22,7 +22,12 @@ using ASP_Core.Models.Course;
 using ASP_Core.Models.Subject;
 using ASP_Core.Services.Auth;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-
+using System.Reflection.Metadata.Ecma335;
+using System.Linq;
+using ASP_Core.Models.Responses.POST;
+using ASP_Core.Models.Responses.PUT;
+using ASP_Core.Models.Responses.GET;
+using ASP_Core.Models.Responses.DELETE;
 
 namespace ASP_Core.Database
 {
@@ -251,7 +256,7 @@ namespace ASP_Core.Database
             return generatedSaturnCode;
         }
 
-        public ChangeResponse? Change(ChangeModel changeModel)
+        public ChangeResponse? UserChange(ChangeModel changeModel)
         {
             ChangeResponse changeResponse = new ChangeResponse();
             User? user = this.Users.Include(u => u.Roles).FirstOrDefault(u => u.SaturnCode == changeModel.SaturnCode);
@@ -341,11 +346,8 @@ namespace ASP_Core.Database
             return MessageModel.Include(u => u.Sender).Include(u => u.Receivers).Where(mm => mm.Sender.SaturnCode == sender).ToList();
         }
 
-
-        //make a sendMessage method that returns with a messageresponse and adds the message to the database
         public SendMessageResponse SendMessage(MessageModel messageModel)
         {
-            // get the receivers saturncode from the messageModel
             List<string> receivers = new List<string>();
             foreach (var receiver in messageModel.Receivers)
             {
@@ -374,1165 +376,346 @@ namespace ASP_Core.Database
             if (user == null) return null;
             MessageModel? message = MessageModel.Include(m => m.Sender).Include(m => m.Receivers).FirstOrDefault(m => m.Id == deleteMessageModel.MessageId);
             if (message == null) return null;
-            // ideiglenesen kiszedve, hogy bármilyen üzenetet lehessen törölni
-            //if (message.Sender.SaturnCode != deleteMessageModel.SaturnCode) return null;
             MessageModel.Remove(message);
             SaveChanges();
             return new DeleteMessageResponse { MessageId = deleteMessageModel.MessageId };
         }
 
-        public AddExamToUserResponse? AddExamToUser(ExamUserModel examuser)
+        public AddExamToUserResponse? AddExamToUser(AddExamUserModel examuser)
         {
-            if (Exams.FirstOrDefault(e => e.Id == examuser.ExamId) == null)
-            {
-                return new AddExamToUserResponse
-                {
-                    StudentSaturnCode = examuser.SaturnCode,
-                    Message = "Nem található ilyen exam",
-                    ExamsId = examuser.ExamId,
-                    Success = false
-                };
-            }
-            if (Users.First(e => e.SaturnCode == examuser.SaturnCode) == null)
-            {
-                return new AddExamToUserResponse
-                {
-                    StudentSaturnCode = examuser.SaturnCode,
-                    Message = "Nem található ilyen user",
-                    ExamsId = examuser.ExamId,
-                    Success = false
-                };
-            }
-            if (Exams.First(e => e.Id == examuser.ExamId) != null && Users.First(u => u.SaturnCode == examuser.SaturnCode) != null)
-            {
-                Users.First(u => u.SaturnCode == examuser.SaturnCode).Exams.Add(Exams.First(e => e.Id == examuser.ExamId));
-                Exams.First(e => e.Id == examuser.ExamId).Students.Add(Users.First(u => u.SaturnCode == examuser.SaturnCode));
-                return new AddExamToUserResponse
-                {
-                    StudentSaturnCode = examuser.SaturnCode,
-                    Message = "siker",
-                    ExamsId = examuser.ExamId,
-                    Success = true
-                };
-            }
-            return new AddExamToUserResponse
-            {
-                StudentSaturnCode = examuser.SaturnCode,
-                Message = "váratlan hiba",
-                ExamsId = examuser.ExamId,
-                Success = false
-            };
-        }
-        public ListExamsResponse? ListExams()
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<ExamModel> examModels = new List<ExamModel>();
-            foreach (Exam ex in Exams)
-            {
-                examModels.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
-            }
-            return new ListExamsResponse
-            {
-                Exams = examModels,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-        public StandardExamResponse? AddNewExams(CreateExamRequestModel createExamRequestModel)
-        {
-            Course jokurzus = new Course();
-            foreach (Course course in Courses)
-            {
-                if (course.Code == createExamRequestModel.CourseCode)
-                {
-                    jokurzus = course;
-                }
-            }
-            if (jokurzus.Code != createExamRequestModel.CourseCode)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
-                    Success = false
-                };
-            }
-
-            Semester joszemeszter = new Semester();
-
-            foreach (Semester semester in Semesters)
-            {
-                if (semester.Id == createExamRequestModel.SemesterId)
-                {
-                    joszemeszter = semester;
-                }
-            }
-            if (joszemeszter.Id != createExamRequestModel.SemesterId)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nincs szemeszter a megadott szemeszterkóddal",
-                    Success = false
-                };
-            }
-            if (createExamRequestModel == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nincs átadva az exam",
-                    Success = false
-                };
-            }
-
-            if (jokurzus == null || joszemeszter == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "Üres a kurzus vagy szemeszter bruh",
-                    Success = false
-                };
-            }
-            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
-            Exam newexam = new Exam
-            {
-                Course = jokurzus,
-                Grades = new List<Grade>(),
-                Semester = joszemeszter,
-                Students = new List<User>(),
-                MaxSize = createExamRequestModel.MaxSize,
-                Prof = createExamRequestModel.Prof
-            };
-            this.Exams.Add(newexam);
+            User? user = Users.Include(u => u.Exams).FirstOrDefault(u => u.SaturnCode == examuser.SaturnCode);
+            if (user == null) return null;
+            Exam? exam = Exams.Include(e => e.Students).FirstOrDefault(e => e.Id == examuser.ExamId);
+            if (exam == null) return null;
+            user.Exams.Add(exam);
             SaveChanges();
-            return new StandardExamResponse
-            {
-                Message = "Sikeres hozzáadás",
-                Success = true
-            };
-        }
-        public StandardExamResponse? DeleteExam(int examId)
-        {
-            if (examId == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nincs átadva az exam",
-                    Success = false
-                };
-            }
-            if (Exams.FirstOrDefault(e => e.Id == examId) == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nem létezik ilyen exam",
-                    Success = false
-                };
-            }
-            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examId));
-            SaveChanges();
-            return new StandardExamResponse
-            {
-                Message = "Sikeresen törölte az examot",
-                Success = true
-            };
-
-
-
-
+            return new AddExamToUserResponse { SaturnCode = user.SaturnCode, ExamId = exam.Id };
         }
 
-        public StandardExamResponse? EditExam(ExamModel examModel)
+        public List<ExamModelResponse> ListExams()
         {
-            if (examModel == null)
+            List<Exam> exams = Exams.Include(e => e.Course).Include(e => e.Semester).Include(e => e.Students).ToList();
+            return exams.Select(exam => new ExamModelResponse
             {
-                return new StandardExamResponse
-                {
-                    Message = "nincs átadva a módosított exam",
-                    Success = false
-                };
-            }
-            if (Exams.FirstOrDefault(e => e.Id == examModel.Id) == null)
-            {
-                return new StandardExamResponse
-                {
-                    Message = "nem létezik ilyen módosítandó exam",
-                    Success = false
-                };
-            }
-            Exam modifiableExam = Exams.FirstOrDefault(e => e.Id == examModel.Id);
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
+            }).ToList();
+        }
+
+        public ExamModelResponse AddNewExam(AddExamRequest addExamRequest)
+        {
+            
+            Course? course = Courses.FirstOrDefault(e => e.Code == addExamRequest.Course);
+            if (course == null) return null;
+            Semester? semester = Semesters.FirstOrDefault(e => e.Id == addExamRequest.Semester);
+            if (semester == null) return null;
             Exam newExam = new Exam
             {
-                Course = modifiableExam.Course,
-                Id = examModel.Id,
-                Grades = modifiableExam.Grades,
-                MaxSize = examModel.MaxSize,
-                Prof = examModel.Prof,
-                Semester = modifiableExam.Semester,
-                Students = modifiableExam.Students
+                MaxSize = addExamRequest.MaxSize,
+                Prof = addExamRequest.Prof,
+                Course = course,
+                Semester = semester
             };
-            foreach (User user in Users)
-            {
-                if (user.Exams.Contains(Exams.FirstOrDefault(e => e.Id == examModel.Id)))
-                {
-                    user.Exams.Remove(Exams.FirstOrDefault(e => e.Id == examModel.Id));
-                    user.Exams.Add(newExam);
-                }
-            }
-
-            this.Exams.Remove(Exams.FirstOrDefault(e => e.Id == modifiableExam.Id));
-            this.Exams.Add(newExam);
+            Exams.Add(newExam);
             SaveChanges();
-            return new StandardExamResponse
+            ExamModelResponse examModel = new ExamModelResponse
             {
-                Message = "Sikeresen megváltoztatta az examot",
-                Success = true
+                MaxSize = newExam.MaxSize,
+                Prof = newExam.Prof,
+                Course = newExam.Course.Code,
+                Semester = newExam.Semester.Id
             };
+            return examModel;
         }
 
-
-        public ListExamsResponse? SearchExamByProf(string profid)
+        public ExamModelResponse DeleteExam(int examId)
         {
-            if (Exams.Count() == 0)
+            Exam? exam = Exams.Include(e => e.Course).Include(e => e.Semester).FirstOrDefault(e => e.Id == examId);
+            if (exam == null) return null;
+            ExamModelResponse response = new ExamModelResponse
             {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<Exam> specexams = new List<Exam>();
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                if (exam.Prof == profid)
-                {
-                    specexams.Add(exam);
-                }
-            }
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
             };
-        }
-
-        public ListExamsResponse? SearchExamById(int id)
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<Exam> specexams = new List<Exam>();
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                if (exam.Id == id)
-                {
-                    specexams.Add(exam);
-                }
-            }
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-        public ListExamsResponse? SearchExamBySizeMin(int size)
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<Exam> specexams = new List<Exam>();
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-                if (exam.MaxSize >= size)
-                {
-                    specexams.Add(exam);
-                }
-            }
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-
-
-        public ListExamsResponse? SearchExamBySizeMax(int size)
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<Exam> specexams = new List<Exam>();
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            foreach (Exam exam in Exams)
-            {
-
-                if (exam.MaxSize <= size)
-                {
-                    specexams.Add(exam);
-                }
-            }
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-
-
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-
-        public ListExamsResponse? SearchExamByCourse(string courseCode)
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<Exam> specexams = Exams.Where(e => e.Course.Code == courseCode).ToList();
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            Exams.Include(e => e.Course.Code == courseCode);
-
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            foreach (Exam ex in specexams)
-            {
-                specexamsModel.Add(new ExamModel { Course = ex.Course, Id = ex.Id, MaxSize = ex.MaxSize, Prof = ex.Prof, Semester = ex.Semester });
-            }
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-
-
-
-        public ListExamsResponse? SearchExamBySemester(int semesterId)
-        {
-            if (Exams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false
-                };
-            }
-            List<ExamModel> specexamsModel = new List<ExamModel>();
-            List<Exam> specexams = Exams.Where(e => e.Semester.Id == semesterId).ToList();
-            if (specexams.Count() == 0)
-            {
-                return new ListExamsResponse
-                {
-                    Message = "nincs a keresésnek megfelelő vizsga",
-                    Success = false
-                };
-            }
-            specexams.ForEach(exam => specexamsModel.Add(new ExamModel { Course = exam.Course, Id = exam.Id, MaxSize = exam.MaxSize, Prof = exam.Prof, Semester = exam.Semester }));
-
-            return new ListExamsResponse
-            {
-                Exams = specexamsModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-
-        public ExamUserCountResponse? ExamUserCount(int examId)
-        {
-            int usercount = 0;
-            if (Exams.Count() == 0)
-            {
-                return new ExamUserCountResponse
-                {
-                    Message = "Nem létezik még vizsga",
-                    Success = false,
-                    usercount = 0
-                };
-            }
-            foreach (User user in Users)
-            {
-                if (user.Exams != null)
-                {
-                    if (user.Exams.Count != 0)
-                    {
-                        foreach (Exam exam in user.Exams)
-                        {
-                            if (exam.Id == examId)
-                            {
-                                usercount++;
-                            }
-                        }
-                    }
-                }
-
-
-            }
-            return new ExamUserCountResponse
-            {
-                usercount = usercount,
-                Message = "Sikeres megszámolás",
-                Success = true
-            };
-        }
-
-
-
-        public NewCourseResponse? AddNewCourse(ListCourseModel courseModel)
-        {
-
-            foreach (Course course in Courses)
-            {
-                if (course.Code == courseModel.Code)
-                {
-                    return new NewCourseResponse
-                    {
-                        Message = "Már van a megadott kurzuskóddal kurzus!",
-                        Success = false
-                    };
-                }
-            }
-
-            if (courseModel.SemesterId < 1)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "NEM LEHET A SZEMESZTER ID-JA 1-NÉL KISSEBB!",
-                    Success = false
-                };
-            }
-
-            if (courseModel.Credit < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nwm lehet a kredit 0-nál kissebb!",
-                    Success = false
-                };
-            }
-
-            if (courseModel.Type == "")
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a tipus ures!",
-                    Success = false
-                };
-            }
-
-            if (courseModel.SubjectCode == "")
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a subject code ures!",
-                    Success = false
-                };
-            }
-
-            if (courseModel.Code == "")
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a kurzuskód ures!",
-                    Success = false
-                };
-            }
-
-            if (courseModel.MaxSize < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a férőhely kissebb mint nulla!",
-                    Success = false
-                };
-            }
-
-
-
-            Subject josubject = new Subject();
-            foreach (Subject subject in Subjects)
-            {
-                if (subject.Code == courseModel.SubjectCode)
-                {
-                    josubject = subject;
-                }
-            }
-            if (josubject.Code != courseModel.SubjectCode)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nincs subject a megadott subjectkóddal",
-                    Success = false
-                };
-            }
-            if (courseModel.Credit < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "newm lehet a kredit nullánál kissebb",
-                    Success = false
-                };
-            }
-            Semester joszemeszter = new Semester();
-            joszemeszter.Id = -1;
-
-            foreach (Semester semester in Semesters)
-            {
-                if (semester.Id == courseModel.SemesterId)
-                {
-                    joszemeszter = semester;
-                }
-            }
-            if (joszemeszter.Id != courseModel.SemesterId)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nincs szemeszter a megadott szemeszterkóddal",
-                    Success = false
-                };
-            }
-            if (courseModel == null)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nincs átadva a kurzus",
-                    Success = false
-                };
-            }
-
-            if (josubject == null || joszemeszter == null)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "Üres a kurzus vagy subject",
-                    Success = false
-                };
-            }
-            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
-            Course newcourse = new Course
-            {
-                Code = courseModel.Code,
-                Classes = new List<ClassModel>(),
-                Students = new List<User>(),
-                Credit = courseModel.Credit,
-                CurrentSemester = joszemeszter,
-                Exams = new List<Exam>(),
-                Subject = josubject,
-                MaxSize = courseModel.MaxSize,
-                Grades = new List<Grade>(),
-                Prof = courseModel.Prof,
-                Name = courseModel.Type
-            };
-            this.Courses.Add(newcourse);
+            Exams.Remove(exam);
             SaveChanges();
-            return new NewCourseResponse
-            {
-                Message = $"Sikeres hozzáadás!   semester in:{courseModel.SemesterId}  out:{newcourse.CurrentSemester.Id}  subject in:{courseModel.SubjectCode} out:{newcourse.Subject.Code}",
-                Success = true
-            };
+            return response;
         }
 
-        public NewCourseResponse? DeleteCourse(string courseCode)
+        public ExamModelResponse EditExam(ExamRequest examModel)
         {
-            if (courseCode == null)
+            ExamModelResponse response = new ExamModelResponse();
+            Exam? exam = Exams.Include(e => e.Course).Include(e => e.Semester).FirstOrDefault(e => e.Id == examModel.Id);
+            if (exam == null) return null;
+            response.Id = examModel.Id;
+            if (examModel.MaxSize != 0)
             {
-                return new NewCourseResponse
-                {
-                    Message = "nincs átadva az kurzuskód",
-                    Success = false
-                };
+                exam.MaxSize = examModel.MaxSize;
+                response.MaxSize = examModel.MaxSize;
             }
-            if (Courses.FirstOrDefault(e => e.Code == courseCode) == null)
+            if (examModel.Prof != null)
             {
-                return new NewCourseResponse
-                {
-                    Message = "nem létezik ilyen kurzus",
-                    Success = false
-                };
+                exam.Prof = examModel.Prof;
+                response.Prof = examModel.Prof;
             }
-            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseCode));
+            if (examModel.Course != null)
+            {
+                Course? course = Courses.FirstOrDefault(e => e.Code == examModel.Course);
+                if (course == null) return null;
+                exam.Course = course;
+                response.Course = examModel.Course;
+            }
+            if (examModel.Semester != 0)
+            {
+                Semester? semester = Semesters.FirstOrDefault(e => e.Id == examModel.Semester);
+                if (semester == null) return null;
+                exam.Semester = semester;
+                response.Semester = examModel.Semester;
+            }
             SaveChanges();
-            return new NewCourseResponse
-            {
-                Message = $"Sikeresen törölte a {courseCode} kurzust!",
-                Success = true
-            };
-
-
+            return response;
         }
 
-
-        public ListCourseResponse? ListCourses()
+        public List<ExamModelResponse>? SearchExamsByProf(string prof)
         {
-            if (Courses.Count() == 0)
+            List<Exam> exams = Exams.Include(e => e.Course).Include(e => e.Semester).Include(e => e.Students).Where(e => e.Prof == prof).ToList();
+            return exams.Select(exam => new ExamModelResponse
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            List<ListCourseModel> courseModels = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                courseModels.Add(new ListCourseModel { Code = course.Code, Credit = course.Credit, SubjectCode = (course.Subject?.Code == null) ? "Nincs valamiért" : course.Subject.Code, MaxSize = course.MaxSize, Prof = course.Prof, SemesterId = (course.CurrentSemester?.Id == null) ? -1 : course.CurrentSemester.Id, Type = course.Name });
-            }
-            return new ListCourseResponse
-            {
-                Courses = courseModels,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
+            }).ToList();
         }
 
-
-
-        public NewCourseResponse? EditCourse(ListCourseModel courseModel)
+        public ExamModelResponse? SearchExamById(int id)
         {
-            if (courseModel == null)
+            Exam? exam = Exams.Include(e => e.Course).Include(e => e.Semester).Include(e => e.Students).FirstOrDefault(e => e.Id == id);
+            if (exam == null) return null;
+            ExamModelResponse response = new ExamModelResponse
             {
-                return new NewCourseResponse
-                {
-                    Message = "nincs átadva a módosított course",
-                    Success = false
-                };
-            }
-            if (courseModel.Credit < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a kredit minuszban",
-                    Success = false
-                };
-            }
-            if (courseModel.MaxSize < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem lehet a maxszám minuszban",
-                    Success = false
-                };
-            }
-            Subject josubject = new Subject();
-            foreach (Subject subject in Subjects)
-            {
-                if (subject.Code == courseModel.SubjectCode)
-                {
-                    josubject = subject;
-                }
-            }
-            if (josubject.Code != courseModel.SubjectCode)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nincs subject a megadott subjectkóddal",
-                    Success = false
-                };
-            }
-            if (courseModel.Credit < 0)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "newm lehet a kredit nullánál kissebb",
-                    Success = false
-                };
-            }
-            Semester joszemeszter = new Semester();
-            joszemeszter.Id = -1;
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
+            };
+            return response;
+        }
 
-            foreach (Semester semester in Semesters)
+        public List<ExamModelResponse>? SearchExamByCourse(string courseCode)
+        {
+            List<Exam> exams = Exams.Include(e => e.Course).Include(e => e.Semester).Include(e => e.Students).Where(e => e.Course.Code == courseCode).ToList();
+            return exams.Select(exam => new ExamModelResponse
             {
-                if (semester.Id == courseModel.SemesterId)
-                {
-                    joszemeszter = semester;
-                }
-            }
-            if (joszemeszter.Id != courseModel.SemesterId)
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
+            }).ToList();
+        }
+
+        public List<ExamModelResponse>? SearchExamBySemester(int semesterId)
+        {
+            List<Exam> exams = Exams.Include(e => e.Course).Include(e => e.Semester).Include(e => e.Students).Where(e => e.Semester.Id == semesterId).ToList();
+            return exams.Select(exam => new ExamModelResponse
             {
-                return new NewCourseResponse
-                {
-                    Message = "nincs szemeszter a megadott szemeszterkóddal",
-                    Success = false
-                };
-            }
-            if (Courses.FirstOrDefault(e => e.Code == courseModel.Code) == null)
-            {
-                return new NewCourseResponse
-                {
-                    Message = "nem létezik ilyen módosítandó kurzus",
-                    Success = false
-                };
-            }
-            Course modifiableCourse = Courses.FirstOrDefault(e => e.Code == courseModel.Code);
+                Id = exam.Id,
+                MaxSize = exam.MaxSize,
+                Prof = exam.Prof,
+                Course = exam.Course.Code,
+                Semester = exam.Semester.Id
+            }).ToList();
+        }
+
+        public CourseResponse? AddNewCourse(CourseRequest courseModel)
+        {
+            Subject? subject = Subjects.Include(s => s.Courses)
+                .FirstOrDefault(e => e.Code == courseModel.SubjectCode);
+            if (subject == null) return null;
+            Semester? semester = Semesters.Include(s => s.SemesterCourses)
+                .FirstOrDefault(e => e.Id == courseModel.CurrentSemesterId);
+            if (semester == null) return null;
             Course newCourse = new Course
             {
                 Code = courseModel.Code,
-                Classes = modifiableCourse.Classes,
-                Credit = courseModel.Credit,
-                CurrentSemester = joszemeszter,
-                Students = modifiableCourse.Students,
-                Subject = josubject,
-                MaxSize = courseModel.MaxSize,
-                Exams = modifiableCourse.Exams,
-                Grades = modifiableCourse.Grades,
+                Type = courseModel.Type,
                 Prof = courseModel.Prof,
-                Name = courseModel.Type
+                Credit = courseModel.Credit,
+                MaxSize = courseModel.MaxSize,
+                Classes = new List<ClassModel>(),
+                Subject = subject,
+                Students = new List<User>(),
+                Grades = new List<Grade>(),
+                CurrentSemester = semester,
+                Exams = new List<Exam>()
             };
-
-            this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseModel.Code));
-            this.Courses.Add(newCourse);
+            Courses.Add(newCourse);
             SaveChanges();
-            return new NewCourseResponse
+            return new CourseResponse
             {
-                Message = $"Sikeresen megváltoztatta a {courseModel.Code} kurzust",
-                Success = true
+                Code = newCourse.Code,
+                Type = newCourse.Type,
+                Prof = newCourse.Prof,
+                Credit = newCourse.Credit,
+                MaxSize = newCourse.MaxSize,
+                SubjectCode = newCourse.Subject.Code,
+                CurrentSemesterId = newCourse.CurrentSemester.Id
             };
         }
 
-
-
-        public ListCourseResponse? SearchCoursesByProf(string profid)
+        public CourseResponse? DeleteCourse(string courseCode)
         {
-            if (Courses.Count() == 0)
+            Course? course = Courses.Include(c => c.Subject).Include(c => c.CurrentSemester).FirstOrDefault(e => e.Code == courseCode);
+            if (course == null) return null;
+            CourseResponse response = new CourseResponse
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.Prof == profid)
-                {
-                    speccourse.Add(course);
-                }
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                CurrentSemesterId = course.CurrentSemester.Id
             };
+            Courses.Remove(course);
+            SaveChanges();
+            return response;
         }
 
-        public ListCourseResponse? SearchCoursesByCreditmin(int credit)
+        public List<CourseModel> ListCourses()
         {
-            if (Courses.Count() == 0)
+            return Courses.Select(course => new CourseModel
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (credit < 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet a kredit minuszban.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.Credit >= credit)
-                {
-                    speccourse.Add(course);
-                }
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
         }
 
-
-        public ListCourseResponse? SearchCoursesByCreditmax(int credit)
+        public CourseResponse? EditCourse(CourseRequest courseRequest)
         {
-            if (Courses.Count() == 0)
+            Course? course = Courses.Include(c => c.Subject).Include(c => c.CurrentSemester).FirstOrDefault(e => e.Code == courseRequest.Code);
+            if (course == null) return null;
+            CourseResponse courseResponse = new CourseResponse();
+            if (courseRequest.Type != null)
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
+                course.Type = courseRequest.Type;
+                courseResponse.Type = courseRequest.Type;
             }
-            if (credit < 0)
+            if (courseRequest.Prof != null)
             {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet a kredit minuszban.",
-                    Success = false
-                };
+                course.Prof = courseRequest.Prof;
+                courseResponse.Prof = courseRequest.Prof;
             }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
+            if (courseRequest.Credit > 0)
             {
-                if (course.Credit < credit)
-                {
-                    speccourse.Add(course);
-                }
+                course.Credit = courseRequest.Credit;
+                courseResponse.Credit = courseRequest.Credit;
             }
-            if (speccourse.Count() == 0)
+            if (courseRequest.MaxSize != 0)
             {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
+                course.MaxSize = courseRequest.MaxSize;
+                courseResponse.MaxSize = courseRequest.MaxSize;
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
+            if (courseRequest.SubjectCode != null)
             {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Subject? subject = Subjects.FirstOrDefault(e => e.Code == courseRequest.SubjectCode);
+                if (subject == null) return null;
+                course.Subject = subject;
+                courseResponse.SubjectCode = courseRequest.SubjectCode;
+            }
+            if (courseRequest.CurrentSemesterId != 0)
+            {
+                Semester? semester = Semesters.FirstOrDefault(e => e.Id == courseRequest.CurrentSemesterId);
+                if (semester == null) return null;
+                course.CurrentSemester = semester;
+                courseResponse.CurrentSemesterId = courseRequest.CurrentSemesterId;
+            }
+            SaveChanges();
+            return courseResponse;
         }
 
-        public ListCourseResponse? SearchCoursesBySizemin(int size)
+        public List<CourseModel> SearchCoursesByProf(string prof)
         {
-            if (Courses.Count() == 0)
+            return Courses.Where(c => c.Prof == prof).Select(course => new CourseModel
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (size < 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet a férőhely minuszban.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.MaxSize >= size)
-                {
-                    speccourse.Add(course);
-                }
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
         }
 
-
-        public ListCourseResponse? SearchCoursesBySizemax(int size)
+        public List<CourseModel> SearchCoursesByCredit(int credit)
         {
-            if (Courses.Count() == 0)
+            return Courses.Where(c => c.Credit == credit).Select(course => new CourseModel
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (size < 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet a férőhely minuszban.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.MaxSize < size)
-                {
-                    speccourse.Add(course);
-                }
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
         }
 
-
-        public ListCourseResponse? SearchCoursesByType(string type)
+        public List<CourseModel> SearchCoursesByName(string name)
         {
-            if (Courses.Count() == 0)
+            return Courses.Where(c => c.Type == name).Select(course => new CourseModel
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (type == "")
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem adtál meg típust.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.Name == type)
-                {
-                    speccourse.Add(course);
-                }
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
         }
 
-
-        public ListCourseResponse? SearchCoursesBySemester(int semesterId)
+        public List<CourseModel> SearchCoursesBySemester(int semesterId)
         {
-            if (Courses.Count() == 0)
+            return Courses.Where(c => c.CurrentSemester.Id == semesterId).Select(course => new CourseModel
             {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (semesterId < 1)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet a szemeszterId kissebb mint 1.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.CurrentSemester != null)
-                {
-                    if (course.CurrentSemester.Id == semesterId)
-                    {
-                        speccourse.Add(course);
-                    }
-                }
-
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
         }
 
-
-        public ListCourseResponse? SearchCoursesBySubject(string subjectCode)
+        public List<CourseModel> SearchCoursesBySubject(string subjectCode)
         {
-            if (Courses.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "Nem létezik még kurzus",
-                    Success = false
-                };
-            }
-            if (subjectCode == "")
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nem lehet öres a subjectkód.",
-                    Success = false
-                };
-            }
-            List<Course> speccourse = new List<Course>();
-            List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
-            foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
-            {
-                if (course.CurrentSemester != null)
-                {
-                    if (course.Subject.Code == subjectCode)
-                    {
-                        speccourse.Add(course);
-                    }
-                }
-
-            }
-            if (speccourse.Count() == 0)
-            {
-                return new ListCourseResponse
-                {
-                    Message = "nincs a keresésnek megfelelő kurzus",
-                    Success = false
-                };
-            }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
-
-            return new ListCourseResponse
-            {
-                Courses = speccoursesModel,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+           return Courses.Where(c => c.Subject.Code == subjectCode).Select(course => new CourseModel
+           {
+               Code = course.Code,
+               Type = course.Type,
+               Prof = course.Prof,
+               Credit = course.Credit,
+               MaxSize = course.MaxSize,
+               SubjectCode = course.Subject.Code,
+               SemesterId = course.CurrentSemester.Id
+           }).ToList();
         }
 
         public ClassResponse? AddClass(AddClassRequest addClassRequest)
@@ -1647,134 +830,59 @@ namespace ASP_Core.Database
             return classesBySearch;
         }
 
-        public ListSubjectResponse? ListSubjects()
+        public List<SubjectModel> ListSubjects()
         {
-            if (Subjects.Count() == 0)
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "Nem létezik még tárgy",
-                    Success = false
-                };
-            }
-            List<SubjectModel> subjectmodels = new List<SubjectModel>();
-            foreach (Subject subject in Subjects)
-            {
-                subjectmodels.Add(new SubjectModel { Code = subject.Code, Name = subject.Name });
-            }
-            return new ListSubjectResponse
-            {
-                Subjects = subjectmodels,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
-        }
-
-
-        public ListSubjectResponse? AddNewSubject(SubjectModel subject)
-        {
-            if (subject.Code=="")
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "üres a kód",
-                    Success = false
-                };
-            }
-            if (subject.Name == "")
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "üres a név",
-                    Success = false
-                };
-            }
-            foreach (Subject subject1 in Subjects)
-            {
-                if (subject1.Code == subject.Code)
-                {
-                    return new ListSubjectResponse
-                    {
-                        Message = "Már létezik ilyen subject",
-                        Success = false
-                    };
-                }
-            }
-
-            Subjects.Add(new Subject { Code = subject.Code, Courses = new List<Course>(), Name = subject.Name });
-            SaveChanges();
-            return new ListSubjectResponse
-            {
-                Message = "subject létrehozva",
-                Success = true
-            };
-
-        }
-
-
-        public ListSubjectResponse? DeleteSubject(string subjectCode)
-        {
-            if (subjectCode == null)
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "nincs átadva az subjectcode",
-                    Success = false
-                };
-            }
-            if (Subjects.FirstOrDefault(e => e.Code == subjectCode) == null)
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "nem létezik ilyen subject",
-                    Success = false
-                };
-            }
-            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code== subjectCode));
-            SaveChanges();
-            return new ListSubjectResponse
-            {
-                Message = "Sikeresen törölte az subjectet",
-                Success = true
-            };
-
-
-        }
-
-        public ListSubjectResponse? EditSubject(SubjectModel subject)
-        {
-            if (subject == null)
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "nincs átadva a módosított subject",
-                    Success = false
-                };
-            }
-            
-            if (Subjects.FirstOrDefault(e => e.Code == subject.Code) == null)
-            {
-                return new ListSubjectResponse
-                {
-                    Message = "nem létezik ilyen módosítandó subject",
-                    Success = false
-                };
-            }
-            Subject modifiableSubject = Subjects.FirstOrDefault(e => e.Code == subject.Code);
-            Subject newsubject = new Subject
+            return Subjects.Select(subject => new SubjectModel
             {
                 Code = subject.Code,
-                Courses = modifiableSubject.Courses,
                 Name = subject.Name
-            };
+            }).ToList();
+        }
 
-            this.Subjects.Remove(Subjects.FirstOrDefault(e => e.Code == subject.Code));
-            this.Subjects.Add(newsubject);
-            SaveChanges();
-            return new ListSubjectResponse
+        public SubjectResponse? AddNewSubject(SubjectModel subject)
+        {
+            if (subject == null) return null;
+            Subject newSubject = new Subject
             {
-                Message = $"Sikeresen megváltoztatta a {subject.Code} subjectet",
-                Success = true
+                Code = subject.Code,
+                Name = subject.Name,
+                Courses = new List<Course>()
+            };
+            Subjects.Add(newSubject);
+            SaveChanges();
+            return new SubjectResponse
+            {
+                Code = newSubject.Code,
+                Name = newSubject.Name
+            };
+        }
+
+        public DeleteSubjectResponse? DeleteSubject(string subjectCode)
+        {
+            Subject subject = Subjects.FirstOrDefault(e => e.Code == subjectCode);
+            if (subject == null) return null;
+            DeleteSubjectResponse response = new DeleteSubjectResponse
+            {
+                Code = subject.Code
+            };
+            Subjects.Remove(subject);
+            SaveChanges();
+            return response;
+        }
+
+        public SubjectResponse EditSubject(SubjectModel subjectModel)
+        {
+            Subject? subject = Subjects.FirstOrDefault(e => e.Code == subjectModel.Code);
+            if (subject == null) return null;
+            if (subjectModel.Name != null)
+            {
+                subject.Name = subjectModel.Name;
+            }
+            SaveChanges();
+            return new SubjectResponse
+            {
+                Code = subject.Code,
+                Name = subject.Name
             };
         }
     }

@@ -1,6 +1,6 @@
 ﻿using ASP_Core.Database.Models;
 
-namespace ASP_Core.Models.Responses
+namespace ASP_Core.Models.Responses.POST
 {
     public class RegisterResponse
     {

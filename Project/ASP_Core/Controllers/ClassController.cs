@@ -2,7 +2,7 @@
 using ASP_Core.Models.Class;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
-using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
 using Microsoft.AspNetCore.Authorization;

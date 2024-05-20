@@ -77,7 +77,7 @@ namespace ASP_Core.Services.Exam
                 Id = c.Id,
                 StartTime = c.StartTime,
                 EndTime = c.EndTime,
-                Course = c.Course.Name,
+                Course = c.Course.Type,
                 Room = c.Room.Code
             }).ToList();
             return result;

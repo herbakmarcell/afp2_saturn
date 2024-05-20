@@ -2,6 +2,7 @@
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.PUT;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
 using Microsoft.AspNetCore.Authorization;
@@ -12,9 +13,9 @@ namespace ASP_Core.Controllers
 {
     public class ExamController : ControllerBase
     {
-        private readonly ExamIService examService;
+        private readonly IExamService examService;
         private readonly ICommonService commonService;
-        public ExamController(ExamIService examService, ICommonService commonService)
+        public ExamController(IExamService examService, ICommonService commonService)
         {
             this.examService = examService;
             this.commonService = commonService;
@@ -23,7 +24,7 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addexamtouser")]
-        public ActionResult<Response<AddExamToUserResponse>> AddExamToUser([FromBody] ExamUserModel examuser)
+        public ActionResult<Response<AddExamToUserResponse>> AddExamToUser([FromBody] AddExamUserModel examuser)
         {
             if (examuser.SaturnCode==null || examuser.ExamId==null)
             {
@@ -52,7 +53,7 @@ namespace ASP_Core.Controllers
         [HttpPost]
         [Authorize()]
         [Route("addnewexam")]
-        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]CreateExamRequestModel createExamRequestModel)
+        public ActionResult<Response<StandardExamResponse>> AddnewExam([FromBody]AddExamRequest createExamRequestModel)
         {
             StandardExamResponse addNewExamResponse = examService.AddNewExam(createExamRequestModel);
             if (addNewExamResponse.Success == false)
@@ -81,7 +82,7 @@ namespace ASP_Core.Controllers
         [HttpPut]
         [Authorize()]
         [Route("editexam")]
-        public ActionResult<Response<StandardExamResponse>> EditExam([FromBody] ExamModel examModel)
+        public ActionResult<Response<StandardExamResponse>> EditExam([FromBody] ExamRequest examModel)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
