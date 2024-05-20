@@ -37,9 +37,10 @@
             // 
             // textBox1
             // 
+            textBox1.BorderStyle = BorderStyle.None;
             textBox1.Location = new Point(57, 112);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(191, 23);
+            textBox1.Size = new Size(191, 16);
             textBox1.TabIndex = 0;
             // 
             // pictureBox1
@@ -56,9 +57,9 @@
             // 
             button1.BackColor = Color.Transparent;
             button1.BackgroundImage = Properties.Resources.uploadButton;
-            button1.Location = new Point(72, 176);
+            button1.Location = new Point(69, 176);
             button1.Name = "button1";
-            button1.Size = new Size(152, 56);
+            button1.Size = new Size(156, 52);
             button1.TabIndex = 2;
             button1.UseVisualStyleBackColor = false;
             // 
@@ -78,6 +79,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.mainBack;
             ClientSize = new Size(302, 262);
             Controls.Add(label4);
             Controls.Add(button1);
