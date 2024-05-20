@@ -21,16 +21,13 @@ namespace ASP_Core.Services.Course
     {
         public CourseResponse? AddNewCourse(CourseRequest courseModel);
         public CourseResponse? DeleteCourse(string courseCode);
-        public CourseResponse? EditCourse(CourseModel courseModel);
+        public CourseResponse? EditCourse(CourseRequest courseModel);
         public List<CourseModel> ListCourses();
-        public ListCourseResponse? SearchCoursesByProf(string profId);
-        public ListCourseResponse? SearchCoursesByCreditmin(int credit);
-        public ListCourseResponse? SearchCoursesByCreditmax(int credit);
-        public ListCourseResponse? SearchCoursesBySizemin(int size);
-        public ListCourseResponse? SearchCoursesBySizemax(int size);
-        public ListCourseResponse? SearchCoursesByType(string type);
-        public ListCourseResponse? SearchCoursesBySemester(int semesterId);
-        public ListCourseResponse? SearchCoursesBySubject(string subjectCode);
+        public List<CourseModel> SearchCoursesByProf(string profId);
+        public List<CourseModel> SearchCoursesByCredit(bool byMax, int credit);
+        public List<CourseModel> SearchCoursesByType(string type);
+        public List<CourseModel> SearchCoursesBySemester(int semesterId);
+        public List<CourseModel> SearchCoursesBySubject(string subjectCode);
     }
     public class CourseService : ICourseService
     {
@@ -60,42 +57,27 @@ namespace ASP_Core.Services.Course
             return saturnContext.EditCourse(courseRequest);
         }
 
-        public ListCourseResponse? SearchCoursesByProf(string profId)
+        public List<CourseModel> SearchCoursesByProf(string profId)
         {
             return saturnContext.SearchCoursesByProf(profId);
         }
 
-        public ListCourseResponse? SearchCoursesByCreditmax(int credit)
+        public List<CourseModel> SearchCoursesByCredit(bool byMax, int credit)
         {
-            return saturnContext.SearchCoursesByCreditmax(credit);
+            return saturnContext.SearchCoursesByCredit(byMax, credit);
         }
 
-        public ListCourseResponse? SearchCoursesByCreditmin(int credit)
-        {
-            return saturnContext.SearchCoursesByCreditmin(credit);
-        }
-
-        public ListCourseResponse? SearchCoursesBySizemin(int size)
-        {
-            return saturnContext.SearchCoursesBySizemin(size);
-        }
-
-        public ListCourseResponse? SearchCoursesBySizemax(int size)
-        {
-            return saturnContext.SearchCoursesBySizemax(size);
-        }
-
-        public ListCourseResponse? SearchCoursesByType(string type)
+        public List<CourseModel> SearchCoursesByType(string type)
         {
             return saturnContext.SearchCoursesByType(type);
         }
 
-        public ListCourseResponse? SearchCoursesBySemester(int semesterId)
+        public List<CourseModel> SearchCoursesBySemester(int semesterId)
         {
             return saturnContext.SearchCoursesBySemester(semesterId);
         }
 
-        public ListCourseResponse? SearchCoursesBySubject(string subjectCode)
+        public List<CourseModel> SearchCoursesBySubject(string subjectCode)
         {
             return saturnContext.SearchCoursesBySubject(subjectCode);
         }

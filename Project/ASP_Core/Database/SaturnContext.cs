@@ -662,9 +662,19 @@ namespace ASP_Core.Database
             }).ToList();
         }
 
-        public List<CourseModel> SearchCoursesByCredit(int credit)
+        public List<CourseModel> SearchCoursesByCredit(bool byMax, int credit)
         {
-            return Courses.Where(c => c.Credit == credit).Select(course => new CourseModel
+            if (byMax) return Courses.Where(c => c.Credit <= credit).Select(course => new CourseModel
+            {
+                Code = course.Code,
+                Type = course.Type,
+                Prof = course.Prof,
+                Credit = course.Credit,
+                MaxSize = course.MaxSize,
+                SubjectCode = course.Subject.Code,
+                SemesterId = course.CurrentSemester.Id
+            }).ToList();
+            return Courses.Where(c => c.Credit > credit).Select(course => new CourseModel
             {
                 Code = course.Code,
                 Type = course.Type,
@@ -676,9 +686,9 @@ namespace ASP_Core.Database
             }).ToList();
         }
 
-        public List<CourseModel> SearchCoursesByName(string name)
+        public List<CourseModel> SearchCoursesByType(string type)
         {
-            return Courses.Where(c => c.Type == name).Select(course => new CourseModel
+            return Courses.Where(c => c.Type == type).Select(course => new CourseModel
             {
                 Code = course.Code,
                 Type = course.Type,
