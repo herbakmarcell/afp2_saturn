@@ -82,11 +82,11 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            label1.Font = new Font("Comic Sans MS", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             label1.ForeColor = Color.DarkOrange;
-            label1.Location = new Point(943, 78);
+            label1.Location = new Point(949, 78);
             label1.Name = "label1";
-            label1.Size = new Size(159, 23);
+            label1.Size = new Size(150, 23);
             label1.TabIndex = 23;
             label1.Text = "Egyenleg feltöltése";
             // 
