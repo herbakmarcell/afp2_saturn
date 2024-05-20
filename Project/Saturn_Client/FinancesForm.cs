@@ -23,6 +23,15 @@ namespace Saturn_Client
             MessageBox.Show("Ezen az oldalon, megtalálod az információkat az egyetemi pénzügyeiddel kapcsolatban. A fontos befizetések összegét és határidejét mindig tartsd figyelemmel");
         }
 
+
+
+
+        private void InitializeMessageDataGridView()
+        {
+            
+        }
+
+
         public int Radius { get; set; } = 30;
 
         protected override void OnPaint(PaintEventArgs e)
