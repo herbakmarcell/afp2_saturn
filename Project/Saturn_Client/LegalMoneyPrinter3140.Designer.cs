@@ -30,6 +30,7 @@
         {
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -50,11 +51,22 @@
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = Properties.Resources.uploadButton;
+            button1.Location = new Point(72, 176);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 56);
+            button1.TabIndex = 2;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // LegalMoneyPrinter3140
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(299, 356);
+            ClientSize = new Size(302, 262);
+            Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(pictureBox1);
             Name = "LegalMoneyPrinter3140";
@@ -68,5 +80,6 @@
 
         private TextBox textBox1;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }
