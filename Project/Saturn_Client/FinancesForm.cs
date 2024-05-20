@@ -35,7 +35,6 @@ namespace Saturn_Client
             dataGridView1.Columns.Add("type", "Típus");
             dataGridView1.Columns.Add("status", "Státusz");
             dataGridView1.Columns.Add("deadline", "Határidő");
-            dataGridView1.Columns.Add("saturnCode", "SaturnCode");
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].FillWeight = 1;
             dataGridView1.Columns[0].Visible = false;
