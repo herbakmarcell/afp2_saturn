@@ -44,7 +44,7 @@
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.ForeColor = Color.DarkOrange;
-            HelpButton.Location = new Point(898, 10);
+            HelpButton.Location = new Point(1044, 12);
             HelpButton.Name = "HelpButton";
             HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 12;
@@ -61,7 +61,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(841, 281);
+            dataGridView1.Size = new Size(928, 394);
             dataGridView1.TabIndex = 21;
             // 
             // FinancesForm
@@ -69,7 +69,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(955, 346);
+            ClientSize = new Size(1111, 494);
             Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
             Margin = new Padding(3, 2, 3, 2);

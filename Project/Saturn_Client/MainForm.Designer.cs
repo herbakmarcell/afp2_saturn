@@ -55,7 +55,7 @@
             userDataButton.FlatStyle = FlatStyle.Flat;
             userDataButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             userDataButton.ForeColor = SystemColors.ActiveCaptionText;
-            userDataButton.Location = new Point(66, 27);
+            userDataButton.Location = new Point(66, 11);
             userDataButton.Margin = new Padding(3, 2, 3, 2);
             userDataButton.Name = "userDataButton";
             userDataButton.Size = new Size(152, 52);
@@ -74,7 +74,7 @@
             studiesButton.FlatStyle = FlatStyle.Flat;
             studiesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             studiesButton.ForeColor = SystemColors.ActiveCaptionText;
-            studiesButton.Location = new Point(230, 27);
+            studiesButton.Location = new Point(266, 11);
             studiesButton.Margin = new Padding(3, 2, 3, 2);
             studiesButton.Name = "studiesButton";
             studiesButton.Size = new Size(152, 52);
@@ -93,7 +93,7 @@
             subjectsButton.FlatStyle = FlatStyle.Flat;
             subjectsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             subjectsButton.ForeColor = SystemColors.ActiveCaptionText;
-            subjectsButton.Location = new Point(393, 27);
+            subjectsButton.Location = new Point(456, 11);
             subjectsButton.Margin = new Padding(3, 2, 3, 2);
             subjectsButton.Name = "subjectsButton";
             subjectsButton.Size = new Size(152, 52);
@@ -112,7 +112,7 @@
             examsButton.FlatStyle = FlatStyle.Flat;
             examsButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             examsButton.ForeColor = SystemColors.ActiveCaptionText;
-            examsButton.Location = new Point(556, 27);
+            examsButton.Location = new Point(649, 11);
             examsButton.Margin = new Padding(3, 2, 3, 2);
             examsButton.Name = "examsButton";
             examsButton.Size = new Size(152, 52);
@@ -131,7 +131,7 @@
             financesButton.FlatStyle = FlatStyle.Flat;
             financesButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             financesButton.ForeColor = SystemColors.ActiveCaptionText;
-            financesButton.Location = new Point(720, 25);
+            financesButton.Location = new Point(844, 11);
             financesButton.Margin = new Padding(3, 2, 3, 2);
             financesButton.Name = "financesButton";
             financesButton.Size = new Size(152, 52);
@@ -144,7 +144,7 @@
             visibleDataPanel.Location = new Point(66, 81);
             visibleDataPanel.Margin = new Padding(3, 2, 3, 2);
             visibleDataPanel.Name = "visibleDataPanel";
-            visibleDataPanel.Size = new Size(970, 382);
+            visibleDataPanel.Size = new Size(1127, 533);
             visibleDataPanel.TabIndex = 5;
             visibleDataPanel.Visible = false;
             // 
@@ -157,7 +157,7 @@
             exitButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             exitButton.FlatStyle = FlatStyle.Flat;
             exitButton.Image = Properties.Resources.exiticon;
-            exitButton.Location = new Point(1068, 9);
+            exitButton.Location = new Point(1222, 11);
             exitButton.Margin = new Padding(3, 2, 3, 2);
             exitButton.Name = "exitButton";
             exitButton.Size = new Size(30, 30);
@@ -195,7 +195,7 @@
             inboxButton.FlatStyle = FlatStyle.Flat;
             inboxButton.Font = new Font("Microsoft Sans Serif", 16.1999989F, FontStyle.Bold);
             inboxButton.ForeColor = SystemColors.ActiveCaptionText;
-            inboxButton.Location = new Point(884, 27);
+            inboxButton.Location = new Point(1041, 11);
             inboxButton.Margin = new Padding(3, 2, 3, 2);
             inboxButton.Name = "inboxButton";
             inboxButton.Size = new Size(152, 52);
@@ -216,7 +216,7 @@
             regButton.FlatAppearance.MouseDownBackColor = Color.Transparent;
             regButton.FlatAppearance.MouseOverBackColor = Color.Transparent;
             regButton.FlatStyle = FlatStyle.Flat;
-            regButton.Location = new Point(884, 468);
+            regButton.Location = new Point(1041, 619);
             regButton.Name = "regButton";
             regButton.Size = new Size(152, 52);
             regButton.TabIndex = 12;
@@ -228,7 +228,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.mainBack;
-            ClientSize = new Size(1104, 531);
+            ClientSize = new Size(1264, 681);
             Controls.Add(regButton);
             Controls.Add(HelpButton);
             Controls.Add(inboxButton);

@@ -48,9 +48,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Comic Sans MS", 9F);
             label1.ForeColor = Color.Maroon;
-            label1.Location = new Point(31, 21);
+            label1.Location = new Point(27, 16);
             label1.Name = "label1";
-            label1.Size = new Size(85, 20);
+            label1.Size = new Size(68, 17);
             label1.TabIndex = 0;
             label1.Text = "Tárgy neve";
             // 
@@ -60,9 +60,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Comic Sans MS", 9F);
             label2.ForeColor = Color.Maroon;
-            label2.Location = new Point(117, 21);
+            label2.Location = new Point(102, 16);
             label2.Name = "label2";
-            label2.Size = new Size(94, 20);
+            label2.Size = new Size(73, 17);
             label2.TabIndex = 1;
             label2.Text = "Tárgy kódja";
             // 
@@ -72,9 +72,9 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Comic Sans MS", 9F);
             label3.ForeColor = Color.Maroon;
-            label3.Location = new Point(207, 21);
+            label3.Location = new Point(181, 16);
             label3.Name = "label3";
-            label3.Size = new Size(138, 20);
+            label3.Size = new Size(110, 17);
             label3.TabIndex = 2;
             label3.Text = "Tárgycsoport neve";
             // 
@@ -84,9 +84,9 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Comic Sans MS", 9F);
             label4.ForeColor = Color.Maroon;
-            label4.Location = new Point(342, 21);
+            label4.Location = new Point(299, 16);
             label4.Name = "label4";
-            label4.Size = new Size(68, 20);
+            label4.Size = new Size(54, 17);
             label4.TabIndex = 3;
             label4.Text = "Sorszám";
             // 
@@ -96,9 +96,9 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Comic Sans MS", 9F);
             label5.ForeColor = Color.Maroon;
-            label5.Location = new Point(413, 21);
+            label5.Location = new Point(361, 16);
             label5.Name = "label5";
-            label5.Size = new Size(107, 20);
+            label5.Size = new Size(87, 17);
             label5.TabIndex = 4;
             label5.Text = "Ajánlott félév";
             // 
@@ -108,9 +108,9 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Comic Sans MS", 9F);
             label6.ForeColor = Color.Maroon;
-            label6.Location = new Point(517, 21);
+            label6.Location = new Point(452, 16);
             label6.Name = "label6";
-            label6.Size = new Size(53, 20);
+            label6.Size = new Size(43, 17);
             label6.TabIndex = 5;
             label6.Text = "Kredit";
             // 
@@ -120,9 +120,9 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Comic Sans MS", 9F);
             label7.ForeColor = Color.Maroon;
-            label7.Location = new Point(571, 21);
+            label7.Location = new Point(500, 16);
             label7.Name = "label7";
-            label7.Size = new Size(84, 20);
+            label7.Size = new Size(68, 17);
             label7.TabIndex = 6;
             label7.Text = "Tárgytípus";
             // 
@@ -132,9 +132,9 @@
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Comic Sans MS", 9F);
             label8.ForeColor = Color.Maroon;
-            label8.Location = new Point(654, 21);
+            label8.Location = new Point(572, 16);
             label8.Name = "label8";
-            label8.Size = new Size(85, 20);
+            label8.Size = new Size(71, 17);
             label8.TabIndex = 7;
             label8.Text = "Teljesített";
             // 
@@ -144,9 +144,9 @@
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Comic Sans MS", 9F);
             label9.ForeColor = Color.Maroon;
-            label9.Location = new Point(733, 21);
+            label9.Location = new Point(641, 16);
             label9.Name = "label9";
-            label9.Size = new Size(59, 20);
+            label9.Size = new Size(49, 17);
             label9.TabIndex = 8;
             label9.Text = "Felvett";
             // 
@@ -159,10 +159,9 @@
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.ForeColor = Color.DarkOrange;
-            HelpButton.Location = new Point(999, 12);
-            HelpButton.Margin = new Padding(3, 4, 3, 4);
+            HelpButton.Location = new Point(874, 9);
             HelpButton.Name = "HelpButton";
-            HelpButton.Size = new Size(31, 36);
+            HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 12;
             HelpButton.Text = "?";
             toolTip1.SetToolTip(HelpButton, "Használati útmutató");
@@ -171,10 +170,10 @@
             // 
             // SubjectsForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(1091, 462);
+            ClientSize = new Size(1111, 494);
             Controls.Add(HelpButton);
             Controls.Add(label9);
             Controls.Add(label8);
@@ -185,6 +184,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SubjectsForm";
             Text = "SubjectForm";
             ResumeLayout(false);

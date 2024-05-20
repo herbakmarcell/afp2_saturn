@@ -306,7 +306,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(955, 346);
+            ClientSize = new Size(1111, 494);
             Controls.Add(studentcbLabel);
             Controls.Add(teachercbLabel);
             Controls.Add(admincbLabel);

@@ -72,7 +72,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(819, 266);
+            dataGridView1.Size = new Size(926, 376);
             dataGridView1.TabIndex = 20;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -216,7 +216,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(955, 346);
+            ClientSize = new Size(1111, 494);
             Controls.Add(label4);
             Controls.Add(linkLabel3);
             Controls.Add(linkLabel2);
