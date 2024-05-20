@@ -314,7 +314,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
-            ClientSize = new Size(955, 346);
+            ClientSize = new Size(1111, 494);
             Controls.Add(logoBox);
             Controls.Add(HelpButton);
             Controls.Add(label8);
