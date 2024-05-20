@@ -1,4 +1,4 @@
-namespace ASP_Core.Models.Responses
+namespace ASP_Core.Models.Responses.POST
 {
     public class AddExamToUserResponse
     {

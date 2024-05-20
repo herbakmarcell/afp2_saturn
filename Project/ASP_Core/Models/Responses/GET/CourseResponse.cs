@@ -1,6 +1,6 @@
 using ASP_Core.Models.Course;
 
-namespace ASP_Core.Database.Models
+namespace ASP_Core.Models.Responses.GET
 {
     public class CourseResponse
     {
