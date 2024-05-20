@@ -71,7 +71,7 @@ namespace ASP_Core.Controllers
         [Route("deleteexam")]
         public ActionResult<Response<ExamModelResponse>> DeleteExam([FromBody] int examId)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin") || !commonService.TokenHasRole(User.Claims, "Teacher"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
                 return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
