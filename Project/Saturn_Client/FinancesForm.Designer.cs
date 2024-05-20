@@ -32,6 +32,7 @@
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
             dataGridView1 = new DataGridView();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -64,12 +65,22 @@
             dataGridView1.Size = new Size(899, 394);
             dataGridView1.TabIndex = 21;
             // 
+            // button1
+            // 
+            button1.Location = new Point(985, 178);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 22;
+            button1.Text = "Feltöltés";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // FinancesForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1111, 494);
+            Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
             Margin = new Padding(3, 2, 3, 2);
@@ -83,5 +94,6 @@
         private Button HelpButton;
         private ToolTip toolTip1;
         private DataGridView dataGridView1;
+        private Button button1;
     }
 }
