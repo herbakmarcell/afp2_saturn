@@ -1,10 +1,8 @@
-﻿namespace ASP_Core.Database.Models
+﻿namespace ASP_Core.Models.Responses
 {
-    public class SubjectModel
+    public class SubjectResponse
     {
-
         public string Code { get; set; }
         public string Name { get; set; }
-
     }
 }

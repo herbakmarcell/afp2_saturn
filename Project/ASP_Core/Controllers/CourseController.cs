@@ -1,8 +1,10 @@
-﻿using ASP_Core.Database.Models;
+﻿using ASP_Core.Database;
 using ASP_Core.Models;
+using ASP_Core.Models.Course;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Course;
 using ASP_Core.Services.Exam;
@@ -14,184 +16,141 @@ namespace ASP_Core.Controllers
 {
     public class CourseController : ControllerBase
     {
-        private readonly CourseIService CourseService;
+        private readonly ICourseService courseService;
         private readonly ICommonService commonService;
-        public CourseController(CourseIService courseService, ICommonService commonService)
+        public CourseController(ICourseService courseService, ICommonService commonService)
         {
-            this.CourseService = courseService;
+            this.courseService = courseService;
             this.commonService = commonService;
         }
 
         [HttpPost]
         [Authorize()]
         [Route("addnewcourse")]
-        public ActionResult<Response<NewCourseResponse>> AddnewCourse([FromBody] ListCourseModel courseModel)
+        public ActionResult<Response<CourseResponse>> AddnewCourse([FromBody] CourseRequest courseModel)
         {
-            NewCourseResponse newCourseResponse = CourseService.AddNewCourse(courseModel);
-            if (newCourseResponse.Success == false)
+            CourseResponse? newCourseResponse = courseService.AddNewCourse(courseModel);
+            if (newCourseResponse == null)
             {
-                return BadRequest(new Response<string>(newCourseResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen kurzus létrehozás"));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
         [HttpDelete]
         [Authorize()]
         [Route("deletecourse")]
-        public ActionResult<Response<NewCourseResponse>> DeleteCourse([FromBody] string courseCode)
+        public ActionResult<Response<CourseResponse>> DeleteCourse(string courseCode)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
-                return Unauthorized(new Response<string>("Missing Admin permissions"));
+                return Unauthorized(new Response<string>("Nincs megfelelő jogosultság!"));
             }
-            NewCourseResponse newCourseResponse = CourseService.DeleteCourse(courseCode);
-            if (newCourseResponse.Success == false)
+            CourseResponse? newCourseResponse = courseService.DeleteCourse(courseCode);
+            if (newCourseResponse == null)
             {
-                return BadRequest(new Response<string>(newCourseResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen kurzus törlés!"));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
         [HttpGet]
         [Authorize()]
         [Route("listcourses")]
-        public ActionResult<Response<ListCourseResponse>> ListCourses()
+        public ActionResult<Response<List<CourseModel>>> ListCourses()
         {
-            ListCourseResponse listCourseResponse = CourseService.ListCourses();
-            if (listCourseResponse.Success == false)
+            List<CourseModel> courses = courseService.ListCourses();
+            if (courses == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Nincs kurzus!"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(courses));
         }
 
 
         [HttpPut]
         [Authorize()]
         [Route("editcourse")]
-        public ActionResult<Response<NewCourseResponse>> EditCourse([FromBody] ListCourseModel courseModel)
+        public ActionResult<Response<CourseResponse>> EditCourse([FromBody] CourseRequest courseModel)
         {
-            if (!commonService.TokenHasRole(User.Claims, "Admin"))
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
-                return Unauthorized(new Response<string>("Missing Admin permissions"));
+                return Unauthorized(new Response<string>("Hiányzó jogosultság!"));
             }
-            NewCourseResponse newCourseResponse = CourseService.EditCourse(courseModel);
-            if (newCourseResponse.Success == false)
+            CourseResponse? newCourseResponse = courseService.EditCourse(courseModel);
+            if (newCourseResponse == null)
             {
-                return BadRequest(new Response<string>(newCourseResponse.Message));
+                return BadRequest(new Response<string>("Hiba a kurzus szerkesztése során!"));
             }
-            return new OkObjectResult(new Response<NewCourseResponse>(newCourseResponse));
+            return new OkObjectResult(new Response<CourseResponse>(newCourseResponse));
         }
 
 
         [HttpGet]
         [Authorize()]
         [Route("searchcoursesbyprof")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesByProf([FromQuery] string profid)
+        public ActionResult<Response<List<CourseModel>>> SearchCoursesByProf(string profid)
         {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesByProf(profid);
-            if (listCourseResponse.Success == false)
+            List<CourseModel> listCourseResponse = courseService.SearchCoursesByProf(profid);
+            if (listCourseResponse == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Nem találhatóak kurzusok ehhez a professzorhoz!"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(listCourseResponse));
         }
 
         [HttpGet]
         [Authorize()]
-        [Route("searchcoursesbycreditmin")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesByCreditmin([FromQuery] int credit)
+        [Route("searchcoursesbycredit")]
+        public ActionResult<Response<List<CourseModel>>> SearchCoursesByCredit(bool byMax, int credit)
         {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesByCreditmin(credit);
-            if (listCourseResponse.Success == false)
+            List<CourseModel> listCourseResponse = courseService.SearchCoursesByCredit(byMax, credit);
+            if (listCourseResponse == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Ennek a keresésnek semmi front-endje, de sikeresen meghívtad :)"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(listCourseResponse));
         }
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchcoursesbycreditmax")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesByCreditmax([FromQuery] int credit)
-        {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesByCreditmax(credit);
-            if (listCourseResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
-        }
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchcoursesbysizemin")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesBySizemin([FromQuery] int size)
-        {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesBySizemin(size);
-            if (listCourseResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
-        }
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchcoursesbysizemax")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesBySizemax([FromQuery] int size)
-        {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesBySizemax(size);
-            if (listCourseResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
-        }
-
 
         [HttpGet]
         [Authorize()]
         [Route("searchcoursesbytype")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesByType([FromQuery] string type)
+        public ActionResult<Response<List<CourseModel>>> SearchCoursesByType(string type)
         {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesByType(type);
-            if (listCourseResponse.Success == false)
+            List<CourseModel> listCourseResponse = courseService.SearchCoursesByType(type);
+            if (listCourseResponse == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Nincsennek ilyen típusú kurzusok!"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(listCourseResponse));
         }
 
 
         [HttpGet]
         [Authorize()]
         [Route("searchcoursesbysemester")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesBySemester([FromQuery] int semesterId)
+        public ActionResult<Response<List<CourseModel>>> SearchCoursesBySemester(int semesterId)
         {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesBySemester(semesterId);
-            if (listCourseResponse.Success == false)
+            List<CourseModel> listCourseResponse = courseService.SearchCoursesBySemester(semesterId);
+            if (listCourseResponse == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Ebben a szemeszterben nincsennek kurzusok!"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(listCourseResponse));
         }
 
 
         [HttpGet]
         [Authorize()]
         [Route("searchcoursesbysubject")]
-        public ActionResult<Response<ListCourseResponse>> SearchCoursesBySubject([FromQuery] string subjectCode)
+        public ActionResult<Response<List<CourseModel>>> SearchCoursesBySubject(string subjectCode)
         {
-            ListCourseResponse listCourseResponse = CourseService.SearchCoursesBySubject(subjectCode);
-            if (listCourseResponse.Success == false)
+            List<CourseModel> listCourseResponse = courseService.SearchCoursesBySubject(subjectCode);
+            if (listCourseResponse == null)
             {
-                return BadRequest(new Response<string>(listCourseResponse.Message));
+                return BadRequest(new Response<string>("Ennek a tárgynak nincsennek kurzusai!"));
             }
-            return new OkObjectResult(new Response<ListCourseResponse>(listCourseResponse));
+            return new OkObjectResult(new Response<List<CourseModel>>(listCourseResponse));
         }
     }
 }

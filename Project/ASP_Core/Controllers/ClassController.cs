@@ -1,8 +1,8 @@
-﻿using ASP_Core.Database.Models;
-using ASP_Core.Models;
+﻿using ASP_Core.Models;
+using ASP_Core.Models.Class;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
-using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
 using Microsoft.AspNetCore.Authorization;
@@ -13,120 +13,89 @@ namespace ASP_Core.Controllers
 {
     public class ClassController : ControllerBase
     {
-        private readonly ClassIService ClassService;
+        private readonly IClassService ClassService;
         private readonly ICommonService commonService;
-        public ClassController(ClassIService classService, ICommonService commonService)
+        public ClassController(IClassService classService, ICommonService commonService)
         {
             this.ClassService = classService;
             this.commonService = commonService;
         }
         [HttpPost]
         [Authorize()]
-        [Route("addnewclass")]
-        public ActionResult<Response<StandardClassResponse>> AddnewClass([FromBody]CreateClassRequestModel createClassRequestModel)
+        [Route("addclass")]
+        public ActionResult<Response<ClassResponse?>> AddClass([FromBody] AddClassRequest addClassRequest)
         {
-            StandardClassResponse classResponse = ClassService.AddNewClass(createClassRequestModel);
-            if (classResponse.Success == false)
+            ClassResponse? classResponse = ClassService.AddClass(addClassRequest);
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
-                return BadRequest(new Response<string>(classResponse.Message));
+                return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
-            return new OkObjectResult(new Response<StandardClassResponse>(classResponse));
+            if (classResponse == null)
+            {
+                return BadRequest(new Response<string>("Hiba a létrehozás közben!"));
+            }
+            return new OkObjectResult(new Response<ClassResponse>(classResponse));
         }
         [HttpDelete]
         [Authorize()]
         [Route("deleteclass")]
-        public ActionResult<Response<StandardClassResponse>> DeleteClass([FromBody] int classId)
+        public ActionResult<Response<ClassResponse>> DeleteClass([FromQuery] int classId)
         {
-            StandardClassResponse classResponse = ClassService.DeleteClass(classId);
-            if (classResponse.Success == false)
+            ClassResponse? classResponse = ClassService.DeleteClass(classId);
+            if (!commonService.TokenHasRole(User.Claims, "Admin") && !commonService.TokenHasRole(User.Claims, "Teacher"))
             {
-                return BadRequest(new Response<string>(classResponse.Message));
+                return Unauthorized(new Response<string>("Hiányzó jogosultságok!"));
             }
-            return new OkObjectResult(new Response<StandardClassResponse>(classResponse));
+            if (classResponse == null)
+            {
+                return BadRequest(new Response<string>("Sikertelen törlés!"));
+            }
+            return new OkObjectResult(new Response<ClassResponse>(classResponse));
         }
 
         [HttpPut]
         [Authorize()]
         [Route("editclass")]
-        public ActionResult<Response<StandardExamResponse>> EditClass([FromBody] EditClassModel editClassModel)
+        public ActionResult<Response<ClassResponse>> EditClass([FromBody] EditClassRequest? editClassModel)
         {
             if (!commonService.TokenHasRole(User.Claims, "Admin"))
             {
                 return Unauthorized(new Response<string>("Missing Admin permissions"));
             }
-            StandardClassResponse StandardClassResponse = ClassService.EditClass(editClassModel);
-            if (StandardClassResponse.Success == false)
+            ClassResponse? response = ClassService.EditClass(editClassModel);
+            if (response == null)
             {
-                return BadRequest(new Response<string>(StandardClassResponse.Message));
+                return BadRequest(new Response<string>("Sikertelen módosítás!"));
             }
-            return new OkObjectResult(new Response<StandardClassResponse>(StandardClassResponse));
+            return new OkObjectResult(new Response<ClassResponse>(response));
         }
 
 
         [HttpGet]
         [Authorize()]
         [Route("searchclassesbyid")]
-        public ActionResult<Response<ListClassResponse>> SearchClassesById([FromQuery] int id)
+        public ActionResult<Response<ClassResponse>> SearchClassesById(int? id)
         {
-            ListClassResponse listClassesResponse = ClassService.SearchClassesById(id);
-            if (listClassesResponse.Success == false)
+            ClassResponse? searchedClass = ClassService.SearchClassesById(id);
+            if (searchedClass == null)
             {
-                return BadRequest(new Response<string>(listClassesResponse.Message));
+                return BadRequest(new Response<string>("Nincs ilyen ID-val rendelkező óra!"));
             }
-            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
-        }
-        [HttpGet]
-        [Authorize()]
-        [Route("searchclassesbystartmin")]
-        public ActionResult<Response<ListClassResponse>> SearchClassesByStartmin([FromQuery] DateTime startTime)
-        {
-            ListClassResponse listClassesResponse = ClassService.SearchClassesByStartmin(startTime);
-            if (listClassesResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listClassesResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
+            return new OkObjectResult(new Response<ClassResponse>(searchedClass));
         }
 
         [HttpGet]
         [Authorize()]
-        [Route("searchclassesbystartmax")]
-        public ActionResult<Response<ListClassResponse>> SearchClassesByStartmax([FromQuery] DateTime startTime)
+        [Route("searchclassbytime")]
+        public ActionResult<Response<List<ClassResponse?>>> SearchClassesByTime(bool byStart, bool byMin, DateTime time)
         {
-            ListClassResponse listClassesResponse = ClassService.SearchClassesByStartmax(startTime);
-            if (listClassesResponse.Success == false)
+            List<ClassResponse?> searchedClass = ClassService.SearchClassesByTime(byStart, byMin, time);
+            if (searchedClass == null)
             {
-                return BadRequest(new Response<string>(listClassesResponse.Message));
+                return BadRequest(new Response<string>("Nincs ilyen időpontban óra!"));
             }
-            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
+            return new OkObjectResult(new Response<List<ClassResponse?>>(searchedClass));
         }
 
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchclassesbyendmin")]
-        public ActionResult<Response<ListClassResponse>> SearchClassesByEndmin([FromQuery] DateTime Time)
-        {
-            ListClassResponse listClassesResponse = ClassService.SearchClassesByEndmin(Time);
-            if (listClassesResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listClassesResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
-        }
-
-
-        [HttpGet]
-        [Authorize()]
-        [Route("searchclassesbyendmax")]
-        public ActionResult<Response<ListClassResponse>> SearchClassesByEndmax([FromQuery] DateTime Time)
-        {
-            ListClassResponse listClassesResponse = ClassService.SearchClassesByEndmax(Time);
-            if (listClassesResponse.Success == false)
-            {
-                return BadRequest(new Response<string>(listClassesResponse.Message));
-            }
-            return new OkObjectResult(new Response<ListClassResponse>(listClassesResponse));
-        }
     }
 }

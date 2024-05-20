@@ -2,7 +2,9 @@
 using ASP_Core.Database.Models;
 using ASP_Core.Models;
 using ASP_Core.Models.Auth;
-using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
+using ASP_Core.Models.Responses.POST;
+using ASP_Core.Models.Responses.PUT;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
@@ -107,7 +109,7 @@ namespace ASP_Core.Services.Auth
 
         public ChangeResponse? Change(ChangeModel changeModel)
         {
-            return saturnContext.Change(changeModel);
+            return saturnContext.UserChange(changeModel);
             
         }
 

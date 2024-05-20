@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ASP_Core.Models.Responses
+namespace ASP_Core.Models.Responses.POST
 {
     public class SendMessageResponse
     {

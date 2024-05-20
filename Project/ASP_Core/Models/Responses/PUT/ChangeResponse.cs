@@ -1,4 +1,4 @@
-﻿namespace ASP_Core.Models.Responses
+﻿namespace ASP_Core.Models.Responses.PUT
 {
     public class ChangeResponse
     {

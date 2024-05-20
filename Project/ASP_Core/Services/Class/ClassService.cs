@@ -3,8 +3,10 @@ using ASP_Core.Database;
 using ASP_Core.Database.Models;
 using ASP_Core.Models;
 using ASP_Core.Models.Auth;
+using ASP_Core.Models.Class;
 using ASP_Core.Models.Exam;
-using ASP_Core.Models.Responses;
+using ASP_Core.Models.Responses.GET;
+using ASP_Core.Services.Auth;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
@@ -15,21 +17,15 @@ using System.Text.RegularExpressions;
 
 namespace ASP_Core.Services.Exam
 {
-    public interface ClassIService
+    public interface IClassService
     {
-        public string TokenWithSaturn(IEnumerable<Claim> claims);
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role);
-
-        public StandardClassResponse? AddNewClass(CreateClassRequestModel createClassRequestModel);
-        public StandardClassResponse? DeleteClass(int classId);
-        public StandardClassResponse? EditClass(EditClassModel editClassModel);
-        public ListClassResponse? SearchClassesById(int id);
-        public ListClassResponse? SearchClassesByStartmin(DateTime startTime);
-        public ListClassResponse? SearchClassesByStartmax(DateTime startTime);
-        public ListClassResponse? SearchClassesByEndmin(DateTime Time);
-        public ListClassResponse? SearchClassesByEndmax(DateTime Time);
+        public ClassResponse? AddClass(AddClassRequest addClassRequest);
+        public ClassResponse? DeleteClass(int classId);
+        public ClassResponse? EditClass(EditClassRequest? editClassModel);
+        public ClassResponse? SearchClassesById(int? id);
+        public List<ClassResponse?> SearchClassesByTime(bool byStart, bool byMin, DateTime startTime);
     }
-    public class ClassService : ClassIService
+    public class ClassService : IClassService
     {
         private readonly SaturnContext saturnContext;
         public ClassService(SaturnContext saturnContext)
@@ -37,57 +33,55 @@ namespace ASP_Core.Services.Exam
             this.saturnContext = saturnContext;
         }
 
-
-        public string TokenWithSaturn(IEnumerable<Claim> claims)
+        public ClassResponse? AddClass(AddClassRequest addClassRequest)
         {
-            if (claims == null) return null;
-            return claims.FirstOrDefault(c => c.Type == "saturnCode").Value.ToString();
+            return saturnContext.AddClass(addClassRequest);
         }
 
-        public bool TokenHasRole(IEnumerable<Claim> claims, string role)
-        {
-            if (claims == null) return false;
-            return claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value.Split(',').Contains(role);
-        }
-
-        public StandardClassResponse? AddNewClass(CreateClassRequestModel createClassRequestModel)
-        {
-            return saturnContext.AddNewClass(createClassRequestModel);
-        }
-
-        public StandardClassResponse? DeleteClass(int classId)
+        public ClassResponse? DeleteClass(int classId)
         {
             return saturnContext.DeleteClass(classId);
         }
 
-        public StandardClassResponse? EditClass(EditClassModel editClassModel)
+        public ClassResponse? EditClass(EditClassRequest? editClassModel)
         {
+            if (editClassModel == null)
+            {
+                return null;
+            }
             return saturnContext.EditClass(editClassModel);
         }
 
-        public ListClassResponse? SearchClassesById(int id)
+        public ClassResponse? SearchClassesById(int? id)
         {
-            return saturnContext.SearchClassById(id);
+            if (id == null) return null;
+            ClassModel? searchedClass = saturnContext.SearchClassById(id);
+            if (searchedClass == null) return null;
+            ClassResponse result = new ClassResponse
+            {
+                Id = searchedClass.Id,
+                StartTime = searchedClass.StartTime,
+                EndTime = searchedClass.EndTime,
+                Course = searchedClass.Course.Code,
+                Room = searchedClass.Room.Code
+            };
+            return result;
         }
 
-        public ListClassResponse? SearchClassesByStartmin(DateTime startTime)
+        public List<ClassResponse?> SearchClassesByTime(bool byStart, bool byMin, DateTime time)
         {
-            return saturnContext.SearchClassByStartmin(startTime);
+            List<ClassModel> temp = saturnContext.SearchClassByTime(byMin, byStart, time);
+            if (temp == null || temp.Count == 0) return null;
+            List<ClassResponse> result = temp.Select(c => new ClassResponse
+            {
+                Id = c.Id,
+                StartTime = c.StartTime,
+                EndTime = c.EndTime,
+                Course = c.Course.Type,
+                Room = c.Room.Code
+            }).ToList();
+            return result;
         }
 
-        public ListClassResponse? SearchClassesByStartmax(DateTime startTime)
-        {
-            return saturnContext.SearchClassByStartmin(startTime);
-        }
-
-        public ListClassResponse? SearchClassesByEndmin(DateTime Time)
-        {
-            return saturnContext.SearchClassByEndmin(Time);
-        }
-
-        public ListClassResponse? SearchClassesByEndmax(DateTime Time)
-        {
-            return saturnContext.SearchClassByEndmax(Time);
-        }
     }
 }

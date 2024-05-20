@@ -1,4 +1,4 @@
-﻿namespace ASP_Core.Models.Responses
+﻿namespace ASP_Core.Models.Responses.GET
 {
     public class LoginResponse
     {
