@@ -47,7 +47,7 @@ namespace ASP_Core
             builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddScoped<ExamIService, ExamService>();
             builder.Services.AddScoped<CourseIService, CourseService>();
-            builder.Services.AddScoped<ClassIService, ClassService>();
+            builder.Services.AddScoped<IClassService, ClassService>();
             builder.Services.AddScoped<SubjectIService, SubjectService>();
 
             builder.Services.AddControllers();

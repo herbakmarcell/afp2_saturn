@@ -1,4 +1,6 @@
-﻿namespace ASP_Core.Database.Models
+﻿using ASP_Core.Models.Subject;
+
+namespace ASP_Core.Database.Models
 {
     public class ListSubjectResponse
     {

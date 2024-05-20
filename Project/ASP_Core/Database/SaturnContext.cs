@@ -17,6 +17,11 @@ using Humanizer.DateTimeHumanizeStrategy;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Exam;
 using ASP_Core.Services.Exam;
+using ASP_Core.Models.Class;
+using ASP_Core.Models.Course;
+using ASP_Core.Models.Subject;
+using ASP_Core.Services.Auth;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 
 namespace ASP_Core.Database
@@ -995,7 +1000,7 @@ namespace ASP_Core.Database
                 MaxSize = courseModel.MaxSize,
                 Grades = new List<Grade>(),
                 Prof = courseModel.Prof,
-                Type = courseModel.Type
+                Name = courseModel.Type
             };
             this.Courses.Add(newcourse);
             SaveChanges();
@@ -1049,7 +1054,7 @@ namespace ASP_Core.Database
             List<ListCourseModel> courseModels = new List<ListCourseModel>();
             foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
-                courseModels.Add(new ListCourseModel { Code = course.Code, Credit = course.Credit, SubjectCode = (course.Subject?.Code == null) ? "Nincs valamiért" : course.Subject.Code, MaxSize = course.MaxSize, Prof = course.Prof, SemesterId = (course.CurrentSemester?.Id == null) ? -1 : course.CurrentSemester.Id, Type = course.Type });
+                courseModels.Add(new ListCourseModel { Code = course.Code, Credit = course.Credit, SubjectCode = (course.Subject?.Code == null) ? "Nincs valamiért" : course.Subject.Code, MaxSize = course.MaxSize, Prof = course.Prof, SemesterId = (course.CurrentSemester?.Id == null) ? -1 : course.CurrentSemester.Id, Type = course.Name });
             }
             return new ListCourseResponse
             {
@@ -1150,7 +1155,7 @@ namespace ASP_Core.Database
                 Exams = modifiableCourse.Exams,
                 Grades = modifiableCourse.Grades,
                 Prof = courseModel.Prof,
-                Type = courseModel.Type
+                Name = courseModel.Type
             };
 
             this.Courses.Remove(Courses.FirstOrDefault(e => e.Code == courseModel.Code));
@@ -1192,7 +1197,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1237,7 +1242,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1283,7 +1288,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1328,7 +1333,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1374,7 +1379,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1407,7 +1412,7 @@ namespace ASP_Core.Database
             List<ListCourseModel> speccoursesModel = new List<ListCourseModel>();
             foreach (Course course in Courses.Include(c => c.Subject).Include(c => c.CurrentSemester))
             {
-                if (course.Type == type)
+                if (course.Name == type)
                 {
                     speccourse.Add(course);
                 }
@@ -1420,7 +1425,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1470,7 +1475,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1520,7 +1525,7 @@ namespace ASP_Core.Database
                     Success = false
                 };
             }
-            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Type }));
+            speccourse.ForEach(spec => speccoursesModel.Add(new ListCourseModel { Code = spec.Code, SubjectCode = spec.Subject?.Code, SemesterId = spec.CurrentSemester?.Id, MaxSize = spec.MaxSize, Credit = spec.Credit, Prof = spec.Prof, Type = spec.Name }));
 
             return new ListCourseResponse
             {
@@ -1530,367 +1535,116 @@ namespace ASP_Core.Database
             };
         }
 
-
-        public StandardClassResponse? AddNewClass(CreateClassRequestModel createClassRequestModel)
+        public ClassResponse? AddClass(AddClassRequest addClassRequest)
         {
-            Course jokurzus = new Course();
-            foreach (Course course in Courses)
-            {
-                if (course.Code == createClassRequestModel.Coursecode)
-                {
-                    jokurzus = course;
-                }
-            }
-            if (jokurzus.Code != createClassRequestModel.Coursecode)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
-                    Success = false
-                };
-            }
-
-
-            Room joroom = new Room();
-            foreach (Room room in Rooms)
-            {
-                if (room.Code == createClassRequestModel.Roomcode)
-                {
-                    joroom = room;
-                }
-            }
-            if (joroom.Code != createClassRequestModel.Roomcode)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs terem a megadott teremkóddal",
-                    Success = false
-                };
-            }
-            if (createClassRequestModel == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs átadva a legenerálandó class",
-                    Success = false
-                };
-            }
-
-            if (joroom == null || jokurzus == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "Üres a kurzus vagy szoba",
-                    Success = false
-                };
-            }
-            //professzorok rangjának ellenőrzése ha majd lesz Teacher rang, és lesznek tanárok
-            ClassModel newclass = new ClassModel
-            {
-                Course = jokurzus,
-                StartTime = createClassRequestModel.StartTime,
-                EndTime = createClassRequestModel.EndTime,
-                Room = joroom
-            };
-            this.Classes.Add(newclass);
-            SaveChanges();
-            return new StandardClassResponse
-            {
-                Message = "Sikeres hozzáadás",
-                Success = true,
-            };
-        }
-
-
-
-        public StandardClassResponse? DeleteClass(int classId)
-        {
-            if (classId == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs átadva az classId",
-                    Success = false
-                };
-            }
-            if (Classes.FirstOrDefault(e => e.Id == classId) == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nem létezik ilyen class",
-                    Success = false
-                };
-            }
-            this.Classes.Remove(Classes.FirstOrDefault(e => e.Id == classId));
-            SaveChanges();
-            return new StandardClassResponse
-            {
-                Message = $"Sikeresen törölte a {classId} számú classt",
-                Success = true
-            };
-
-
-        }
-
-
-
-        public StandardClassResponse? EditClass(EditClassModel editClassModel)
-        {
-            if (editClassModel == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs átadva a módosított class",
-                    Success = false
-                };
-            }
-            if (Classes.FirstOrDefault(e => e.Id == editClassModel.Id) == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nem létezik ilyen módosítandó class",
-                    Success = false
-                };
-            }
-            Course jokurzus = new Course();
-            foreach (Course course in Courses)
-            {
-                if (course.Code == editClassModel.CourseCode)
-                {
-                    jokurzus = course;
-                }
-            }
-            if (jokurzus.Code != editClassModel.CourseCode)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs ilyen kurzuskóddal rendelkező kurzus",
-                    Success = false
-                };
-            }
-
-
-            Room joroom = new Room();
-            foreach (Room room in Rooms)
-            {
-                if (room.Code == editClassModel.RoomCode)
-                {
-                    joroom = room;
-                }
-            }
-            if (joroom.Code != editClassModel.RoomCode)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs terem a megadott teremkóddal",
-                    Success = false
-                };
-            }
-            if (editClassModel == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs átadva a legenerálandó class",
-                    Success = false
-                };
-            }
-
-            if (joroom == null || jokurzus == null)
-            {
-                return new StandardClassResponse
-                {
-                    Message = "nincs megadott kurzus vagy szoba",
-                    Success = false
-                };
-            }
-            ClassModel modifiableClass = Classes.FirstOrDefault(e => e.Id == editClassModel.Id);
+            Course? courseExists = Courses.FirstOrDefault(e => e.Code == addClassRequest.Course);
+            if (courseExists == null) return null;
+            Room? roomExists = Rooms.FirstOrDefault(e => e.Code == addClassRequest.Room);
+            if (roomExists == null) return null;
             ClassModel newClass = new ClassModel
             {
-                Course = jokurzus,
-                StartTime = editClassModel.StartTime,
-                EndTime = editClassModel.EndTime,
-                Id = editClassModel.Id,
-                Room = joroom
+                Course = courseExists,
+                Room = roomExists,
+                StartTime = addClassRequest.StartTime,
+                EndTime = addClassRequest.EndTime
             };
-
-            this.Classes.Remove(Classes.FirstOrDefault(e => e.Id == editClassModel.Id));
-            this.Classes.Add(newClass);
+            Classes.Add(newClass);
             SaveChanges();
-            return new StandardClassResponse
+            return new ClassResponse
             {
-                Message = "Sikeresen megváltoztatta az classt",
-                Success = true
+                Course = newClass.Course.Code,
+                Room = newClass.Room.Code,
+                StartTime = newClass.StartTime,
+                EndTime = newClass.EndTime
             };
         }
 
-        public ListClassResponse? SearchClassById(int id)
+        public ClassResponse? DeleteClass(int classId)
         {
-            if (Classes.Count() == 0)
+            ClassModel? classModel = Classes.Include(c => c.Course).Include(c => c.Room).FirstOrDefault(e => e.Id == classId);
+            if (classModel == null) return null;
+            ClassResponse response = new ClassResponse
             {
-                return new ListClassResponse
-                {
-                    Message = "Nem létezik még óra",
-                    Success = false
-                };
-            }
-            List<ClassModel> specclasses = new List<ClassModel>();
-            foreach (ClassModel xclass in Classes)
-            {
-                if (xclass.Id == id)
-                {
-                    specclasses.Add(xclass);
-                }
-            }
-            if (specclasses.Count() == 0)
-            {
-                return new ListClassResponse
-                {
-                    Message = "nincs a keresésnek megfelelő óra",
-                    Success = false
-                };
-            }
-            return new ListClassResponse
-            {
-                Classes = specclasses,
-                Message = "Sikeres kilistázás",
-                Success = true
+                Id = classModel.Id,
+                Course = classModel.Course.Code,
+                Room = classModel.Room.Code,
+                StartTime = classModel.StartTime,
+                EndTime = classModel.EndTime
             };
-        }
-        public ListClassResponse? SearchClassByStartmin(DateTime startTime)
-        {
-            if (Classes.Count() == 0)
-            {
-                return new ListClassResponse
-                {
-                    Message = "Nem létezik még óra",
-                    Success = false
-                };
-            }
-            List<ClassModel> specclasses = new List<ClassModel>();
-            foreach (ClassModel xclass in Classes)
-            {
-                if (xclass.StartTime >= startTime)
-                {
-                    specclasses.Add(xclass);
-                }
-            }
-            if (specclasses.Count() == 0)
-            {
-                return new ListClassResponse
-                {
-                    Message = "nincs a keresésnek megfelelő óra",
-                    Success = false
-                };
-            }
-            return new ListClassResponse
-            {
-                Classes = specclasses,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+            Classes.Remove(classModel);
+            SaveChanges();
+            return response;
         }
 
-        public ListClassResponse? SearchClassByStartmax(DateTime startTime)
+        public ClassResponse? EditClass(EditClassRequest editClassModel)
         {
-            if (Classes.Count() == 0)
+            ClassResponse response = new ClassResponse();
+            ClassModel? classModel = Classes.Include(c => c.Course).Include(c => c.Room).FirstOrDefault(e => e.Id == editClassModel.Id);
+            if (classModel == null) return null;
+            response.Id = editClassModel.Id;
+            if (string.IsNullOrEmpty(editClassModel.Course))
             {
-                return new ListClassResponse
-                {
-                    Message = "Nem létezik még óra",
-                    Success = false
-                };
+                Course? courseExists = Courses.FirstOrDefault(e => e.Code == editClassModel.Course);
+                if (courseExists == null) return null;
+                classModel.Course = courseExists;
+                response.Course = editClassModel.Course;
             }
-            List<ClassModel> specclasses = new List<ClassModel>();
-            foreach (ClassModel xclass in Classes)
+            if (string.IsNullOrEmpty(editClassModel.Room))
             {
-                if (xclass.StartTime < startTime)
-                {
-                    specclasses.Add(xclass);
-                }
+                Room? roomExists = Rooms.FirstOrDefault(e => e.Code == editClassModel.Room);
+                if (roomExists == null) return null;
+                classModel.Room = roomExists;
+                response.Room = editClassModel.Room;
             }
-            if (specclasses.Count() == 0)
+            if (editClassModel.StartTime != null)
             {
-                return new ListClassResponse
-                {
-                    Message = "nincs a keresésnek megfelelő óra",
-                    Success = false
-                };
+                classModel.StartTime = (DateTime)editClassModel.StartTime;
+                response.StartTime = (DateTime)editClassModel.StartTime;
             }
-            return new ListClassResponse
+            if (editClassModel.EndTime != null)
             {
-                Classes = specclasses,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+                classModel.EndTime = (DateTime)editClassModel.EndTime;
+                response.EndTime = (DateTime)editClassModel.EndTime;
+            }
+            SaveChanges();
+            return response;
         }
 
-
-        public ListClassResponse? SearchClassByEndmin(DateTime Time)
+        public ClassModel? SearchClassById(int? id)
         {
-            if (Classes.Count() == 0)
-            {
-                return new ListClassResponse
-                {
-                    Message = "Nem létezik még óra",
-                    Success = false
-                };
-            }
-            List<ClassModel> specclasses = new List<ClassModel>();
-            foreach (ClassModel xclass in Classes)
-            {
-                if (xclass.EndTime >= Time)
-                {
-                    specclasses.Add(xclass);
-                }
-            }
-            if (specclasses.Count() == 0)
-            {
-                return new ListClassResponse
-                {
-                    Message = "nincs a keresésnek megfelelő óra",
-                    Success = false
-                };
-            }
-            return new ListClassResponse
-            {
-                Classes = specclasses,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+            return Classes.Include(c => c.Course).Include(c => c.Room).FirstOrDefault(e => e.Id == id);
         }
 
-        public ListClassResponse? SearchClassByEndmax(DateTime Time)
+        public List<ClassModel> SearchClassByTime(bool byStart, bool byMin, DateTime time)
         {
             if (Classes.Count() == 0)
             {
-                return new ListClassResponse
-                {
-                    Message = "Nem létezik még óra",
-                    Success = false
-                };
+                return null;
             }
-            List<ClassModel> specclasses = new List<ClassModel>();
-            foreach (ClassModel xclass in Classes)
+            List<ClassModel> classesBySearch = new List<ClassModel>();
+            if (byStart)
             {
-                if (xclass.EndTime < Time)
+                if (byMin)
                 {
-                    specclasses.Add(xclass);
+                    classesBySearch = Classes.Include(c => c.Course).Include(c => c.Room).Where(c => c.StartTime >= time).ToList();
+                }
+                else
+                {
+                    classesBySearch = Classes.Include(c => c.Course).Include(c => c.Room).Where(c => c.StartTime < time).ToList();
                 }
             }
-            if (specclasses.Count() == 0)
+            else
             {
-                return new ListClassResponse
+                if (byMin)
                 {
-                    Message = "nincs a keresésnek megfelelő óra",
-                    Success = false
-                };
+                    classesBySearch = Classes.Include(c => c.Course).Include(c => c.Room).Where(c => c.EndTime >= time).ToList();
+                }
+                else
+                {
+                    classesBySearch = Classes.Include(c => c.Course).Include(c => c.Room).Where(c => c.EndTime < time).ToList();
+                }
             }
-            return new ListClassResponse
-            {
-                Classes = specclasses,
-                Message = "Sikeres kilistázás",
-                Success = true
-            };
+            return classesBySearch;
         }
 
         public ListSubjectResponse? ListSubjects()

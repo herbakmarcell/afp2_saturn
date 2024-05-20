@@ -1,5 +1,6 @@
 ﻿using ASP_Core.Database.Models;
 using ASP_Core.Models;
+using ASP_Core.Models.Course;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;

@@ -1,4 +1,4 @@
-using ASP_Core.Database.Models;
+using ASP_Core.Models.Exam;
 
 namespace ASP_Core.Models.Responses
 {

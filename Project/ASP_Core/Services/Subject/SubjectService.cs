@@ -5,6 +5,7 @@ using ASP_Core.Models;
 using ASP_Core.Models.Auth;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Subject;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;

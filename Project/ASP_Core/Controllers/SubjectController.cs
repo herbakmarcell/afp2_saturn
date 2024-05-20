@@ -3,6 +3,7 @@ using ASP_Core.Models;
 using ASP_Core.Models.Exam;
 using ASP_Core.Models.Message;
 using ASP_Core.Models.Responses;
+using ASP_Core.Models.Subject;
 using ASP_Core.Services.Auth;
 using ASP_Core.Services.Exam;
 using ASP_Core.Services.Subject;

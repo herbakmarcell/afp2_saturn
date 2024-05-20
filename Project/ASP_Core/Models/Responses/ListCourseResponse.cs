@@ -1,3 +1,5 @@
+using ASP_Core.Models.Course;
+
 namespace ASP_Core.Database.Models
 {
     public class ListCourseResponse

@@ -1,4 +1,4 @@
-namespace ASP_Core.Database.Models
+namespace ASP_Core.Models.Exam
 {
     public class CreateExamRequestModel
     {
