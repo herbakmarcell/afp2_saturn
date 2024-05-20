@@ -32,6 +32,7 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             label4 = new Label();
+            linkLabel2 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -79,12 +80,28 @@
             label4.TabIndex = 33;
             label4.Text = "Mennyit szeretne feltölteni?";
             // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.BackColor = Color.Transparent;
+            linkLabel2.Font = new Font("Comic Sans MS", 9.2F);
+            linkLabel2.LinkColor = Color.DarkOrange;
+            linkLabel2.Location = new Point(12, 9);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(51, 18);
+            linkLabel2.TabIndex = 34;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "<Vissza";
+            linkLabel2.VisitedLinkColor = Color.DarkOrange;
+            linkLabel2.LinkClicked += linkLabel2_LinkClicked;
+            // 
             // LegalMoneyPrinter3140
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.mainBack;
             ClientSize = new Size(302, 262);
+            Controls.Add(linkLabel2);
             Controls.Add(label4);
             Controls.Add(button1);
             Controls.Add(textBox1);
@@ -102,5 +119,6 @@
         private PictureBox pictureBox1;
         private Button button1;
         private Label label4;
+        private LinkLabel linkLabel2;
     }
 }
