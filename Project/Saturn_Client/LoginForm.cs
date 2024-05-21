@@ -134,22 +134,13 @@ namespace Saturn_Client
             LoginAsync();
         }
 
-        private void regformButton_Click(object sender, EventArgs e)
-        {
-            RegFrom regFrom = new RegFrom();
-            regFrom.Show();
-            regformButton.Enabled = false;
-        }
+        
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("A SaturnKódod és Jelszavad megadása után, a Bejelentkezés gombra kattintva tudsz belépni az alkalmazásba.");
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-            regformButton.Visible = false;
-            regformButton.Enabled = false;
-        }
+
     }
 }
