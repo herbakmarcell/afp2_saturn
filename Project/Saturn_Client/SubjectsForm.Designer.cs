@@ -29,126 +29,20 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
+            dataGridView1 = new DataGridView();
+            targynev = new DataGridViewTextBoxColumn();
+            targykod = new DataGridViewTextBoxColumn();
+            targycsopnev = new DataGridViewTextBoxColumn();
+            sorszam = new DataGridViewTextBoxColumn();
+            ajanlottfelev = new DataGridViewTextBoxColumn();
+            kredit = new DataGridViewTextBoxColumn();
+            targytipus = new DataGridViewTextBoxColumn();
+            teljesitett = new DataGridViewTextBoxColumn();
+            felvett = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Comic Sans MS", 9F);
-            label1.ForeColor = Color.Maroon;
-            label1.Location = new Point(27, 16);
-            label1.Name = "label1";
-            label1.Size = new Size(68, 17);
-            label1.TabIndex = 0;
-            label1.Text = "Tárgy neve";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Comic Sans MS", 9F);
-            label2.ForeColor = Color.Maroon;
-            label2.Location = new Point(102, 16);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 17);
-            label2.TabIndex = 1;
-            label2.Text = "Tárgy kódja";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Comic Sans MS", 9F);
-            label3.ForeColor = Color.Maroon;
-            label3.Location = new Point(181, 16);
-            label3.Name = "label3";
-            label3.Size = new Size(110, 17);
-            label3.TabIndex = 2;
-            label3.Text = "Tárgycsoport neve";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Comic Sans MS", 9F);
-            label4.ForeColor = Color.Maroon;
-            label4.Location = new Point(299, 16);
-            label4.Name = "label4";
-            label4.Size = new Size(54, 17);
-            label4.TabIndex = 3;
-            label4.Text = "Sorszám";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Comic Sans MS", 9F);
-            label5.ForeColor = Color.Maroon;
-            label5.Location = new Point(361, 16);
-            label5.Name = "label5";
-            label5.Size = new Size(87, 17);
-            label5.TabIndex = 4;
-            label5.Text = "Ajánlott félév";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Comic Sans MS", 9F);
-            label6.ForeColor = Color.Maroon;
-            label6.Location = new Point(452, 16);
-            label6.Name = "label6";
-            label6.Size = new Size(43, 17);
-            label6.TabIndex = 5;
-            label6.Text = "Kredit";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Comic Sans MS", 9F);
-            label7.ForeColor = Color.Maroon;
-            label7.Location = new Point(500, 16);
-            label7.Name = "label7";
-            label7.Size = new Size(68, 17);
-            label7.TabIndex = 6;
-            label7.Text = "Tárgytípus";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Comic Sans MS", 9F);
-            label8.ForeColor = Color.Maroon;
-            label8.Location = new Point(572, 16);
-            label8.Name = "label8";
-            label8.Size = new Size(71, 17);
-            label8.TabIndex = 7;
-            label8.Text = "Teljesített";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Comic Sans MS", 9F);
-            label9.ForeColor = Color.Maroon;
-            label9.Location = new Point(641, 16);
-            label9.Name = "label9";
-            label9.Size = new Size(49, 17);
-            label9.TabIndex = 8;
-            label9.Text = "Felvett";
             // 
             // HelpButton
             // 
@@ -159,7 +53,7 @@
             HelpButton.FlatStyle = FlatStyle.Flat;
             HelpButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
             HelpButton.ForeColor = Color.DarkOrange;
-            HelpButton.Location = new Point(874, 9);
+            HelpButton.Location = new Point(979, 12);
             HelpButton.Name = "HelpButton";
             HelpButton.Size = new Size(27, 27);
             HelpButton.TabIndex = 12;
@@ -168,41 +62,87 @@
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { targynev, targykod, targycsopnev, sorszam, ajanlottfelev, kredit, targytipus, teljesitett, felvett });
+            dataGridView1.Location = new Point(28, 12);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(945, 284);
+            dataGridView1.TabIndex = 13;
+            // 
+            // targynev
+            // 
+            targynev.HeaderText = "Tárgy neve";
+            targynev.Name = "targynev";
+            // 
+            // targykod
+            // 
+            targykod.HeaderText = "Tárgy kódja";
+            targykod.Name = "targykod";
+            // 
+            // targycsopnev
+            // 
+            targycsopnev.HeaderText = "Tárgycsoport neve";
+            targycsopnev.Name = "targycsopnev";
+            // 
+            // sorszam
+            // 
+            sorszam.HeaderText = "Sorszám";
+            sorszam.Name = "sorszam";
+            // 
+            // ajanlottfelev
+            // 
+            ajanlottfelev.HeaderText = "Ajánlott félév";
+            ajanlottfelev.Name = "ajanlottfelev";
+            // 
+            // kredit
+            // 
+            kredit.HeaderText = "Kredit";
+            kredit.Name = "kredit";
+            // 
+            // targytipus
+            // 
+            targytipus.HeaderText = "Tárgytípus";
+            targytipus.Name = "targytipus";
+            // 
+            // teljesitett
+            // 
+            teljesitett.HeaderText = "Teljesített";
+            teljesitett.Name = "teljesitett";
+            // 
+            // felvett
+            // 
+            felvett.HeaderText = "Felvett";
+            felvett.Name = "felvett";
+            // 
             // SubjectsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1111, 494);
+            Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "SubjectsForm";
             Text = "SubjectForm";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private Label label9;
         private Button HelpButton;
         private ToolTip toolTip1;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn targynev;
+        private DataGridViewTextBoxColumn targykod;
+        private DataGridViewTextBoxColumn targycsopnev;
+        private DataGridViewTextBoxColumn sorszam;
+        private DataGridViewTextBoxColumn ajanlottfelev;
+        private DataGridViewTextBoxColumn kredit;
+        private DataGridViewTextBoxColumn targytipus;
+        private DataGridViewTextBoxColumn teljesitett;
+        private DataGridViewTextBoxColumn felvett;
     }
 }
