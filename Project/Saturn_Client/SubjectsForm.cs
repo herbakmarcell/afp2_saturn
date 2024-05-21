@@ -88,14 +88,14 @@ namespace Saturn_Client
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            backButton.Visible = true;
-            manageAdminFunctions();
+            MessageBox.Show("Sikeres tárgyfelvétel!");
             //backendösszekötés
         }
 
         private void backButton_Click(object sender, EventArgs e)
         {
             subjectDataGridView.Visible = true;
+            backButton.Visible = false;
         }
     }
 }
