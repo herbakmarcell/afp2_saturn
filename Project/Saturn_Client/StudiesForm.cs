@@ -20,7 +20,7 @@ namespace Saturn_Client
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Itt láthatod a tanulmányaidra vonatkozó adatokat, a Jogviszonyoddal és az aktuális félévvel kapcsolatban.");
+            MessageBox.Show("Itt láthatod a tanulmányaidra vonatkozó adatokat, a Jogviszonyoddal, az aktuális félévvel, valamint a választott specifikációddal kapcsolatban. ");
         }
 
         public int Radius { get; set; } = 30;
