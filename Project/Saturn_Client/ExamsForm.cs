@@ -93,7 +93,15 @@ namespace Saturn_Client
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Itt megtudhatsz mindent a közelgő vizsgáiddal kapcsolatban. A vizsgák összes fontossabb adatát megtalálod.");
+            if (TokenContainer.IsAdmin)
+            {
+                MessageBox.Show("Itt tudod kezelni a vizsgákat. Hozzáadni, módosítani, törölni tudsz vizsgákat.");
+            }
+            else
+            {
+                MessageBox.Show("Itt megtudhatsz mindent a közelgő vizsgáiddal kapcsolatban. A táblázatban kiválasztott vizsgáidatt, fel tudod venni. Megtekintheted a már felvett vizsgáidat.");
+            }
+            
         }
 
         public int Radius { get; set; } = 30;
