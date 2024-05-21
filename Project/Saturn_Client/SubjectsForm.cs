@@ -1,11 +1,15 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,9 +17,13 @@ namespace Saturn_Client
 {
     public partial class SubjectsForm : Form
     {
+        private RestClient client;
         public SubjectsForm()
         {
             InitializeComponent();
+            client = new RestClient("https://localhost:7204/api/Auth");
+            hideAdminFunctions();
+            manageFuctions();
         }
 
         private void HelpButton_Click(object sender, EventArgs e)
@@ -42,6 +50,43 @@ namespace Saturn_Client
             {
                 e.Graphics.DrawPath(pen, path);
             }
+        }
+        private void manageFuctions()
+        {
+            updateSubjectButton.Visible = false;
+            addSubjectButton.Visible = false;
+            deleteSubjectButton.Visible = false;
+            if (TokenContainer.IsAdmin)
+            {
+                updateSubjectButton.Visible = true;
+                addSubjectButton.Visible = true;
+                deleteSubjectButton.Visible = true;
+            }
+            
+        }
+        private void hideAdminFunctions()
+        {
+
+        }
+
+        private void updateSubjectButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteSubjectButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addSubjectButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void applyButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
