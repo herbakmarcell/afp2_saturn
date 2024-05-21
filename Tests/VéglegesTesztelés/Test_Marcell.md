@@ -1,6 +1,6 @@
 # Végleges tesztelés
 
-## **Dátum:** 2024.05.21
+## **Dátum:** 2024.05.21.
  - Tesztelő: **Herbák Marcell**
  - Manuális (kézi) tesztelés
 
