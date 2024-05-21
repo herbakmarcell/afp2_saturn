@@ -36,7 +36,15 @@ namespace Saturn_Client
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Az Üzenetek oldalon, láthatod a beérkezett és elküldött üzeneteidet. Küldhetsz üzenetet másoknak és kezelheted a már meglévőket.");
+            if (TokenContainer.IsAdmin)
+            {
+                MessageBox.Show("Adminként az üzenetek oldalon, megtekintheted az általad küldött, és fogadott üzeneteket, valamint törölhetsz üzeneteket.");
+            }
+            else
+            {
+                MessageBox.Show("Az Üzenetek oldalon, láthatod a beérkezett és elküldött üzeneteidet. Küldhetsz üzenetet másoknak és megtekintheted a már meglévőket.");
+            }
+            
         }
 
         private void HideSend(bool enabled)

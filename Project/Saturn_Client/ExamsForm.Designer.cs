@@ -88,7 +88,7 @@
             // 
             examsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             examsDataGridView.Columns.AddRange(new DataGridViewColumn[] { subject, subjectCode, course, type, startingTime, personLimit, classroom, teacher });
-            examsDataGridView.Location = new Point(28, 47);
+            examsDataGridView.Location = new Point(27, 47);
             examsDataGridView.Name = "examsDataGridView";
             examsDataGridView.Size = new Size(843, 238);
             examsDataGridView.TabIndex = 13;

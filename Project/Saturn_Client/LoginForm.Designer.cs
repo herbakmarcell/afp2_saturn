@@ -41,7 +41,6 @@
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
             loginButton = new Button();
-            regformButton = new Button();
             ((System.ComponentModel.ISupportInitialize)logoBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userPic).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passPic).BeginInit();
@@ -177,19 +176,6 @@
             loginButton.UseVisualStyleBackColor = false;
             loginButton.Click += loginButton_Click;
             // 
-            // regformButton
-            // 
-            regformButton.BackColor = Color.Transparent;
-            regformButton.ForeColor = SystemColors.ControlText;
-            regformButton.Location = new Point(552, 241);
-            regformButton.Margin = new Padding(3, 2, 3, 2);
-            regformButton.Name = "regformButton";
-            regformButton.Size = new Size(88, 25);
-            regformButton.TabIndex = 9;
-            regformButton.Text = "Regisztráció";
-            regformButton.UseVisualStyleBackColor = false;
-            regformButton.Click += regformButton_Click;
-            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -201,7 +187,6 @@
             Controls.Add(usernameField);
             Controls.Add(pictureBox1);
             Controls.Add(HelpButton);
-            Controls.Add(regformButton);
             Controls.Add(passPic);
             Controls.Add(userPic);
             Controls.Add(exitButton);
@@ -211,7 +196,6 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "LoginForm";
             Text = "Saturn";
-            Load += LoginForm_Load;
             MouseDown += LoginForm_MouseDown;
             MouseMove += LoginForm_MouseMove;
             MouseUp += LoginForm_MouseUp;
@@ -237,6 +221,5 @@
         private Button HelpButton;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private Button regformButton;
     }
 }
