@@ -52,7 +52,7 @@ namespace Saturn_Client
         }
         private void manageFuctions()
         {
-            
+            backButton.Visible = false;
             if (!TokenContainer.IsAdmin)
             {
                 updateSubjectButton.Visible = false;
@@ -60,7 +60,7 @@ namespace Saturn_Client
                 deleteSubjectButton.Visible = false;
 
             }
-            
+
         }
         private void manageAdminFunctions()
         {
@@ -70,21 +70,32 @@ namespace Saturn_Client
         private void updateSubjectButton_Click(object sender, EventArgs e)
         {
             manageAdminFunctions();
+            backButton.Visible = true;
         }
 
         private void deleteSubjectButton_Click(object sender, EventArgs e)
         {
+            backButton.Visible = true;
+            manageAdminFunctions();
             //backendösszekötés
         }
 
         private void addSubjectButton_Click(object sender, EventArgs e)
         {
+            backButton.Visible = true;
             manageAdminFunctions();
         }
 
         private void applyButton_Click(object sender, EventArgs e)
         {
+            backButton.Visible = true;
+            manageAdminFunctions();
             //backendösszekötés
+        }
+
+        private void backButton_Click(object sender, EventArgs e)
+        {
+            subjectDataGridView.Visible = true;
         }
     }
 }
