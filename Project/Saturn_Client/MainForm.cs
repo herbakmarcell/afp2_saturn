@@ -186,7 +186,15 @@ namespace Saturn_Client
 
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("A fõoldalon menüpontok között tudsz navigálni. Lásd: Saját, Tanulmányok, Tárgyak, Vizsgázás, Pénzügyek, Postaláda");
+            if (TokenContainer.IsAdmin)
+            {
+                MessageBox.Show("Adminként, itt a regisztráció gombbal tudsz a regisztrációs felületre navigáni, ahol új felhasználókat tudsz létrehozni.");
+            }
+            else
+            {
+                MessageBox.Show("A fõoldalon menüpontok között tudsz navigálni. Lásd: Saját, Tanulmányok, Tárgyak, Vizsgázás, Pénzügyek, Postaláda");
+            }
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
