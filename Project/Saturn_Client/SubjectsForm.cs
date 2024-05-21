@@ -22,7 +22,6 @@ namespace Saturn_Client
         {
             InitializeComponent();
             client = new RestClient("https://localhost:7204/api/Auth");
-            hideAdminFunctions();
             manageFuctions();
         }
 
@@ -53,40 +52,39 @@ namespace Saturn_Client
         }
         private void manageFuctions()
         {
-            updateSubjectButton.Visible = false;
-            addSubjectButton.Visible = false;
-            deleteSubjectButton.Visible = false;
-            if (TokenContainer.IsAdmin)
+            
+            if (!TokenContainer.IsAdmin)
             {
-                updateSubjectButton.Visible = true;
-                addSubjectButton.Visible = true;
-                deleteSubjectButton.Visible = true;
+                updateSubjectButton.Visible = false;
+                addSubjectButton.Visible = false;
+                deleteSubjectButton.Visible = false;
+
             }
             
         }
-        private void hideAdminFunctions()
+        private void manageAdminFunctions()
         {
-
+            subjectDataGridView.Visible = false;
         }
 
         private void updateSubjectButton_Click(object sender, EventArgs e)
         {
-
+            manageAdminFunctions();
         }
 
         private void deleteSubjectButton_Click(object sender, EventArgs e)
         {
-
+            //backendösszekötés
         }
 
         private void addSubjectButton_Click(object sender, EventArgs e)
         {
-
+            manageAdminFunctions();
         }
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-
+            //backendösszekötés
         }
     }
 }

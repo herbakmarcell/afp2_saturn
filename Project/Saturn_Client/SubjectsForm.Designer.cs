@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             HelpButton = new Button();
             toolTip1 = new ToolTip(components);
-            dataGridView1 = new DataGridView();
+            subjectDataGridView = new DataGridView();
             targynev = new DataGridViewTextBoxColumn();
             targykod = new DataGridViewTextBoxColumn();
             targycsopnev = new DataGridViewTextBoxColumn();
@@ -45,11 +45,11 @@
             updateSubjectButton = new Button();
             applyButton = new Button();
             addSubjectButton = new Button();
-            classroomTB = new TextBox();
-            limitTB = new TextBox();
-            startTB = new TextBox();
-            typeTB = new TextBox();
-            courseTB = new TextBox();
+            subjecttypeTB = new TextBox();
+            creditTB = new TextBox();
+            recSemesterTB = new TextBox();
+            subjectidTB = new TextBox();
+            subjectgroupTB = new TextBox();
             subjectcodeTB = new TextBox();
             subjectTB = new TextBox();
             subjectTypeLabel = new Label();
@@ -59,7 +59,7 @@
             subjectgroupLabel = new Label();
             subjectcodeLabel = new Label();
             subjectLabel = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)subjectDataGridView).BeginInit();
             SuspendLayout();
             // 
             // HelpButton
@@ -80,14 +80,14 @@
             HelpButton.UseVisualStyleBackColor = false;
             HelpButton.Click += HelpButton_Click;
             // 
-            // dataGridView1
+            // subjectDataGridView
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { targynev, targykod, targycsopnev, sorszam, ajanlottfelev, kredit, targytipus, teljesitett, felvett });
-            dataGridView1.Location = new Point(28, 22);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(945, 284);
-            dataGridView1.TabIndex = 13;
+            subjectDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            subjectDataGridView.Columns.AddRange(new DataGridViewColumn[] { targynev, targykod, targycsopnev, sorszam, ajanlottfelev, kredit, targytipus, teljesitett, felvett });
+            subjectDataGridView.Location = new Point(28, 12);
+            subjectDataGridView.Name = "subjectDataGridView";
+            subjectDataGridView.Size = new Size(945, 284);
+            subjectDataGridView.TabIndex = 13;
             // 
             // targynev
             // 
@@ -194,40 +194,40 @@
             addSubjectButton.UseVisualStyleBackColor = false;
             addSubjectButton.Click += addSubjectButton_Click;
             // 
-            // classroomTB
+            // subjecttypeTB
             // 
-            classroomTB.Location = new Point(678, 66);
-            classroomTB.Name = "classroomTB";
-            classroomTB.Size = new Size(100, 23);
-            classroomTB.TabIndex = 52;
+            subjecttypeTB.Location = new Point(678, 66);
+            subjecttypeTB.Name = "subjecttypeTB";
+            subjecttypeTB.Size = new Size(100, 23);
+            subjecttypeTB.TabIndex = 52;
             // 
-            // limitTB
+            // creditTB
             // 
-            limitTB.Location = new Point(572, 66);
-            limitTB.Name = "limitTB";
-            limitTB.Size = new Size(100, 23);
-            limitTB.TabIndex = 51;
+            creditTB.Location = new Point(572, 66);
+            creditTB.Name = "creditTB";
+            creditTB.Size = new Size(100, 23);
+            creditTB.TabIndex = 51;
             // 
-            // startTB
+            // recSemesterTB
             // 
-            startTB.Location = new Point(466, 66);
-            startTB.Name = "startTB";
-            startTB.Size = new Size(100, 23);
-            startTB.TabIndex = 50;
+            recSemesterTB.Location = new Point(466, 66);
+            recSemesterTB.Name = "recSemesterTB";
+            recSemesterTB.Size = new Size(100, 23);
+            recSemesterTB.TabIndex = 50;
             // 
-            // typeTB
+            // subjectidTB
             // 
-            typeTB.Location = new Point(360, 66);
-            typeTB.Name = "typeTB";
-            typeTB.Size = new Size(100, 23);
-            typeTB.TabIndex = 49;
+            subjectidTB.Location = new Point(360, 66);
+            subjectidTB.Name = "subjectidTB";
+            subjectidTB.Size = new Size(100, 23);
+            subjectidTB.TabIndex = 49;
             // 
-            // courseTB
+            // subjectgroupTB
             // 
-            courseTB.Location = new Point(254, 66);
-            courseTB.Name = "courseTB";
-            courseTB.Size = new Size(100, 23);
-            courseTB.TabIndex = 48;
+            subjectgroupTB.Location = new Point(254, 66);
+            subjectgroupTB.Name = "subjectgroupTB";
+            subjectgroupTB.Size = new Size(100, 23);
+            subjectgroupTB.TabIndex = 48;
             // 
             // subjectcodeTB
             // 
@@ -333,17 +333,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.dataBackFinal;
             ClientSize = new Size(1111, 494);
+            Controls.Add(subjectDataGridView);
             Controls.Add(deleteSubjectButton);
             Controls.Add(updateSubjectButton);
             Controls.Add(applyButton);
             Controls.Add(addSubjectButton);
-            Controls.Add(dataGridView1);
             Controls.Add(HelpButton);
-            Controls.Add(classroomTB);
-            Controls.Add(limitTB);
-            Controls.Add(startTB);
-            Controls.Add(typeTB);
-            Controls.Add(courseTB);
+            Controls.Add(subjecttypeTB);
+            Controls.Add(creditTB);
+            Controls.Add(recSemesterTB);
+            Controls.Add(subjectidTB);
+            Controls.Add(subjectgroupTB);
             Controls.Add(subjectcodeTB);
             Controls.Add(subjectTB);
             Controls.Add(subjectTypeLabel);
@@ -356,7 +356,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "SubjectsForm";
             Text = "SubjectForm";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)subjectDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -364,7 +364,7 @@
         #endregion
         private Button HelpButton;
         private ToolTip toolTip1;
-        private DataGridView dataGridView1;
+        private DataGridView subjectDataGridView;
         private DataGridViewTextBoxColumn targynev;
         private DataGridViewTextBoxColumn targykod;
         private DataGridViewTextBoxColumn targycsopnev;
@@ -378,11 +378,11 @@
         private Button updateSubjectButton;
         private Button applyButton;
         private Button addSubjectButton;
-        private TextBox classroomTB;
-        private TextBox limitTB;
-        private TextBox startTB;
-        private TextBox typeTB;
-        private TextBox courseTB;
+        private TextBox subjecttypeTB;
+        private TextBox creditTB;
+        private TextBox recSemesterTB;
+        private TextBox subjectidTB;
+        private TextBox subjectgroupTB;
         private TextBox subjectcodeTB;
         private TextBox subjectTB;
         private Label subjectTypeLabel;
